@@ -1,56 +1,59 @@
 import * as React from "react";
-import { Prompt, RouteComponentProps } from "react-router-dom";
-import { getProduct, IProduct, products } from "./ProductsData";
-import Product from "./Product";
+import { RouteComponentProps } from "react-router-dom";
+import { connect } from "react-redux";
+import { IApplicationState } from "./Store";
+import { handleSearchData } from "./ProductsActions";
+import { IDataSearch } from "./ProductsData";
 
-type Props = RouteComponentProps<{ id: string }>;
-
-export interface IState {
-  product?: IProduct;
-  added: boolean;
-  loading: boolean;
+export interface IDataResult extends RouteComponentProps{
+  getDataSearch: typeof handleSearchData;
+  searchResult: IDataSearch | null;
+  searchValue: string| ""
 }
 
-class ProductPage extends React.Component<Props, IState> {
-  constructor(props: Props) {
+class ProductPage extends React.Component<IDataResult> {
+  constructor(props: IDataResult) {
     super(props);
-    this.state = { added: false, loading: true };
   }
 
-  public async componentDidMount() {
-    if (this.props.match.params.id) {
-      const id: number = parseInt(this.props.match.params.id, 10);
-      const product = await getProduct(id);
-      if (product !== null) {
-        this.setState({ product, loading: false });
-      }
-    }
+
+  public componentDidMount() {
+    this.props.getDataSearch(this.props.searchValue);
+    console.log("ProductPage", this.props);
   }
 
   public render() {
-    const product = this.state.product;
     return (
       <div className="page-container">
-        <Prompt when={!this.state.added} message={this.navAwayMessage} />
-        {product ? (
-          <Product
-            product={product}
-            inBasket={this.state.added}
-            onAddToBasket={this.handleAddClick}
-          />
-        ) : (
-          <p>Product not found!</p>
-        )}
+        <div className="d-flex flex-wrap align-content-around">
+                {this.props.searchResult === null ? (
+                  <p>{"Loading ..."}</p>
+                ) : (
+                  this.props.searchResult.photos.map((image, i) => (
+                    <div key={i} className="p-2">
+                      <img alt="" src={image.src.medium} className="img-fluid" />
+                    </div>
+                  ))
+                )}
+              </div>
       </div>
     );
   }
-
-  private handleAddClick = () => {
-    this.setState({ added: true });
-  };
-
-  private navAwayMessage = () =>
-    "Are you sure you leave without buying this product?";
 }
 
-export default ProductPage;
+const mapStateToProps = (store: IApplicationState) => {
+  return {
+    searchResult: store.products.searchDataFromInput,
+    searchValue: store.products.search
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getDataSearch: (name:string) => dispatch(handleSearchData(name))
+  };
+
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

@@ -13,6 +13,7 @@ const rootReducer = combineReducers<IApplicationState>({
 
 export default function configureStore(): Store<IApplicationState> {
   const store = createStore(rootReducer, undefined, applyMiddleware(thunk));
+  store.subscribe(() => console.log("Store subscribe",store.getState()))
   return store;
 }
 

@@ -1,22 +1,67 @@
-import { IProduct } from "./ProductsData";
+import { ICuratedPhoto, IDataSearch } from "./ProductsData";
+import { IProps } from "./PhotosPage";
 
-export enum ProductsActionTypes {
-  GETALL = "PRODUCTS/GETALL",
-  LOADING = "PRODUCTS/LOADING"
+
+
+export enum DataActionTypes {
+  GETDATA = "GETDATA"
 }
 
-export interface IProductsGetAllAction {
-  type: ProductsActionTypes.GETALL;
-  products: IProduct[];
+export enum SearchValueTypes {
+  GETSEARCHVALUE = "GETSEARCHVALUE"
 }
 
-export interface IProductsLoadingAction {
-  type: ProductsActionTypes.LOADING;
+export enum SearchKeydownTypes {
+  SEARCKEYDOWN = "SEARCKEYDOWN"
 }
 
-export type ProductsActions = IProductsGetAllAction | IProductsLoadingAction;
+export enum GetSearchNameTypes {
+  GETSEARCHNAME = "GETSEARCHNAME"
+}
+
+export enum GetDataSearchValueTypes {
+  GETDATASEARCHVALUE = "GETDATASEARCHVALUE"
+}
+
+
+export interface IGetSearchValueAction {
+  type: SearchValueTypes.GETSEARCHVALUE;
+  searchValue: string;
+}
+
+export interface IDataLoadingAction {
+  type: DataActionTypes.GETDATA;
+  dataFromAPI: ICuratedPhoto;
+}
+
+export interface ISearchKeydownAction {
+  type: SearchKeydownTypes.SEARCKEYDOWN;
+  keydownKey: any;
+}
+
+export interface ISearchNameGetAction{
+  type: GetSearchNameTypes.GETSEARCHNAME;
+  props: IProps;
+}
+
+export interface IDataSearchValueAction{
+  type:GetDataSearchValueTypes.GETDATASEARCHVALUE
+  data: IDataSearch;
+}
+
+
+export type ProductsActions =
+  | IDataLoadingAction
+  | IGetSearchValueAction
+  | ISearchKeydownAction
+  | ISearchNameGetAction
+  |IDataSearchValueAction
+
 
 export interface IProductsState {
-  readonly products: IProduct[];
+  readonly data: ICuratedPhoto | null;
   readonly productsLoading: boolean;
+  readonly search: string;
+  readonly keyboardKey: any;
+  readonly searchDataFromInput: IDataSearch|null;
 }

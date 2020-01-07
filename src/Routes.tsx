@@ -6,14 +6,14 @@ import {
   RouteComponentProps,
   Switch
 } from "react-router-dom";
-import ProductsPage from "./ProductsPage";
+import PhotosPage from "./PhotosPage";
+import VideosPage from "./VideosPage";
 import Header from "./Header";
-import ProductPage from "./ProductPage";
 import NotFoundPage from "./NotFoundPage";
 import LoginPage from "./LoginPage";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Suspense } from "react";
-import ContactUsPage from "./ContactUsPage";
+import ProductPage  from "./ProductPage";
 
 const AdminPage = React.lazy(() => import("./AdminPage"));
 
@@ -38,10 +38,10 @@ const Routes: React.SFC<RouteComponentProps> = props => {
         >
           <Switch>
             <Route path="/login" component={LoginPage} />
-            <Redirect exact={true} from="/" to="/products" />
-            <Route path="/products" exact={true} component={ProductsPage} />
-            <Route path="/products/:id" component={ProductPage} />
-            <Route path="/contactus" component={ContactUsPage}/>
+            <Redirect exact={true} from="/" to="/login" />
+            <Route path="/photos" exact={true} component={PhotosPage} />
+            <Route path="/videos" exact={true} component={VideosPage} />
+            <Route path="/photos/:id" component={ProductPage} />
             <Route path="/admin">
               {loggedIn ? (
                 <Suspense

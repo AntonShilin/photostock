@@ -1,13 +1,20 @@
 import { Reducer } from "redux";
 import {
-  ProductsActionTypes,
   ProductsActions,
-  IProductsState
+  IProductsState,
+  DataActionTypes,
+  SearchKeydownTypes,
+  GetSearchNameTypes,
+  SearchValueTypes,
+  GetDataSearchValueTypes
 } from "./ProductsTypes";
 
 const initialProductState: IProductsState = {
-  products: [],
-  productsLoading: false
+  productsLoading: false,
+  data: null,
+  search: "",
+  keyboardKey: null,
+  searchDataFromInput: null
 };
 
 export const productsReducer: Reducer<IProductsState, ProductsActions> = (
@@ -15,17 +22,36 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
   action
 ) => {
   switch (action.type) {
-    case ProductsActionTypes.LOADING: {
+    case DataActionTypes.GETDATA: {
       return {
         ...state,
-        productsLoading: true
+        data: action.dataFromAPI
       };
     }
-    case ProductsActionTypes.GETALL: {
+    case SearchValueTypes.GETSEARCHVALUE: {
       return {
         ...state,
-        products: action.products,
-        productsLoading: false
+        search: action.searchValue
+      };
+    }
+    case SearchKeydownTypes.SEARCKEYDOWN: {
+      return {
+        ...state,
+        keyboardKey: action.keydownKey
+      };
+    }
+    case GetSearchNameTypes.GETSEARCHNAME: {
+      const url:any = action.props;
+      url.history.push(`/products/${state.search}`);
+      return {
+        ...state,
+      };
+    }
+      
+    case GetDataSearchValueTypes.GETDATASEARCHVALUE: {
+      return {
+        ...state,
+        searchDataFromInput: action.data
       };
     }
   }

@@ -1,28 +1,70 @@
-import { ActionCreator, AnyAction, Dispatch } from "redux";
+import { ActionCreator, AnyAction, Dispatch, Action } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { getProducts as getProductsFromAPI } from "./ProductsData";
+import { doSomething, doSearchInputValue } from "./ProductsData";
 import {
-  ProductsActionTypes,
-  IProductsGetAllAction,
-  IProductsLoadingAction,
-  IProductsState
+  DataActionTypes,
+  SearchValueTypes,
+  SearchKeydownTypes,
+  GetSearchNameTypes,
+  GetDataSearchValueTypes,
+  IGetSearchValueAction,
+  IProductsState,
+  IDataLoadingAction,
+  ISearchKeydownAction,
+  ISearchNameGetAction,
+  IDataSearchValueAction
 } from "./ProductsTypes";
+import { IProps } from "./PhotosPage";
 
-const loading: ActionCreator<IProductsLoadingAction> = () => ({
-  type: ProductsActionTypes.LOADING
-});
 
-export const getProducts: ActionCreator<ThunkAction<Promise<AnyAction>,
+export const getData: ActionCreator<ThunkAction<
+  Promise<AnyAction>,
   IProductsState,
   null,
-  IProductsGetAllAction
+  IDataLoadingAction
 >> = () => {
   return async (dispatch: Dispatch) => {
-    dispatch(loading());
-    const products = await getProductsFromAPI();
+    const data = await doSomething();
     return dispatch({
-      products,
-      type: ProductsActionTypes.GETALL
+      type: DataActionTypes.GETDATA,
+      dataFromAPI: data
+    });
+  };
+};
+
+export const handleSearchChange: ActionCreator<IGetSearchValueAction> = (
+  e: React.ChangeEvent<HTMLInputElement>
+) => ({
+  type: SearchValueTypes.GETSEARCHVALUE,
+  searchValue: e.target.value
+});
+
+export const handleSearchKeydown: ActionCreator<ISearchKeydownAction> = (
+  e: React.KeyboardEvent<HTMLInputElement>
+) => ({
+  type: SearchKeydownTypes.SEARCKEYDOWN,
+  keydownKey: e.keyCode
+});
+
+export const handleSearchName: ActionCreator<ISearchNameGetAction> = (
+  allprops: IProps
+) => ({
+  type: GetSearchNameTypes.GETSEARCHNAME,
+  props: allprops
+});
+
+
+export const handleSearchData: ActionCreator<ThunkAction<
+  Promise<AnyAction>,
+  IProductsState,
+  null,
+  IDataSearchValueAction
+>> = (name) => {
+  return async (dispatch: Dispatch) => {
+    const resultSearch = await doSearchInputValue(name);
+    return dispatch({
+      type: GetDataSearchValueTypes.GETDATASEARCHVALUE,
+      data: resultSearch
     });
   };
 };
