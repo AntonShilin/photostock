@@ -3,17 +3,6 @@ import { watchFile } from "fs";
 import { resolve } from "dns";
 import { rejects } from "assert";
 
-export interface IReview {
-  comment: string;
-}
-
-export interface IProduct {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-}
-
 interface IDataSrc {
   original: string;
   large2x: string;
@@ -51,28 +40,50 @@ export interface IDataSearch {
   photos: IData[];
 }
 
-export const getProducts = async (): Promise<IProduct[]> => {
-  await wait(1000);
-  return products;
-};
+export interface IPopularVideos {
+  page: number;
+  per_page: number;
+  total_results: number;
+  url: string;
+  videos: IVideos[];
+}
 
-const wait = (ms: number): Promise<void> => {
-  // tslint:disable-next-line: no-shadowed-variable
-  return new Promise(resolve => setTimeout(resolve, ms));
-};
+interface IVideos {
+  id: number;
+  width: number;
+  height: number;
+  url: string;
+  image: string;
+  full_res: null;
+  tags: [];
+  duration: number;
+  user: IUserVideo;
+  video_files: IVideoFiles[];
+  video_pictures: IVideoPictures[];
+}
 
-export const getProduct = async (id: number): Promise<IProduct | null> => {
-  await wait2(1000);
-  const foundProducts = products.filter(customer => customer.id === id);
-  return foundProducts.length === 0 ? null : foundProducts[0];
-};
+interface IUserVideo {
+  id: number;
+  name: string;
+  url: string;
+}
 
-const wait2 = (ms: number): Promise<any> => {
-  // tslint:disable-next-line: no-shadowed-variable
-  return new Promise(resolve => setTimeout(resolve, ms));
-};
+interface IVideoFiles {
+  id: number;
+  quality: string;
+  file_type: string;
+  width: number;
+  height: number;
+  link: string;
+}
 
-export const doSomething = async (): Promise<ICuratedPhoto> => {
+interface IVideoPictures {
+  id: number;
+  picture: string;
+  nr: number;
+}
+
+export const getPhotos = async (): Promise<ICuratedPhoto> => {
   const keyAPI: string =
     "563492ad6f9170000100000148298afd943a453c8f3f48bdbc9811a9";
   // tslint:disable-next-line: no-shadowed-variable
@@ -90,7 +101,9 @@ export const doSomething = async (): Promise<ICuratedPhoto> => {
   }
 };
 
-export const doSearchInputValue = async (name:string): Promise<IDataSearch[]> => {
+export const doSearchInputValue = async (
+  name: string
+): Promise<IDataSearch[]> => {
   const keyAPI: string =
     "563492ad6f9170000100000148298afd943a453c8f3f48bdbc9811a9";
   // tslint:disable-next-line: no-shadowed-variable
@@ -102,31 +115,48 @@ export const doSearchInputValue = async (name:string): Promise<IDataSearch[]> =>
       }
     );
     const data = await response.json();
-    console.log(data);
-     return data;
+    return data;
   } catch (err) {
     return err;
   }
 };
 
-export const products: IProduct[] = [
-  {
-    description:
-      "A collection of navigational components that composedeclaratively with your app",
-    id: 1,
-    name: "React Router",
-    price: 8
-  },
-  {
-    description: "A library that helps manage state across yourapp",
-    id: 2,
-    name: "React Redux",
-    price: 12
-  },
-  {
-    description: "A library that helps you interact with a GraphQL backend",
-    id: 3,
-    name: "React Apollo",
-    price: 12
+export const searchVideos = async (): Promise<any> => {
+  const keyAPI: string =
+    "563492ad6f9170000100000148298afd943a453c8f3f48bdbc9811a9";
+  // tslint:disable-next-line: no-shadowed-variable
+  try {
+    const response = await fetch(
+      "https://api.pexels.com/videos/search?query=italy+query&per_page=15&page=1",
+      {
+        headers: { Authorization: keyAPI }
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    //return data;
+  } catch (err) {
+    console.log(err);
+    return err;
   }
-];
+};
+
+export const getPopularVideos = async (): Promise<IPopularVideos[]> => {
+  const keyAPI: string =
+    "563492ad6f9170000100000148298afd943a453c8f3f48bdbc9811a9";
+  // tslint:disable-next-line: no-shadowed-variable
+  try {
+    const response = await fetch(
+      "https://api.pexels.com/videos/popular?per_page=100&page=1",
+      {
+        headers: { Authorization: keyAPI }
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+     return data;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};

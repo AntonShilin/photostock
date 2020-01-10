@@ -1,5 +1,4 @@
 import * as React from "react";
-import { IProduct } from "./ProductsData";
 import { Link } from "react-router-dom";
 import { RouteComponentProps } from "react-router-dom";
 import "url-search-params-polyfill";
@@ -12,7 +11,6 @@ import { handleSearchName } from "./ProductsActions";
 import { ICuratedPhoto } from "./ProductsData";
 
 export interface IProps extends RouteComponentProps {
-  products: IProduct[];
   data: ICuratedPhoto | null;
   getDataForMainPage: typeof getData;
   search: "";

@@ -1,18 +1,20 @@
 import { ActionCreator, AnyAction, Dispatch, Action } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { doSomething, doSearchInputValue } from "./ProductsData";
+import { getPhotos, doSearchInputValue, getPopularVideos } from "./ProductsData";
 import {
   DataActionTypes,
   SearchValueTypes,
   SearchKeydownTypes,
   GetSearchNameTypes,
   GetDataSearchValueTypes,
+  GetPopularVideoTypes,
   IGetSearchValueAction,
   IProductsState,
   IDataLoadingAction,
   ISearchKeydownAction,
   ISearchNameGetAction,
-  IDataSearchValueAction
+  IDataSearchValueAction,
+  IPopularVideoAction
 } from "./ProductsTypes";
 import { IProps } from "./PhotosPage";
 
@@ -24,7 +26,7 @@ export const getData: ActionCreator<ThunkAction<
   IDataLoadingAction
 >> = () => {
   return async (dispatch: Dispatch) => {
-    const data = await doSomething();
+    const data = await getPhotos();
     return dispatch({
       type: DataActionTypes.GETDATA,
       dataFromAPI: data
@@ -65,6 +67,22 @@ export const handleSearchData: ActionCreator<ThunkAction<
     return dispatch({
       type: GetDataSearchValueTypes.GETDATASEARCHVALUE,
       data: resultSearch
+    });
+  };
+};
+
+
+export const getPopularVideo: ActionCreator<ThunkAction<
+  Promise<AnyAction>,
+  IProductsState,
+  null,
+  IPopularVideoAction
+>> = () => {
+  return async (dispatch: Dispatch) => {
+    const data = await getPopularVideos();
+    return dispatch({
+      type: GetPopularVideoTypes.GETPOPULARVIDEO,
+      videoFiles: data
     });
   };
 };

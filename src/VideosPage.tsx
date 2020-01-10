@@ -1,17 +1,21 @@
 import * as React from "react";
+import { connect } from "react-redux";
+import { searchVideos, IPopularVideos } from "./ProductsData";
+import { getPopularVideo } from "./ProductsActions";
+import { IApplicationState } from "./Store";
 
-// export interface State {
-
-// }
-
-class VideosPage extends React.Component {
-
-
-public componentDidMount() {
-  alert("A")
+export interface IPropsVideosPage {
+  getVideo: typeof getPopularVideo;
+  videoData: IPopularVideos | null;
 }
 
+class VideosPage extends React.Component<IPropsVideosPage> {
+  public componentDidMount() {
+    this.props.getVideo();
+  }
+
   public render() {
+    console.log("VideoPage", this.props);
     return (
       <React.Fragment>
         <div className="jumbotron jumbotron-fluid" /* style={bgimage} */>
@@ -24,15 +28,13 @@ public componentDidMount() {
                 type="text"
                 className="form-control"
                 placeholder="Find video"
-                // value={this.props.search}
-                // onChange={this.props.watchInputChange}
-                // onKeyDown={this.props.getKeyNumber}
+            
               />
               <div className="input-group-append">
                 <button
                   className="btn btn-success"
                   type="submit"
-                  //   onClick={() => this.props.goByTheNameOfTheSearch(this.props)}
+            
                 >
                   Search
                 </button>
@@ -52,17 +54,22 @@ public componentDidMount() {
           </div>
           <div className="row">
             <div className="col-12">
-              {/* <div className="d-flex flex-wrap align-content-around">
-                {this.props.data === null ? (
+              <div className="d-flex flex-wrap align-content-around">
+                {this.props.videoData === null ? (
                   <p>{"Loading ..."}</p>
                 ) : (
-                  this.props.data.photos.map((image, i) => (
-                    <div key={i} className="p-2">
-                      <img src={image.src.medium} className="img-fluid" />
+                  this.props.videoData.videos.map((value, i) => (
+                    <div key={i} className="media m-2">
+                      <video width="320" height="240" controls={true}>
+                        <source
+                          src={value.video_files[2].link}
+                          type={value.video_files[2].file_type}
+                        />
+                      </video>
                     </div>
                   ))
                 )}
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
@@ -71,4 +78,16 @@ public componentDidMount() {
   }
 }
 
-export default VideosPage;
+const mapStateToProps = (store: IApplicationState) => {
+  return {
+    videoData: store.products.videos
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getVideo: () => dispatch(getPopularVideo())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(VideosPage);

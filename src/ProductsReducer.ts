@@ -6,7 +6,8 @@ import {
   SearchKeydownTypes,
   GetSearchNameTypes,
   SearchValueTypes,
-  GetDataSearchValueTypes
+  GetDataSearchValueTypes,
+  GetPopularVideoTypes
 } from "./ProductsTypes";
 
 const initialProductState: IProductsState = {
@@ -14,7 +15,8 @@ const initialProductState: IProductsState = {
   data: null,
   search: "",
   keyboardKey: null,
-  searchDataFromInput: null
+  searchDataFromInput: null,
+  videos: null
 };
 
 export const productsReducer: Reducer<IProductsState, ProductsActions> = (
@@ -54,6 +56,14 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         searchDataFromInput: action.data
       };
     }
+      
+    case GetPopularVideoTypes.GETPOPULARVIDEO: {
+      return {
+        ...state,
+        videos: action.videoFiles
+      };
+    }
+      
   }
   return state || initialProductState;
 };
