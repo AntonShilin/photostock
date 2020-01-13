@@ -121,22 +121,20 @@ export const doSearchInputValue = async (
   }
 };
 
-export const searchVideos = async (): Promise<any> => {
+export const searchVideos = async (name:string): Promise<IPopularVideos[]> => {
   const keyAPI: string =
     "563492ad6f9170000100000148298afd943a453c8f3f48bdbc9811a9";
   // tslint:disable-next-line: no-shadowed-variable
   try {
     const response = await fetch(
-      "https://api.pexels.com/videos/search?query=italy+query&per_page=15&page=1",
+      `https://api.pexels.com/videos/search?query=${name}+query&per_page=100&page=1`,
       {
         headers: { Authorization: keyAPI }
       }
     );
     const data = await response.json();
-    console.log(data);
-    //return data;
+    return data;
   } catch (err) {
-    console.log(err);
     return err;
   }
 };
@@ -153,10 +151,8 @@ export const getPopularVideos = async (): Promise<IPopularVideos[]> => {
       }
     );
     const data = await response.json();
-    console.log(data);
      return data;
   } catch (err) {
-    console.log(err);
     return err;
   }
 };

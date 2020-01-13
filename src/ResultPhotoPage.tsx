@@ -5,17 +5,16 @@ import { IApplicationState } from "./Store";
 import { handleSearchData } from "./ProductsActions";
 import { IDataSearch } from "./ProductsData";
 
-export interface IDataResult extends RouteComponentProps{
+export interface IDataResult extends RouteComponentProps {
   getDataSearch: typeof handleSearchData;
   searchResult: IDataSearch | null;
-  searchValue: string| ""
+  searchValue: string | "";
 }
 
-class ProductPage extends React.Component<IDataResult> {
+class ResultPhotoPage extends React.Component<IDataResult> {
   constructor(props: IDataResult) {
     super(props);
   }
-
 
   public componentDidMount() {
     this.props.getDataSearch(this.props.searchValue);
@@ -26,16 +25,16 @@ class ProductPage extends React.Component<IDataResult> {
     return (
       <div className="page-container">
         <div className="d-flex flex-wrap align-content-around">
-                {this.props.searchResult === null ? (
-                  <p>{"Loading ..."}</p>
-                ) : (
-                  this.props.searchResult.photos.map((image, i) => (
-                    <div key={i} className="p-2">
-                      <img alt="" src={image.src.medium} className="img-fluid" />
-                    </div>
-                  ))
-                )}
+          {this.props.searchResult === null ? (
+            <p>{"Loading ..."}</p>
+          ) : (
+            this.props.searchResult.photos.map((image, i) => (
+              <div key={i} className="p-2">
+                <img alt="" src={image.src.medium} className="img-fluid" />
               </div>
+            ))
+          )}
+        </div>
       </div>
     );
   }
@@ -50,10 +49,8 @@ const mapStateToProps = (store: IApplicationState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getDataSearch: (name:string) => dispatch(handleSearchData(name))
+    getDataSearch: (name: string) => dispatch(handleSearchData(name))
   };
-
-
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ResultPhotoPage);

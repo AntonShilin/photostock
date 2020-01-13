@@ -1,40 +1,56 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { searchVideos, IPopularVideos } from "./ProductsData";
-import { getPopularVideo } from "./ProductsActions";
+import { getPopularVideo, showResultSearchVideo,changeNameVideo } from "./ProductsActions";
 import { IApplicationState } from "./Store";
 
 export interface IPropsVideosPage {
-  getVideo: typeof getPopularVideo;
-  videoData: IPopularVideos | null;
+  getPopularVideo: typeof getPopularVideo;
+  popularVideo: IPopularVideos | null;
+  searchName: "";
+  getResultSearch: typeof showResultSearchVideo;
+  watchNameVideoChange: typeof changeNameVideo;
 }
 
 class VideosPage extends React.Component<IPropsVideosPage> {
   public componentDidMount() {
-    this.props.getVideo();
+    this.props.getPopularVideo();
   }
 
   public render() {
-    console.log("VideoPage", this.props);
+    const bgimage = {
+      backgroundSize: "100%",
+      backgroundRepeat: "no-repeat",
+      backgroundImage:
+        "url(" +
+        `${
+          this.props.popularVideo !== null
+            ? this.props.popularVideo.videos[3].video_pictures[3].picture
+            : ""
+        }` +
+        ")"
+    };
     return (
       <React.Fragment>
-        <div className="jumbotron jumbotron-fluid" /* style={bgimage} */>
+        <div className="jumbotron jumbotron-fluid" style={bgimage}>
           <div className="container">
             <h1 className="pb-5">
               The best free stock videos from talented authors.
             </h1>
-            <div className="input-group mb-3">
+            <div className="input-group mb-3 input-group-lg">
               <input
                 type="text"
                 className="form-control"
                 placeholder="Find video"
-            
+                value={this.props.searchName}
+                 onChange={this.props.watchNameVideoChange}
+                // onKeyDown={this.props.getKeyNumber}
               />
               <div className="input-group-append">
                 <button
                   className="btn btn-success"
                   type="submit"
-            
+                  onClick={() => this.props.getResultSearch(this.props)}
                 >
                   Search
                 </button>
@@ -55,10 +71,10 @@ class VideosPage extends React.Component<IPropsVideosPage> {
           <div className="row">
             <div className="col-12">
               <div className="d-flex flex-wrap align-content-around">
-                {this.props.videoData === null ? (
+                {this.props.popularVideo === null ? (
                   <p>{"Loading ..."}</p>
                 ) : (
-                  this.props.videoData.videos.map((value, i) => (
+                  this.props.popularVideo.videos.map((value, i) => (
                     <div key={i} className="media m-2">
                       <video width="320" height="240" controls={true}>
                         <source
@@ -80,13 +96,16 @@ class VideosPage extends React.Component<IPropsVideosPage> {
 
 const mapStateToProps = (store: IApplicationState) => {
   return {
-    videoData: store.products.videos
+    popularVideo: store.products.videos
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getVideo: () => dispatch(getPopularVideo())
+    getPopularVideo: () => dispatch(getPopularVideo()),
+    getResultSearch: (allProps: IPropsVideosPage) =>
+      dispatch(showResultSearchVideo(allProps)),
+      watchNameVideoChange:(e:string)=>dispatch(changeNameVideo(e))
   };
 };
 

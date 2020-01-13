@@ -16,7 +16,7 @@ export interface IProps extends RouteComponentProps {
   search: "";
   watchInputChange: typeof handleSearchChange;
   getKeyNumber: typeof handleSearchKeydown;
-  goByTheNameOfTheSearch: typeof handleSearchName;
+  getNamePictureSearch: typeof handleSearchName;
 }
 
 class PhotosPage extends React.Component<IProps> {
@@ -47,7 +47,7 @@ class PhotosPage extends React.Component<IProps> {
             <h1 className="pb-5">
               The best free stock photos from talented authors.
             </h1>
-            <div className="input-group mb-3">
+            <div className="input-group mb-3 input-group-lg">
               <input
                 type="text"
                 className="form-control"
@@ -60,7 +60,7 @@ class PhotosPage extends React.Component<IProps> {
                 <button
                   className="btn btn-success"
                   type="submit"
-                  onClick={() => this.props.goByTheNameOfTheSearch(this.props)}
+                  onClick={() => this.props.getNamePictureSearch(this.props)}
                 >
                   Search
                 </button>
@@ -113,7 +113,7 @@ const mapDispatchToProps = (dispatch: any) => {
     getDataForMainPage: () => dispatch(getData()),
     watchInputChange: (e: string) => dispatch(handleSearchChange(e)),
     getKeyNumber: (e: any) => dispatch(handleSearchKeydown(e)),
-    goByTheNameOfTheSearch: (allprops: IProps) =>
+    getNamePictureSearch: (allprops: IProps) =>
       dispatch(handleSearchName(allprops))
   };
 };

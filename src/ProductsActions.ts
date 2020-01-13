@@ -1,6 +1,11 @@
 import { ActionCreator, AnyAction, Dispatch, Action } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { getPhotos, doSearchInputValue, getPopularVideos } from "./ProductsData";
+import {
+  getPhotos,
+  doSearchInputValue,
+  getPopularVideos,
+  searchVideos
+} from "./ProductsData";
 import {
   DataActionTypes,
   SearchValueTypes,
@@ -8,16 +13,22 @@ import {
   GetSearchNameTypes,
   GetDataSearchValueTypes,
   GetPopularVideoTypes,
+  GetResultSearchVideoTypes,
+  GetChangeNameVideoTypes,
+  GetVideoTypes,
   IGetSearchValueAction,
   IProductsState,
   IDataLoadingAction,
   ISearchKeydownAction,
   ISearchNameGetAction,
   IDataSearchValueAction,
-  IPopularVideoAction
+  IPopularVideoAction,
+  IGetResultSearchVideoAction,
+  IChangeNameVideoAction,
+  IGetVideoAction
 } from "./ProductsTypes";
 import { IProps } from "./PhotosPage";
-
+import { IPropsVideosPage } from "./VideosPage";
 
 export const getData: ActionCreator<ThunkAction<
   Promise<AnyAction>,
@@ -55,13 +66,19 @@ export const handleSearchName: ActionCreator<ISearchNameGetAction> = (
   props: allprops
 });
 
+export const showResultSearchVideo: ActionCreator<IGetResultSearchVideoAction> = (
+  allprops: IPropsVideosPage
+) => ({
+  type: GetResultSearchVideoTypes.GETRESULTSEARCHVIDEO,
+  props: allprops
+});
 
 export const handleSearchData: ActionCreator<ThunkAction<
   Promise<AnyAction>,
   IProductsState,
   null,
   IDataSearchValueAction
->> = (name) => {
+>> = name => {
   return async (dispatch: Dispatch) => {
     const resultSearch = await doSearchInputValue(name);
     return dispatch({
@@ -70,7 +87,6 @@ export const handleSearchData: ActionCreator<ThunkAction<
     });
   };
 };
-
 
 export const getPopularVideo: ActionCreator<ThunkAction<
   Promise<AnyAction>,
@@ -83,6 +99,30 @@ export const getPopularVideo: ActionCreator<ThunkAction<
     return dispatch({
       type: GetPopularVideoTypes.GETPOPULARVIDEO,
       videoFiles: data
+    });
+  };
+};
+
+export const changeNameVideo: ActionCreator<IChangeNameVideoAction> = (
+  e: React.ChangeEvent<HTMLInputElement>
+) => ({
+  type: GetChangeNameVideoTypes.GETCHANGENAMEVIDEO,
+  value: e.target.value
+});
+
+
+
+export const getVideo: ActionCreator<ThunkAction<
+  Promise<AnyAction>,
+  IProductsState,
+  null,
+  IGetVideoAction
+>> = (name) => {
+  return async (dispatch: Dispatch) => {
+    const data = await searchVideos(name);
+    return dispatch({
+      type: GetVideoTypes.GETVIDEO,
+      dataVideo: data
     });
   };
 };

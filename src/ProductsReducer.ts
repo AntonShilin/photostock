@@ -7,7 +7,11 @@ import {
   GetSearchNameTypes,
   SearchValueTypes,
   GetDataSearchValueTypes,
-  GetPopularVideoTypes
+  GetPopularVideoTypes,
+  GetSearchVideoTypes,
+  GetResultSearchVideoTypes,
+  GetChangeNameVideoTypes,
+  GetVideoTypes
 } from "./ProductsTypes";
 
 const initialProductState: IProductsState = {
@@ -16,7 +20,9 @@ const initialProductState: IProductsState = {
   search: "",
   keyboardKey: null,
   searchDataFromInput: null,
-  videos: null
+  videos: null,
+  searchNameVideo: "",
+  resultSearchVideo: null
 };
 
 export const productsReducer: Reducer<IProductsState, ProductsActions> = (
@@ -44,7 +50,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     }
     case GetSearchNameTypes.GETSEARCHNAME: {
       const url:any = action.props;
-      url.history.push(`/products/${state.search}`);
+      url.history.push(`/photos/${state.search}`);
       return {
         ...state,
       };
@@ -63,6 +69,31 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         videos: action.videoFiles
       };
     }
+     
+      
+    case GetResultSearchVideoTypes.GETRESULTSEARCHVIDEO: {
+      const url:any = action.props;
+      url.history.push(`/videos/${state.searchNameVideo}`);
+      return {
+        ...state
+      };
+    }
+    
+    case GetChangeNameVideoTypes.GETCHANGENAMEVIDEO: {
+      return {
+        ...state,
+        searchNameVideo: action.value
+      };
+    }
+
+      
+    case GetVideoTypes.GETVIDEO: {
+      return {
+        ...state,
+        resultSearchVideo: action.dataVideo
+      };
+    }
+      
       
   }
   return state || initialProductState;
