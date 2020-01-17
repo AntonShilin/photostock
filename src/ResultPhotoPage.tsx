@@ -18,22 +18,40 @@ class ResultPhotoPage extends React.Component<IDataResult> {
 
   public componentDidMount() {
     this.props.getDataSearch(this.props.searchValue);
-    console.log("ProductPage", this.props);
   }
 
   public render() {
+    console.log("ResultPhotoPage", this.props);
     return (
-      <div className="page-container">
-        <div className="d-flex flex-wrap align-content-around">
-          {this.props.searchResult === null ? (
-            <p>{"Loading ..."}</p>
-          ) : (
-            this.props.searchResult.photos.map((image, i) => (
-              <div key={i} className="p-2">
-                <img alt="" src={image.src.medium} className="img-fluid" />
-              </div>
-            ))
-          )}
+      <div className="container-fluid">
+        <div className="row my-3">
+          <div className="col-12">
+            <h3 className="text-left">
+              {`${this.props.searchValue} photos`}
+              <span className="ml-3 badge badge-pill badge-info">
+                {this.props.searchResult !== null ? (
+                  this.props.searchResult.photos.length
+                ) : (
+                  <span>0</span>
+                )}
+              </span>
+            </h3>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <div className="d-flex flex-wrap justify-content-around">
+              {this.props.searchResult === null ? (
+                <p>{"Loading ..."}</p>
+              ) : (
+                this.props.searchResult.photos.map((image, i) => (
+                  <div key={i} className="p-2">
+                    <img alt="" src={image.src.medium} className="img-fluid" />
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
         </div>
       </div>
     );

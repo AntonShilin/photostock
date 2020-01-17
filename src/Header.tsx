@@ -10,19 +10,19 @@ const Header: React.SFC<RouteComponentProps> = props => {
 
   return (
     <Navbar bg="dark" variant="dark" expand="md">
-      <Navbar.Brand href="/login" className="mr-3 p-2">
+      <Navbar.Brand href="/photos" className="mr-3 p-2">
         Photo & Video Stock
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
-          <NavLink to="/photos" className="mr-3 p-2">
+        <Nav className="ml-auto text-uppercase">
+          <NavLink to="/photos" className="mr-3 p-2 text-decoration-none">
             Find photos
           </NavLink>
-          <NavLink to="/videos" className="mr-3 p-2">
+          <NavLink to="/videos" className="mr-3 p-2 text-decoration-none">
             Find videos
           </NavLink>
-          <NavLink to="/admin" className="mr-3 p-2">
+          <NavLink to="/login" className="mr-3 p-2">
             <FaRegUserCircle style={{ fontSize: "2rem", color: "white" }}/>
           </NavLink>
         </Nav>

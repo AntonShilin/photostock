@@ -5,7 +5,7 @@ const LoginPage: React.SFC = () => {
     <div className="container mt-5">
       <div className="row">
         <div className="col-12">
-          <h1>Welcome Back To Photos & Video stock</h1>
+          <h3 className="text-center">Welcome Back To Photos & Video stock</h3>
         </div>
       </div>
       <div className="row mt-5 justify-content-center">

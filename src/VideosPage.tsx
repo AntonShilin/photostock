@@ -56,21 +56,21 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                 </button>
               </div>
             </div>
-            <small>
-              Search ideas: businessman, hd wallpapers, abstract, phone, green,
-              more...
-            </small>
+            <h6>
+              Search ideas: <span className="text-muted">businessman, hd wallpapers, abstract, phone, green,
+              more...</span>
+            </h6>
           </div>
         </div>
-        <div className="container-fluid">
+        <div className="container-fluid bg-light">
           <div className="row">
             <div className="col-sm-6 col-md-12">
-              <h6>New free stock videos</h6>
+              <h6 className="mt-2">New free stock videos</h6>
             </div>
           </div>
           <div className="row">
             <div className="col-12">
-              <div className="d-flex flex-wrap align-content-around">
+              <div className="d-flex flex-wrap justify-content-around">
                 {this.props.popularVideo === null ? (
                   <p>{"Loading ..."}</p>
                 ) : (

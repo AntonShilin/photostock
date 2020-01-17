@@ -42,7 +42,7 @@ class PhotosPage extends React.Component<IProps> {
 
     return (
       <React.Fragment>
-        <div className="jumbotron jumbotron-fluid" style={bgimage}>
+        <div className="jumbotron jumbotron-fluid bg-light" style={bgimage}>
           <div className="container">
             <h1 className="pb-5">
               The best free stock photos from talented authors.
@@ -66,24 +66,23 @@ class PhotosPage extends React.Component<IProps> {
                 </button>
               </div>
             </div>
-            <small>
-              Search ideas: car, adventure, crowd, dark, workout, butterfly,
-              more...
-            </small>
+            <h6>
+              Search ideas:{" "}
+              <span className="text-muted">
+                car, adventure, crowd, dark, workout, butterfly, more...
+              </span>
+            </h6>
           </div>
         </div>
-        <div className="container-fluid">
+        <div className="container-fluid bg-light">
           <div className="row mb-2">
-            <div className="col-sm-6 col-md-6">
-              <h6 className="m-0">New free stock photos</h6>
-            </div>
-            <div className="col-sm-6 col-md-6 text-right">
-              <button className="btn btn-secondary">Next page</button>
+            <div className="col-12">
+              <h6 className="m-0 mt-2">Free Stock Photos Trending </h6>
             </div>
           </div>
           <div className="row">
             <div className="col-12">
-              <div className="d-flex flex-wrap align-content-around">
+              <div className="d-flex flex-wrap justify-content-around">
                 {this.props.data === null ? (
                   <p>{"Loading ..."}</p>
                 ) : (
