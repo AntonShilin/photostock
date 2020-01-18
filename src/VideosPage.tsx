@@ -1,8 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { searchVideos, IPopularVideos } from "./ProductsData";
-import { getPopularVideo, showResultSearchVideo,changeNameVideo } from "./ProductsActions";
+import {
+  getPopularVideo,
+  showResultSearchVideo,
+  changeNameVideo
+} from "./ProductsActions";
 import { IApplicationState } from "./Store";
+import "./VideosPage.css";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
@@ -16,25 +21,20 @@ class VideosPage extends React.Component<IPropsVideosPage> {
   public componentDidMount() {
     this.props.getPopularVideo();
   }
-
   public render() {
-    const bgimage = {
-      backgroundSize: "100%",
-      backgroundRepeat: "no-repeat",
-      backgroundImage:
-        "url(" +
-        `${
-          this.props.popularVideo !== null
-            ? this.props.popularVideo.videos[3].video_pictures[3].picture
-            : ""
-        }` +
-        ")"
-    };
     return (
       <React.Fragment>
-        <div className="jumbotron jumbotron-fluid" style={bgimage}>
+        <div className="jumbotron border-0">
+       {/*    <video
+            className="img-fluid mx-auto d-block"
+            id="bg_video"
+            autoPlay={true}
+            loop={true}
+          >
+            <source src={require(`./video/nyc.mp4`)} type="video/mp4" />
+          </video> */}
           <div className="container">
-            <h1 className="pb-5">
+            <h1 className="pb-5 text-white">
               The best free stock videos from talented authors.
             </h1>
             <div className="input-group mb-3 input-group-lg">
@@ -43,8 +43,9 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                 className="form-control"
                 placeholder="Find video"
                 value={this.props.searchName}
-                 onChange={this.props.watchNameVideoChange}
+                onChange={this.props.watchNameVideoChange}
                 // onKeyDown={this.props.getKeyNumber}
+                autoFocus={true}
               />
               <div className="input-group-append">
                 <button
@@ -57,12 +58,14 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               </div>
             </div>
             <h6>
-              Search ideas: <span className="text-muted">businessman, hd wallpapers, abstract, phone, green,
-              more...</span>
+              Search ideas:{" "}
+              <span className="text-muted">
+                businessman, hd wallpapers, abstract, phone, green, more...
+              </span>
             </h6>
           </div>
         </div>
-        <div className="container-fluid bg-light">
+        <div className="container bg-light">
           <div className="row">
             <div className="col-sm-6 col-md-12">
               <h6 className="mt-2">New free stock videos</h6>
@@ -105,7 +108,7 @@ const mapDispatchToProps = (dispatch: any) => {
     getPopularVideo: () => dispatch(getPopularVideo()),
     getResultSearch: (allProps: IPropsVideosPage) =>
       dispatch(showResultSearchVideo(allProps)),
-      watchNameVideoChange:(e:string)=>dispatch(changeNameVideo(e))
+    watchNameVideoChange: (e: string) => dispatch(changeNameVideo(e))
   };
 };
 

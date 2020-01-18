@@ -145,7 +145,7 @@ export const getPopularVideos = async (): Promise<IPopularVideos[]> => {
   // tslint:disable-next-line: no-shadowed-variable
   try {
     const response = await fetch(
-      "https://api.pexels.com/videos/popular?per_page=100&page=1",
+      "https://api.pexels.com/videos/popular?per_page=10&page=1",
       {
         headers: { Authorization: keyAPI }
       }

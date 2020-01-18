@@ -17,7 +17,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
 
   public render() {
     return (
-      <div className="container-fluid">
+      <div className="container">
         <div className="row my-3">
           <div className="col-12">
             <h3 className="text-left m-0 mt-2">

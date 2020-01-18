@@ -23,7 +23,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
   public render() {
     console.log("ResultPhotoPage", this.props);
     return (
-      <div className="container-fluid">
+      <div className="container">
         <div className="row my-3">
           <div className="col-12">
             <h3 className="text-left">
