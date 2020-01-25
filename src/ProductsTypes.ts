@@ -45,6 +45,11 @@ export enum GetVideoTypes {
 
 /*  interfaces */
 
+export interface ISearchKeydownAction {
+  type: SearchKeydownTypes.SEARCKEYDOWN;
+  keydownKey: any;
+}
+
 export interface IGetSearchValueAction {
   type: SearchValueTypes.GETSEARCHVALUE;
   searchValue: string;
@@ -60,10 +65,6 @@ export interface IDataLoadingAction {
   dataFromAPI: ICuratedPhoto;
 }
 
-export interface ISearchKeydownAction {
-  type: SearchKeydownTypes.SEARCKEYDOWN;
-  keydownKey: any;
-}
 
 export interface ISearchNameGetAction {
   type: GetSearchNameTypes.GETSEARCHNAME;
@@ -94,20 +95,20 @@ export interface IGetVideoAction{
 export type ProductsActions =
   | IDataLoadingAction
   | IGetSearchValueAction
-  | ISearchKeydownAction
   | ISearchNameGetAction
   | IDataSearchValueAction
   | IPopularVideoAction
   | IGetResultSearchVideoAction
   | IChangeNameVideoAction
+  |ISearchKeydownAction
   | IGetVideoAction;
 
 export interface IProductsState {
+  readonly keyboardKey: any;
   readonly data: ICuratedPhoto | null;
   readonly videos: IPopularVideos | null;
   readonly productsLoading: boolean;
-  readonly search: string;
-  readonly keyboardKey: any;
+  readonly searchNamePhoto: string;
   readonly searchDataFromInput: IDataSearch | null;
   readonly searchNameVideo: string;
   readonly resultSearchVideo: IPopularVideos | null;

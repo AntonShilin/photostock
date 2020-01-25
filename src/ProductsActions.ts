@@ -1,7 +1,7 @@
 import { ActionCreator, AnyAction, Dispatch, Action } from "redux";
 import { ThunkAction } from "redux-thunk";
 import {
-  getPhotos,
+  getPopularPhotos,
   doSearchInputValue,
   getPopularVideos,
   searchVideos
@@ -9,7 +9,6 @@ import {
 import {
   DataActionTypes,
   SearchValueTypes,
-  SearchKeydownTypes,
   GetSearchNameTypes,
   GetDataSearchValueTypes,
   GetPopularVideoTypes,
@@ -19,16 +18,18 @@ import {
   IGetSearchValueAction,
   IProductsState,
   IDataLoadingAction,
-  ISearchKeydownAction,
   ISearchNameGetAction,
   IDataSearchValueAction,
   IPopularVideoAction,
   IGetResultSearchVideoAction,
   IChangeNameVideoAction,
-  IGetVideoAction
+  IGetVideoAction,
+  ISearchKeydownAction,
+  SearchKeydownTypes
 } from "./ProductsTypes";
 import { IProps } from "./PhotosPage";
 import { IPropsVideosPage } from "./VideosPage";
+import { RouteComponentProps } from "react-router-dom";
 
 export const getData: ActionCreator<ThunkAction<
   Promise<AnyAction>,
@@ -37,20 +38,13 @@ export const getData: ActionCreator<ThunkAction<
   IDataLoadingAction
 >> = () => {
   return async (dispatch: Dispatch) => {
-    const data = await getPhotos();
+    const data = await getPopularPhotos();
     return dispatch({
       type: DataActionTypes.GETDATA,
       dataFromAPI: data
     });
   };
 };
-
-export const handleSearchChange: ActionCreator<IGetSearchValueAction> = (
-  e: React.ChangeEvent<HTMLInputElement>
-) => ({
-  type: SearchValueTypes.GETSEARCHVALUE,
-  searchValue: e.target.value
-});
 
 export const handleSearchKeydown: ActionCreator<ISearchKeydownAction> = (
   e: React.KeyboardEvent<HTMLInputElement>
@@ -59,7 +53,15 @@ export const handleSearchKeydown: ActionCreator<ISearchKeydownAction> = (
   keydownKey: e.keyCode
 });
 
-export const handleSearchName: ActionCreator<ISearchNameGetAction> = (
+export const handleSearchChange: ActionCreator<IGetSearchValueAction> = (
+  e: React.ChangeEvent<HTMLInputElement>
+) => ({
+  type: SearchValueTypes.GETSEARCHVALUE,
+  searchValue: e.target.value
+});
+
+
+export const handleSearchPictureName: ActionCreator<ISearchNameGetAction> = (
   allprops: IProps
 ) => ({
   type: GetSearchNameTypes.GETSEARCHNAME,
@@ -110,16 +112,14 @@ export const changeNameVideo: ActionCreator<IChangeNameVideoAction> = (
   value: e.target.value
 });
 
-
-
 export const getVideo: ActionCreator<ThunkAction<
   Promise<AnyAction>,
   IProductsState,
   null,
   IGetVideoAction
->> = (name) => {
+>> = (name:string)=> {
   return async (dispatch: Dispatch) => {
-    const data = await searchVideos(name);
+    const data = await searchVideos( name );
     return dispatch({
       type: GetVideoTypes.GETVIDEO,
       dataVideo: data

@@ -1,22 +1,21 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 import { RouteComponentProps } from "react-router-dom";
 import "url-search-params-polyfill";
 import { connect } from "react-redux";
 import { IApplicationState } from "./Store";
-import { getData } from "./ProductsActions";
-import { handleSearchKeydown } from "./ProductsActions";
+import { getData, handleSearchKeydown } from "./ProductsActions";
 import { handleSearchChange } from "./ProductsActions";
-import { handleSearchName } from "./ProductsActions";
+import { handleSearchPictureName } from "./ProductsActions";
 import { ICuratedPhoto } from "./ProductsData";
+import "./PhotosPage.css";
 
 export interface IProps extends RouteComponentProps {
   data: ICuratedPhoto | null;
   getDataForMainPage: typeof getData;
-  search: "";
+  searchNamePhoto: "";
   watchInputChange: typeof handleSearchChange;
+  getNamePictureSearch: typeof handleSearchPictureName;
   getKeyNumber: typeof handleSearchKeydown;
-  getNamePictureSearch: typeof handleSearchName;
 }
 
 class PhotosPage extends React.Component<IProps> {
@@ -25,26 +24,18 @@ class PhotosPage extends React.Component<IProps> {
   }
 
   public componentDidMount() {
-    this.props.getDataForMainPage();
+    if (this.props.data === null) {
+      this.props.getDataForMainPage();
+    }
   }
 
   public render() {
-    const bgimage = {
-      backgroundImage:
-        "url(" +
-        `${
-          this.props.data !== null
-            ? this.props.data.photos[0].src.landscape
-            : ""
-        }` +
-        ")"
-    };
-
+    console.log(this.props)
     return (
       <React.Fragment>
-        <div className="jumbotron jumbotron-fluid bg-light" style={bgimage}>
+        <div className="jumbotron jumbotron-fluid bg-light photospage_bg">
           <div className="container">
-            <h1 className="pb-5">
+            <h1 className="pb-5 text-white">
               The best free stock photos from talented authors.
             </h1>
             <div className="input-group mb-3 input-group-lg">
@@ -52,10 +43,10 @@ class PhotosPage extends React.Component<IProps> {
                 type="text"
                 className="form-control"
                 placeholder="Find a photo"
-                value={this.props.search}
+                value={this.props.searchNamePhoto}
                 onChange={this.props.watchInputChange}
+                autoFocus={true}
                 onKeyDown={this.props.getKeyNumber}
-                autoFocus={true} 
               />
               <div className="input-group-append">
                 <button
@@ -69,7 +60,7 @@ class PhotosPage extends React.Component<IProps> {
             </div>
             <h6>
               Search ideas:{" "}
-              <span className="text-muted">
+              <span className="text-white">
                 car, adventure, crowd, dark, workout, butterfly, more...
               </span>
             </h6>
@@ -102,19 +93,17 @@ class PhotosPage extends React.Component<IProps> {
   }
 }
 
-const mapStateToProps = (store: IApplicationState, url: URLSearchParams) => {
-  return {
-    data: store.products.data
-  };
-};
+const mapStateToProps = (store: IApplicationState) => ({
+  data: store.products.data
+});
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
+    getKeyNumber: (e: any) => dispatch(handleSearchKeydown(e)),
     getDataForMainPage: () => dispatch(getData()),
     watchInputChange: (e: string) => dispatch(handleSearchChange(e)),
-    getKeyNumber: (e: any) => dispatch(handleSearchKeydown(e)),
     getNamePictureSearch: (allprops: IProps) =>
-      dispatch(handleSearchName(allprops))
+      dispatch(handleSearchPictureName(allprops))
   };
 };
 

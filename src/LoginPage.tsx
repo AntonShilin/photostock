@@ -16,7 +16,6 @@ const LoginPage: React.SFC = () => {
                 type="email"
                 className="form-control"
                 placeholder="Enter email"
-                id="email"
               />
             </div>
             <div className="form-group">
@@ -24,7 +23,6 @@ const LoginPage: React.SFC = () => {
                 type="password"
                 className="form-control"
                 placeholder="Enter password"
-                id="pwd"
               />
             </div>
             <div className="form-group form-check">

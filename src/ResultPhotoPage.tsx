@@ -1,9 +1,9 @@
 import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { IApplicationState } from "./Store";
 import { handleSearchData } from "./ProductsActions";
 import { IDataSearch } from "./ProductsData";
+import { RouteComponentProps } from "react-router-dom";
 
 export interface IDataResult extends RouteComponentProps {
   getDataSearch: typeof handleSearchData;
@@ -12,22 +12,30 @@ export interface IDataResult extends RouteComponentProps {
 }
 
 class ResultPhotoPage extends React.Component<IDataResult> {
-  constructor(props: IDataResult) {
-    super(props);
-  }
+  
+  private url = this.props.location.pathname;
+  private searchname = this.url.match(/\w+$/);
+
+  // constructor(props: IDataResult) {
+  //   super(props);
+  // }
 
   public componentDidMount() {
-    this.props.getDataSearch(this.props.searchValue);
+    if (this.searchname !== null) {
+      this.props.getDataSearch(this.searchname[0]);
+    }
   }
 
   public render() {
-    console.log("ResultPhotoPage", this.props);
+    console.log(this.props);
     return (
       <div className="container">
         <div className="row my-3">
           <div className="col-12">
-            <h3 className="text-left">
-              {`${this.props.searchValue} photos`}
+            <h5 className="text-left">
+              {this.props.searchValue === ""
+                ? `Result`
+                : this.props.searchValue + `photos`}
               <span className="ml-3 badge badge-pill badge-info">
                 {this.props.searchResult !== null ? (
                   this.props.searchResult.photos.length
@@ -35,7 +43,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                   <span>0</span>
                 )}
               </span>
-            </h3>
+            </h5>
           </div>
         </div>
         <div className="row">
@@ -61,7 +69,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
 const mapStateToProps = (store: IApplicationState) => {
   return {
     searchResult: store.products.searchDataFromInput,
-    searchValue: store.products.search
+    searchValue: store.products.searchNamePhoto
   };
 };
 

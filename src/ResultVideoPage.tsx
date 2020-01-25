@@ -3,25 +3,34 @@ import { connect } from "react-redux";
 import { IApplicationState } from "./Store";
 import { IPopularVideos } from "./ProductsData";
 import { getVideo } from "./ProductsActions";
+import { RouteComponentProps } from "react-router-dom";
 
-export interface IPropsResultPage {
+export interface IPropsResultPage extends RouteComponentProps {
   result: IPopularVideos | null;
   getSearchVideo: typeof getVideo;
   nameVideo: "" | string;
 }
 
 class ResultVideoPage extends React.Component<IPropsResultPage> {
+  private url = this.props.location.pathname;
+  private searchname = this.url.match(/\w+$/);
+
   public componentDidMount() {
-    this.props.getSearchVideo(this.props.nameVideo);
+    if (this.searchname !== null) {
+      this.props.getSearchVideo(this.searchname[0]);
+    }
   }
 
   public render() {
+    console.log(this.props);
     return (
       <div className="container">
         <div className="row my-3">
           <div className="col-12">
-            <h3 className="text-left m-0 mt-2">
-              {`${this.props.nameVideo} videos`}
+            <h5 className="text-left m-0 mt-2">
+              {this.props.nameVideo === ""
+                ? `Result`
+                : this.props.nameVideo + ` videos`}
               <span className="ml-3 badge badge-pill badge-info">
                 {this.props.result !== null ? (
                   this.props.result.videos.length
@@ -29,7 +38,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                   <span>0</span>
                 )}
               </span>
-            </h3>
+            </h5>
           </div>
         </div>
         <div className="row">
@@ -40,7 +49,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
               ) : (
                 this.props.result.videos.map((num, i) => (
                   <div key={i} className="media m-2">
-                    <video width="320" height="240" controls={true}>
+                    <video width="420" height="340" controls={true}>
                       <source
                         src={num.video_files[2].link}
                         type={num.video_files[2].file_type}

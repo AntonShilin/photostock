@@ -83,7 +83,7 @@ interface IVideoPictures {
   nr: number;
 }
 
-export const getPhotos = async (): Promise<ICuratedPhoto> => {
+export const getPopularPhotos = async (): Promise<ICuratedPhoto> => {
   const keyAPI: string =
     "563492ad6f9170000100000148298afd943a453c8f3f48bdbc9811a9";
   // tslint:disable-next-line: no-shadowed-variable

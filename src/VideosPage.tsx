@@ -25,7 +25,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
     return (
       <React.Fragment>
         <div className="jumbotron border-0">
-       {/*    <video
+          {/*    <video
             className="img-fluid mx-auto d-block"
             id="bg_video"
             autoPlay={true}
@@ -59,7 +59,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
             </div>
             <h6>
               Search ideas:{" "}
-              <span className="text-muted">
+              <span className="text-white">
                 businessman, hd wallpapers, abstract, phone, green, more...
               </span>
             </h6>
@@ -74,12 +74,10 @@ class VideosPage extends React.Component<IPropsVideosPage> {
           <div className="row">
             <div className="col-12">
               <div className="d-flex flex-wrap justify-content-around">
-                {this.props.popularVideo === null ? (
-                  <p>{"Loading ..."}</p>
-                ) : (
+                {this.props.popularVideo !== null ? (
                   this.props.popularVideo.videos.map((value, i) => (
                     <div key={i} className="media m-2">
-                      <video width="320" height="240" controls={true}>
+                      <video width="420" height="340" controls={true}>
                         <source
                           src={value.video_files[2].link}
                           type={value.video_files[2].file_type}
@@ -87,6 +85,8 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                       </video>
                     </div>
                   ))
+                ) : (
+                  <p>Loading !!!</p>
                 )}
               </div>
             </div>
