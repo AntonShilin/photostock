@@ -8,6 +8,7 @@ import { handleSearchChange } from "./ProductsActions";
 import { handleSearchPictureName } from "./ProductsActions";
 import { ICuratedPhoto } from "./ProductsData";
 import "./PhotosPage.css";
+import LoadingPage from "./LoadingPage";
 
 export interface IProps extends RouteComponentProps {
   data: ICuratedPhoto | null;
@@ -76,7 +77,7 @@ class PhotosPage extends React.Component<IProps> {
             <div className="col-12">
               <div className="d-flex flex-wrap justify-content-around">
                 {this.props.data === null ? (
-                  <p>{"Loading ..."}</p>
+                  <LoadingPage/>
                 ) : (
                   this.props.data.photos.map((image, i) => (
                     <div key={i} className="p-2">

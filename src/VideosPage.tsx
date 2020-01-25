@@ -8,6 +8,7 @@ import {
 } from "./ProductsActions";
 import { IApplicationState } from "./Store";
 import "./VideosPage.css";
+import LoadingPage from "./LoadingPage";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
@@ -86,7 +87,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                     </div>
                   ))
                 ) : (
-                  <p>Loading !!!</p>
+                  <LoadingPage/>
                 )}
               </div>
             </div>

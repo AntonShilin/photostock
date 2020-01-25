@@ -4,6 +4,7 @@ import { IApplicationState } from "./Store";
 import { IPopularVideos } from "./ProductsData";
 import { getVideo } from "./ProductsActions";
 import { RouteComponentProps } from "react-router-dom";
+import LoadingPage from "./LoadingPage";
 
 export interface IPropsResultPage extends RouteComponentProps {
   result: IPopularVideos | null;
@@ -45,7 +46,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
           <div className="col-12">
             <div className="d-flex flex-wrap align-content-around">
               {this.props.result === null ? (
-                <p>{"Loading ..."}</p>
+                  <LoadingPage/>
               ) : (
                 this.props.result.videos.map((num, i) => (
                   <div key={i} className="media m-2">

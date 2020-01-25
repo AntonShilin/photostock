@@ -4,6 +4,7 @@ import { IApplicationState } from "./Store";
 import { handleSearchData } from "./ProductsActions";
 import { IDataSearch } from "./ProductsData";
 import { RouteComponentProps } from "react-router-dom";
+import LoadingPage from "./LoadingPage";
 
 export interface IDataResult extends RouteComponentProps {
   getDataSearch: typeof handleSearchData;
@@ -50,7 +51,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
           <div className="col-12">
             <div className="d-flex flex-wrap justify-content-around">
               {this.props.searchResult === null ? (
-                <p>{"Loading ..."}</p>
+                <LoadingPage/>
               ) : (
                 this.props.searchResult.photos.map((image, i) => (
                   <div key={i} className="p-2">
