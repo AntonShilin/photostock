@@ -5,9 +5,6 @@ body {
   font-family: 'Archivo Black', sans-serif !important;
 }
 
-footer{
-  bottom:0;
-}
 
 input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: lightgrey  !important;
@@ -22,7 +19,7 @@ input:-moz-placeholder { /* Firefox 18- */
   color: lightgrey !important;
 }
 
-a.navbar-brand{
+a{
   font-size: 1.10rem;
 }
 

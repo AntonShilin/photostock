@@ -8,9 +8,9 @@ import { FaRegUserCircle } from "react-icons/fa";
 const Header: React.SFC<RouteComponentProps> = props => {
   return (
     <Navbar bg="dark" variant="dark" expand="md" sticky="top">
-      <Navbar.Brand href="/photos" className="mr-3 p-2">
+      <NavLink to="/photos" className="mr-3 p-2 text-decoration-none  text-white">
         Photo & Video Stock
-      </Navbar.Brand>
+      </NavLink>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto text-uppercase">
