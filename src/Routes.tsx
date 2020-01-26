@@ -31,19 +31,19 @@ const Routes: React.SFC<RouteComponentProps> = props => {
     <React.Fragment>
       <Header />
       <Switch>
-        <Route path="/login" component={LoginPage} />
+        <Route path="https://antonshilin.github.io/login" component={LoginPage} />
         <Redirect exact={true} from="/" to="/login" />
-        <Route path="/photos" exact={true} component={PhotosPage} />
-        <Route path="/videos" exact={true} component={VideosPage} />
-        <Route path="/videos/:searchvideo" component={ResultVideoPage} />
-        <Route path="/photos/:searchphoto" component={ResultPhotoPage} />
+        <Route path="https://antonshilin.github.io/photos" exact={true} component={PhotosPage} />
+        <Route path="https://antonshilin.github.io/videos" exact={true} component={VideosPage} />
+        <Route path="https://antonshilin.github.io/videos/:searchvideo" component={ResultVideoPage} />
+        <Route path="https://antonshilin.github.io/photos/:searchphoto" component={ResultPhotoPage} />
         <Route path="/admin">
           {loggedIn ? (
             <Suspense fallback={<LoadingPage />}>
               <AdminPage />
             </Suspense>
           ) : (
-            <Redirect to="/login" />
+            <Redirect to="https://antonshilin.github.io/login" />
           )}
         </Route>
         <Route component={NotFoundPage} />
