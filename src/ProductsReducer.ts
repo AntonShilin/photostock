@@ -14,7 +14,7 @@ import {
   SearchKeydownTypes
 } from "./ProductsTypes";
 
-const initialProductState: IProductsState  = {
+const initialProductState: IProductsState = {
   productsLoading: false,
   data: null,
   searchNamePhoto: "",
@@ -24,7 +24,6 @@ const initialProductState: IProductsState  = {
   resultSearchVideo: null,
   keyboardKey: null
 };
-
 
 export const productsReducer: Reducer<IProductsState, ProductsActions> = (
   state = initialProductState,
@@ -42,7 +41,8 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       if (action.keydownKey === 13 || action.keydownKey === 32) {
         if (state.searchNamePhoto !== "") {
           const currentLocation = document.location.pathname;
-          const newURL = document.location.replace(currentLocation+"/"+state.searchNamePhoto);
+          const searchphoto = state.searchNamePhoto;
+          document.location.assign(currentLocation + "/" + searchphoto);
         }
       }
 
@@ -61,7 +61,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
 
     case GetSearchNameTypes.GETSEARCHNAME: {
       const currentDocument: any = action.props;
-      console.log(state.searchNamePhoto)
+      console.log(state.searchNamePhoto);
       currentDocument.history.push(`/photos/${state.searchNamePhoto}`);
       return {
         ...state

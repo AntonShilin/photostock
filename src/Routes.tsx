@@ -19,7 +19,7 @@ import AdminPage from "./AdminPage";
 
 const RoutesWrap: React.SFC = () => {
   return (
-    <Router basename="/photoandvideo/">
+    <Router>
       <Route component={Routes} />
     </Router>
   );

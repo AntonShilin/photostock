@@ -20,7 +20,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
 
   public componentDidMount() {
     if (this.searchname !== null) {
-      this.props.getDataSearch(this.searchname[0]);
+      this.props.getDataSearch(this.searchname);
     }
   }
 
