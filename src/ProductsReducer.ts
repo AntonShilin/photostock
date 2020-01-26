@@ -41,9 +41,8 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     case SearchKeydownTypes.SEARCKEYDOWN: {
       if (action.keydownKey === 13 || action.keydownKey === 32) {
         if (state.searchNamePhoto !== "") {
-          const currentLocation = document.location;
-          console.log(currentLocation)
-          //const newURL = document.location.replace(currentLocation+"/"+state.searchNamePhoto);
+          const currentLocation = document.location.pathname;
+          const newURL = document.location.replace(currentLocation+"/"+state.searchNamePhoto);
         }
       }
 
