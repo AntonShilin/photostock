@@ -42,10 +42,11 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       if (action.keydownKey === 13 || action.keydownKey === 32) {
         if (state.searchNamePhoto !== "") {
           const currentLocation = document.location;
+          alert(currentLocation)
           document.location.replace(currentLocation+"/"+state.searchNamePhoto);
         }
       }
-      
+
       return {
         ...state,
         keyboardKey: action.keydownKey
