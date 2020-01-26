@@ -10,7 +10,7 @@ const LoginPage: React.SFC = () => {
       </div>
       <div className="row mt-5 justify-content-center">
         <div className="col-md-7 col-sm-12">
-          <form action="/action_page.php" className="bg-light p-3 rounded border">
+          <form  className="bg-light p-3 rounded border w-75 d-block mx-auto">
             <div className="form-group">
               <input
                 type="email"

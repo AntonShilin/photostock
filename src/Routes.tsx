@@ -14,13 +14,13 @@ import LoginPage from "./LoginPage";
 import { Suspense } from "react";
 import ResultPhotoPage from "./ResultPhotoPage";
 import ResultVideoPage from "./ResultVideoPage";
-
-const AdminPage = React.lazy(() => import("./AdminPage"));
+import LoadingPage from "./App";
+import AdminPage from "./AdminPage";
 
 const RoutesWrap: React.SFC = () => {
   return (
     <Router>
-      <Route component={Routes}/>
+      <Route component={Routes} />
     </Router>
   );
 };
@@ -28,7 +28,7 @@ const RoutesWrap: React.SFC = () => {
 const Routes: React.SFC<RouteComponentProps> = props => {
   const [loggedIn, setLoggedIn] = React.useState(true);
   return (
-    <div>
+    <React.Fragment>
       <Header />
       <Switch>
         <Route path="/login" component={LoginPage} />
@@ -39,9 +39,7 @@ const Routes: React.SFC<RouteComponentProps> = props => {
         <Route path="/photos/:searchphoto" component={ResultPhotoPage} />
         <Route path="/admin">
           {loggedIn ? (
-            <Suspense
-              fallback={<div className="page-container">Loading...</div>}
-            >
+            <Suspense fallback={<LoadingPage />}>
               <AdminPage />
             </Suspense>
           ) : (
@@ -50,7 +48,7 @@ const Routes: React.SFC<RouteComponentProps> = props => {
         </Route>
         <Route component={NotFoundPage} />
       </Switch>
-    </div>
+    </React.Fragment>
   );
 };
 

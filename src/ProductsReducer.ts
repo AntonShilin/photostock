@@ -25,6 +25,7 @@ const initialProductState: IProductsState  = {
   keyboardKey: null
 };
 
+
 export const productsReducer: Reducer<IProductsState, ProductsActions> = (
   state = initialProductState,
   action
@@ -39,9 +40,12 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
 
     case SearchKeydownTypes.SEARCKEYDOWN: {
       if (action.keydownKey === 13 || action.keydownKey === 32) {
-        console.log(state);
-      // history.push(history.location.pathname+"/"+ state.search)
+        if (state.searchNamePhoto !== "") {
+          const currentLocation = document.location;
+          document.location.replace(currentLocation+"/"+state.searchNamePhoto);
+        }
       }
+      
       return {
         ...state,
         keyboardKey: action.keydownKey

@@ -1,15 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './LoadingPage.css';
+import React from "react";
 
-const LoadingPage: React.FC = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
+      <header className="App-header">?</header>
     </div>
   );
-}
+};
 
-export default LoadingPage;
+export default App;

@@ -29,7 +29,6 @@ import {
 } from "./ProductsTypes";
 import { IProps } from "./PhotosPage";
 import { IPropsVideosPage } from "./VideosPage";
-import { RouteComponentProps } from "react-router-dom";
 
 export const getData: ActionCreator<ThunkAction<
   Promise<AnyAction>,

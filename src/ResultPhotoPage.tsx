@@ -17,9 +17,6 @@ class ResultPhotoPage extends React.Component<IDataResult> {
   private url = this.props.location.pathname;
   private searchname = this.url.match(/\w+$/);
 
-  // constructor(props: IDataResult) {
-  //   super(props);
-  // }
 
   public componentDidMount() {
     if (this.searchname !== null) {
@@ -28,7 +25,6 @@ class ResultPhotoPage extends React.Component<IDataResult> {
   }
 
   public render() {
-    console.log(this.props);
     return (
       <div className="container">
         <div className="row my-3">
@@ -36,7 +32,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
             <h5 className="text-left">
               {this.props.searchValue === ""
                 ? `Result`
-                : this.props.searchValue + `photos`}
+                : this.props.searchValue + ` photos`}
               <span className="ml-3 badge badge-pill badge-info">
                 {this.props.searchResult !== null ? (
                   this.props.searchResult.photos.length

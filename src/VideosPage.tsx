@@ -26,14 +26,6 @@ class VideosPage extends React.Component<IPropsVideosPage> {
     return (
       <React.Fragment>
         <div className="jumbotron border-0">
-          {/*    <video
-            className="img-fluid mx-auto d-block"
-            id="bg_video"
-            autoPlay={true}
-            loop={true}
-          >
-            <source src={require(`./video/nyc.mp4`)} type="video/mp4" />
-          </video> */}
           <div className="container">
             <h1 className="pb-5 text-white">
               The best free stock videos from talented authors.
@@ -45,7 +37,6 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                 placeholder="Find video"
                 value={this.props.searchName}
                 onChange={this.props.watchNameVideoChange}
-                // onKeyDown={this.props.getKeyNumber}
                 autoFocus={true}
               />
               <div className="input-group-append">
@@ -78,7 +69,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                 {this.props.popularVideo !== null ? (
                   this.props.popularVideo.videos.map((value, i) => (
                     <div key={i} className="media m-2">
-                      <video width="420" height="340" controls={true}>
+                      <video width="420" height="340" controls={true} className="img-fluid">
                         <source
                           src={value.video_files[2].link}
                           type={value.video_files[2].file_type}

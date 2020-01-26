@@ -31,7 +31,6 @@ class PhotosPage extends React.Component<IProps> {
   }
 
   public render() {
-    console.log(this.props)
     return (
       <React.Fragment>
         <div className="jumbotron jumbotron-fluid bg-light photospage_bg">
@@ -81,7 +80,7 @@ class PhotosPage extends React.Component<IProps> {
                 ) : (
                   this.props.data.photos.map((image, i) => (
                     <div key={i} className="p-2">
-                      <img src={image.src.medium} className="img-fluid" />
+                      <img src={image.src.medium} className="img-fluid"  alt="img_1"/>
                     </div>
                   ))
                 )}
