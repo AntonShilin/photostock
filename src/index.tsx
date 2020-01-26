@@ -12,7 +12,7 @@ interface IProps {
   store: Store<IApplicationState>;
 }
 
-const Root: React.SFC<IProps> = props => {
+export const Root: React.SFC<IProps> = props => {
   return (
     <Provider store={props.store}>
       <RoutesWrap/>
