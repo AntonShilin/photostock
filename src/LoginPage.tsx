@@ -31,8 +31,8 @@ const LoginPage: React.SFC = () => {
                 me
               </label>
             </div>
-            <button type="submit" className="btn btn-primary">
-              Submit
+            <button type="submit" disabled={true} className="btn btn-primary">
+              Sing up
             </button>
           </form>
         </div>

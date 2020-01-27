@@ -40,9 +40,9 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     case SearchKeydownTypes.SEARCKEYDOWN: {
       if (action.keydownKey === 13 || action.keydownKey === 32) {
         if (state.searchNamePhoto !== "") {
-          const currentLocation = document.location.pathname;
+          /* const currentLocation = document.location.pathname;
           const searchphoto = state.searchNamePhoto;
-          document.location.assign(currentLocation + "/" + searchphoto);
+          document.location.assign(currentLocation + "/" + searchphoto); */
         }
       }
 
