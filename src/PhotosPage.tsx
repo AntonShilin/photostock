@@ -46,7 +46,7 @@ class PhotosPage extends React.Component<IProps> {
                 value={this.props.searchNamePhoto}
                 onChange={this.props.watchInputChange}
                 autoFocus={true}
-                onKeyDown={this.props.getKeyNumber}
+                /* onKeyDown={this.props.getKeyNumber} */
               />
               <div className="input-group-append">
                 <button

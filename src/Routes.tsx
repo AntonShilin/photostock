@@ -14,8 +14,8 @@ import LoginPage from "./LoginPage";
 import { Suspense } from "react";
 import ResultPhotoPage from "./ResultPhotoPage";
 import ResultVideoPage from "./ResultVideoPage";
-import LoadingPage from "./App";
 import AdminPage from "./AdminPage";
+import LoadingPage from "./LoadingPage";
 
 const RoutesWrap: React.SFC = () => {
   return (
@@ -27,6 +27,7 @@ const RoutesWrap: React.SFC = () => {
 
 const Routes: React.SFC<RouteComponentProps> = props => {
   const [loggedIn, setLoggedIn] = React.useState(true);
+  console.log(loggedIn)
   return (
     <React.Fragment>
       <Header />

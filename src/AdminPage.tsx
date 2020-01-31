@@ -4,11 +4,10 @@ class AdminPage extends React.Component {
   public render() {
     return (
       <div className="container mt-5">
-        <h2>Profile</h2>
-        <div className="card">
-          <div className="card-header">Name:</div>
-          <div className="card-body">Login:</div>
-          <div className="card-footer">Email:</div>
+        <h2 className="text-center">Profile</h2>
+        <div className="card d-block mx-auto w-75">
+          <div className="card-header">Login:</div>
+          <div className="card-body">Email:</div>
         </div>
       </div>
     );

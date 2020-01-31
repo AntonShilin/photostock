@@ -44,13 +44,18 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
         </div>
         <div className="row">
           <div className="col-12">
-            <div className="d-flex flex-wrap align-content-around">
+            <div className="d-flex flex-wrap justify-content-around">
               {this.props.result === null ? (
-                  <LoadingPage/>
+                <LoadingPage />
               ) : (
                 this.props.result.videos.map((num, i) => (
                   <div key={i} className="media m-2">
-                    <video width="420" height="340" controls={true}>
+                    <video
+                      width="420"
+                      height="340"
+                      controls={true}
+                      className="img-fluid"
+                    >
                       <source
                         src={num.video_files[2].link}
                         type={num.video_files[2].file_type}

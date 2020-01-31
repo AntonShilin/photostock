@@ -1,22 +1,24 @@
-.gear {
+div img.gear {
   height: 25vmin;
-  animation: moving 3.5s;
+  animation: moving 2s infinite linear;
 }
 
 @-webkit-keyframes moving {
   from {
-    transform: rotate(-360deg);
+    transform: rotate(0deg);
   }
+
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg); 
   }
 }
 
 @keyframes moving {
   from {
-    transform: rotate(-360deg);
+    transform: rotate(0deg); 
   }
+
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg); 
   }
 }
