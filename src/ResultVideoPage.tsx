@@ -28,16 +28,18 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
       <div className="container">
         <div className="row my-3">
           <div className="col-12">
-            <h5 className="text-left m-0 mt-2">
+            <h5 className="text-left m-0 mt-2 ">
               {this.props.nameVideo === ""
                 ? `Result`
                 : this.props.nameVideo + ` videos`}
               <span className="ml-3 badge badge-pill badge-info">
                 {this.props.result !== null ? (
-                  this.props.result.videos.length
-                ) : (
-                  <span>0</span>
-                )}
+                  this.props.result.videos.length > 0 ? (
+                    this.props.result.videos.length
+                  ) : (
+                    "Not found video. Try again"
+                  )
+                ) : <span>0</span>}
               </span>
             </h5>
           </div>

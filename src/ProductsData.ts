@@ -49,6 +49,7 @@ export interface IPopularVideos {
 }
 
 interface IVideos {
+  lenght: number;
   id: number;
   width: number;
   height: number;

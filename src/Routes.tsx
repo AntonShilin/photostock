@@ -27,7 +27,6 @@ const RoutesWrap: React.SFC = () => {
 
 const Routes: React.SFC<RouteComponentProps> = props => {
   const [loggedIn, setLoggedIn] = React.useState(true);
-  console.log(loggedIn)
   return (
     <React.Fragment>
       <Header />

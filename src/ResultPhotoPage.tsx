@@ -13,10 +13,8 @@ export interface IDataResult extends RouteComponentProps {
 }
 
 class ResultPhotoPage extends React.Component<IDataResult> {
-  
   private url = this.props.location.pathname;
   private searchname = this.url.match(/\w+$/);
-
 
   public componentDidMount() {
     if (this.searchname !== null) {
@@ -35,7 +33,11 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                 : this.props.searchValue + ` photos`}
               <span className="ml-3 badge badge-pill badge-info">
                 {this.props.searchResult !== null ? (
-                  this.props.searchResult.photos.length
+                  this.props.searchResult.photos.length > 0 ? (
+                    this.props.searchResult.photos.length
+                  ) : (
+                    "Sorry. Not found. Try again"
+                  )
                 ) : (
                   <span>0</span>
                 )}
@@ -47,7 +49,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
           <div className="col-12">
             <div className="d-flex flex-wrap justify-content-around">
               {this.props.searchResult === null ? (
-                <LoadingPage/>
+                <LoadingPage />
               ) : (
                 this.props.searchResult.photos.map((image, i) => (
                   <div key={i} className="p-2">
