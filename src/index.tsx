@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import RoutesWrap from "./Routes";
+import RoutesWrap from "./Routes/Routes";
 import { Provider } from "react-redux";
 import { Store } from "redux";
-import configureStore from "./Store";
-import { IApplicationState } from "./Store";
+import configureStore from "./Store/Store";
+import { IApplicationState } from "./Store/Store";
 
 interface IProps {
   store: Store<IApplicationState>;

@@ -1,10 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { IApplicationState } from "./Store";
-import { handleSearchData } from "./ProductsActions";
-import { IDataSearch } from "./ProductsData";
+import { IApplicationState } from "../Store/Store";
+import { handleSearchData } from "../Actions/ProductsActions";
+import { IDataSearch } from "../ProductsData/ProductsData";
 import { RouteComponentProps } from "react-router-dom";
-import LoadingPage from "./LoadingPage";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 export interface IDataResult extends RouteComponentProps {
   getDataSearch: typeof handleSearchData;

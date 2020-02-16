@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, createStore, Store } from "redux";
 import thunk from "redux-thunk";
-import { productsReducer } from "./ProductsReducer";
-import { IProductsState } from "./ProductsTypes";
+import { productsReducer } from "../Reducer/ProductsReducer";
+import { IProductsState } from "../Types/ProductsTypes";
 
 export interface IApplicationState {
   products: IProductsState;

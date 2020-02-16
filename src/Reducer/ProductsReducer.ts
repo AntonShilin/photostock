@@ -12,7 +12,7 @@ import {
   GetChangeNameVideoTypes,
   GetVideoTypes,
   SearchKeydownTypes
-} from "./ProductsTypes";
+} from "../Types/ProductsTypes";
 
 const initialProductState: IProductsState = {
   productsLoading: false,

@@ -6,16 +6,16 @@ import {
   RouteComponentProps,
   Switch
 } from "react-router-dom";
-import PhotosPage from "./PhotosPage";
-import VideosPage from "./VideosPage";
-import Header from "./Header";
-import NotFoundPage from "./NotFoundPage";
-import LoginPage from "./LoginPage";
+import PhotosPage from "../PhotosPage/PhotosPage";
+import VideosPage from "../VideosPage/VideosPage";
+import Header from "../Header/Header";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
+import LoginPage from "../LoginPage/LoginPage";
 import { Suspense } from "react";
-import ResultPhotoPage from "./ResultPhotoPage";
-import ResultVideoPage from "./ResultVideoPage";
-import AdminPage from "./AdminPage";
-import LoadingPage from "./LoadingPage";
+import ResultPhotoPage from "../ResultPhotoPage/ResultPhotoPage";
+import ResultVideoPage from "../ResultVideoPage/ResultVideoPage";
+import AdminPage from "../AdminPage/AdminPage";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 const RoutesWrap: React.SFC = () => {
   return (

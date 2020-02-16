@@ -2,13 +2,13 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import "url-search-params-polyfill";
 import { connect } from "react-redux";
-import { IApplicationState } from "./Store";
-import { getData, handleSearchKeydown } from "./ProductsActions";
-import { handleSearchChange } from "./ProductsActions";
-import { handleSearchPictureName } from "./ProductsActions";
-import { ICuratedPhoto } from "./ProductsData";
+import { IApplicationState } from "../Store/Store";
+import { getData, handleSearchKeydown } from "../Actions/ProductsActions";
+import { handleSearchChange } from "../Actions/ProductsActions";
+import { handleSearchPictureName } from "../Actions/ProductsActions";
+import { ICuratedPhoto } from "../ProductsData/ProductsData";
 import "./PhotosPage.css";
-import LoadingPage from "./LoadingPage";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 export interface IProps extends RouteComponentProps {
   data: ICuratedPhoto | null;

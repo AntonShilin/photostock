@@ -1,14 +1,14 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { searchVideos, IPopularVideos } from "./ProductsData";
+import { searchVideos, IPopularVideos } from "../ProductsData/ProductsData";
 import {
   getPopularVideo,
   showResultSearchVideo,
   changeNameVideo
-} from "./ProductsActions";
-import { IApplicationState } from "./Store";
+} from "../Actions/ProductsActions";
+import { IApplicationState } from "../Store/Store";
 import "./VideosPage.css";
-import LoadingPage from "./LoadingPage";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;

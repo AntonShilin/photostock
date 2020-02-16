@@ -7,7 +7,7 @@ class LoadingPage extends React.Component {
       <div className="container mt-5">
         <img
           className="gear mx-auto d-block"
-          src={require("./media/gear.svg")}
+          src={require("../media/gear.svg")}
           alt=""
         />
       </div>

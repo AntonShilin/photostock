@@ -1,6 +1,6 @@
-import { ICuratedPhoto, IDataSearch, IPopularVideos } from "./ProductsData";
-import { IProps } from "./PhotosPage";
-import { IPropsVideosPage } from "./VideosPage";
+import { ICuratedPhoto, IDataSearch, IPopularVideos } from "../ProductsData/ProductsData";
+import { IProps } from "../PhotosPage/PhotosPage";
+import { IPropsVideosPage } from "../VideosPage/VideosPage";
 
 export enum DataActionTypes {
   GETDATA = "GETDATA"

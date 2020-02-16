@@ -1,10 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { IApplicationState } from "./Store";
-import { IPopularVideos } from "./ProductsData";
-import { getVideo } from "./ProductsActions";
+import { IApplicationState } from "../Store/Store";
+import { IPopularVideos } from "../ProductsData/ProductsData";
+import { getVideo } from "../Actions/ProductsActions";
 import { RouteComponentProps } from "react-router-dom";
-import LoadingPage from "./LoadingPage";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 export interface IPropsResultPage extends RouteComponentProps {
   result: IPopularVideos | null;

@@ -5,7 +5,7 @@ import {
   doSearchInputValue,
   getPopularVideos,
   searchVideos
-} from "./ProductsData";
+} from "../ProductsData/ProductsData";
 import {
   DataActionTypes,
   SearchValueTypes,
@@ -26,9 +26,9 @@ import {
   IGetVideoAction,
   ISearchKeydownAction,
   SearchKeydownTypes
-} from "./ProductsTypes";
-import { IProps } from "./PhotosPage";
-import { IPropsVideosPage } from "./VideosPage";
+} from "../Types/ProductsTypes";
+import { IProps } from "../PhotosPage/PhotosPage";
+import { IPropsVideosPage } from "../VideosPage/VideosPage";
 
 export const getData: ActionCreator<ThunkAction<
   Promise<AnyAction>,
