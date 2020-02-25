@@ -1,0 +1,43 @@
+div#main_menu {
+  a {
+    color: #fff;
+  }
+  position: relative;
+  background-color: #232a34;
+  .row {
+    min-height: 4rem;
+    div > a {
+      color: #fff;
+    }
+  }
+  button {
+    position: absolute;
+    right: 1rem;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+  }
+}
+
+div#main_menu_submenu {
+  width: 0%;
+  height: 100%;
+  padding: 0;
+  position: absolute;
+  z-index: 10;
+  background-color: #05a081;
+  box-shadow: 14px 0px 7px #343a40;
+  a {
+    color: #fff;
+  }
+}
+
+div.streak {
+  opacity: 0.3;
+  z-index: 3;
+  top: 4rem;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: #343a40;
+}

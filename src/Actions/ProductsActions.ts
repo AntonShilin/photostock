@@ -25,10 +25,17 @@ import {
   IChangeNameVideoAction,
   IGetVideoAction,
   ISearchKeydownAction,
-  SearchKeydownTypes
+  IToggleMenuAction,
+  SearchKeydownTypes,
+  ToggleMenu
 } from "../Types/ProductsTypes";
 import { IProps } from "../PhotosPage/PhotosPage";
 import { IPropsVideosPage } from "../VideosPage/VideosPage";
+
+export const handleToggleMenu: ActionCreator<IToggleMenuAction> =(elem:React.ElementType<HTMLDivElement>) => ({
+  type: ToggleMenu.TOGGLEMENU,
+  element: elem
+})
 
 export const getData: ActionCreator<ThunkAction<
   Promise<AnyAction>,
@@ -125,3 +132,4 @@ export const getVideo: ActionCreator<ThunkAction<
     });
   };
 };
+

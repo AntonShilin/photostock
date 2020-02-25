@@ -43,7 +43,16 @@ export enum GetVideoTypes {
   GETVIDEO = "GETVIDEO"
 }
 
+export enum ToggleMenu {
+  TOGGLEMENU="TOGGLEMENU"
+}
+
 /*  interfaces */
+
+export interface IToggleMenuAction {
+  type: ToggleMenu.TOGGLEMENU;
+  element: React.ElementType<HTMLDivElement>
+}
 
 export interface ISearchKeydownAction {
   type: SearchKeydownTypes.SEARCKEYDOWN;
@@ -101,7 +110,8 @@ export type ProductsActions =
   | IGetResultSearchVideoAction
   | IChangeNameVideoAction
   |ISearchKeydownAction
-  | IGetVideoAction;
+  | IGetVideoAction
+  | IToggleMenuAction;
 
 export interface IProductsState {
   readonly keyboardKey: any;
@@ -112,4 +122,5 @@ export interface IProductsState {
   readonly searchDataFromInput: IDataSearch | null;
   readonly searchNameVideo: string;
   readonly resultSearchVideo: IPopularVideos | null;
+  readonly isToggleMenu: boolean;
 }

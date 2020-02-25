@@ -11,7 +11,8 @@ import {
   GetResultSearchVideoTypes,
   GetChangeNameVideoTypes,
   GetVideoTypes,
-  SearchKeydownTypes
+  SearchKeydownTypes,
+  ToggleMenu
 } from "../Types/ProductsTypes";
 
 const initialProductState: IProductsState = {
@@ -22,7 +23,8 @@ const initialProductState: IProductsState = {
   videos: null,
   searchNameVideo: "",
   resultSearchVideo: null,
-  keyboardKey: null
+  keyboardKey: null,
+  isToggleMenu: false
 };
 
 export const productsReducer: Reducer<IProductsState, ProductsActions> = (
@@ -40,8 +42,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     case SearchKeydownTypes.SEARCKEYDOWN: {
       if (action.keydownKey === 13 || action.keydownKey === 32) {
         if (state.searchNamePhoto !== "") {
-         
-         /*   const currentLocation = document.location.pathname;
+          /*   const currentLocation = document.location.pathname;
           const searchphoto = state.searchNamePhoto;
            document.location.assign(currentLocation + "/" + searchphoto);  */
         }
@@ -102,6 +103,31 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       return {
         ...state,
         resultSearchVideo: action.dataVideo
+      };
+    }
+
+    case ToggleMenu.TOGGLEMENU: {
+      const elem: any = action.element;
+      console.log(elem.current.style.width);
+      
+      
+      // tslint:disable-next-line: radix
+      if (elem.current.style.width ==="0%") {
+        let count: number = 0;
+        const gearForward = setInterval(() => {
+          if (count < 50) {
+            count++;
+            elem.current.style.width = count + "%";
+            console.log(count);
+          } else {
+            clearInterval(gearForward);
+          }
+        }, 5);
+      }
+      
+      return {
+        ...state,
+        isToggleMenu: !state.isToggleMenu
       };
     }
   }

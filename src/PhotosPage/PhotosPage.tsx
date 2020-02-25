@@ -66,7 +66,7 @@ class PhotosPage extends React.Component<IProps> {
             </h6>
           </div>
         </div>
-        <div className="container bg-light">
+        <div className="container-xl bg-light">
           <div className="row mb-2">
             <div className="col-12">
               <h6 className="m-0 mt-2">Free Stock Photos Trending </h6>

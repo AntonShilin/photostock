@@ -24,7 +24,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
 
   public render() {
     return (
-      <div className="container">
+      <div className="container-xl">
         <div className="row my-3">
           <div className="col-12">
             <h5 className="text-left">

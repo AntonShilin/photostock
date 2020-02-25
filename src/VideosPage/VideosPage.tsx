@@ -57,7 +57,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
             </h6>
           </div>
         </div>
-        <div className="container bg-light">
+        <div className="container-xl bg-light">
           <div className="row">
             <div className="col-sm-6 col-md-12">
               <h6 className="mt-2">New free stock videos</h6>

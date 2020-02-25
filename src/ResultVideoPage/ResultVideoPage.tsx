@@ -23,9 +23,8 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
   }
 
   public render() {
-    console.log(this.props);
     return (
-      <div className="container">
+      <div className="container-xl">
         <div className="row my-3">
           <div className="col-12">
             <h5 className="text-left m-0 mt-2 ">
