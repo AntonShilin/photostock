@@ -27,7 +27,9 @@ import {
   ISearchKeydownAction,
   IToggleMenuAction,
   SearchKeydownTypes,
-  ToggleMenu
+  ToggleMenu,
+  IMoveScrollAction,
+  MoveScroll
 } from "../Types/ProductsTypes";
 import { IProps } from "../PhotosPage/PhotosPage";
 import { IPropsVideosPage } from "../VideosPage/VideosPage";
@@ -133,3 +135,12 @@ export const getVideo: ActionCreator<ThunkAction<
   };
 };
 
+
+
+export const handleScroll: ActionCreator<IMoveScrollAction> = (event:any) => 
+ /*  console.log(event);
+  console.log(event.srcElement.scrollingElement.scrollTop); */
+  ({
+    type: MoveScroll.MOVESCROLL,
+    scrollPosition:event.srcElement.scrollingElement.scrollTop
+  })

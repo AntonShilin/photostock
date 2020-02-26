@@ -1,6 +1,8 @@
-div img.gear {
-  height: 5rem;
-  animation: moving 2s infinite linear;
+ div.gear_icon_bg {
+  div.gear_icon {
+    animation: moving 2s infinite linear;
+    display: inline-block;
+  }
 }
 
 @-webkit-keyframes moving {
@@ -9,16 +11,16 @@ div img.gear {
   }
 
   to {
-    transform: rotate(360deg); 
+    transform: rotate(360deg);
   }
 }
 
 @keyframes moving {
   from {
-    transform: rotate(0deg); 
+    transform: rotate(0deg);
   }
 
   to {
-    transform: rotate(360deg); 
+    transform: rotate(360deg);
   }
 }

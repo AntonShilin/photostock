@@ -47,6 +47,10 @@ export enum ToggleMenu {
   TOGGLEMENU="TOGGLEMENU"
 }
 
+export enum MoveScroll {
+  MOVESCROLL="MOVESCROLL"
+}
+
 /*  interfaces */
 
 export interface IToggleMenuAction {
@@ -100,6 +104,11 @@ export interface IGetVideoAction{
   dataVideo: IPopularVideos;
 }
 
+export interface IMoveScrollAction{
+  type: MoveScroll.MOVESCROLL;
+  scrollPosition: number;
+}
+
 
 export type ProductsActions =
   | IDataLoadingAction
@@ -111,6 +120,7 @@ export type ProductsActions =
   | IChangeNameVideoAction
   |ISearchKeydownAction
   | IGetVideoAction
+  |IMoveScrollAction
   | IToggleMenuAction;
 
 export interface IProductsState {
@@ -123,4 +133,5 @@ export interface IProductsState {
   readonly searchNameVideo: string;
   readonly resultSearchVideo: IPopularVideos | null;
   readonly isToggleMenu: boolean;
+  readonly isScrolling: boolean;
 }

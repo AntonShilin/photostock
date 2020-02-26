@@ -7,13 +7,15 @@ import { IoIosMenu } from "react-icons/io";
 import { MdClose } from "react-icons/md";
 import "./Header.scss";
 import { connect } from "react-redux";
-import { handleToggleMenu } from "../Actions/ProductsActions";
+import { handleToggleMenu, handleScroll } from "../Actions/ProductsActions";
 import { IApplicationState } from "../Store/Store";
 import SearchSmall from "../SearchSmall/SearchSmall";
 
 export interface IHeaderProps {
   handleToggleMenu: typeof handleToggleMenu;
   isToggleMenu: boolean;
+  handleScroll: typeof handleScroll;
+  isScrolling: boolean;
 }
 
 class Header extends React.Component<IHeaderProps, RouteComponentProps> {
@@ -23,17 +25,21 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
     this.elementMenu = React.createRef();
   }
 
+  public componentDidMount() {
+    window.addEventListener("scroll", this.props.handleScroll);
+  }
+
   public render() {
     return (
       <React.Fragment>
-         <div
-              className="streak d-lg-none"
-              style={
-                this.props.isToggleMenu
-                  ? { display: "block" }
-                  : { display: "none" }
-              }
-            />
+        <div
+          className={`streak d-lg-none ${
+            this.props.isScrolling ? "d-none" : ""
+          }`}
+          style={
+            this.props.isToggleMenu ? { display: "block" } : { display: "none" }
+          }
+        />
         <div id="main_menu" className="container-xl">
           <div className="row align-items-center">
             <div className="col-lg-3 d-flex">
@@ -73,9 +79,13 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
         <div
           ref={this.elementMenu}
           id="main_menu_submenu"
-          className="container-xl d-lg-none"
+          className={`container-xl d-lg-none ${
+            this.props.isScrolling ? "d-none" : ""
+          }`}
           style={
-            this.props.isToggleMenu ? { display: "block" } : { display: "none", width:"0%" }
+            this.props.isToggleMenu
+              ? { display: "block" }
+              : { display: "none", width: "0%" }
           }
         >
           <div className="row align-items-center">
@@ -103,13 +113,15 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
 }
 
 const mapStateToProps = (store: IApplicationState) => ({
-  isToggleMenu: store.products.isToggleMenu
+  isToggleMenu: store.products.isToggleMenu,
+  isScrolling: store.products.isScrolling
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     handleToggleMenu: (element: React.ElementType<HTMLDivElement>) =>
-      dispatch(handleToggleMenu(element))
+      dispatch(handleToggleMenu(element)),
+    handleScroll: (event: any) => dispatch(handleScroll(event))
   };
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

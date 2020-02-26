@@ -12,7 +12,8 @@ import {
   GetChangeNameVideoTypes,
   GetVideoTypes,
   SearchKeydownTypes,
-  ToggleMenu
+  ToggleMenu,
+  MoveScroll
 } from "../Types/ProductsTypes";
 
 const initialProductState: IProductsState = {
@@ -24,7 +25,8 @@ const initialProductState: IProductsState = {
   searchNameVideo: "",
   resultSearchVideo: null,
   keyboardKey: null,
-  isToggleMenu: false
+  isToggleMenu: false,
+  isScrolling: false
 };
 
 export const productsReducer: Reducer<IProductsState, ProductsActions> = (
@@ -108,26 +110,32 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
 
     case ToggleMenu.TOGGLEMENU: {
       const elem: any = action.element;
-      console.log(elem.current.style.width);
-      
-      
-      // tslint:disable-next-line: radix
-      if (elem.current.style.width ==="0%") {
-        let count: number = 0;
-        const gearForward = setInterval(() => {
-          if (count < 50) {
-            count++;
-            elem.current.style.width = count + "%";
-            console.log(count);
-          } else {
-            clearInterval(gearForward);
-          }
-        }, 5);
+      if (elem.current.style.width === "0%") {
+        const f2 = () => {
+          let count = 0;
+          return () => {
+            if (count < 25) {
+              count++;
+              elem.current.style.width = count + "%";
+            } else {
+              clearInterval(move);
+            }
+          };
+        };
+        const f1 = f2();
+        const move = setInterval(f1, 10);
       }
-      
+
       return {
         ...state,
         isToggleMenu: !state.isToggleMenu
+      };
+    }
+
+    case MoveScroll.MOVESCROLL: {
+      return {
+        ...state,
+        isScrolling: action.scrollPosition>10 ? true : false
       };
     }
   }
