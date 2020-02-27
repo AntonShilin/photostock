@@ -7,8 +7,9 @@ import {
   changeNameVideo
 } from "../Actions/ProductsActions";
 import { IApplicationState } from "../Store/Store";
-import "./VideosPage.css";
+import "./VideosPage.scss";
 import LoadingPage from "../LoadingPage/LoadingPage";
+import { FiSearch } from "react-icons/fi";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
@@ -37,16 +38,15 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                 placeholder="Find video"
                 value={this.props.searchName}
                 onChange={this.props.watchNameVideoChange}
-                autoFocus={true}
+                autoFocus={false}
               />
               <div className="input-group-append">
-                <button
-                  className="btn btn-success"
-                  type="submit"
+                <span
+                  className="input-group-text"
                   onClick={() => this.props.getResultSearch(this.props)}
                 >
-                  Search
-                </button>
+                  <FiSearch />
+                </span>
               </div>
             </div>
             <h6>
@@ -69,7 +69,12 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                 {this.props.popularVideo !== null ? (
                   this.props.popularVideo.videos.map((value, i) => (
                     <div key={i} className="media m-2">
-                      <video width="420" height="340" controls={true} className="img-fluid">
+                      <video
+                        width="420"
+                        height="340"
+                        controls={true}
+                        className="img-fluid"
+                      >
                         <source
                           src={value.video_files[2].link}
                           type={value.video_files[2].file_type}
@@ -78,7 +83,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                     </div>
                   ))
                 ) : (
-                  <LoadingPage/>
+                  <LoadingPage />
                 )}
               </div>
             </div>

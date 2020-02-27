@@ -15,7 +15,7 @@ class SearchSmall extends React.Component<ISearchSmallProps> {
               placeholder="Find a photo"
               /*  value={this.props.searchNamePhoto}
           onChange={this.props.watchInputChange} */
-              autoFocus={true}
+              autoFocus={false}
             />
             <div className="input-group-append">
               <span

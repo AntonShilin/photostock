@@ -17,6 +17,20 @@ div#main_menu {
     border: 0;
     outline: none;
   }
+  form > div {
+    input {
+      animation: show_input ease 3s;
+      border-radius: 0;
+    }
+    div {
+      animation: show_input ease 3s;
+      span{
+          background-color: #fff;
+          border-radius: 0;
+          border: 0;
+      }
+    }
+  }
 }
 
 div#main_menu_submenu {
@@ -27,8 +41,12 @@ div#main_menu_submenu {
   z-index: 10;
   background-color: #05a081;
   box-shadow: 14px 0px 7px #343a40;
-  a {
+  div > div > a {
     color: #fff;
+    animation: show_name ease 1.8s;
+  }
+  div.row {
+    height: 80%;
   }
 }
 
@@ -40,4 +58,22 @@ div.streak {
   height: 100vh;
   position: absolute;
   background-color: #343a40;
+}
+
+@keyframes show_name {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes show_input {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

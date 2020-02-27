@@ -114,7 +114,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         const f2 = () => {
           let count = 0;
           return () => {
-            if (count < 25) {
+            if (count < 35) {
               count++;
               elem.current.style.width = count + "%";
             } else {
@@ -123,7 +123,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
           };
         };
         const f1 = f2();
-        const move = setInterval(f1, 10);
+        const move = setInterval(f1, 7);
       }
 
       return {

@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoIosMenu } from "react-icons/io";
 import { MdClose } from "react-icons/md";
+import { AiFillPicture } from "react-icons/ai";
+import { FaVideo } from "react-icons/fa";
 import "./Header.scss";
 import { connect } from "react-redux";
 import { handleToggleMenu, handleScroll } from "../Actions/ProductsActions";
@@ -50,12 +52,12 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
             </div>
             <div className="col-lg-3 text-right  d-lg-block d-none">
               <NavLink to="/photos" className="p-2 text-decoration-none">
-                Find photos
+                <AiFillPicture style={{ fontSize: "1.5rem" }} /> Photos
               </NavLink>
             </div>
             <div className="col-lg-3 text-right  d-lg-block d-none">
               <NavLink to="/videos" className="p-2 text-decoration-none">
-                Find videos
+                <FaVideo style={{ fontSize: "1.5rem" }} /> Videos
               </NavLink>
             </div>
             <div className="col-lg-3 text-right  d-lg-block d-none ">
@@ -89,17 +91,17 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
           }
         >
           <div className="row align-items-center">
-            <div className="col-12 text-center mb-4 mt-4">
+            <div className="col-12 text-center">
               <NavLink to="/photos" className=" text-decoration-none">
-                Find photos
+                <AiFillPicture style={{ fontSize: "1.5rem" }} /> Photos
               </NavLink>
             </div>
-            <div className="col-12 text-center mb-4">
+            <div className="col-12 text-center">
               <NavLink to="/videos" className=" text-decoration-none">
-                Find videos
+                <FaVideo style={{ fontSize: "1.5rem" }} /> Videos
               </NavLink>
             </div>
-            <div className="col-12 text-center mb-4">
+            <div className="col-12 text-center">
               <NavLink to="/login" className="">
                 <FaRegUserCircle style={{ fontSize: "1.5rem" }} />
               </NavLink>

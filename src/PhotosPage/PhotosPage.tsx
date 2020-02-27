@@ -7,8 +7,9 @@ import { getData, handleSearchKeydown } from "../Actions/ProductsActions";
 import { handleSearchChange } from "../Actions/ProductsActions";
 import { handleSearchPictureName } from "../Actions/ProductsActions";
 import { ICuratedPhoto } from "../ProductsData/ProductsData";
-import "./PhotosPage.css";
+import "./PhotosPage.scss";
 import LoadingPage from "../LoadingPage/LoadingPage";
+import { FiSearch } from "react-icons/fi";
 
 export interface IProps extends RouteComponentProps {
   data: ICuratedPhoto | null;
@@ -45,17 +46,16 @@ class PhotosPage extends React.Component<IProps> {
                 placeholder="Find a photo"
                 value={this.props.searchNamePhoto}
                 onChange={this.props.watchInputChange}
-                autoFocus={true}
+                autoFocus={false}
                 /* onKeyDown={this.props.getKeyNumber} */
               />
               <div className="input-group-append">
-                <button
-                  className="btn btn-success"
-                  type="submit"
+                <span
+                  className="input-group-text"
                   onClick={() => this.props.getNamePictureSearch(this.props)}
                 >
-                  Search
-                </button>
+                  <FiSearch />
+                </span>
               </div>
             </div>
             <h6>
@@ -74,13 +74,17 @@ class PhotosPage extends React.Component<IProps> {
           </div>
           <div className="row">
             <div className="col-12">
-              <div className="d-flex flex-wrap justify-content-around">
+              <div className="d-flex flex-wrap justify-content-center">
                 {this.props.data === null ? (
-                  <LoadingPage/>
+                  <LoadingPage />
                 ) : (
                   this.props.data.photos.map((image, i) => (
                     <div key={i} className="p-2">
-                      <img src={image.src.medium} className="img-fluid"  alt="img_1"/>
+                      <img
+                        src={image.src.medium}
+                        className="img-fluid"
+                        alt="img_1"
+                      />
                     </div>
                   ))
                 )}

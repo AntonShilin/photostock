@@ -47,7 +47,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
         </div>
         <div className="row">
           <div className="col-12">
-            <div className="d-flex flex-wrap justify-content-around">
+            <div className="d-flex flex-wrap justify-content-center">
               {this.props.searchResult === null ? (
                 <LoadingPage />
               ) : (
