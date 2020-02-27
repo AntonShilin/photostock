@@ -41,6 +41,7 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
           style={
             this.props.isToggleMenu ? { display: "block" } : { display: "none" }
           }
+          onClick={() => this.props.handleToggleMenu(this.elementMenu)}
         />
         <div id="main_menu" className="container-xl">
           <div className="row align-items-center">
