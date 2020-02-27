@@ -32,7 +32,7 @@ const Routes: React.SFC<RouteComponentProps> = props => {
       <Header />
       <Switch>
         <Route path="/login" component={LoginPage} />
-        <Redirect exact={true} from="/" to="/login" />
+        <Redirect exact={true} from="/" to="/photos" />
         <Route path="/photos" exact={true} component={PhotosPage} />
         <Route path="/videos" exact={true} component={VideosPage} />
         <Route path="/videos/:searchvideo" component={ResultVideoPage} />
