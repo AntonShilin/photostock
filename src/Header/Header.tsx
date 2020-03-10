@@ -62,7 +62,7 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
               </NavLink>
             </div>
             <div className="col-lg-3 text-right  d-lg-block d-none ">
-              <NavLink to="/login" className="p-2">
+              <NavLink to="/login" className="p-2 text-decoration-none">
                 <FaRegUserCircle style={{ fontSize: "1.5rem" }} />
               </NavLink>
             </div>
@@ -104,7 +104,7 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
             </div>
             <div className="col-12 text-center">
               <NavLink to="/login" className="">
-                <FaRegUserCircle style={{ fontSize: "1.5rem" }} />
+                <FaRegUserCircle style={{ fontSize: "1.5rem" }} /> Sign In
               </NavLink>
             </div>
           </div>

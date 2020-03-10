@@ -18,6 +18,9 @@ export interface IProps extends RouteComponentProps {
   watchInputChange: typeof handleSearchChange;
   getNamePictureSearch: typeof handleSearchPictureName;
   getKeyNumber: typeof handleSearchKeydown;
+  isScrollTop: number | null;
+  isScrollHeight: number | null;
+  isClientHeight: number | null;
 }
 
 class PhotosPage extends React.Component<IProps> {
@@ -78,13 +81,15 @@ class PhotosPage extends React.Component<IProps> {
                 {this.props.data === null ? (
                   <LoadingPage />
                 ) : (
-                  this.props.data.photos.map((image, i) => (
+                  this.props.data.photos.map((elem, i) => (
                     <div key={i} className="p-2">
-                      <img
-                        src={image.src.medium}
-                        className="img-fluid"
-                        alt="img_1"
-                      />
+                      <div className="info-for-image">
+                        <img
+                          src={elem.src.medium}
+                          className="img-fluid"
+                          alt="img_1"
+                        />
+                      </div>
                     </div>
                   ))
                 )}
@@ -98,7 +103,10 @@ class PhotosPage extends React.Component<IProps> {
 }
 
 const mapStateToProps = (store: IApplicationState) => ({
-  data: store.products.data
+  data: store.products.data,
+  isScrollTop: store.products.isScrollTop,
+  isScrollHeight: store.products.isScrollHeight,
+  isClientHeight: store.products.isClientHeight
 });
 
 const mapDispatchToProps = (dispatch: any) => {

@@ -142,5 +142,7 @@ export const handleScroll: ActionCreator<IMoveScrollAction> = (event:any) =>
   console.log(event.srcElement.scrollingElement.scrollTop); */
   ({
     type: MoveScroll.MOVESCROLL,
-    scrollPosition:event.srcElement.scrollingElement.scrollTop
+    scrollTop: event.srcElement.scrollingElement.scrollTop,
+    scrollHeight: event.srcElement.scrollingElement.scrollHeight,
+    clientHeight: event.srcElement.scrollingElement.clientHeight
   })

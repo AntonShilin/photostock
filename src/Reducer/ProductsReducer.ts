@@ -26,7 +26,10 @@ const initialProductState: IProductsState = {
   resultSearchVideo: null,
   keyboardKey: null,
   isToggleMenu: false,
-  isScrolling: false
+  isScrolling: false,
+  isScrollTop: null,
+  isScrollHeight: null,
+  isClientHeight: null
 };
 
 export const productsReducer: Reducer<IProductsState, ProductsActions> = (
@@ -135,7 +138,10 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     case MoveScroll.MOVESCROLL: {
       return {
         ...state,
-        isScrolling: action.scrollPosition>10 ? true : false
+        isScrolling: action.scrollTop > 10 ? true : false,
+        isScrollTop: action.scrollTop,
+        isScrollHeight: action.scrollHeight,
+        isClientHeight: action.clientHeight
       };
     }
   }

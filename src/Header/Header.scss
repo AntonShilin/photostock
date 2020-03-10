@@ -17,10 +17,11 @@ div#main_menu {
     border: 0;
     outline: none;
   }
-  form > div {
-    input {
+  form > div.input-group {
+    input.form-control {
       animation: show_input ease 3s;
       border-radius: 0;
+      border: 0;
     }
     div {
       animation: show_input ease 3s;
@@ -44,6 +45,9 @@ div#main_menu_submenu {
   div > div > a {
     color: #fff;
     animation: show_name ease 1.8s;
+    &:hover{
+        color: yellowgreen;
+    }
   }
   div.row {
     height: 80%;

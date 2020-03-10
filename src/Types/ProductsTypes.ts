@@ -106,7 +106,9 @@ export interface IGetVideoAction{
 
 export interface IMoveScrollAction{
   type: MoveScroll.MOVESCROLL;
-  scrollPosition: number;
+  scrollTop: number;
+  scrollHeight: number;
+  clientHeight: number;
 }
 
 
@@ -134,4 +136,7 @@ export interface IProductsState {
   readonly resultSearchVideo: IPopularVideos | null;
   readonly isToggleMenu: boolean;
   readonly isScrolling: boolean;
+  readonly isScrollTop: number|null;
+  readonly isScrollHeight: number|null;
+  readonly isClientHeight: number|null;
 }
