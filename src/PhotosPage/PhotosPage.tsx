@@ -37,8 +37,7 @@ class PhotosPage extends React.Component<IProps> {
   public render() {
     return (
       <React.Fragment>
-        <div className="jumbotron jumbotron-fluid bg-light photospage_bg">
-          <div className="container">
+          <div className="container-xl bg-light photospage_bg">
             <h1 className="pb-5 text-white">
               The best free stock photos from talented authors.
             </h1>
@@ -68,7 +67,7 @@ class PhotosPage extends React.Component<IProps> {
               </span>
             </h6>
           </div>
-        </div>
+      
         <div className="container-xl bg-light">
           <div className="row mb-2">
             <div className="col-12">
@@ -96,7 +95,8 @@ class PhotosPage extends React.Component<IProps> {
               </div>
             </div>
           </div>
-        </div>
+          </div>
+      
       </React.Fragment>
     );
   }

@@ -26,13 +26,12 @@ class VideosPage extends React.Component<IPropsVideosPage> {
   public render() {
     return (
       <React.Fragment>
-        <div className="jumbotron border-0">
-          <div className="container">
+          <div className="container-xl bg-videos-page">
             <h1 className="pb-5 text-white">
               The best free stock videos from talented authors.
             </h1>
             <div className="input-group mb-3 input-group-lg">
-              <input
+              <input 
                 type="text"
                 className="form-control"
                 placeholder="Find video"
@@ -56,7 +55,6 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               </span>
             </h6>
           </div>
-        </div>
         <div className="container-xl bg-light">
           <div className="row">
             <div className="col-sm-6 col-md-12">
@@ -88,7 +86,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               </div>
             </div>
           </div>
-        </div>
+          </div>
       </React.Fragment>
     );
   }

@@ -46,19 +46,19 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
         <div id="main_menu" className="container-xl">
           <div className="row align-items-center">
             <div className="col-lg-3 d-flex">
-              <NavLink to="#" className="p-2 text-decoration-none">
+              <NavLink to="/photos" className="p-2 text-decoration-none">
                 F&S
               </NavLink>
               {this.props.isToggleMenu ? <SearchSmall /> : null}
             </div>
             <div className="col-lg-3 text-right  d-lg-block d-none">
               <NavLink to="/photos" className="p-2 text-decoration-none">
-                <AiFillPicture style={{ fontSize: "1.5rem" }} /> Photos
+                 Photos
               </NavLink>
             </div>
             <div className="col-lg-3 text-right  d-lg-block d-none">
               <NavLink to="/videos" className="p-2 text-decoration-none">
-                <FaVideo style={{ fontSize: "1.5rem" }} /> Videos
+                Videos
               </NavLink>
             </div>
             <div className="col-lg-3 text-right  d-lg-block d-none ">
