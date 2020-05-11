@@ -29,7 +29,6 @@ export enum GetPopularVideoTypes {
 export enum GetSearchVideoTypes {
   GETSEARCHVIDEO = "GETSEARCHVIDEO"
 }
-// GetSearchNameVideoTypes
 
 export enum GetResultSearchVideoTypes {
   GETRESULTSEARCHVIDEO = "GETRESULTSEARCHVIDEO"
@@ -51,7 +50,15 @@ export enum MoveScroll {
   MOVESCROLL="MOVESCROLL"
 }
 
+export enum stickInput {
+  STICKINPUT="STICKINPUT"
+}
+
 /*  interfaces */
+export interface IStickInputAction {
+  type: stickInput.STICKINPUT;
+}
+
 
 export interface IToggleMenuAction {
   type: ToggleMenu.TOGGLEMENU;
@@ -106,9 +113,9 @@ export interface IGetVideoAction{
 
 export interface IMoveScrollAction{
   type: MoveScroll.MOVESCROLL;
-  scrollTop: number;
-  scrollHeight: number;
-  clientHeight: number;
+  scrollTop: number|null;
+  scrollHeight: number|null;
+  clientHeight: number|null;
 }
 
 
@@ -122,7 +129,8 @@ export type ProductsActions =
   | IChangeNameVideoAction
   |ISearchKeydownAction
   | IGetVideoAction
-  |IMoveScrollAction
+  | IMoveScrollAction
+  |IStickInputAction
   | IToggleMenuAction;
 
 export interface IProductsState {

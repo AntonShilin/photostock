@@ -13,8 +13,10 @@ import {
   GetVideoTypes,
   SearchKeydownTypes,
   ToggleMenu,
-  MoveScroll
+  MoveScroll,
+  stickInput
 } from "../Types/ProductsTypes";
+import { getImages } from "../Actions/ProductsActions";
 
 const initialProductState: IProductsState = {
   productsLoading: false,
@@ -68,7 +70,8 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
 
     case GetSearchNameTypes.GETSEARCHNAME: {
       const currentDocument: any = action.props;
-      console.log(state.searchNamePhoto);
+      // console.log(currentDocument);
+      // console.log(state.searchNamePhoto);
       currentDocument.history.push(`/photos/${state.searchNamePhoto}`);
       return {
         ...state
@@ -76,6 +79,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     }
 
     case GetDataSearchValueTypes.GETDATASEARCHVALUE: {
+      
       return {
         ...state,
         searchDataFromInput: action.data
@@ -117,7 +121,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         const f2 = () => {
           let count = 0;
           return () => {
-            if (count < 35) {
+            if (count < 100) {
               count++;
               elem.current.style.width = count + "%";
             } else {
@@ -126,7 +130,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
           };
         };
         const f1 = f2();
-        const move = setInterval(f1, 7);
+        const move = setInterval(f1, 2);
       }
 
       return {
@@ -138,12 +142,19 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     case MoveScroll.MOVESCROLL: {
       return {
         ...state,
-        isScrolling: action.scrollTop > 10 ? true : false,
+        isScrolling: action.scrollTop! > 10 ? true : false,
         isScrollTop: action.scrollTop,
         isScrollHeight: action.scrollHeight,
         isClientHeight: action.clientHeight
       };
     }
+
+    case stickInput.STICKINPUT: {
+      return {
+        ...state
+      };
+    }
+      
   }
   return state || initialProductState;
 };

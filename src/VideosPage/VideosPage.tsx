@@ -10,6 +10,7 @@ import { IApplicationState } from "../Store/Store";
 import "./VideosPage.scss";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import { FiSearch } from "react-icons/fi";
+import NavigationPages from "../NavigationPages/NavigationPages";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
@@ -54,7 +55,8 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                 businessman, hd wallpapers, abstract, phone, green, more...
               </span>
             </h6>
-          </div>
+        </div>
+        <NavigationPages/>
         <div className="container-xl bg-light">
           <div className="row">
             <div className="col-sm-6 col-md-12">

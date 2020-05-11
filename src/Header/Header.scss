@@ -1,9 +1,15 @@
+header{
+position: sticky;
+  top: 0px;
+  z-index: 5;
+
+
 div#main_menu {
+  position: relative;
+  background-color: #232a34;
   a {
     color: #fff;
   }
-  position: relative;
-  background-color: #232a34;
   .row {
     min-height: 4rem;
     div > a {
@@ -19,12 +25,12 @@ div#main_menu {
   }
   form > div.input-group {
     input.form-control {
-      animation: show_input ease 3s;
+      animation: show_input ease 2s;
       border-radius: 0;
       border: 0;
     }
     div {
-      animation: show_input ease 3s;
+      animation: show_input ease 2s;
       span{
           background-color: #fff;
           border-radius: 0;
@@ -35,22 +41,25 @@ div#main_menu {
 }
 
 div#main_menu_submenu {
-  width: 0%;
-  height: 100%;
-  padding: 0;
+  margin: 0;
   position: absolute;
-  z-index: 10;
-  background-color: #05a081;
-  box-shadow: 14px 0px 7px #343a40;
+  top: 4rem;
+  left: 0rem;
+  width: 0%;
+  height: 92vh;
+  padding: 0;
+  background-color: #232a34b0;
   div > div > a {
     color: #fff;
-    animation: show_name ease 1.8s;
+    animation: show_name ease 2s;
+    text-decoration: none;
     &:hover{
-        color: yellowgreen;
+        color: #dc448a;
     }
   }
   div.row {
     height: 80%;
+    margin: 0;
   }
 }
 
@@ -58,18 +67,21 @@ div.streak {
   opacity: 0.3;
   z-index: 3;
   top: 4rem;
-  width: 100vw;
+  width: 97vw;
   height: 100vh;
   position: absolute;
   background-color: #343a40;
+}
 }
 
 @keyframes show_name {
   0% {
     opacity: 0;
+    font-size: 0rem !important;
   }
   100% {
-    opacity: 1;
+    font-size: 1rem !important;
+    opacity: 10 !important;
   }
 }
 

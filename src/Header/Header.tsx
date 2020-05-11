@@ -11,7 +11,7 @@ import "./Header.scss";
 import { connect } from "react-redux";
 import { handleToggleMenu, handleScroll } from "../Actions/ProductsActions";
 import { IApplicationState } from "../Store/Store";
-import SearchSmall from "../SearchSmall/SearchSmall";
+import SearchSmallArea from "../SearchSmallArea/SearchSmallArea";
 
 export interface IHeaderProps {
   handleToggleMenu: typeof handleToggleMenu;
@@ -33,11 +33,8 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
 
   public render() {
     return (
-      <React.Fragment>
+      <header>
         <div
-          className={`streak d-lg-none ${
-            this.props.isScrolling ? "d-none" : ""
-          }`}
           style={
             this.props.isToggleMenu ? { display: "block" } : { display: "none" }
           }
@@ -45,23 +42,15 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
         />
         <div id="main_menu" className="container-xl">
           <div className="row align-items-center">
-            <div className="col-lg-3 d-flex">
+            <div className="col-2">
               <NavLink to="/photos" className="p-2 text-decoration-none">
                 F&S
               </NavLink>
-              {this.props.isToggleMenu ? <SearchSmall /> : null}
             </div>
-            <div className="col-lg-3 text-right  d-lg-block d-none">
-              <NavLink to="/photos" className="p-2 text-decoration-none">
-                 Photos
-              </NavLink>
+           <div className="col-8">
+              {this.props.isScrolling ? <SearchSmallArea /> : null}
             </div>
-            <div className="col-lg-3 text-right  d-lg-block d-none">
-              <NavLink to="/videos" className="p-2 text-decoration-none">
-                Videos
-              </NavLink>
-            </div>
-            <div className="col-lg-3 text-right  d-lg-block d-none ">
+            <div className="col-2 text-center  d-lg-block d-none ">
               <NavLink to="/login" className="p-2 text-decoration-none">
                 <FaRegUserCircle style={{ fontSize: "1.5rem" }} />
               </NavLink>
@@ -78,13 +67,10 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
               )}
             </button>
           </div>
-        </div>
         <div
           ref={this.elementMenu}
           id="main_menu_submenu"
-          className={`container-xl d-lg-none ${
-            this.props.isScrolling ? "d-none" : ""
-          }`}
+          className={`container-xl d-lg-none`}
           style={
             this.props.isToggleMenu
               ? { display: "block" }
@@ -110,10 +96,13 @@ class Header extends React.Component<IHeaderProps, RouteComponentProps> {
           </div>
           <div />
         </div>
-      </React.Fragment>
+        </div>
+      </header>
     );
   }
 }
+
+
 
 const mapStateToProps = (store: IApplicationState) => ({
   isToggleMenu: store.products.isToggleMenu,
@@ -124,7 +113,7 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     handleToggleMenu: (element: React.ElementType<HTMLDivElement>) =>
       dispatch(handleToggleMenu(element)),
-    handleScroll: (event: any) => dispatch(handleScroll(event))
+    handleScroll: (event:any) => dispatch(handleScroll(event))
   };
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

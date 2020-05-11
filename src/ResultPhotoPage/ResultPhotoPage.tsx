@@ -1,15 +1,17 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { IApplicationState } from "../Store/Store";
-import { handleSearchData } from "../Actions/ProductsActions";
-import { IDataSearch } from "../ProductsData/ProductsData";
-import { RouteComponentProps } from "react-router-dom";
+import { IDataSearch, IPopularVideos } from "../ProductsData/ProductsData";
+import { RouteComponentProps, NavLink } from "react-router-dom";
 import LoadingPage from "../LoadingPage/LoadingPage";
+import { getImages } from "../Actions/ProductsActions";
 
 export interface IDataResult extends RouteComponentProps {
-  getDataSearch: typeof handleSearchData;
-  searchResult: IDataSearch | null;
-  searchValue: string | "";
+  getResultSearchImageByName: typeof getImages;
+  searchResultByPhoto: IDataSearch | null;
+  searchNamePhoto: string;
+  searchResultByVideo: IPopularVideos | null;
+  
 }
 
 class ResultPhotoPage extends React.Component<IDataResult> {
@@ -17,43 +19,57 @@ class ResultPhotoPage extends React.Component<IDataResult> {
   private searchname = this.url.match(/\w+$/);
 
   public componentDidMount() {
-    if (this.searchname !== null) {
-      this.props.getDataSearch(this.searchname);
+    if (this.props.searchNamePhoto !== "") {
+      this.props.getResultSearchImageByName(this.props.searchNamePhoto);
+    } else if (this.props.searchNamePhoto === "") {
+      this.props.getResultSearchImageByName(this.searchname);
     }
   }
 
   public render() {
     return (
       <div className="container-xl">
+        <div className="result-bages row align-items-center mt-3 mb-3">
+          <div className="col-3 text-right">
+            <NavLink to={`${this.url}`} className="p-2 text-decoration-none btn btn-light">
+              Photos
+              <span className="ml-1">
+                {this.props.searchResultByPhoto === null
+                  ? '0'
+                  : this.props.searchResultByPhoto.photos.length}
+              </span>
+            </NavLink>
+          </div>
+          <div className="col-3 text-left">
+            <NavLink to="/videos" className="p-2 text-decoration-none btn btn-light">
+              Videos
+              <span className="ml-1">
+                {this.props.searchResultByVideo === null
+                  ? '0'
+                  : this.props.searchResultByVideo.videos.length}
+              </span>
+            </NavLink>
+          </div>
+          <div className="col-6 text-center" />
+        </div>
         <div className="row my-3">
           <div className="col-12">
-            <h5 className="text-left">
-              {this.props.searchValue === ""
-                ? `Result`
-                : this.props.searchValue + ` photos`}
-              <span className="ml-3 badge badge-pill badge-info">
-                {this.props.searchResult !== null ? (
-                  this.props.searchResult.photos.length > 0 ? (
-                    this.props.searchResult.photos.length
-                  ) : (
-                    "Sorry. Not found. Try again"
-                  )
-                ) : (
-                  <span>0</span>
-                )}
-              </span>
-            </h5>
+            <h5 className="text-center">{`${this.searchname} photos`}</h5>
           </div>
         </div>
         <div className="row">
           <div className="col-12">
             <div className="d-flex flex-wrap justify-content-center">
-              {this.props.searchResult === null ? (
+              {this.props.searchResultByPhoto === null ? (
                 <LoadingPage />
               ) : (
-                this.props.searchResult.photos.map((image, i) => (
+                this.props.searchResultByPhoto.photos.map((image, i) => (
                   <div key={i} className="p-2">
-                    <img alt="" src={image.src.medium} className="img-fluid" />
+                    <img
+                      alt="img"
+                      src={image.src.medium}
+                      className="img-fluid"
+                    />
                   </div>
                 ))
               )}
@@ -67,14 +83,15 @@ class ResultPhotoPage extends React.Component<IDataResult> {
 
 const mapStateToProps = (store: IApplicationState) => {
   return {
-    searchResult: store.products.searchDataFromInput,
-    searchValue: store.products.searchNamePhoto
+    searchResultByPhoto: store.products.searchDataFromInput,
+    searchNamePhoto: store.products.searchNamePhoto,
+    searchResultByVideo: store.products.resultSearchVideo,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getDataSearch: (name: string) => dispatch(handleSearchData(name))
+    getResultSearchImageByName: (name: string) => dispatch(getImages(name)),
   };
 };
 

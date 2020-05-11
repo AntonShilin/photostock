@@ -1,20 +1,36 @@
-.photospage_bg{
-    min-height: 25rem;
-    padding: 5rem 0rem;
-    background-image: url(../media/countryside.jpg) !important;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 0;
-    input.form-control{
+.photospage_bg {
+  min-height: 25rem;
+  padding: 5rem 0rem;
+  background-image: url(../media/countryside.jpg) !important;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 0;
+  div.input-group {
+    input.form-control {
+      border-radius: 0;
+      border: 0;
+    }
+    div.input-group-append {
+      span.input-group-text {
         border-radius: 0;
-        border:0;
+        border: 0;
+        background-color: #fff;
+      }
     }
-    div.input-group-append{
-        span.input-group-text{
-            border-radius: 0;
-            border:0;
-            background-color: #fff;
-        }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .photospage_bg {
+    padding: 3rem 0rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .photospage_bg {
+    h1 {
+      font-size: 2rem !important;
     }
+  }
 }
 
