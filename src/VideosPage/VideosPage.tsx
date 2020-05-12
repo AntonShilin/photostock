@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { searchVideos, IPopularVideos } from "../ProductsData/ProductsData";
 import {
   getPopularVideo,
-  showResultSearchVideo,
-  changeNameVideo
+  startSearchVideoByName,
+  changeNameVideo,
 } from "../Actions/ProductsActions";
 import { IApplicationState } from "../Store/Store";
 import "./VideosPage.scss";
@@ -16,7 +16,7 @@ export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
   popularVideo: IPopularVideos | null;
   searchName: "";
-  getResultSearch: typeof showResultSearchVideo;
+  startSearchVideoByName: typeof startSearchVideoByName;
   watchNameVideoChange: typeof changeNameVideo;
 }
 
@@ -27,36 +27,36 @@ class VideosPage extends React.Component<IPropsVideosPage> {
   public render() {
     return (
       <React.Fragment>
-          <div className="container-xl bg-videos-page">
-            <h1 className="pb-5 text-white">
-              The best free stock videos from talented authors.
-            </h1>
-            <div className="input-group mb-3 input-group-lg">
-              <input 
-                type="text"
-                className="form-control"
-                placeholder="Find video"
-                value={this.props.searchName}
-                onChange={this.props.watchNameVideoChange}
-                autoFocus={false}
-              />
-              <div className="input-group-append">
-                <span
-                  className="input-group-text"
-                  onClick={() => this.props.getResultSearch(this.props)}
-                >
-                  <FiSearch />
-                </span>
-              </div>
-            </div>
-            <h6>
-              Search ideas:{" "}
-              <span className="text-white">
-                businessman, hd wallpapers, abstract, phone, green, more...
+        <div className="container-xl bg-videos-page">
+          <h1 className="pb-5 text-white">
+            The best free stock videos from talented authors.
+          </h1>
+          <div className="input-group mb-3 input-group-lg">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Find video"
+              value={this.props.searchName}
+              onChange={this.props.watchNameVideoChange}
+              autoFocus={false}
+            />
+            <div className="input-group-append">
+              <span
+                className="input-group-text"
+                onClick={() => this.props.startSearchVideoByName(this.props)}
+              >
+                <FiSearch />
               </span>
-            </h6>
+            </div>
+          </div>
+          <h6>
+            Search ideas:{" "}
+            <span className="text-white">
+              businessman, hd wallpapers, abstract, phone, green, more...
+            </span>
+          </h6>
         </div>
-        <NavigationPages/>
+        <NavigationPages />
         <div className="container-xl bg-light">
           <div className="row">
             <div className="col-sm-6 col-md-12">
@@ -65,30 +65,28 @@ class VideosPage extends React.Component<IPropsVideosPage> {
           </div>
           <div className="row">
             <div className="col-12">
-              <div className="d-flex flex-wrap justify-content-around">
-                {this.props.popularVideo !== null ? (
-                  this.props.popularVideo.videos.map((value, i) => (
-                    <div key={i} className="media m-2">
-                      <video
-                        width="420"
-                        height="340"
-                        controls={true}
-                        className="img-fluid"
-                      >
-                        <source
-                          src={value.video_files[2].link}
-                          type={value.video_files[2].file_type}
-                        />
-                      </video>
-                    </div>
-                  ))
-                ) : (
-                  <LoadingPage />
-                )}
-              </div>
+              {this.props.popularVideo !== null ? (
+                this.props.popularVideo.videos.map((value, i) => (
+                  <div key={i} className="d-inline m-1">
+                    <video
+                      width="420"
+                      height="340"
+                      controls={true}
+                      className="img-fluid"
+                    >
+                      <source
+                        src={value.video_files[2].link}
+                        type={value.video_files[2].file_type}
+                      />
+                    </video>
+                  </div>
+                ))
+              ) : (
+                <LoadingPage />
+              )}
             </div>
           </div>
-          </div>
+        </div>
       </React.Fragment>
     );
   }
@@ -96,16 +94,16 @@ class VideosPage extends React.Component<IPropsVideosPage> {
 
 const mapStateToProps = (store: IApplicationState) => {
   return {
-    popularVideo: store.products.videos
+    popularVideo: store.products.videos,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getPopularVideo: () => dispatch(getPopularVideo()),
-    getResultSearch: (allProps: IPropsVideosPage) =>
-      dispatch(showResultSearchVideo(allProps)),
-    watchNameVideoChange: (e: string) => dispatch(changeNameVideo(e))
+    startSearchVideoByName: (allProps: IPropsVideosPage) =>
+      dispatch(startSearchVideoByName(allProps)),
+    watchNameVideoChange: (e: string) => dispatch(changeNameVideo(e)),
   };
 };
 

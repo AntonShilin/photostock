@@ -1,16 +1,14 @@
 import * as React from "react";
 import { FiSearch } from "react-icons/fi";
 import { IApplicationState } from "../Store/Store";
-import { handleSearchChange, getImages } from "../Actions/ProductsActions";
-import { IProps } from "../PhotosPage/PhotosPage";
+import { handleSearchChange, getSearchImages } from "../Actions/ProductsActions";
 import "./SearchSmallArea.scss";
 import { connect } from "react-redux";
-import { RouteComponentProps, withRouter } from "react-router-dom";
 
-export interface ISearchSmallProps extends RouteComponentProps {
+export interface ISearchSmallProps  {
   searchNamePhoto: string;
   watchInputChange: typeof handleSearchChange;
-  searchImagesByName: typeof getImages;
+  getSearchImages: typeof getSearchImages;
 }
 
 class SearchSmallArea extends React.Component<ISearchSmallProps> {
@@ -31,7 +29,7 @@ class SearchSmallArea extends React.Component<ISearchSmallProps> {
               <span
                 className="input-group-text"
                 onClick={() =>
-                  this.props.searchImagesByName(this.props.searchNamePhoto)
+                  this.props.getSearchImages(this.props.searchNamePhoto)
                 }
               >
                 <FiSearch />
@@ -52,10 +50,9 @@ const mapStateToProps = (store: IApplicationState) => ({
 const mapDispatchToProps = (dispatch: any) => {
   return {
     watchInputChange: (e: string) => dispatch(handleSearchChange(e)),
-    searchImagesByName: (name: string) => dispatch(getImages(name)),
+    getSearchImages: (name: string) => dispatch(getSearchImages(name)),
   };
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(SearchSmallArea)
-);
+export default  connect(mapStateToProps, mapDispatchToProps)(SearchSmallArea)
+;

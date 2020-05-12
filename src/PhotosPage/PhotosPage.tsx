@@ -4,54 +4,39 @@ import "url-search-params-polyfill";
 import { connect } from "react-redux";
 import { IApplicationState } from "../Store/Store";
 import {
-  getData,
+  getPopularImages,
   handleSearchKeydown,
-  stickInputToTheTop,
 } from "../Actions/ProductsActions";
 import { handleSearchChange } from "../Actions/ProductsActions";
-import { goToResultPageSearchPictureName } from "../Actions/ProductsActions";
+import { startSearchPictureByName } from "../Actions/ProductsActions";
 import { ICuratedPhoto } from "../ProductsData/ProductsData";
 import "./PhotosPage.scss";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import { FiSearch } from "react-icons/fi";
 import NavigationPages from "../NavigationPages/NavigationPages";
 
-export interface IProps extends RouteComponentProps {
+export interface IPropsPhotosPage extends RouteComponentProps {
   data: ICuratedPhoto | null;
-  getDataForMainPage: typeof getData;
+  getPopularImages: typeof getPopularImages;
   searchNamePhoto: string;
   watchInputChange: typeof handleSearchChange;
-  goToResultPage: typeof goToResultPageSearchPictureName;
+  startSearchPictureByName: typeof startSearchPictureByName;
   getKeyNumber: typeof handleSearchKeydown;
-  stickInputToTheTop: typeof stickInputToTheTop;
   isScrollTop: number | null;
   isScrollHeight: number | null;
   isClientHeight: number | null;
   isScrolling: boolean;
 }
 
-class PhotosPage extends React.Component<IProps> {
-  public searchArea: React.RefObject<HTMLDivElement>;
-  constructor(props: IProps) {
+class PhotosPage extends React.Component<IPropsPhotosPage> {
+  constructor(props: IPropsPhotosPage) {
     super(props);
-    this.searchArea = React.createRef();
   }
 
   public componentDidMount() {
     if (this.props.data === null) {
-      this.props.getDataForMainPage();
+      this.props.getPopularImages();
     }
-   /*  
-      window.addEventListener("scroll", (e) => {
-        const scrollTop: number = this.props.isScrollTop!;
-      
-        if (scrollTop > 400 ) {
-          if (this.searchArea.current!) {
-            this.props.stickInputToTheTop(this.searchArea.current);
-            e.stopPropagation();
-          } 
-        }
-      }, false); */
    
   }
 
@@ -64,7 +49,6 @@ class PhotosPage extends React.Component<IProps> {
           </h1>
           <div
             className="input-group mb-3 input-group-lg"
-            ref={this.searchArea}
           >
             <input
               type="text"
@@ -78,7 +62,7 @@ class PhotosPage extends React.Component<IProps> {
             <div className="input-group-append">
               <span
                 className="input-group-text"
-                onClick={() => this.props.goToResultPage(this.props)}
+                onClick={() => this.props.startSearchPictureByName(this.props)}
               >
                 <FiSearch />
               </span>
@@ -136,12 +120,10 @@ const mapStateToProps = (store: IApplicationState) => ({
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getKeyNumber: (e: any) => dispatch(handleSearchKeydown(e)),
-    getDataForMainPage: () => dispatch(getData()),
+    getPopularImages: () => dispatch(getPopularImages()),
     watchInputChange: (e: string) => dispatch(handleSearchChange(e)),
-    stickInputToTheTop: (elem: HTMLDivElement) =>
-      dispatch(stickInputToTheTop(elem)),
-    goToResultPage: (allprops: IProps) =>
-      dispatch(goToResultPageSearchPictureName(allprops)),
+    startSearchPictureByName: (allprops: IPropsPhotosPage) =>
+      dispatch(startSearchPictureByName(allprops)),
   };
 };
 

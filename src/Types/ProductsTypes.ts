@@ -1,5 +1,5 @@
 import { ICuratedPhoto, IDataSearch, IPopularVideos } from "../ProductsData/ProductsData";
-import { IProps } from "../PhotosPage/PhotosPage";
+import { IPropsPhotosPage } from "../PhotosPage/PhotosPage";
 import { IPropsVideosPage } from "../VideosPage/VideosPage";
 
 export enum DataActionTypes {
@@ -14,8 +14,8 @@ export enum SearchKeydownTypes {
   SEARCKEYDOWN = "SEARCKEYDOWN"
 }
 
-export enum GetSearchNameTypes {
-  GETSEARCHNAME = "GETSEARCHNAME"
+export enum startSearchImageByNameTypes {
+  STARTSEARCHIMAGEBYNAME = "STARTSEARCHIMAGEBYNAME" 
 }
 
 export enum GetDataSearchValueTypes {
@@ -30,8 +30,8 @@ export enum GetSearchVideoTypes {
   GETSEARCHVIDEO = "GETSEARCHVIDEO"
 }
 
-export enum GetResultSearchVideoTypes {
-  GETRESULTSEARCHVIDEO = "GETRESULTSEARCHVIDEO"
+export enum startSearchVideoByNameTypes {
+  STARTSEARCHVIDEOBYNAME = "STARTSEARCHVIDEOBYNAME" 
 }
 
 export enum GetChangeNameVideoTypes {
@@ -50,15 +50,8 @@ export enum MoveScroll {
   MOVESCROLL="MOVESCROLL"
 }
 
-export enum stickInput {
-  STICKINPUT="STICKINPUT"
-}
 
 /*  interfaces */
-export interface IStickInputAction {
-  type: stickInput.STICKINPUT;
-}
-
 
 export interface IToggleMenuAction {
   type: ToggleMenu.TOGGLEMENU;
@@ -75,8 +68,8 @@ export interface IGetSearchValueAction {
   searchValue: string;
 }
 
-export interface IGetResultSearchVideoAction {
-  type: GetResultSearchVideoTypes.GETRESULTSEARCHVIDEO;
+export interface ISearchVideoByNameAction {
+  type: startSearchVideoByNameTypes.STARTSEARCHVIDEOBYNAME;
   props: IPropsVideosPage;
 }
 
@@ -86,9 +79,9 @@ export interface IDataLoadingAction {
 }
 
 
-export interface ISearchNameGetAction {
-  type: GetSearchNameTypes.GETSEARCHNAME;
-  props: IProps;
+export interface ISearchImageByNameAction {
+  type: startSearchImageByNameTypes.STARTSEARCHIMAGEBYNAME;
+  props: IPropsPhotosPage;
 }
 
 export interface IDataSearchValueAction {
@@ -122,15 +115,14 @@ export interface IMoveScrollAction{
 export type ProductsActions =
   | IDataLoadingAction
   | IGetSearchValueAction
-  | ISearchNameGetAction
+  | ISearchImageByNameAction
   | IDataSearchValueAction
   | IPopularVideoAction
-  | IGetResultSearchVideoAction
+  | ISearchVideoByNameAction
   | IChangeNameVideoAction
   |ISearchKeydownAction
   | IGetVideoAction
   | IMoveScrollAction
-  |IStickInputAction
   | IToggleMenuAction;
 
 export interface IProductsState {
@@ -139,7 +131,7 @@ export interface IProductsState {
   readonly videos: IPopularVideos | null;
   readonly productsLoading: boolean;
   readonly searchNamePhoto: string;
-  readonly searchDataFromInput: IDataSearch | null;
+  readonly resultSearchImage: IDataSearch | null;
   readonly searchNameVideo: string;
   readonly resultSearchVideo: IPopularVideos | null;
   readonly isToggleMenu: boolean;

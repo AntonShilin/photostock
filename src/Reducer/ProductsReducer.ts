@@ -3,26 +3,24 @@ import {
   ProductsActions,
   IProductsState,
   DataActionTypes,
-  GetSearchNameTypes,
   SearchValueTypes,
   GetDataSearchValueTypes,
   GetPopularVideoTypes,
   GetSearchVideoTypes,
-  GetResultSearchVideoTypes,
   GetChangeNameVideoTypes,
   GetVideoTypes,
   SearchKeydownTypes,
   ToggleMenu,
   MoveScroll,
-  stickInput
+  startSearchImageByNameTypes,
+  startSearchVideoByNameTypes,
 } from "../Types/ProductsTypes";
-import { getImages } from "../Actions/ProductsActions";
 
 const initialProductState: IProductsState = {
   productsLoading: false,
   data: null,
   searchNamePhoto: "",
-  searchDataFromInput: null,
+  resultSearchImage: null,
   videos: null,
   searchNameVideo: "",
   resultSearchVideo: null,
@@ -68,7 +66,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       };
     }
 
-    case GetSearchNameTypes.GETSEARCHNAME: {
+    case startSearchImageByNameTypes.STARTSEARCHIMAGEBYNAME: {
       const currentDocument: any = action.props;
       // console.log(currentDocument);
       // console.log(state.searchNamePhoto);
@@ -82,7 +80,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       
       return {
         ...state,
-        searchDataFromInput: action.data
+        resultSearchImage: action.data
       };
     }
 
@@ -93,7 +91,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       };
     }
 
-    case GetResultSearchVideoTypes.GETRESULTSEARCHVIDEO: {
+    case startSearchVideoByNameTypes.STARTSEARCHVIDEOBYNAME: {
       const currentDocument: any = action.props;
       currentDocument.history.push(`/videos/${state.searchNameVideo}`);
       return {
@@ -146,12 +144,6 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         isScrollTop: action.scrollTop,
         isScrollHeight: action.scrollHeight,
         isClientHeight: action.clientHeight
-      };
-    }
-
-    case stickInput.STICKINPUT: {
-      return {
-        ...state
       };
     }
       

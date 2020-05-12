@@ -9,19 +9,15 @@ import {
 import {
   DataActionTypes,
   SearchValueTypes,
-  GetSearchNameTypes,
   GetDataSearchValueTypes,
   GetPopularVideoTypes,
-  GetResultSearchVideoTypes,
   GetChangeNameVideoTypes,
   GetVideoTypes,
   IGetSearchValueAction,
   IProductsState,
   IDataLoadingAction,
-  ISearchNameGetAction,
   IDataSearchValueAction,
   IPopularVideoAction,
-  IGetResultSearchVideoAction,
   IChangeNameVideoAction,
   IGetVideoAction,
   ISearchKeydownAction,
@@ -30,12 +26,15 @@ import {
   ToggleMenu,
   IMoveScrollAction,
   MoveScroll,
-  stickInput,
-  IStickInputAction,
+  ISearchImageByNameAction,
+  startSearchImageByNameTypes,
+  ISearchVideoByNameAction,
+  startSearchVideoByNameTypes,
 } from "../Types/ProductsTypes";
-import { IProps } from "../PhotosPage/PhotosPage";
+import { IPropsPhotosPage } from "../PhotosPage/PhotosPage";
 import { IPropsVideosPage } from "../VideosPage/VideosPage";
 
+/* toggle menu button */
 export const handleToggleMenu: ActionCreator<IToggleMenuAction> = (
   elem: React.ElementType<HTMLDivElement>
 ) => ({
@@ -43,7 +42,8 @@ export const handleToggleMenu: ActionCreator<IToggleMenuAction> = (
   element: elem,
 });
 
-export const getData: ActionCreator<ThunkAction<
+/* get fotos from API for start foto page*/
+export const getPopularImages: ActionCreator<ThunkAction<
   Promise<AnyAction>,
   IProductsState,
   null,
@@ -58,6 +58,7 @@ export const getData: ActionCreator<ThunkAction<
   };
 };
 
+/* what is key code number */
 export const handleSearchKeydown: ActionCreator<ISearchKeydownAction> = (
   e: React.KeyboardEvent<HTMLInputElement>
 ) => ({
@@ -65,6 +66,7 @@ export const handleSearchKeydown: ActionCreator<ISearchKeydownAction> = (
   keydownKey: e.keyCode,
 });
 
+/* change in input on foto page */
 export const handleSearchChange: ActionCreator<IGetSearchValueAction> = (
   e: React.ChangeEvent<HTMLInputElement>
 ) => {
@@ -74,37 +76,44 @@ export const handleSearchChange: ActionCreator<IGetSearchValueAction> = (
   };
 };
 
-export const goToResultPageSearchPictureName: ActionCreator<ISearchNameGetAction> = (
-  allprops: IProps
+/*go to the page with results search images by name  */
+export const startSearchPictureByName: ActionCreator<ISearchImageByNameAction> = (
+  allprops: IPropsPhotosPage
 ) => {
   return {
-    type: GetSearchNameTypes.GETSEARCHNAME,
+    type: startSearchImageByNameTypes.STARTSEARCHIMAGEBYNAME,
     props: allprops,
   };
 };
 
-export const showResultSearchVideo: ActionCreator<IGetResultSearchVideoAction> = (
+/*go to the page with results search video by name  */
+export const startSearchVideoByName: ActionCreator<ISearchVideoByNameAction> = (
   allprops: IPropsVideosPage
-) => ({
-  type: GetResultSearchVideoTypes.GETRESULTSEARCHVIDEO,
+) => {
+  return {
+  type: startSearchVideoByNameTypes.STARTSEARCHVIDEOBYNAME,
   props: allprops,
-});
+  };
+}
+  
 
-export const getImages: ActionCreator<ThunkAction<
+/* get images search by name  */
+export const getSearchImages: ActionCreator<ThunkAction<
   Promise<AnyAction>,
   IProductsState,
   null,
   IDataSearchValueAction
->> = (name) => {
-  return async (dispatch: Dispatch) => {
-    const resultSearch = await doSearchInputValue(name);
+  >> = (name:string) => {
+    return async (dispatch: Dispatch) => {
+    const resultSearchImages = await doSearchInputValue(name);
     return dispatch({
       type: GetDataSearchValueTypes.GETDATASEARCHVALUE,
-      data: resultSearch,
+      data: resultSearchImages,
     });
   };
 };
 
+/* get videos for start video page*/
 export const getPopularVideo: ActionCreator<ThunkAction<
   Promise<AnyAction>,
   IProductsState,
@@ -120,6 +129,7 @@ export const getPopularVideo: ActionCreator<ThunkAction<
   };
 };
 
+/* change in input on video page */
 export const changeNameVideo: ActionCreator<IChangeNameVideoAction> = (
   e: React.ChangeEvent<HTMLInputElement>
 ) => ({
@@ -127,12 +137,13 @@ export const changeNameVideo: ActionCreator<IChangeNameVideoAction> = (
   value: e.target.value,
 });
 
-export const getVideo: ActionCreator<ThunkAction<
+/* get videos search by name*/
+export const getSearchVideos: ActionCreator<ThunkAction<
   Promise<AnyAction>,
   IProductsState,
   null,
   IGetVideoAction
->> = (name: string) => {
+  >> = (name: string) => {
   return async (dispatch: Dispatch) => {
     const data = await searchVideos(name);
     return dispatch({
@@ -142,6 +153,7 @@ export const getVideo: ActionCreator<ThunkAction<
   };
 };
 
+/* some scroll events parametres*/
 export const handleScroll: ActionCreator<IMoveScrollAction> = (
   event:any
 ) => {
@@ -155,16 +167,3 @@ export const handleScroll: ActionCreator<IMoveScrollAction> = (
   };
 };
 
-export const stickInputToTheTop: ActionCreator<IStickInputAction> = (
-  elem: HTMLDivElement
-) => {
-  //  elem.classList.add('stick-top');
-  // elem.style.position = "fixed";
-//  elem.style.top = 0.5 + "rem";
-  // elem.style.left = 5 + "rem";
-//  elem.style.maxWidth = 80 + "%";
-//  elem.style.zIndex = "5";
-  return {
-    type: stickInput.STICKINPUT,
-  };
-};

@@ -1,15 +1,16 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { IApplicationState } from "../Store/Store";
-import { IPopularVideos } from "../ProductsData/ProductsData";
-import { getVideo } from "../Actions/ProductsActions";
-import { RouteComponentProps } from "react-router-dom";
+import { IPopularVideos, IDataSearch } from "../ProductsData/ProductsData";
+import { getSearchVideos } from "../Actions/ProductsActions";
+import { RouteComponentProps, NavLink } from "react-router-dom";
 import LoadingPage from "../LoadingPage/LoadingPage";
 
 export interface IPropsResultPage extends RouteComponentProps {
-  result: IPopularVideos | null;
-  getSearchVideo: typeof getVideo;
+  resultSearchVideo: IPopularVideos | null;
+  getSearchVideos: typeof getSearchVideos;
   nameVideo: "" | string;
+  resultSearchImage: IDataSearch | null;
 }
 
 class ResultVideoPage extends React.Component<IPropsResultPage> {
@@ -18,39 +19,54 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
 
   public componentDidMount() {
     if (this.searchname !== null) {
-      this.props.getSearchVideo(this.searchname[0]);
+      this.props.getSearchVideos(this.searchname[0]);
     }
   }
 
   public render() {
     return (
       <div className="container-xl">
-        <div className="row my-3">
-          <div className="col-12">
-            <h5 className="text-left m-0 mt-2 ">
-              {this.props.nameVideo === ""
-                ? `Result`
-                : this.props.nameVideo + ` videos`}
-              <span className="ml-3 badge badge-pill badge-info">
-                {this.props.result !== null ? (
-                  this.props.result.videos.length > 0 ? (
-                    this.props.result.videos.length
-                  ) : (
-                    "Not found video. Try again"
-                  )
-                ) : <span>0</span>}
+        <div className="result-bages row align-items-center mt-3 mb-3">
+          <div className="col-3 text-right">
+            <NavLink
+              to={`/photos/${this.searchname}`}
+              className="p-2 text-decoration-none btn btn-light"
+            >
+              Photos
+              <span className="ml-1">
+                {this.props.resultSearchImage === null
+                  ? "0"
+                  : this.props.resultSearchImage.photos.length}
               </span>
-            </h5>
+            </NavLink>
+          </div>
+          <div className="col-3 text-left">
+            <NavLink
+              to={`${this.url}`}
+              className="p-2 text-decoration-none btn btn-light"
+            >
+              Videos
+              <span className="ml-1">
+                {this.props.resultSearchVideo === null
+                  ? "0"
+                  : this.props.resultSearchVideo.videos.length - 1}
+              </span>
+            </NavLink>
+          </div>
+          <div className="col-6 text-center" />
+        </div>
+        <div className="row mt-3 mb-3">
+          <div className="col-12">
+            <h5 className="text-center">{`${this.searchname} photos`}</h5>
           </div>
         </div>
         <div className="row">
           <div className="col-12">
-            <div className="d-flex flex-wrap justify-content-around">
-              {this.props.result === null ? (
+              {this.props.resultSearchVideo === null ? (
                 <LoadingPage />
               ) : (
-                this.props.result.videos.map((num, i) => (
-                  <div key={i} className="media m-2">
+                this.props.resultSearchVideo.videos.map((num, i) => (
+                  <div key={i} className="d-inline m-1">
                     <video
                       width="420"
                       height="340"
@@ -65,7 +81,6 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                   </div>
                 ))
               )}
-            </div>
           </div>
         </div>
       </div>
@@ -75,14 +90,15 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
 
 const mapStateToProps = (store: IApplicationState) => {
   return {
-    result: store.products.resultSearchVideo,
-    nameVideo: store.products.searchNameVideo
+    resultSearchVideo: store.products.resultSearchVideo,
+    nameVideo: store.products.searchNameVideo,
+    resultSearchImage: store.products.resultSearchImage,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getSearchVideo: (name: string) => dispatch(getVideo(name))
+    getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
   };
 };
 
