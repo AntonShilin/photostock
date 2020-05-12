@@ -37,7 +37,6 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
     if (this.props.data === null) {
       this.props.getPopularImages();
     }
-   
   }
 
   public render() {
@@ -47,9 +46,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
           <h1 className="pb-5 text-white">
             The best free stock photos from talented authors.
           </h1>
-          <div
-            className="input-group mb-3 input-group-lg"
-          >
+          <div className="input-group mb-3 input-group-lg">
             <input
               type="text"
               className="form-control"
@@ -75,33 +72,31 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
             </span>
           </h6>
         </div>
-        <NavigationPages/>
+        <NavigationPages />
         <div className="container-xl bg-light">
           <div className="row mb-2">
             <div className="col-12">
               <h6 className="m-0 mt-2">Free Stock Photos Trending </h6>
             </div>
           </div>
-          <div className="row">
-            <div className="col-12">
-              <div className="d-flex flex-wrap justify-content-center">
-                {this.props.data === null ? (
-                  <LoadingPage />
-                ) : (
-                  this.props.data.photos.map((elem, i) => (
-                    <div key={i} className="p-2">
-                      <div className="info-for-image">
-                        <img
-                          src={elem.src.medium}
-                          className="img-fluid"
-                          alt="img_1"
-                        />
-                      </div>
+          <div className="row justify-content-center">
+            {this.props.data === null ? (
+              <LoadingPage />
+            ) : (
+              this.props.data.photos.map((elem, i) => (
+                <div key={i} className="col-auto">
+                  <div className="p-1">
+                    <div className="info-for-image">
+                      <img
+                        src={elem.src.medium}
+                        className="img-fluid"
+                        alt="img_1"
+                      />
                     </div>
-                  ))
-                )}
-              </div>
-            </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </React.Fragment>
@@ -114,7 +109,7 @@ const mapStateToProps = (store: IApplicationState) => ({
   isScrollTop: store.products.isScrollTop,
   isScrollHeight: store.products.isScrollHeight,
   isClientHeight: store.products.isClientHeight,
-  isScrolling: store.products.isScrolling
+  isScrolling: store.products.isScrolling,
 });
 
 const mapDispatchToProps = (dispatch: any) => {

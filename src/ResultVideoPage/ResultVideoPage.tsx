@@ -9,7 +9,7 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 export interface IPropsResultPage extends RouteComponentProps {
   resultSearchVideo: IPopularVideos | null;
   getSearchVideos: typeof getSearchVideos;
-  nameVideo: "" | string;
+  searchNameVideo: "" | string;
   resultSearchImage: IDataSearch | null;
 }
 
@@ -19,7 +19,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
 
   public componentDidMount() {
     if (this.searchname !== null) {
-      this.props.getSearchVideos(this.searchname[0]);
+      this.props.getSearchVideos(this.searchname);
     }
   }
 
@@ -60,16 +60,14 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
             <h5 className="text-center">{`${this.searchname} photos`}</h5>
           </div>
         </div>
-        <div className="row">
-          <div className="col-12">
+        <div className="row justify-content-center">
               {this.props.resultSearchVideo === null ? (
                 <LoadingPage />
               ) : (
                 this.props.resultSearchVideo.videos.map((num, i) => (
-                  <div key={i} className="d-inline m-1">
+                <div  key={i}  className="col-lg-6 col-md-6 col-sm-12">
+                  <div className="">
                     <video
-                      width="420"
-                      height="340"
                       controls={true}
                       className="img-fluid"
                     >
@@ -78,10 +76,10 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                         type={num.video_files[2].file_type}
                       />
                     </video>
+                    </div>
                   </div>
                 ))
               )}
-          </div>
         </div>
       </div>
     );
@@ -91,7 +89,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
 const mapStateToProps = (store: IApplicationState) => {
   return {
     resultSearchVideo: store.products.resultSearchVideo,
-    nameVideo: store.products.searchNameVideo,
+    searchNameVideo: store.products.searchNameVideo,
     resultSearchImage: store.products.resultSearchImage,
   };
 };

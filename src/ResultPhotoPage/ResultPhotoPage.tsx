@@ -11,7 +11,6 @@ export interface IDataResult extends RouteComponentProps {
   resultSearchImage: IDataSearch | null;
   searchNamePhoto: string;
   resultSearchVideo: IPopularVideos | null;
-  
 }
 
 class ResultPhotoPage extends React.Component<IDataResult> {
@@ -19,9 +18,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
   private searchname = this.url.match(/\w+$/);
 
   public componentDidMount() {
-    if (this.props.searchNamePhoto !== "") {
-      this.props.getSearchImages(this.props.searchNamePhoto);
-    } else if (this.props.searchNamePhoto === "") {
+    if (this.searchname !== null) {
       this.props.getSearchImages(this.searchname);
     }
   }
@@ -31,22 +28,28 @@ class ResultPhotoPage extends React.Component<IDataResult> {
       <div className="container-xl">
         <div className="result-bages row align-items-center mt-3 mb-3">
           <div className="col-3 text-right">
-            <NavLink to={`${this.url}`} className="p-2 text-decoration-none btn btn-light">
+            <NavLink
+              to={`${this.url}`}
+              className="p-2 text-decoration-none btn btn-light"
+            >
               Photos
               <span className="ml-1">
                 {this.props.resultSearchImage === null
-                  ? '0'
+                  ? "0"
                   : this.props.resultSearchImage.photos.length}
               </span>
             </NavLink>
           </div>
           <div className="col-3 text-left">
-            <NavLink to={`/videos/${this.searchname}`} className="p-2 text-decoration-none btn btn-light">
+            <NavLink
+              to={`/videos/${this.searchname}`}
+              className="p-2 text-decoration-none btn btn-light"
+            >
               Videos
               <span className="ml-1">
                 {this.props.resultSearchVideo === null
-                  ? '0'
-                  : this.props.resultSearchVideo.videos.length-1}
+                  ? "0"
+                  : this.props.resultSearchVideo.videos.length - 1}
               </span>
             </NavLink>
           </div>
@@ -57,24 +60,18 @@ class ResultPhotoPage extends React.Component<IDataResult> {
             <h5 className="text-center">{`${this.searchname} photos`}</h5>
           </div>
         </div>
-        <div className="row">
-          <div className="col-12">
-            <div className="d-flex flex-wrap justify-content-center">
-              {this.props.resultSearchImage === null ? (
-                <LoadingPage />
-              ) : (
-                this.props.resultSearchImage.photos.map((image, i) => (
-                  <div key={i} className="p-2">
-                    <img
-                      alt="img"
-                      src={image.src.medium}
-                      className="img-fluid"
-                    />
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
+        <div className="row justify-content-center">
+          {this.props.resultSearchImage === null ? (
+            <LoadingPage />
+          ) : (
+            this.props.resultSearchImage.photos.map((image, i) => (
+              <div key={i} className="col-auto">
+                <div className="p-1">
+                  <img alt="img" src={image.src.medium} className="img-fluid" />
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     );

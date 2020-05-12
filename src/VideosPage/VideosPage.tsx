@@ -63,14 +63,12 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               <h6 className="mt-2">New free stock videos</h6>
             </div>
           </div>
-          <div className="row">
-            <div className="col-12">
-              {this.props.popularVideo !== null ? (
-                this.props.popularVideo.videos.map((value, i) => (
-                  <div key={i} className="d-inline m-1">
+          <div className="row justify-content-center">
+            {this.props.popularVideo !== null ? (
+              this.props.popularVideo.videos.map((value, i) => (
+                <div key={i} className="col-lg-6 col-md-6 col-sm-12">
+                  <div className="d-inline m-1">
                     <video
-                      width="420"
-                      height="340"
                       controls={true}
                       className="img-fluid"
                     >
@@ -80,11 +78,11 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                       />
                     </video>
                   </div>
-                ))
-              ) : (
-                <LoadingPage />
-              )}
-            </div>
+                </div>
+              ))
+            ) : (
+              <LoadingPage />
+            )}
           </div>
         </div>
       </React.Fragment>
