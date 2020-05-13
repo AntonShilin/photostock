@@ -11,11 +11,12 @@ import "./VideosPage.scss";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import { FiSearch } from "react-icons/fi";
 import NavigationPages from "../NavigationPages/NavigationPages";
+import HeaderVideoPage from "./HeaderVideoPage/HeaderVideoPage";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
   popularVideo: IPopularVideos | null;
-  searchName: "";
+  defaultNameVideo: "";
   startSearchVideoByName: typeof startSearchVideoByName;
   watchNameVideoChange: typeof changeNameVideo;
 }
@@ -27,6 +28,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
   public render() {
     return (
       <React.Fragment>
+        <HeaderVideoPage/>
         <div className="container-xl bg-videos-page">
           <h1 className="pb-5 text-white">
             The best free stock videos from talented authors.
@@ -36,7 +38,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               type="text"
               className="form-control"
               placeholder="Find video"
-              value={this.props.searchName}
+              value={this.props.defaultNameVideo}
               onChange={this.props.watchNameVideoChange}
               autoFocus={false}
             />

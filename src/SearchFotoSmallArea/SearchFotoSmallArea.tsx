@@ -2,16 +2,16 @@ import * as React from "react";
 import { FiSearch } from "react-icons/fi";
 import { IApplicationState } from "../Store/Store";
 import { handleSearchChange, getSearchImages } from "../Actions/ProductsActions";
-import "./SearchSmallArea.scss";
+import "./SearchFotoSmallArea.scss";
 import { connect } from "react-redux";
 
-export interface ISearchSmallProps  {
+export interface ISearchFotoSmallAreaProps  {
   searchNamePhoto: string;
   watchInputChange: typeof handleSearchChange;
   getSearchImages: typeof getSearchImages;
 }
 
-class SearchSmallArea extends React.Component<ISearchSmallProps> {
+class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
   public render() {
     return (
       <div className="search-small-area ml-2 input-group input-group-md align-content-center">
@@ -54,5 +54,5 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default  connect(mapStateToProps, mapDispatchToProps)(SearchSmallArea)
+export default  connect(mapStateToProps, mapDispatchToProps)(SearchFotoSmallArea)
 ;

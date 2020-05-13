@@ -5,6 +5,7 @@ import { IPopularVideos, IDataSearch } from "../ProductsData/ProductsData";
 import { getSearchVideos } from "../Actions/ProductsActions";
 import { RouteComponentProps, NavLink } from "react-router-dom";
 import LoadingPage from "../LoadingPage/LoadingPage";
+import HeaderResultVideoPage from "./HeaderResultVideoPage/HeaderResultVideoPage";
 
 export interface IPropsResultPage extends RouteComponentProps {
   resultSearchVideo: IPopularVideos | null;
@@ -25,63 +26,63 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
 
   public render() {
     return (
-      <div className="container-xl">
-        <div className="result-bages row align-items-center mt-3 mb-3">
-          <div className="col-3 text-right">
-            <NavLink
-              to={`/photos/${this.searchname}`}
-              className="p-2 text-decoration-none btn btn-light"
-            >
-              Photos
-              <span className="ml-1">
-                {this.props.resultSearchImage === null
-                  ? "0"
-                  : this.props.resultSearchImage.photos.length}
-              </span>
-            </NavLink>
+      <React.Fragment>
+        <HeaderResultVideoPage />
+        <div className="container-xl">
+          <div className="result-bages row align-items-center mt-3 mb-3">
+            <div className="col-3 text-right">
+              <NavLink
+                to={`/photos/${this.searchname}`}
+                className="p-2 text-decoration-none btn btn-light"
+              >
+                Photos
+                <span className="ml-1">
+                  {this.props.resultSearchImage === null
+                    ? "0"
+                    : this.props.resultSearchImage.photos.length}
+                </span>
+              </NavLink>
+            </div>
+            <div className="col-3 text-left">
+              <NavLink
+                to={`${this.url}`}
+                className="p-2 text-decoration-none btn btn-light"
+              >
+                Videos
+                <span className="ml-1">
+                  {this.props.resultSearchVideo === null
+                    ? "0"
+                    : this.props.resultSearchVideo.videos.length - 1}
+                </span>
+              </NavLink>
+            </div>
+            <div className="col-6 text-center" />
           </div>
-          <div className="col-3 text-left">
-            <NavLink
-              to={`${this.url}`}
-              className="p-2 text-decoration-none btn btn-light"
-            >
-              Videos
-              <span className="ml-1">
-                {this.props.resultSearchVideo === null
-                  ? "0"
-                  : this.props.resultSearchVideo.videos.length - 1}
-              </span>
-            </NavLink>
+          <div className="row mt-3 mb-3">
+            <div className="col-12">
+              <h5 className="text-center">{`${this.searchname} photos`}</h5>
+            </div>
           </div>
-          <div className="col-6 text-center" />
-        </div>
-        <div className="row mt-3 mb-3">
-          <div className="col-12">
-            <h5 className="text-center">{`${this.searchname} photos`}</h5>
-          </div>
-        </div>
-        <div className="row justify-content-center">
-              {this.props.resultSearchVideo === null ? (
-                <LoadingPage />
-              ) : (
-                this.props.resultSearchVideo.videos.map((num, i) => (
-                <div  key={i}  className="col-lg-6 col-md-6 col-sm-12">
+          <div className="row justify-content-center">
+            {this.props.resultSearchVideo === null ? (
+              <LoadingPage />
+            ) : (
+              this.props.resultSearchVideo.videos.map((num, i) => (
+                <div key={i} className="col-lg-6 col-md-6 col-sm-12">
                   <div className="">
-                    <video
-                      controls={true}
-                      className="img-fluid"
-                    >
+                    <video controls={true} className="img-fluid">
                       <source
                         src={num.video_files[2].link}
                         type={num.video_files[2].file_type}
                       />
                     </video>
-                    </div>
                   </div>
-                ))
-              )}
+                </div>
+              ))
+            )}
+          </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

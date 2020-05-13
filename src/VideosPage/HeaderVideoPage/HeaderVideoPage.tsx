@@ -6,22 +6,22 @@ import { IoIosMenu } from "react-icons/io";
 import { MdClose } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";
 import { FaVideo } from "react-icons/fa";
-import "./HeaderPhotoPage.scss";
+import "./HeaderVideoPage.scss";
 import { connect } from "react-redux";
 import { handleToggleMenu, handleScroll } from "../../Actions/ProductsActions";
 import { IApplicationState } from "../../Store/Store";
-import SearchSmallArea from "../../SearchFotoSmallArea/SearchFotoSmallArea";
+import SearchVideoSmallArea from "../../SearchVideoSmallArea/SearchVideoSmallArea";
 
-export interface IHeaderPhotoPageProps {
+export interface IHeaderVideoPageProps {
   handleToggleMenu: typeof handleToggleMenu;
   isToggleMenu: boolean;
   handleScroll: typeof handleScroll;
   isScrolling: boolean;
 }
 
-class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteComponentProps> {
+class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
   public elementMenu: React.RefObject<HTMLDivElement>;
-  constructor(props: IHeaderPhotoPageProps) {
+  constructor(props: IHeaderVideoPageProps) {
     super(props);
     this.elementMenu = React.createRef();
   }
@@ -47,7 +47,7 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteCompon
               </NavLink>
             </div>
            <div className="col-8">
-              {this.props.isScrolling ? <SearchSmallArea /> : null}
+              {this.props.isScrolling ? <SearchVideoSmallArea /> : null}
             </div>
             <div className="col-2 text-center  d-lg-block d-none ">
               <NavLink to="/login" className="p-2 text-decoration-none">
@@ -102,7 +102,6 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteCompon
 }
 
 
-
 const mapStateToProps = (store: IApplicationState) => ({
   isToggleMenu: store.products.isToggleMenu,
   isScrolling: store.products.isScrolling
@@ -115,4 +114,4 @@ const mapDispatchToProps = (dispatch: any) => {
     handleScroll: (event:any) => dispatch(handleScroll(event))
   };
 };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderPhotoPage));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderVideoPage));
