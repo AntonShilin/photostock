@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import PhotosPage from "../PhotosPage/PhotosPage";
 import VideosPage from "../VideosPage/VideosPage";
-import Header from "../Header/Header";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import LoginPage from "../LoginPage/LoginPage";
 import { Suspense } from "react";
@@ -29,7 +28,6 @@ const Routes: React.SFC<RouteComponentProps> = props => {
   const [loggedIn, setLoggedIn] = React.useState(true);
   return (
     <React.Fragment>
-      <Header />
       <Switch>
         <Route path="/login" component={LoginPage} />
         <Redirect exact={true} from="/" to="/photos" />

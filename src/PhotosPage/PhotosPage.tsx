@@ -14,6 +14,7 @@ import "./PhotosPage.scss";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import { FiSearch } from "react-icons/fi";
 import NavigationPages from "../NavigationPages/NavigationPages";
+import HeaderPhotoPage from "./HeaderPhotoPage/HeaderPhotoPage";
 
 export interface IPropsPhotosPage extends RouteComponentProps {
   data: ICuratedPhoto | null;
@@ -42,6 +43,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
   public render() {
     return (
       <React.Fragment>
+        <HeaderPhotoPage />
         <div className="container-xl bg-light photospage_bg">
           <h1 className="pb-5 text-white">
             The best free stock photos from talented authors.

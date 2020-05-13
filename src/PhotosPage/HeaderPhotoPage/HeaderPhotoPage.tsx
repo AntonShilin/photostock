@@ -1,28 +1,27 @@
 import * as React from "react";
 import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
-import "url-search-params-polyfill";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoIosMenu } from "react-icons/io";
 import { MdClose } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";
 import { FaVideo } from "react-icons/fa";
-import "./Header.scss";
+import "./HeaderPhotoPage.scss";
 import { connect } from "react-redux";
-import { handleToggleMenu, handleScroll } from "../Actions/ProductsActions";
-import { IApplicationState } from "../Store/Store";
-import SearchSmallArea from "../SearchSmallArea/SearchSmallArea";
+import { handleToggleMenu, handleScroll } from "../../Actions/ProductsActions";
+import { IApplicationState } from "../../Store/Store";
+import SearchSmallArea from "../../SearchSmallArea/SearchSmallArea";
 
-export interface IHeaderProps {
+export interface IHeaderPhotoPageProps {
   handleToggleMenu: typeof handleToggleMenu;
   isToggleMenu: boolean;
   handleScroll: typeof handleScroll;
   isScrolling: boolean;
 }
 
-class Header extends React.Component<IHeaderProps, RouteComponentProps> {
+class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteComponentProps> {
   public elementMenu: React.RefObject<HTMLDivElement>;
-  constructor(props: IHeaderProps) {
+  constructor(props: IHeaderPhotoPageProps) {
     super(props);
     this.elementMenu = React.createRef();
   }
@@ -116,4 +115,4 @@ const mapDispatchToProps = (dispatch: any) => {
     handleScroll: (event:any) => dispatch(handleScroll(event))
   };
 };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderPhotoPage));
