@@ -1,9 +1,9 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { searchVideos, IPopularVideos } from "../ProductsData/ProductsData";
+import {  IPopularVideos } from "../ProductsData/ProductsData";
 import {
   getPopularVideo,
-  startSearchVideoByName,
+  getSearchVideos,
   changeNameVideo,
 } from "../Actions/ProductsActions";
 import { IApplicationState } from "../Store/Store";
@@ -12,13 +12,14 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 import { FiSearch } from "react-icons/fi";
 import NavigationPages from "../NavigationPages/NavigationPages";
 import HeaderVideoPage from "./HeaderVideoPage/HeaderVideoPage";
+import { NavLink } from "react-router-dom";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
   popularVideo: IPopularVideos | null;
-  defaultNameVideo: "";
-  startSearchVideoByName: typeof startSearchVideoByName;
-  watchNameVideoChange: typeof changeNameVideo;
+  searchNameVideo: string;
+  getSearchVideos: typeof getSearchVideos;
+  changeNameVideo: typeof changeNameVideo;
 }
 
 class VideosPage extends React.Component<IPropsVideosPage> {
@@ -38,17 +39,17 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               type="text"
               className="form-control"
               placeholder="Find video"
-              value={this.props.defaultNameVideo}
-              onChange={this.props.watchNameVideoChange}
+              value={this.props.searchNameVideo}
+              onChange={this.props.changeNameVideo}
               autoFocus={false}
             />
             <div className="input-group-append">
-              <span
+              <NavLink to={`/videos/${this.props.searchNameVideo}`}
                 className="input-group-text"
-                onClick={() => this.props.startSearchVideoByName(this.props)}
+                onClick={() => this.props.getSearchVideos(this.props.searchNameVideo)}
               >
                 <FiSearch />
-              </span>
+              </NavLink>
             </div>
           </div>
           <h6>
@@ -95,15 +96,16 @@ class VideosPage extends React.Component<IPropsVideosPage> {
 const mapStateToProps = (store: IApplicationState) => {
   return {
     popularVideo: store.products.videos,
+    searchNameVideo: store.products.searchNameVideo,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getPopularVideo: () => dispatch(getPopularVideo()),
-    startSearchVideoByName: (allProps: IPropsVideosPage) =>
-      dispatch(startSearchVideoByName(allProps)),
-    watchNameVideoChange: (e: string) => dispatch(changeNameVideo(e)),
+    changeNameVideo: (e: string) => dispatch(changeNameVideo(e)),
+    getSearchVideos: (name:string) =>
+      dispatch(getSearchVideos(name)),
   };
 };
 

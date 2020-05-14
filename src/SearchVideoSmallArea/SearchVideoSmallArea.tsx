@@ -1,17 +1,18 @@
 import * as React from "react";
 import { FiSearch } from "react-icons/fi";
 import { IApplicationState } from "../Store/Store";
-import {  changeNameVideo, startSearchVideoByName } from "../Actions/ProductsActions";
+import {  changeNameVideo, getSearchVideos } from "../Actions/ProductsActions";
 import "./SearchVideoSmallArea.scss";
 import { connect } from "react-redux";
 import { IPropsVideosPage } from "../VideosPage/VideosPage";
 import { IPopularVideos } from "../ProductsData/ProductsData";
+import { NavLink } from "react-router-dom";
 
 export interface ISearchVideoSmallAreaProps  {
   popularVideo: IPopularVideos | null;
   searchNameVideo: string;
-  startSearchVideoByName: typeof startSearchVideoByName;
-  watchNameVideoChange: typeof changeNameVideo;
+  getSearchVideos: typeof getSearchVideos;
+  changeNameVideo: typeof changeNameVideo;
 }
 
 class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> {
@@ -25,18 +26,18 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
               className="form-control w-100"
               placeholder="Find a photo"
               value={this.props.searchNameVideo}
-              onChange={this.props.watchNameVideoChange}
+              onChange={this.props.changeNameVideo}
               autoFocus={false}
             />
             <div className="input-group-append">
-              <span
+              <NavLink to={`/videos/${this.props.searchNameVideo}`}
                 className="input-group-text"
                 onClick={() =>
-                  this.props.startSearchVideoByName(this.props.searchNameVideo)
+                  this.props.getSearchVideos(this.props.searchNameVideo)
                 }
               >
                 <FiSearch />
-              </span>
+              </NavLink>
             </div>
           </div>
         </form>
@@ -52,9 +53,9 @@ const mapStateToProps = (store: IApplicationState) => ({
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    startSearchVideoByName: (allProps: IPropsVideosPage) =>
-      dispatch(startSearchVideoByName(allProps)),
-    watchNameVideoChange: (e: string) => dispatch(changeNameVideo(e)),
+    getSearchVideos: (allProps: IPropsVideosPage) =>
+      dispatch(getSearchVideos(allProps)),
+      changeNameVideo: (e: string) => dispatch(changeNameVideo(e)),
   };
 };
 

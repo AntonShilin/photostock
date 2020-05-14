@@ -86,7 +86,7 @@ export const startSearchPictureByName: ActionCreator<ISearchImageByNameAction> =
   };
 };
 
-/*go to the page with results search video by name  */
+/*delete this method  */
 export const startSearchVideoByName: ActionCreator<ISearchVideoByNameAction> = (
   allprops: IPropsVideosPage
 ) => {

@@ -19,7 +19,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
   private searchname = this.url.match(/\w+$/);
 
   public componentDidMount() {
-    if (this.searchname !== null) {
+    if (this.props.searchNamePhoto==='') {
       this.props.getSearchImages(this.searchname);
     }
   }

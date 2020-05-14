@@ -10,7 +10,7 @@ import HeaderResultVideoPage from "./HeaderResultVideoPage/HeaderResultVideoPage
 export interface IPropsResultPage extends RouteComponentProps {
   resultSearchVideo: IPopularVideos | null;
   getSearchVideos: typeof getSearchVideos;
-  searchNameVideo: "" | string;
+  searchNameVideo: string;
   resultSearchImage: IDataSearch | null;
 }
 
@@ -19,7 +19,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
   private searchname = this.url.match(/\w+$/);
 
   public componentDidMount() {
-    if (this.searchname !== null) {
+    if (this.props.searchNameVideo === '') {
       this.props.getSearchVideos(this.searchname);
     }
   }
@@ -39,7 +39,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                 <span className="ml-1">
                   {this.props.resultSearchImage === null
                     ? "0"
-                    : this.props.resultSearchImage.photos.length}
+                    : this.props.resultSearchImage.photos.length-1}
                 </span>
               </NavLink>
             </div>
@@ -60,7 +60,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
           </div>
           <div className="row mt-3 mb-3">
             <div className="col-12">
-              <h5 className="text-center">{`${this.searchname} photos`}</h5>
+              <h5 className="text-center">{`${this.searchname} videos`}</h5>
             </div>
           </div>
           <div className="row justify-content-center">

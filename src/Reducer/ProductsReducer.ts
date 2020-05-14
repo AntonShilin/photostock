@@ -15,6 +15,7 @@ import {
   startSearchImageByNameTypes,
   startSearchVideoByNameTypes,
 } from "../Types/ProductsTypes";
+import { IDataSearch } from "../ProductsData/ProductsData";
 
 const initialProductState: IProductsState = {
   productsLoading: false,
@@ -77,11 +78,11 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     }
 
     case GetDataSearchValueTypes.GETDATASEARCHVALUE: {
-      
+    
       return {
         ...state,
         searchNamePhoto: '',
-        resultSearchImage: action.data
+        resultSearchImage: action.data 
       };
     }
 
@@ -110,6 +111,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     case GetVideoTypes.GETVIDEO: {
       return {
         ...state,
+        searchNameVideo: '',
         resultSearchVideo: action.dataVideo
       };
     }
