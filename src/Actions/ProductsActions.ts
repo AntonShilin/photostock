@@ -76,7 +76,7 @@ export const handleSearchChange: ActionCreator<IGetSearchValueAction> = (
   };
 };
 
-/*go to the page with results search images by name  */
+/*delete this method*/
 export const startSearchPictureByName: ActionCreator<ISearchImageByNameAction> = (
   allprops: IPropsPhotosPage
 ) => {

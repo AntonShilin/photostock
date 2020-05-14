@@ -61,8 +61,8 @@ class VideosPage extends React.Component<IPropsVideosPage> {
         <NavigationPages />
         <div className="container-xl bg-light">
           <div className="row">
-            <div className="col-sm-6 col-md-12">
-              <h6 className="mt-2">New free stock videos</h6>
+            <div className="col-12">
+              <h6 className="mt-3 mb-3">New free stock videos</h6>
             </div>
           </div>
           <div className="row justify-content-center">

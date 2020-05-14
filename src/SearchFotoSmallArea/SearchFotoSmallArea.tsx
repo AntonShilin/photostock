@@ -4,6 +4,7 @@ import { IApplicationState } from "../Store/Store";
 import { handleSearchChange, getSearchImages } from "../Actions/ProductsActions";
 import "./SearchFotoSmallArea.scss";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 export interface ISearchFotoSmallAreaProps  {
   searchNamePhoto: string;
@@ -26,14 +27,14 @@ class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
               autoFocus={false}
             />
             <div className="input-group-append">
-              <span
+              <NavLink to={`/photos/${this.props.searchNamePhoto}`}
                 className="input-group-text"
                 onClick={() =>
                   this.props.getSearchImages(this.props.searchNamePhoto)
                 }
               >
                 <FiSearch />
-              </span>
+              </NavLink>
             </div>
           </div>
         </form>

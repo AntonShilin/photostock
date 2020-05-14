@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, NavLink } from "react-router-dom";
 import "url-search-params-polyfill";
 import { connect } from "react-redux";
 import { IApplicationState } from "../Store/Store";
@@ -8,7 +8,7 @@ import {
   handleSearchKeydown,
 } from "../Actions/ProductsActions";
 import { handleSearchChange } from "../Actions/ProductsActions";
-import { startSearchPictureByName } from "../Actions/ProductsActions";
+import { getSearchImages } from "../Actions/ProductsActions";
 import { ICuratedPhoto } from "../ProductsData/ProductsData";
 import "./PhotosPage.scss";
 import LoadingPage from "../LoadingPage/LoadingPage";
@@ -21,7 +21,7 @@ export interface IPropsPhotosPage extends RouteComponentProps {
   getPopularImages: typeof getPopularImages;
   searchNamePhoto: string;
   watchInputChange: typeof handleSearchChange;
-  startSearchPictureByName: typeof startSearchPictureByName;
+  getSearchImages: typeof getSearchImages; 
   getKeyNumber: typeof handleSearchKeydown;
   isScrollTop: number | null;
   isScrollHeight: number | null;
@@ -59,12 +59,12 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
               /* onKeyDown={this.props.getKeyNumber} */
             />
             <div className="input-group-append">
-              <span
+              <NavLink to={`/photos/${this.props.searchNamePhoto}`}
                 className="input-group-text"
-                onClick={() => this.props.startSearchPictureByName(this.props)}
+                onClick={() => this.props.getSearchImages(this.props.searchNamePhoto)}
               >
                 <FiSearch />
-              </span>
+              </NavLink>
             </div>
           </div>
           <h6>
@@ -78,7 +78,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
         <div className="container-xl bg-light">
           <div className="row mb-2">
             <div className="col-12">
-              <h6 className="m-0 mt-2">Free Stock Photos Trending </h6>
+              <h6 className="mb-3 mt-3">Free Stock Photos Trending </h6>
             </div>
           </div>
           <div className="row justify-content-center">
@@ -112,6 +112,7 @@ const mapStateToProps = (store: IApplicationState) => ({
   isScrollHeight: store.products.isScrollHeight,
   isClientHeight: store.products.isClientHeight,
   isScrolling: store.products.isScrolling,
+  searchNamePhoto: store.products.searchNamePhoto,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
@@ -119,8 +120,8 @@ const mapDispatchToProps = (dispatch: any) => {
     getKeyNumber: (e: any) => dispatch(handleSearchKeydown(e)),
     getPopularImages: () => dispatch(getPopularImages()),
     watchInputChange: (e: string) => dispatch(handleSearchChange(e)),
-    startSearchPictureByName: (allprops: IPropsPhotosPage) =>
-      dispatch(startSearchPictureByName(allprops)),
+    getSearchImages: (name: string) =>
+      dispatch(getSearchImages(name)),
   };
 };
 

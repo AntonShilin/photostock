@@ -10,7 +10,7 @@ import "./HeaderPhotoPage.scss";
 import { connect } from "react-redux";
 import { handleToggleMenu, handleScroll } from "../../Actions/ProductsActions";
 import { IApplicationState } from "../../Store/Store";
-import SearchSmallArea from "../../SearchFotoSmallArea/SearchFotoSmallArea";
+import SearchFotoSmallArea from "../../SearchFotoSmallArea/SearchFotoSmallArea";
 
 export interface IHeaderPhotoPageProps {
   handleToggleMenu: typeof handleToggleMenu;
@@ -47,7 +47,7 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteCompon
               </NavLink>
             </div>
            <div className="col-8">
-              {this.props.isScrolling ? <SearchSmallArea /> : null}
+              {this.props.isScrolling ? <SearchFotoSmallArea /> : null}
             </div>
             <div className="col-2 text-center  d-lg-block d-none ">
               <NavLink to="/login" className="p-2 text-decoration-none">

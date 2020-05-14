@@ -68,9 +68,9 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
 
     case startSearchImageByNameTypes.STARTSEARCHIMAGEBYNAME: {
       const currentDocument: any = action.props;
-      // console.log(currentDocument);
-      // console.log(state.searchNamePhoto);
-      currentDocument.history.push(`/photos/${state.searchNamePhoto}`);
+       console.log(currentDocument);
+       console.log(state.searchNamePhoto);
+      // currentDocument.history.push(`/photos/${state.searchNamePhoto}`);
       return {
         ...state
       };
@@ -80,6 +80,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       
       return {
         ...state,
+        searchNamePhoto: '',
         resultSearchImage: action.data
       };
     }

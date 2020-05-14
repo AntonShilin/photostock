@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoIosMenu } from "react-icons/io";
