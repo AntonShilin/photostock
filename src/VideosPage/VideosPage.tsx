@@ -74,7 +74,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               this.props.popularVideo.videos.map((value, i) => (
                 <div key={i} className="col-lg-6 col-md-6 col-sm-12">
                   <div className="d-inline m-1">
-                    <video controls={false} className="img-fluid">
+                    <video controls={true} className="img-fluid">
                       <source
                         src={value.video_files[2].link}
                         type={value.video_files[2].file_type}

@@ -61,7 +61,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
           </div>
           <div className="row mt-3 mb-3">
             <div className="col-12">
-              <h5 className="text-center">{`${this.searchname} videos`}</h5>
+              <h5 className="text-center">{`${this.searchname!== null ? this.searchname[0] : 'Result'} videos`}</h5>
             </div>
           </div>
           <div className="row justify-content-center">
@@ -69,17 +69,16 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
               <LoadingPage />
             ) : (
               this.props.resultSearchVideo.videos.map((num, i) => (
-                (i<5) ? 
               <div key={i} className="col-lg-6 col-md-6 col-sm-12">
                 <div className="">
-                  <video controls={false} className="img-fluid">
+                  <video controls={true} className="img-fluid">
                     <source
                       src={num.video_files[2].link}
                       type={num.video_files[2].file_type}
                     />
                   </video>
                 </div>
-              </div> : null
+              </div> 
               ))
             )}
           </div>
