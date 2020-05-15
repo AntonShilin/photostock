@@ -1,11 +1,5 @@
-import { ActionCreator, AnyAction, Dispatch, Action } from "redux";
-import { ThunkAction } from "redux-thunk";
-import {
-  getPopularPhotos,
-  doSearchInputValue,
-  getPopularVideos,
-  searchVideos,
-} from "../ProductsData/ProductsData";
+import { ActionCreator, Dispatch } from "redux";
+
 import {
   DataActionTypes,
   SearchValueTypes,
@@ -14,25 +8,24 @@ import {
   GetChangeNameVideoTypes,
   GetVideoTypes,
   IGetSearchValueAction,
-  IProductsState,
-  IDataLoadingAction,
-  IDataSearchValueAction,
-  IPopularVideoAction,
   IChangeNameVideoAction,
-  IGetVideoAction,
   ISearchKeydownAction,
   IToggleMenuAction,
   SearchKeydownTypes,
   ToggleMenu,
   IMoveScrollAction,
   MoveScroll,
-  ISearchImageByNameAction,
-  startSearchImageByNameTypes,
-  ISearchVideoByNameAction,
-  startSearchVideoByNameTypes,
+  DeletePrevVideo,
+  IDeletePrevVideoAction,
 } from "../Types/ProductsTypes";
-import { IPropsPhotosPage } from "../PhotosPage/PhotosPage";
-import { IPropsVideosPage } from "../VideosPage/VideosPage";
+
+/* delete prev video*/
+export const deletePrevVideo: ActionCreator<IDeletePrevVideoAction> = () => {
+  return {
+    type: DeletePrevVideo.DELETEPREVVIDEO,
+    data: null,
+  };
+};
 
 /* toggle menu button */
 export const handleToggleMenu: ActionCreator<IToggleMenuAction> = (
@@ -42,23 +35,52 @@ export const handleToggleMenu: ActionCreator<IToggleMenuAction> = (
   element: elem,
 });
 
-/* get fotos from API for start foto page*/
-export const getPopularImages: ActionCreator<ThunkAction<
+/* get popular fotos*/
+/* export const getPopularImages: ActionCreator<ThunkAction<
   Promise<AnyAction>,
   IProductsState,
   null,
-  IDataLoadingAction
+  IGetPopularPhotoAction
 >> = () => {
   return async (dispatch: Dispatch) => {
     const data = await getPopularPhotos();
     return dispatch({
       type: DataActionTypes.GETDATA,
-      dataFromAPI: data,
+      popularPhoto: data,
     });
+  };
+}; */
+
+/*  get popular fotos */
+export const getPopularImages = () => {
+  const keyAPI: string =
+    "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
+  return (dispatch: Dispatch) => {
+    fetch(
+      `https://api.pexels.com/v1/curated?per_page=100&page=1`,
+      {
+        headers: { Authorization: keyAPI },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((data) =>
+        dispatch({
+          type: DataActionTypes.GETDATA,
+          popularPhoto: data,
+        })
+      );
   };
 };
 
-/* what is key code number */
+
+
+/* get key code number */
 export const handleSearchKeydown: ActionCreator<ISearchKeydownAction> = (
   e: React.KeyboardEvent<HTMLInputElement>
 ) => ({
@@ -76,58 +98,37 @@ export const handleSearchChange: ActionCreator<IGetSearchValueAction> = (
   };
 };
 
-/*delete this method*/
-export const startSearchPictureByName: ActionCreator<ISearchImageByNameAction> = (
-  allprops: IPropsPhotosPage
-) => {
-  return {
-    type: startSearchImageByNameTypes.STARTSEARCHIMAGEBYNAME,
-    props: allprops,
+
+
+
+/*  get popular videos */
+export const getPopularVideo = () => {
+  const keyAPI: string =
+    "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
+  return (dispatch: Dispatch) => {
+    fetch(
+      `https://api.pexels.com/videos/popular?per_page=10&page=1`,
+      {
+        headers: { Authorization: keyAPI },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((data) =>
+        dispatch({
+          type: GetPopularVideoTypes.GETPOPULARVIDEO,
+      popularVideo: data,
+        })
+      );
   };
 };
 
-/*delete this method  */
-export const startSearchVideoByName: ActionCreator<ISearchVideoByNameAction> = (
-  allprops: IPropsVideosPage
-) => {
-  return {
-  type: startSearchVideoByNameTypes.STARTSEARCHVIDEOBYNAME,
-  props: allprops,
-  };
-}
-  
 
-/* get images search by name  */
-export const getSearchImages: ActionCreator<ThunkAction<
-  Promise<AnyAction>,
-  IProductsState,
-  null,
-  IDataSearchValueAction
-  >> = (name:string) => {
-    return async (dispatch: Dispatch) => {
-    const resultSearchImages = await doSearchInputValue(name);
-    return dispatch({
-      type: GetDataSearchValueTypes.GETDATASEARCHVALUE,
-      data: resultSearchImages,
-    });
-  };
-};
-
-/* get videos for start video page*/
-export const getPopularVideo: ActionCreator<ThunkAction<
-  Promise<AnyAction>,
-  IProductsState,
-  null,
-  IPopularVideoAction
->> = () => {
-  return async (dispatch: Dispatch) => {
-    const data = await getPopularVideos();
-    return dispatch({
-      type: GetPopularVideoTypes.GETPOPULARVIDEO,
-      videoFiles: data,
-    });
-  };
-};
 
 /* change in input on video page */
 export const changeNameVideo: ActionCreator<IChangeNameVideoAction> = (
@@ -138,27 +139,63 @@ export const changeNameVideo: ActionCreator<IChangeNameVideoAction> = (
 });
 
 /* get videos search by name*/
-export const getSearchVideos: ActionCreator<ThunkAction<
-  Promise<AnyAction>,
-  IProductsState,
-  null,
-  IGetVideoAction
-  >> = (name: string) => {
-  return async (dispatch: Dispatch) => {
-    const data = await searchVideos(name);
-    return dispatch({
-      type: GetVideoTypes.GETVIDEO,
-      dataVideo: data,
-    });
+export const getSearchVideos = (name: string) => {
+  const keyAPI: string =
+    "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
+  return (dispatch: Dispatch) => {
+    dispatch(deletePrevVideo());
+    fetch(
+      `https://api.pexels.com/videos/search?query=${name}+query&per_page=100&page=1`,
+      {
+        headers: { Authorization: keyAPI },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((data) =>
+        dispatch({
+          type: GetVideoTypes.GETVIDEO,
+          findVideo: data,
+        })
+      );
+  };
+};
+
+/* get images search by name  */
+export const getSearchImages = (name: string) => {
+  const keyAPI: string =
+    "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
+  return (dispatch: Dispatch) => {
+    dispatch(deletePrevVideo());
+    fetch(
+      `https://api.pexels.com/v1/search?query=${name}+query&per_page=100&page=1`,
+      {
+        headers: { Authorization: keyAPI },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((data) =>
+        dispatch({
+          type: GetDataSearchValueTypes.GETDATASEARCHVALUE,
+          findPhoto: data,
+        })
+      );
   };
 };
 
 /* some scroll events parametres*/
-export const handleScroll: ActionCreator<IMoveScrollAction> = (
-  event:any
-) => {
-  console.log(event.target.srcElement);
-  //  console.log(event.srcElement.scrollingElement.scrollTop);
+export const handleScroll: ActionCreator<IMoveScrollAction> = (event: any) => {
   return {
     type: MoveScroll.MOVESCROLL,
     scrollTop: event.srcElement.scrollingElement.scrollTop,
@@ -166,4 +203,5 @@ export const handleScroll: ActionCreator<IMoveScrollAction> = (
     clientHeight: event.srcElement.scrollingElement.clientHeight,
   };
 };
+
 

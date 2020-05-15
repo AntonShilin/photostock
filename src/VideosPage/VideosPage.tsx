@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import {  IPopularVideos } from "../ProductsData/ProductsData";
+import { IPopularVideos } from "../Interfaces/Interfaces";
 import {
   getPopularVideo,
   getSearchVideos,
@@ -29,7 +29,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
   public render() {
     return (
       <React.Fragment>
-        <HeaderVideoPage/>
+        <HeaderVideoPage />
         <div className="container-xl bg-videos-page">
           <h1 className="pb-5 text-white">
             The best free stock videos from talented authors.
@@ -44,9 +44,12 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               autoFocus={false}
             />
             <div className="input-group-append">
-              <NavLink to={`/videos/${this.props.searchNameVideo}`}
+              <NavLink
+                to={`/videos/${this.props.searchNameVideo}`}
                 className="input-group-text"
-                onClick={() => this.props.getSearchVideos(this.props.searchNameVideo)}
+                onClick={() => {
+                    this.props.getSearchVideos(this.props.searchNameVideo);
+                }}
               >
                 <FiSearch />
               </NavLink>
@@ -71,10 +74,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               this.props.popularVideo.videos.map((value, i) => (
                 <div key={i} className="col-lg-6 col-md-6 col-sm-12">
                   <div className="d-inline m-1">
-                    <video
-                      controls={true}
-                      className="img-fluid"
-                    >
+                    <video controls={false} className="img-fluid">
                       <source
                         src={value.video_files[2].link}
                         type={value.video_files[2].file_type}
@@ -104,8 +104,7 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     getPopularVideo: () => dispatch(getPopularVideo()),
     changeNameVideo: (e: string) => dispatch(changeNameVideo(e)),
-    getSearchVideos: (name:string) =>
-      dispatch(getSearchVideos(name)),
+    getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
   };
 };
 

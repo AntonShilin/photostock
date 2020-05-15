@@ -9,7 +9,7 @@ import {
 } from "../Actions/ProductsActions";
 import { handleSearchChange } from "../Actions/ProductsActions";
 import { getSearchImages } from "../Actions/ProductsActions";
-import { ICuratedPhoto } from "../ProductsData/ProductsData";
+import { ICuratedPhoto } from "../Interfaces/Interfaces";
 import "./PhotosPage.scss";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import { FiSearch } from "react-icons/fi";
@@ -30,9 +30,6 @@ export interface IPropsPhotosPage extends RouteComponentProps {
 }
 
 class PhotosPage extends React.Component<IPropsPhotosPage> {
-  constructor(props: IPropsPhotosPage) {
-    super(props);
-  }
 
   public componentDidMount() {
     if (this.props.data === null) {

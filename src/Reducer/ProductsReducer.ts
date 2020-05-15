@@ -6,16 +6,13 @@ import {
   SearchValueTypes,
   GetDataSearchValueTypes,
   GetPopularVideoTypes,
-  GetSearchVideoTypes,
   GetChangeNameVideoTypes,
   GetVideoTypes,
   SearchKeydownTypes,
   ToggleMenu,
   MoveScroll,
-  startSearchImageByNameTypes,
-  startSearchVideoByNameTypes,
+  DeletePrevVideo,
 } from "../Types/ProductsTypes";
-import { IDataSearch } from "../ProductsData/ProductsData";
 
 const initialProductState: IProductsState = {
   productsLoading: false,
@@ -30,7 +27,7 @@ const initialProductState: IProductsState = {
   isScrolling: false,
   isScrollTop: null,
   isScrollHeight: null,
-  isClientHeight: null
+  isClientHeight: null,
 };
 
 export const productsReducer: Reducer<IProductsState, ProductsActions> = (
@@ -41,7 +38,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     case DataActionTypes.GETDATA: {
       return {
         ...state,
-        data: action.dataFromAPI
+        data: action.popularPhoto,
       };
     }
 
@@ -56,63 +53,51 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
 
       return {
         ...state,
-        keyboardKey: action.keydownKey
+        keyboardKey: action.keydownKey,
       };
     }
 
     case SearchValueTypes.GETSEARCHVALUE: {
       return {
         ...state,
-        searchNamePhoto: action.searchValue
-      };
-    }
-
-    case startSearchImageByNameTypes.STARTSEARCHIMAGEBYNAME: {
-      const currentDocument: any = action.props;
-       console.log(currentDocument);
-       console.log(state.searchNamePhoto);
-      // currentDocument.history.push(`/photos/${state.searchNamePhoto}`);
-      return {
-        ...state
+        searchNamePhoto: action.searchValue,
       };
     }
 
     case GetDataSearchValueTypes.GETDATASEARCHVALUE: {
-    
       return {
         ...state,
-        searchNamePhoto: '',
-        resultSearchImage: action.data 
+        searchNamePhoto: "",
+        resultSearchImage: action.findPhoto,
       };
     }
 
     case GetPopularVideoTypes.GETPOPULARVIDEO: {
       return {
         ...state,
-        videos: action.videoFiles
-      };
-    }
-
-    case startSearchVideoByNameTypes.STARTSEARCHVIDEOBYNAME: {
-      const currentDocument: any = action.props;
-      currentDocument.history.push(`/videos/${state.searchNameVideo}`);
-      return {
-        ...state
+        videos: action.popularVideo,
       };
     }
 
     case GetChangeNameVideoTypes.GETCHANGENAMEVIDEO: {
       return {
         ...state,
-        searchNameVideo: action.value
+        searchNameVideo: action.value,
       };
     }
 
     case GetVideoTypes.GETVIDEO: {
       return {
         ...state,
-        searchNameVideo: '',
-        resultSearchVideo: action.dataVideo
+        searchNameVideo: "",
+        resultSearchVideo: action.findVideo,
+      };
+    }
+      
+    case DeletePrevVideo.DELETEPREVVIDEO: {
+      return {
+        ...state,
+        resultSearchVideo: action.data,
       };
     }
 
@@ -136,7 +121,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
 
       return {
         ...state,
-        isToggleMenu: !state.isToggleMenu
+        isToggleMenu: !state.isToggleMenu,
       };
     }
 
@@ -146,10 +131,11 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         isScrolling: action.scrollTop! > 10 ? true : false,
         isScrollTop: action.scrollTop,
         isScrollHeight: action.scrollHeight,
-        isClientHeight: action.clientHeight
+        isClientHeight: action.clientHeight,
       };
     }
-      
+
+   
   }
   return state || initialProductState;
 };

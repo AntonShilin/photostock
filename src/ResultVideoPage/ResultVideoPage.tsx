@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { IApplicationState } from "../Store/Store";
-import { IPopularVideos, IDataSearch } from "../ProductsData/ProductsData";
+import { IPopularVideos, IDataSearch } from "../Interfaces/Interfaces";
 import { getSearchVideos } from "../Actions/ProductsActions";
 import { RouteComponentProps, NavLink } from "react-router-dom";
 import LoadingPage from "../LoadingPage/LoadingPage";
@@ -10,8 +10,8 @@ import HeaderResultVideoPage from "./HeaderResultVideoPage/HeaderResultVideoPage
 export interface IPropsResultPage extends RouteComponentProps {
   resultSearchVideo: IPopularVideos | null;
   getSearchVideos: typeof getSearchVideos;
-  searchNameVideo: string;
   resultSearchImage: IDataSearch | null;
+  searchNameVideo: string;
 }
 
 class ResultVideoPage extends React.Component<IPropsResultPage> {
@@ -19,12 +19,13 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
   private searchname = this.url.match(/\w+$/);
 
   public componentDidMount() {
-    if (this.props.searchNameVideo === '') {
-      this.props.getSearchVideos(this.searchname);
+    if (this.searchname !== null) {
+       this.props.getSearchVideos(this.searchname[0]);
     }
   }
 
   public render() {
+    console.log(this.url,this.searchname)
     return (
       <React.Fragment>
         <HeaderResultVideoPage />
@@ -68,16 +69,17 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
               <LoadingPage />
             ) : (
               this.props.resultSearchVideo.videos.map((num, i) => (
-                <div key={i} className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="">
-                    <video controls={true} className="img-fluid">
-                      <source
-                        src={num.video_files[2].link}
-                        type={num.video_files[2].file_type}
-                      />
-                    </video>
-                  </div>
+                (i<5) ? 
+              <div key={i} className="col-lg-6 col-md-6 col-sm-12">
+                <div className="">
+                  <video controls={false} className="img-fluid">
+                    <source
+                      src={num.video_files[2].link}
+                      type={num.video_files[2].file_type}
+                    />
+                  </video>
                 </div>
+              </div> : null
               ))
             )}
           </div>

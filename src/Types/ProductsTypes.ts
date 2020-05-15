@@ -1,6 +1,4 @@
-import { ICuratedPhoto, IDataSearch, IPopularVideos } from "../ProductsData/ProductsData";
-import { IPropsPhotosPage } from "../PhotosPage/PhotosPage";
-import { IPropsVideosPage } from "../VideosPage/VideosPage";
+import { ICuratedPhoto, IDataSearch, IPopularVideos } from "../Interfaces/Interfaces";
 
 export enum DataActionTypes {
   GETDATA = "GETDATA"
@@ -14,9 +12,6 @@ export enum SearchKeydownTypes {
   SEARCKEYDOWN = "SEARCKEYDOWN"
 }
 
-export enum startSearchImageByNameTypes {
-  STARTSEARCHIMAGEBYNAME = "STARTSEARCHIMAGEBYNAME" 
-}
 
 export enum GetDataSearchValueTypes {
   GETDATASEARCHVALUE = "GETDATASEARCHVALUE"
@@ -30,9 +25,6 @@ export enum GetSearchVideoTypes {
   GETSEARCHVIDEO = "GETSEARCHVIDEO"
 }
 
-export enum startSearchVideoByNameTypes {
-  STARTSEARCHVIDEOBYNAME = "STARTSEARCHVIDEOBYNAME" 
-}
 
 export enum GetChangeNameVideoTypes {
   GETCHANGENAMEVIDEO = "GETCHANGENAMEVIDEO"
@@ -50,8 +42,17 @@ export enum MoveScroll {
   MOVESCROLL="MOVESCROLL"
 }
 
+export enum DeletePrevVideo {
+  DELETEPREVVIDEO="DELETEPREVVIDEO"
+}
+
 
 /*  interfaces */
+export interface IDeletePrevVideoAction {
+  type: DeletePrevVideo.DELETEPREVVIDEO;
+  data: null
+}
+
 
 export interface IToggleMenuAction {
   type: ToggleMenu.TOGGLEMENU;
@@ -68,30 +69,21 @@ export interface IGetSearchValueAction {
   searchValue: string;
 }
 
-export interface ISearchVideoByNameAction {
-  type: startSearchVideoByNameTypes.STARTSEARCHVIDEOBYNAME;
-  props: IPropsVideosPage;
-}
 
-export interface IDataLoadingAction {
+export interface IGetPopularPhotoAction {
   type: DataActionTypes.GETDATA;
-  dataFromAPI: ICuratedPhoto;
+  popularPhoto: ICuratedPhoto;
 }
 
-
-export interface ISearchImageByNameAction {
-  type: startSearchImageByNameTypes.STARTSEARCHIMAGEBYNAME;
-  props: IPropsPhotosPage;
-}
 
 export interface IDataSearchValueAction {
   type: GetDataSearchValueTypes.GETDATASEARCHVALUE;
-  data: IDataSearch;
+  findPhoto: IDataSearch;
 }
 
 export interface IPopularVideoAction {
   type: GetPopularVideoTypes.GETPOPULARVIDEO;
-  videoFiles: IPopularVideos;
+  popularVideo: IPopularVideos;
 }
 
 export interface IChangeNameVideoAction {
@@ -101,7 +93,7 @@ export interface IChangeNameVideoAction {
 
 export interface IGetVideoAction{
   type: GetVideoTypes.GETVIDEO;
-  dataVideo: IPopularVideos;
+  findVideo: IPopularVideos;
 }
 
 export interface IMoveScrollAction{
@@ -113,16 +105,15 @@ export interface IMoveScrollAction{
 
 
 export type ProductsActions =
-  | IDataLoadingAction
+  | IGetPopularPhotoAction
   | IGetSearchValueAction
-  | ISearchImageByNameAction
   | IDataSearchValueAction
   | IPopularVideoAction
-  | ISearchVideoByNameAction
   | IChangeNameVideoAction
   |ISearchKeydownAction
   | IGetVideoAction
   | IMoveScrollAction
+  |IDeletePrevVideoAction
   | IToggleMenuAction;
 
 export interface IProductsState {
@@ -131,9 +122,9 @@ export interface IProductsState {
   readonly videos: IPopularVideos | null;
   readonly productsLoading: boolean;
   readonly searchNamePhoto: string;
-  readonly resultSearchImage: IDataSearch | null;
+  resultSearchImage: IDataSearch | null;
   readonly searchNameVideo: string;
-  readonly resultSearchVideo: IPopularVideos | null;
+  resultSearchVideo: IPopularVideos | null;
   readonly isToggleMenu: boolean;
   readonly isScrolling: boolean;
   readonly isScrollTop: number|null;

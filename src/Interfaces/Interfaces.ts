@@ -1,5 +1,5 @@
 
-
+/* photo */
 interface IDataSrc {
   original: string;
   large2x: string;
@@ -37,6 +37,7 @@ export interface IDataSearch {
   photos: IData[];
 }
 
+/* video */
 export interface IPopularVideos {
   page: number;
   per_page: number;
@@ -81,7 +82,7 @@ interface IVideoPictures {
   nr: number;
 }
 
-export const getPopularPhotos = async (): Promise<ICuratedPhoto> => {
+/* export const getPopularPhotos = async (): Promise<ICuratedPhoto> => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
   // tslint:disable-next-line: no-shadowed-variable
@@ -97,9 +98,9 @@ export const getPopularPhotos = async (): Promise<ICuratedPhoto> => {
   } catch (err) {
     return err;
   }
-};
+}; */
 
-export const doSearchInputValue = async (
+/* export const doSearchPhotoByName = async (
   name: string
 ): Promise<IDataSearch[]> => {
   const keyAPI: string =
@@ -117,9 +118,9 @@ export const doSearchInputValue = async (
   } catch (err) {
     return err;
   }
-};
+}; */
 
-export const searchVideos = async (name:string): Promise<IPopularVideos[]> => {
+/* export const doSearchVideoByName = async (name:string): Promise<IPopularVideos[]> => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
   // tslint:disable-next-line: no-shadowed-variable
@@ -135,8 +136,8 @@ export const searchVideos = async (name:string): Promise<IPopularVideos[]> => {
   } catch (err) {
     return err;
   }
-};
-
+}; */
+/* 
 export const getPopularVideos = async (): Promise<IPopularVideos[]> => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
@@ -153,4 +154,4 @@ export const getPopularVideos = async (): Promise<IPopularVideos[]> => {
   } catch (err) {
     return err;
   }
-};
+}; */

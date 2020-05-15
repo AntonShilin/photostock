@@ -1,11 +1,10 @@
 import * as React from "react";
 import { FiSearch } from "react-icons/fi";
 import { IApplicationState } from "../Store/Store";
-import {  changeNameVideo, getSearchVideos } from "../Actions/ProductsActions";
+import {  changeNameVideo, getSearchVideos} from "../Actions/ProductsActions";
 import "./SearchVideoSmallArea.scss";
 import { connect } from "react-redux";
-import { IPropsVideosPage } from "../VideosPage/VideosPage";
-import { IPopularVideos } from "../ProductsData/ProductsData";
+import { IPopularVideos } from "../Interfaces/Interfaces";
 import { NavLink } from "react-router-dom";
 
 export interface ISearchVideoSmallAreaProps  {
@@ -53,9 +52,9 @@ const mapStateToProps = (store: IApplicationState) => ({
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getSearchVideos: (allProps: IPropsVideosPage) =>
-      dispatch(getSearchVideos(allProps)),
-      changeNameVideo: (e: string) => dispatch(changeNameVideo(e)),
+    getSearchVideos: (name:string) =>
+      dispatch(getSearchVideos(name)),
+    changeNameVideo: (e: string) =>  dispatch(changeNameVideo(e)),
   };
 };
 

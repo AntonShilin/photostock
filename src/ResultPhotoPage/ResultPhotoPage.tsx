@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { IApplicationState } from "../Store/Store";
-import { IDataSearch, IPopularVideos } from "../ProductsData/ProductsData";
+import { IDataSearch, IPopularVideos } from "../Interfaces/Interfaces";
 import { RouteComponentProps, NavLink } from "react-router-dom";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import { getSearchImages } from "../Actions/ProductsActions";
@@ -19,8 +19,8 @@ class ResultPhotoPage extends React.Component<IDataResult> {
   private searchname = this.url.match(/\w+$/);
 
   public componentDidMount() {
-    if (this.props.searchNamePhoto==='') {
-      this.props.getSearchImages(this.searchname);
+    if (this.searchname!==null) {
+      this.props.getSearchImages(this.searchname[0]);
     }
   }
 
