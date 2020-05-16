@@ -1,18 +1,39 @@
 .bg-videos-page{
     min-height: 25rem;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    background-image: url(../media/clouds.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 0;
-    h1{
-        font-size: 3rem;
-        font-weight: 700;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-image: url(../media/clouds.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 0;
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+  }
+  h6{
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  div.input-group {
+    input.form-control {
+      border-right: transparent;
     }
-    div.input-group-append{
-        span.input-group-text{
-            background-color: #fff;
+    div.input-group-append {
+      a.input-group-text {
+        background-color: #fff;
+        border-left: 0;
+      }
+    }
+  }
+}
+
+div{
+    div{
+        div{
+            h6{
+                font-weight: 700;
+                font-size: 1.2rem;
+            }
         }
     }
 }

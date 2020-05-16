@@ -74,7 +74,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
         <div className="container-xl bg-light">
           <div className="row mb-2">
             <div className="col-12">
-              <h6 className="mb-3 mt-3">Free Stock Photos Trending </h6>
+              <h6 className="mb-4 mt-4">Trending Free Stock Photos</h6>
             </div>
           </div>
           <div className="row justify-content-center">

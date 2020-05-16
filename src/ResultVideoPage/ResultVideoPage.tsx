@@ -67,7 +67,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
           </div>
           <div className="row mt-3 mb-3">
             <div className="col-12">
-              <h5 className="text-center">{`${
+              <h5 className="text-center mb-5">{`${
                 this.searchname !== null ? this.searchname[0] : "Result"
               } videos`}</h5>
             </div>

@@ -1,9 +1,10 @@
 header {
+  position: -webkit-sticky;
   position: sticky;
   top: 0px;
   z-index: 5;
   
-  div#main_menu {
+  div#main_menu_foto_page {
     position: relative;
     background-color: #232a34;
     a {
@@ -12,11 +13,11 @@ header {
     .row {
       min-height: 4.125rem;
       div > a.btn {
-        width: 3rem;
-        height: 3rem;
+        width: 2.7rem;
+        height: 2.7rem;
         font-size: 2rem;
         font-weight: 900;
-        line-height: 1.5rem;
+         line-height: 1.5rem;
         background-color: rgb(5, 160, 129);
       }
     }

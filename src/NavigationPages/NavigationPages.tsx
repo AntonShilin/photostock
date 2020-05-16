@@ -11,12 +11,12 @@ class NavigationPages extends React.Component<INavigationPagesProps, State> {
     return (
       <div className="navigation-pages container-xl">
         <div className="row align-items-center justify-content-center">
-          <div className="col-2 text-center">
+          <div className="col-3 text-center">
             <NavLink to="/photos"  activeClassName="active">
               Photos
             </NavLink>
           </div>
-          <div className="col-2 text-center">
+          <div className="col-3 text-center">
             <NavLink to="/videos" activeClassName="active">
               Videos
             </NavLink>

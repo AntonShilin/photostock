@@ -37,7 +37,7 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
         <div id="main_menu" className="container-xl">
           <div className="row align-items-center">
             <div className="col-2">
-              <NavLink to="/photos" className="p-2 text-decoration-none btn">
+              <NavLink to="/photos" className="text-decoration-none btn">
                 F
               </NavLink>
             </div>

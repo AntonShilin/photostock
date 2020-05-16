@@ -15,7 +15,7 @@ export interface ISearchFotoSmallAreaProps  {
 class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
   public render() {
     return (
-      <div className="search-small-area ml-2 input-group input-group-md align-content-center">
+      <div className="photo_search-small-area ml-2 input-group input-group-md align-content-center">
         <form className="form-inline w-100">
           <div className="input-group w-100">
             <input

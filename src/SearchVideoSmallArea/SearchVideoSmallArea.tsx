@@ -17,7 +17,7 @@ export interface ISearchVideoSmallAreaProps  {
 class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> {
   public render() {
     return (
-      <div className="search-small-area ml-2 input-group input-group-md align-content-center">
+      <div className="video_search-small-area ml-2 input-group input-group-md align-content-center">
         <form className="form-inline w-100">
           <div className="input-group w-100">
             <input

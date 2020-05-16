@@ -1,18 +1,19 @@
 div.navigation-pages {
-    border-bottom: .15rem solid lightgray;
+  border-bottom: 0.25rem solid lightgray;
   div.row {
-      height: 3.6rem;
-      div {
-          .active {
-              border-bottom: .25rem solid blue;
-            }
-        a {
-            display: inline-block;
-            padding-top: 1rem;
-            padding-bottom: .8rem;
-          font-size: 1.1rem;
-          font-weight: 500;
-          text-decoration: none;
+    height: 3.6rem;
+    div {
+      .active {
+        border-bottom: 0.25rem solid blue;
+      }
+      a {
+        display: inline-block;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-decoration: none;
+        border-bottom: 0.25rem solid transparent;
       }
     }
   }

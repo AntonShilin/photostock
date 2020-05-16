@@ -34,10 +34,10 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteCompon
           }
           onClick={() => this.props.handleToggleMenu()}
         />
-        <div id="main_menu" className="container-xl">
+        <div id="main_menu_foto_page" className="container-xl">
           <div className="row align-items-center">
             <div className="col-2">
-              <NavLink to="/photos" className="p-2 text-decoration-none btn">
+              <NavLink to="/photos" className="text-decoration-none btn">
                 F
               </NavLink>
             </div>
