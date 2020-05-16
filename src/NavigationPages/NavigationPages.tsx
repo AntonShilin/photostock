@@ -10,14 +10,14 @@ class NavigationPages extends React.Component<INavigationPagesProps, State> {
   public render() {
     return (
       <div className="navigation-pages container-xl">
-        <div className="row align-items-center">
-          <div className="col-6 text-center">
-            <NavLink to="/photos" className="p-2 text-decoration-none">
+        <div className="row align-items-center justify-content-center">
+          <div className="col-2 text-center">
+            <NavLink to="/photos"  activeClassName="active">
               Photos
             </NavLink>
           </div>
-          <div className="col-6 text-center">
-            <NavLink to="/videos" className="p-2 text-decoration-none">
+          <div className="col-2 text-center">
+            <NavLink to="/videos" activeClassName="active">
               Videos
             </NavLink>
           </div>

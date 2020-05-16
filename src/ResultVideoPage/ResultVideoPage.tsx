@@ -6,6 +6,7 @@ import { getSearchVideos } from "../Actions/ProductsActions";
 import { RouteComponentProps, NavLink } from "react-router-dom";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import HeaderResultVideoPage from "./HeaderResultVideoPage/HeaderResultVideoPage";
+import "./ResultVideoPage.scss";
 
 export interface IPropsResultPage extends RouteComponentProps {
   resultSearchVideo: IPopularVideos | null;
@@ -20,48 +21,55 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
 
   public componentDidMount() {
     if (this.searchname !== null) {
-       this.props.getSearchVideos(this.searchname[0]);
+      this.props.getSearchVideos(this.searchname[0]);
     }
   }
 
   public render() {
-    console.log(this.url,this.searchname)
+    console.log(this.url, this.searchname);
     return (
       <React.Fragment>
         <HeaderResultVideoPage />
         <div className="container-xl">
-          <div className="result-bages row align-items-center mt-3 mb-3">
-            <div className="col-3 text-right">
-              <NavLink
-                to={`/photos/${this.searchname}`}
-                className="p-2 text-decoration-none btn btn-light"
-              >
-                Photos
-                <span className="ml-1">
-                  {this.props.resultSearchImage === null
-                    ? "0"
-                    : this.props.resultSearchImage.photos.length-1}
-                </span>
-              </NavLink>
+          <div className="video-result-bages row align-items-center justify-content-md-center mt-3 mb-5">
+            <div className="col-auto">
+              <ul className="list-group list-group-horizontal">
+                <li className="list-group-item">
+                  {" "}
+                  <NavLink
+                    activeClassName="video-result-bages-active"
+                    to={`/photos/${this.searchname}`}
+                  >
+                    Photos
+                    <span className="ml-1">
+                      {this.props.resultSearchImage === null
+                        ? "0"
+                        : this.props.resultSearchImage.photos.length}
+                    </span>
+                  </NavLink>
+                </li>
+                <li className="list-group-item">
+                  {" "}
+                  <NavLink
+                    activeClassName="video-result-bages-active"
+                    to={`${this.url}`}
+                  >
+                    Videos
+                    <span className="ml-1">
+                      {this.props.resultSearchVideo === null
+                        ? "0"
+                        : this.props.resultSearchVideo.videos.length - 1}
+                    </span>
+                  </NavLink>
+                </li>
+              </ul>
             </div>
-            <div className="col-3 text-left">
-              <NavLink
-                to={`${this.url}`}
-                className="p-2 text-decoration-none btn btn-light"
-              >
-                Videos
-                <span className="ml-1">
-                  {this.props.resultSearchVideo === null
-                    ? "0"
-                    : this.props.resultSearchVideo.videos.length - 1}
-                </span>
-              </NavLink>
-            </div>
-            <div className="col-6 text-center" />
           </div>
           <div className="row mt-3 mb-3">
             <div className="col-12">
-              <h5 className="text-center">{`${this.searchname!== null ? this.searchname[0] : 'Result'} videos`}</h5>
+              <h5 className="text-center">{`${
+                this.searchname !== null ? this.searchname[0] : "Result"
+              } videos`}</h5>
             </div>
           </div>
           <div className="row justify-content-center">
@@ -69,16 +77,16 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
               <LoadingPage />
             ) : (
               this.props.resultSearchVideo.videos.map((num, i) => (
-              <div key={i} className="col-lg-6 col-md-6 col-sm-12">
-                <div className="">
-                  <video controls={true} className="img-fluid">
-                    <source
-                      src={num.video_files[2].link}
-                      type={num.video_files[2].file_type}
-                    />
-                  </video>
+                <div key={i} className="col-lg-6 col-md-6 col-sm-12">
+                  <div className="">
+                    <video controls={true} className="img-fluid">
+                      <source
+                        src={num.video_files[2].link}
+                        type={num.video_files[2].file_type}
+                      />
+                    </video>
+                  </div>
                 </div>
-              </div> 
               ))
             )}
           </div>

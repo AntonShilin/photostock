@@ -1,0 +1,26 @@
+div.photo-result-bages.row {
+  div {
+    ul {
+      li {
+        padding: 0;
+        border-radius: 0 !important;
+        border: 0.1rem solid lightgray !important;
+        a {
+          display: inline-block;
+          text-decoration: none;
+          padding: 0.5rem 0.5rem;
+          color: black;
+        }
+        .photo-result-bages-active {
+          outline: 0.17rem solid blue;
+          border-radius: 0.25rem;
+        }
+      }
+    }
+  }
+}
+
+h5 {
+  font-size: 2rem;
+  font-weight: 700;
+}

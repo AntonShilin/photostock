@@ -56,7 +56,6 @@ export interface IDeletePrevVideoAction {
 
 export interface IToggleMenuAction {
   type: ToggleMenu.TOGGLEMENU;
-  element: React.ElementType<HTMLDivElement>
 }
 
 export interface ISearchKeydownAction {

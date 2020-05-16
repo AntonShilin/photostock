@@ -20,11 +20,6 @@ export interface IHeaderPhotoPageProps {
 }
 
 class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteComponentProps> {
-  public elementMenu: React.RefObject<HTMLDivElement>;
-  constructor(props: IHeaderPhotoPageProps) {
-    super(props);
-    this.elementMenu = React.createRef();
-  }
 
   public componentDidMount() {
     window.addEventListener("scroll", this.props.handleScroll);
@@ -37,13 +32,13 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteCompon
           style={
             this.props.isToggleMenu ? { display: "block" } : { display: "none" }
           }
-          onClick={() => this.props.handleToggleMenu(this.elementMenu)}
+          onClick={() => this.props.handleToggleMenu()}
         />
         <div id="main_menu" className="container-xl">
           <div className="row align-items-center">
             <div className="col-2">
-              <NavLink to="/photos" className="p-2 text-decoration-none">
-                F&S
+              <NavLink to="/photos" className="p-2 text-decoration-none btn">
+                F
               </NavLink>
             </div>
            <div className="col-8">
@@ -57,7 +52,7 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteCompon
 
             <button
               className="d-lg-none"
-              onClick={() => this.props.handleToggleMenu(this.elementMenu)}
+              onClick={() => this.props.handleToggleMenu()}
             >
               {!this.props.isToggleMenu ? (
                 <IoIosMenu style={{ fontSize: "2rem", color: "white" }} />
@@ -67,7 +62,6 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteCompon
             </button>
           </div>
         <div
-          ref={this.elementMenu}
           id="main_menu_submenu"
           className={`container-xl d-lg-none`}
           style={
@@ -110,8 +104,8 @@ const mapStateToProps = (store: IApplicationState) => ({
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    handleToggleMenu: (element: React.ElementType<HTMLDivElement>) =>
-      dispatch(handleToggleMenu(element)),
+    handleToggleMenu: () =>
+      dispatch(handleToggleMenu()),
     handleScroll: (event:any) => dispatch(handleScroll(event))
   };
 };

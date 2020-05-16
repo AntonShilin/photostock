@@ -31,11 +31,12 @@ class VideosPage extends React.Component<IPropsVideosPage> {
       <React.Fragment>
         <HeaderVideoPage />
         <div className="container-xl bg-videos-page">
-          <h1 className="pb-5 text-white">
+          <h1 className="pb-1 text-white">
             The best free stock videos from talented authors.
           </h1>
           <div className="input-group mb-3 input-group-lg">
             <input
+              required={true}
               type="text"
               className="form-control"
               placeholder="Find video"

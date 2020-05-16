@@ -1,6 +1,5 @@
 import * as React from "react";
 import { RouteComponentProps, NavLink } from "react-router-dom";
-import "url-search-params-polyfill";
 import { connect } from "react-redux";
 import { IApplicationState } from "../Store/Store";
 import {
@@ -42,7 +41,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
       <React.Fragment>
         <HeaderPhotoPage />
         <div className="container-xl bg-light photospage_bg">
-          <h1 className="pb-5 text-white">
+          <h1 className="pb-1 text-white">
             The best free stock photos from talented authors.
           </h1>
           <div className="input-group mb-3 input-group-lg">

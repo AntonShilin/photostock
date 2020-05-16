@@ -31,25 +31,9 @@ export const deletePrevVideo: ActionCreator<IDeletePrevVideoAction> = () => {
 export const handleToggleMenu: ActionCreator<IToggleMenuAction> = (
   elem: React.ElementType<HTMLDivElement>
 ) => ({
-  type: ToggleMenu.TOGGLEMENU,
-  element: elem,
+  type: ToggleMenu.TOGGLEMENU
 });
 
-/* get popular fotos*/
-/* export const getPopularImages: ActionCreator<ThunkAction<
-  Promise<AnyAction>,
-  IProductsState,
-  null,
-  IGetPopularPhotoAction
->> = () => {
-  return async (dispatch: Dispatch) => {
-    const data = await getPopularPhotos();
-    return dispatch({
-      type: DataActionTypes.GETDATA,
-      popularPhoto: data,
-    });
-  };
-}; */
 
 /*  get popular fotos */
 export const getPopularImages = () => {

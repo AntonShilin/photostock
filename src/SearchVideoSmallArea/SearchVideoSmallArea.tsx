@@ -18,11 +18,12 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
   public render() {
     return (
       <div className="search-small-area ml-2 input-group input-group-md align-content-center">
-        <form className="form-inline w-100 mr-5">
+        <form className="form-inline w-100">
           <div className="input-group w-100">
             <input
+              required={true}
               type="text"
-              className="form-control w-100"
+              className="form-control"
               placeholder="Find a photo"
               value={this.props.searchNameVideo}
               onChange={this.props.changeNameVideo}

@@ -102,22 +102,6 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     }
 
     case ToggleMenu.TOGGLEMENU: {
-      const elem: any = action.element;
-      if (elem.current.style.width === "0%") {
-        const f2 = () => {
-          let count = 0;
-          return () => {
-            if (count < 100) {
-              count++;
-              elem.current.style.width = count + "%";
-            } else {
-              clearInterval(move);
-            }
-          };
-        };
-        const f1 = f2();
-        const move = setInterval(f1, 2);
-      }
 
       return {
         ...state,

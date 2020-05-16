@@ -6,6 +6,7 @@ import { RouteComponentProps, NavLink } from "react-router-dom";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import { getSearchImages } from "../Actions/ProductsActions";
 import HeaderResultPhotoPage from "./HeaderResultPhotoPage/HeaderResultPhotoPage";
+import "./ResultPhotoPage.scss";
 
 export interface IDataResult extends RouteComponentProps {
   getSearchImages: typeof getSearchImages;
@@ -19,7 +20,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
   private searchname = this.url.match(/\w+$/);
 
   public componentDidMount() {
-    if (this.searchname!==null) {
+    if (this.searchname !== null) {
       this.props.getSearchImages(this.searchname[0]);
     }
   }
@@ -29,38 +30,45 @@ class ResultPhotoPage extends React.Component<IDataResult> {
       <React.Fragment>
         <HeaderResultPhotoPage />
         <div className="container-xl">
-          <div className="result-bages row align-items-center mt-3 mb-3">
-            <div className="col-3 text-right">
-              <NavLink
-                to={`${this.url}`}
-                className="p-2 text-decoration-none btn btn-light"
-              >
-                Photos
-                <span className="ml-1">
-                  {this.props.resultSearchImage === null
-                    ? "0"
-                    : this.props.resultSearchImage.photos.length}
-                </span>
-              </NavLink>
+          <div className="photo-result-bages row align-items-center justify-content-md-center mt-3 mb-5">
+            <div className="col-auto">
+              <ul className="list-group list-group-horizontal">
+                <li className="list-group-item">
+                  {" "}
+                  <NavLink
+                    activeClassName="photo-result-bages-active"
+                    to={`${this.url}`}
+                  >
+                    Photos
+                    <span className="ml-1">
+                      {this.props.resultSearchImage === null
+                        ? "0"
+                        : this.props.resultSearchImage.photos.length}
+                    </span>
+                  </NavLink>
+                </li>
+                <li className="list-group-item">
+                  {" "}
+                  <NavLink
+                    activeClassName="photo-result-bages-active"
+                    to={`/videos/${this.searchname}`}
+                  >
+                    Videos
+                    <span className="ml-1">
+                      {this.props.resultSearchVideo === null
+                        ? "0"
+                        : this.props.resultSearchVideo.videos.length - 1}
+                    </span>
+                  </NavLink>
+                </li>
+              </ul>
             </div>
-            <div className="col-3 text-left">
-              <NavLink
-                to={`/videos/${this.searchname}`}
-                className="p-2 text-decoration-none btn btn-light"
-              >
-                Videos
-                <span className="ml-1">
-                  {this.props.resultSearchVideo === null
-                    ? "0"
-                    : this.props.resultSearchVideo.videos.length - 1}
-                </span>
-              </NavLink>
-            </div>
-            <div className="col-6 text-center" />
           </div>
           <div className="row mt-3 mb-3">
             <div className="col-12">
-              <h5 className="text-center">{`${this.searchname!== null ? this.searchname[0] : 'Result'} photos`}</h5>
+              <h5 className="text-center">{`${
+                this.searchname !== null ? this.searchname[0] : "Result"
+              } photos`}</h5>
             </div>
           </div>
           <div className="row justify-content-center">
