@@ -34,7 +34,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
         <HeaderVideoPage />
         <div className="container-xl bg-videos-page">
           {this.props.popularVideo !== null ? (
-            <video controls={false} className="img-fluid" autoPlay={true}>
+            <video controls={false} autoPlay={true}>
               <source
                 src={this.props.popularVideo!.videos[0].video_files[1].link}
                 type={
