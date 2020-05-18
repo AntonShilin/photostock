@@ -8,7 +8,7 @@
   background-position: center;
   border-radius: 0;
   overflow: hidden;
-  z-index: -1;
+  z-index: 0;
   video{
     position: absolute;
     top: 0rem;
@@ -101,3 +101,23 @@ div.video_item {
     }
   }
 }
+
+@media screen and (max-width: 440px) {
+  div.video_item {
+    div.video_item_control {
+      top: 30%;
+      left: 40%;
+    }
+  }
+}
+
+
+@media screen and (max-width: 320px) {
+  div.video_item {
+    div.video_item_control {
+      top: 25%;
+      left: 38%;
+    }
+  }
+}
+
