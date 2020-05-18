@@ -44,8 +44,8 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                     Photos
                     <span className="ml-1">
                       {this.props.resultSearchImage === null
-                        ? "0"
-                        : this.props.resultSearchImage.photos.length}
+                        ? 0
+                        : this.props.resultSearchImage.photos.length-1}
                     </span>
                   </NavLink>
                 </li>
@@ -58,7 +58,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                     Videos
                     <span className="ml-1">
                       {this.props.resultSearchVideo === null
-                        ? "0"
+                        ? 0
                         : this.props.resultSearchVideo.videos.length - 1}
                     </span>
                   </NavLink>

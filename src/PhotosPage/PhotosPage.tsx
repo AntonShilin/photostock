@@ -73,7 +73,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
             </div>
           </div>
           <h6>
-            Search ideas:{" "}
+          Suggested:
             <span className="text-white">
               car, adventure, crowd, dark, workout, butterfly, more...
             </span>

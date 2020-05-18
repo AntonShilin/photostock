@@ -15,7 +15,6 @@ import HeaderVideoPage from "./HeaderVideoPage/HeaderVideoPage";
 import { NavLink } from "react-router-dom";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { MdControlPoint } from "react-icons/md";
-import * as ocean from "../media/ocean.mp4";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
@@ -35,8 +34,20 @@ class VideosPage extends React.Component<IPropsVideosPage> {
         <HeaderVideoPage />
         <div className="container-xl bg-videos-page">
           {this.props.popularVideo !== null ? (
-            <video controls={false} autoPlay={true} loop={true}>
-              <source src={ocean} type="video/mp4" />
+            <video
+              controls={false}
+              autoPlay={true}
+              loop={true}
+              poster={
+                this.props.popularVideo.videos[0].video_pictures[4].picture
+              }
+            >
+              <source
+                src={this.props.popularVideo.videos[0].video_files[3].link}
+                type={
+                  this.props.popularVideo.videos[0].video_files[3].file_type
+                }
+              />
               Your browser doesn't support HTML5 video tag.
             </video>
           ) : null}
@@ -66,7 +77,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
             </div>
           </div>
           <h6>
-            Search ideas:{" "}
+            Suggested:
             <span className="text-white">
               businessman, hd wallpapers, abstract, phone, green, more...
             </span>
@@ -84,8 +95,12 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               this.props.popularVideo.videos.map((value, i) =>
                 i < 10 ? (
                   <div key={i} className="col-lg-6 col-md-6 col-sm-12">
-                    <div className="m-1 video_item">
-                      <video controls={false} className="img-fluid">
+                    <div className="m-1 popular_video_item">
+                      <video
+                        controls={false}
+                        className="img-fluid"
+                        poster={value.video_pictures[0].picture}
+                      >
                         <source
                           src={value.video_files[0].link}
                           type={value.video_files[0].file_type}

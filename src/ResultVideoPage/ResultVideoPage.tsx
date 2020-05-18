@@ -29,7 +29,6 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
   }
 
   public render() {
-    console.log(this.url, this.searchname);
     return (
       <React.Fragment>
         <HeaderResultVideoPage />
@@ -46,8 +45,8 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                     Photos
                     <span className="ml-1">
                       {this.props.resultSearchImage === null
-                        ? "0"
-                        : this.props.resultSearchImage.photos.length}
+                        ? 0
+                        : this.props.resultSearchImage.photos.length-1}
                     </span>
                   </NavLink>
                 </li>
@@ -60,7 +59,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                     Videos
                     <span className="ml-1">
                       {this.props.resultSearchVideo === null
-                        ? "0"
+                        ? 0
                         : this.props.resultSearchVideo.videos.length - 1}
                     </span>
                   </NavLink>
@@ -79,39 +78,43 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
             {this.props.resultSearchVideo === null ? (
               <LoadingPage />
             ) : (
-                this.props.resultSearchVideo.videos.map((num, i) => (
-                (i<10)?
-                <div key={i} className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="m-1 video_item">
-                    <video
-                      controls={false}
-                      className="img-fluid"
-                    >
-                      <source
-                        src={num.video_files[0].link}
-                        type={num.video_files[0].file_type}
-                      />
-                      Your browser doesn't support HTML5 video tag.
-                    </video>
-                    <div className="video_item_control">
-                      <AiOutlinePlayCircle
-                        style={{ fontSize: "3.5rem", color: "white" }}
-                      />
+              this.props.resultSearchVideo.videos.map((num, i) =>
+                i < 10 ? (
+                  <div key={i} className="col-lg-6 col-md-6 col-sm-12">
+                    <div className="m-1 video_item">
+                      <video
+                        controls={false}
+                        className="img-fluid"
+                        poster={num.video_pictures[4].picture}
+                      >
+                        <source
+                          src={num.video_files[0].link}
+                          type={num.video_files[0].file_type}
+                        />
+                        Your browser doesn't support HTML5 video tag.
+                      </video>
+                      <div className="video_item_control">
+                        <AiOutlinePlayCircle
+                          style={{ fontSize: "3.5rem", color: "white" }}
+                        />
+                      </div>
+                      <div className="video-person-name">
+                        <p>{num.user.name}</p>
+                      </div>
+                      <span>
+                        <MdControlPoint
+                          style={{ color: "white", fontSize: "1.5rem" }}
+                        />
+                      </span>
+                      <span>
+                        <FiHeart
+                          style={{ color: "white", fontSize: "1.5rem" }}
+                        />
+                      </span>
                     </div>
-                    <div className="video-person-name">
-                      <p>{num.user.name}</p>
-                    </div>
-                    <span>
-                      <MdControlPoint
-                        style={{ color: "white", fontSize: "1.5rem" }}
-                      />
-                    </span>
-                    <span>
-                      <FiHeart style={{ color: "white", fontSize: "1.5rem" }} />
-                    </span>
                   </div>
-                </div> : null
-              ))
+                ) : null
+              )
             )}
           </div>
         </div>
