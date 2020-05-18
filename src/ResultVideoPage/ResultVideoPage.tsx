@@ -79,29 +79,38 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
             {this.props.resultSearchVideo === null ? (
               <LoadingPage />
             ) : (
-              this.props.resultSearchVideo.videos.map((num, i) => (
+                this.props.resultSearchVideo.videos.map((num, i) => (
+                (i<10)?
                 <div key={i} className="col-lg-6 col-md-6 col-sm-12">
                   <div className="m-1 video_item">
-                    <video controls={false} className="img-fluid">
+                    <video
+                      controls={false}
+                      className="img-fluid"
+                    >
                       <source
-                        src={num.video_files[1].link}
-                        type={num.video_files[1].file_type}
+                        src={num.video_files[0].link}
+                        type={num.video_files[0].file_type}
                       />
+                      Your browser doesn't support HTML5 video tag.
                     </video>
                     <div className="video_item_control">
-                      <AiOutlinePlayCircle style={{fontSize: "3.5rem",color: "white"}}/>
+                      <AiOutlinePlayCircle
+                        style={{ fontSize: "3.5rem", color: "white" }}
+                      />
                     </div>
                     <div className="video-person-name">
                       <p>{num.user.name}</p>
                     </div>
                     <span>
-                      <MdControlPoint style={{ color: "white", fontSize:"1.5rem"}}/>
+                      <MdControlPoint
+                        style={{ color: "white", fontSize: "1.5rem" }}
+                      />
                     </span>
                     <span>
-                      <FiHeart style={{ color: "white",fontSize:"1.5rem"}}/>
+                      <FiHeart style={{ color: "white", fontSize: "1.5rem" }} />
                     </span>
                   </div>
-                </div>
+                </div> : null
               ))
             )}
           </div>

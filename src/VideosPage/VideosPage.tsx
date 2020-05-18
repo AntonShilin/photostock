@@ -15,6 +15,7 @@ import HeaderVideoPage from "./HeaderVideoPage/HeaderVideoPage";
 import { NavLink } from "react-router-dom";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { MdControlPoint } from "react-icons/md";
+import * as ocean from "../media/ocean.mp4";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
@@ -34,13 +35,9 @@ class VideosPage extends React.Component<IPropsVideosPage> {
         <HeaderVideoPage />
         <div className="container-xl bg-videos-page">
           {this.props.popularVideo !== null ? (
-            <video controls={false} autoPlay={true}>
-              <source
-                src={this.props.popularVideo!.videos[0].video_files[1].link}
-                type={
-                  this.props.popularVideo!.videos[0].video_files[1].file_type
-                }
-              />
+            <video controls={false} autoPlay={true} loop={true}>
+              <source src={ocean} type="video/mp4" />
+              Your browser doesn't support HTML5 video tag.
             </video>
           ) : null}
           <h1 className="pb-1">
@@ -84,34 +81,39 @@ class VideosPage extends React.Component<IPropsVideosPage> {
           </div>
           <div className="row justify-content-center">
             {this.props.popularVideo !== null ? (
-              this.props.popularVideo.videos.map((value, i) => (
-                <div key={i} className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="m-1 video_item">
-                    <video controls={false} className="img-fluid">
-                      <source
-                        src={value.video_files[1].link}
-                        type={value.video_files[1].file_type}
-                      />
-                    </video>
-                    <div className="video_item_control">
-                      <AiOutlinePlayCircle
-                        style={{ fontSize: "3.5rem", color: "white" }}
-                      />
+              this.props.popularVideo.videos.map((value, i) =>
+                i < 10 ? (
+                  <div key={i} className="col-lg-6 col-md-6 col-sm-12">
+                    <div className="m-1 video_item">
+                      <video controls={false} className="img-fluid">
+                        <source
+                          src={value.video_files[0].link}
+                          type={value.video_files[0].file_type}
+                        />
+                        Your browser doesn't support HTML5 video tag.
+                      </video>
+                      <div className="video_item_control">
+                        <AiOutlinePlayCircle
+                          style={{ fontSize: "3.5rem", color: "white" }}
+                        />
+                      </div>
+                      <div className="video-person-name">
+                        <p>{value.user.name}</p>
+                      </div>
+                      <span>
+                        <MdControlPoint
+                          style={{ color: "white", fontSize: "1.5rem" }}
+                        />
+                      </span>
+                      <span>
+                        <FiHeart
+                          style={{ color: "white", fontSize: "1.5rem" }}
+                        />
+                      </span>
                     </div>
-                    <div className="video-person-name">
-                      <p>{value.user.name}</p>
-                    </div>
-                    <span>
-                      <MdControlPoint
-                        style={{ color: "white", fontSize: "1.5rem" }}
-                      />
-                    </span>
-                    <span>
-                      <FiHeart style={{ color: "white", fontSize: "1.5rem" }} />
-                    </span>
                   </div>
-                </div>
-              ))
+                ) : null
+              )
             ) : (
               <LoadingPage />
             )}
