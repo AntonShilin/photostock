@@ -14,13 +14,15 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 import { FiSearch } from "react-icons/fi";
 import NavigationPages from "../NavigationPages/NavigationPages";
 import HeaderPhotoPage from "./HeaderPhotoPage/HeaderPhotoPage";
+import { MdControlPoint } from "react-icons/md";
+import { FiHeart } from "react-icons/fi";
 
 export interface IPropsPhotosPage extends RouteComponentProps {
   data: ICuratedPhoto | null;
   getPopularImages: typeof getPopularImages;
   searchNamePhoto: string;
   watchInputChange: typeof handleSearchChange;
-  getSearchImages: typeof getSearchImages; 
+  getSearchImages: typeof getSearchImages;
   getKeyNumber: typeof handleSearchKeydown;
   isScrollTop: number | null;
   isScrollHeight: number | null;
@@ -29,7 +31,6 @@ export interface IPropsPhotosPage extends RouteComponentProps {
 }
 
 class PhotosPage extends React.Component<IPropsPhotosPage> {
-
   public componentDidMount() {
     if (this.props.data === null) {
       this.props.getPopularImages();
@@ -40,7 +41,12 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
     return (
       <React.Fragment>
         <HeaderPhotoPage />
-        <div className="container-xl bg-light photospage_bg">
+        <div
+          className="container-xl bg-light photospage_bg"
+          style={{
+            backgroundImage: `url(${this.props.data?.photos[0].src.landscape})`,
+          }}
+        >
           <h1 className="pb-1 text-white">
             The best free stock photos from talented authors.
           </h1>
@@ -55,12 +61,15 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
               /* onKeyDown={this.props.getKeyNumber} */
             />
             <div className="input-group-append">
-              <NavLink to={`/photos/${this.props.searchNamePhoto}`}
+              <NavLink
+                to={`/photos/${this.props.searchNamePhoto}`}
                 className="input-group-text"
-                onClick={() => this.props.getSearchImages(this.props.searchNamePhoto)}
+                onClick={() => 
+                  this.props.getSearchImages(this.props.searchNamePhoto)              
+                }
               >
                 <FiSearch />
-              </NavLink>
+              </NavLink> 
             </div>
           </div>
           <h6>
@@ -71,7 +80,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
           </h6>
         </div>
         <NavigationPages />
-        <div className="container-xl bg-light">
+        <div className="container-xl">
           <div className="row mb-2">
             <div className="col-12">
               <h6 className="mb-4 mt-4">Trending Free Stock Photos</h6>
@@ -83,14 +92,21 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
             ) : (
               this.props.data.photos.map((elem, i) => (
                 <div key={i} className="col-auto">
-                  <div className="p-1">
-                    <div className="info-for-image">
-                      <img
-                        src={elem.src.medium}
-                        className="img-fluid"
-                        alt="img_1"
-                      />
+                  <div className="info-for-image">
+                    <img
+                      src={elem.src.medium}
+                      className="img-fluid"
+                      alt="img_1"
+                    />
+                    <div className="image-photographer">
+                      <p>{elem.photographer}</p>
                     </div>
+                    <span>
+                      <MdControlPoint style={{ color: "white", fontSize:"1.5rem"}}/>
+                    </span>
+                    <span>
+                      <FiHeart style={{ color: "white",fontSize:"1.5rem"}}/>
+                    </span>
                   </div>
                 </div>
               ))
@@ -116,8 +132,7 @@ const mapDispatchToProps = (dispatch: any) => {
     getKeyNumber: (e: any) => dispatch(handleSearchKeydown(e)),
     getPopularImages: () => dispatch(getPopularImages()),
     watchInputChange: (e: string) => dispatch(handleSearchChange(e)),
-    getSearchImages: (name: string) =>
-      dispatch(getSearchImages(name)),
+    getSearchImages: (name: string) => dispatch(getSearchImages(name)),
   };
 };
 

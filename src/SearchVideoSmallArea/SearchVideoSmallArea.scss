@@ -2,7 +2,13 @@
   form {
     div.input-group {
       input.form-control {
-        min-height: 2.5rem;
+        border-right: transparent;
+      }
+      div.input-group-append {
+        a.input-group-text {
+          background-color: #fff;
+          border-left: 0;
+        }
       }
     }
   }

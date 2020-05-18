@@ -7,6 +7,8 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 import { getSearchImages } from "../Actions/ProductsActions";
 import HeaderResultPhotoPage from "./HeaderResultPhotoPage/HeaderResultPhotoPage";
 import "./ResultPhotoPage.scss";
+import { MdControlPoint } from "react-icons/md";
+import { FiHeart } from "react-icons/fi";
 
 export interface IDataResult extends RouteComponentProps {
   getSearchImages: typeof getSearchImages;
@@ -77,12 +79,21 @@ class ResultPhotoPage extends React.Component<IDataResult> {
             ) : (
               this.props.resultSearchImage.photos.map((image, i) => (
                 <div key={i} className="col-auto">
-                  <div className="p-1">
+                  <div className="info-for-image">
                     <img
                       alt="img"
                       src={image.src.medium}
                       className="img-fluid"
                     />
+                    <div className="image-photographer">
+                      <p>{image.photographer}</p>
+                    </div>
+                    <span>
+                      <MdControlPoint style={{ color: "white", fontSize:"1.5rem"}}/>
+                    </span>
+                    <span>
+                      <FiHeart style={{ color: "white",fontSize:"1.5rem"}}/>
+                    </span>
                   </div>
                 </div>
               ))

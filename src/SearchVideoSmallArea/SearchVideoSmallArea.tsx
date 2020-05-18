@@ -36,7 +36,7 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
                   this.props.getSearchVideos(this.props.searchNameVideo)
                 }
               >
-                <FiSearch />
+                <FiSearch style={{color:"black"}}/>
               </NavLink>
             </div>
           </div>

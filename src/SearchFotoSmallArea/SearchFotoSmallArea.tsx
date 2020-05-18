@@ -33,7 +33,7 @@ class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
                   this.props.getSearchImages(this.props.searchNamePhoto)
                 }
               >
-                <FiSearch />
+                <FiSearch style={{color:"black"}}/>
               </NavLink>
             </div>
           </div>

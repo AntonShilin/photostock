@@ -26,3 +26,39 @@ h5 {
   font-size: 2rem;
   font-weight: 700;
 }
+
+div.info-for-image {
+  position: relative;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  &:hover {
+    div.image-photographer {
+      visibility: visible;
+    }
+  }
+  span:nth-of-type(2) {
+    position: absolute;
+    right: 2rem;
+    bottom: 1rem;
+    z-index: 2;
+  }
+  span:nth-of-type(1) {
+    position: absolute;
+    right: 5rem;
+    bottom: 1rem;
+    z-index: 2;
+  }
+  div.image-photographer {
+    visibility: hidden;
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.76), transparent);
+    position: absolute;
+    min-height: 4rem;
+    width: 100%;
+    bottom: 0rem;
+    z-index: 1;
+    p {
+      margin: 1.5rem 1rem 0 1rem;
+      color: white;
+    }
+  }
+}

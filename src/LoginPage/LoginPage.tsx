@@ -1,4 +1,5 @@
 import * as React from "react";
+import { NavLink } from "react-router-dom";
 
 const LoginPage: React.SFC = () => {
   return (
@@ -10,7 +11,8 @@ const LoginPage: React.SFC = () => {
       </div>
       <div className="row mt-5 justify-content-center">
         <div className="col-md-7 col-sm-12">
-          <form  className="bg-light p-3 rounded border w-75 d-block mx-auto">
+          <form className="bg-light pr-3 pl-3 pb-3 pt-1 rounded border w-75 d-block mx-auto">
+            <NavLink to="/photos"  className="close mb-3">&times;</NavLink>
             <div className="form-group">
               <input
                 type="email"

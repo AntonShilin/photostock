@@ -7,6 +7,9 @@ import { RouteComponentProps, NavLink } from "react-router-dom";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import HeaderResultVideoPage from "./HeaderResultVideoPage/HeaderResultVideoPage";
 import "./ResultVideoPage.scss";
+import { AiOutlinePlayCircle } from "react-icons/ai";
+import { MdControlPoint } from "react-icons/md";
+import { FiHeart } from "react-icons/fi";
 
 export interface IPropsResultPage extends RouteComponentProps {
   resultSearchVideo: IPopularVideos | null;
@@ -78,13 +81,25 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
             ) : (
               this.props.resultSearchVideo.videos.map((num, i) => (
                 <div key={i} className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="">
-                    <video controls={true} className="img-fluid">
+                  <div className="m-1 video_item">
+                    <video controls={false} className="img-fluid">
                       <source
-                        src={num.video_files[2].link}
-                        type={num.video_files[2].file_type}
+                        src={num.video_files[1].link}
+                        type={num.video_files[1].file_type}
                       />
                     </video>
+                    <div className="video_item_control">
+                      <AiOutlinePlayCircle style={{fontSize: "3.5rem",color: "white"}}/>
+                    </div>
+                    <div className="video-person-name">
+                      <p>{num.user.name}</p>
+                    </div>
+                    <span>
+                      <MdControlPoint style={{ color: "white", fontSize:"1.5rem"}}/>
+                    </span>
+                    <span>
+                      <FiHeart style={{ color: "white",fontSize:"1.5rem"}}/>
+                    </span>
                   </div>
                 </div>
               ))
