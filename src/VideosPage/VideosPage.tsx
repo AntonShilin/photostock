@@ -39,7 +39,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               autoPlay={true}
               loop={true}
               poster={
-                this.props.popularVideo.videos[0].video_pictures[4].picture
+                this.props.popularVideo.videos[0].image
               }
             >
               <source
