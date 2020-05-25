@@ -29,6 +29,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
   }
 
   public render() {
+    console.log(this.searchname!)
     return (
       <React.Fragment>
         <HeaderResultVideoPage />
@@ -70,7 +71,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
           <div className="row mt-3 mb-3">
             <div className="col-12">
               <h5 className="text-center mb-5">{`${
-                this.searchname !== null ? this.searchname[0] : "Result"
+                this.props.location.pathname.match(/\w+$/)
               } videos`}</h5>
             </div>
           </div>
@@ -81,11 +82,10 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
               this.props.resultSearchVideo.videos.map((num, i) =>
                 i < 10 ? (
                   <div key={i} className="col-lg-6 col-md-6 col-sm-12">
-                    <div className="m-1 video_item">
+                    <div className="m-1 result_video_item">
                       <video
                         controls={false}
-                        className="img-fluid"
-                        poster={num.video_pictures[4].picture}
+                        // poster={num.image}
                       >
                         <source
                           src={num.video_files[0].link}

@@ -28,12 +28,14 @@ h5{
 }
 
 
-div.video_item {
+div.result_video_item {
   position: relative;
   video{
-    background-repeat: no-repeat;
+   /*  background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: cover; */
+    width: 100%;
+    height: auto;
   }
   &:hover{
     cursor: pointer;
@@ -82,3 +84,28 @@ div.video_item {
     }
   }
 }
+
+
+@media screen and (max-width: 768px) {
+  .bg-videos-page {
+    padding-top: 13rem;
+    padding-bottom: 3rem;
+  }
+}
+
+
+
+@media screen and (max-width: 440px) {
+  div.result_video_item {
+    div.video_item_control {
+      top: 25% !important;
+      left: 40% !important;
+    }
+  }
+}
+
+
+
+
+
+

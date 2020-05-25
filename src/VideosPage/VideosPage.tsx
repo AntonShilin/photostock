@@ -100,8 +100,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                     <div className="m-1 popular_video_item">
                       <video
                         controls={false}
-                        className="img-fluid"
-                        poster={value.video_pictures[0].picture}
+                        poster={value.image}
                       >
                         <source
                           src={value.video_files[0].link}

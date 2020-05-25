@@ -69,7 +69,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
           <div className="row mt-3 mb-3">
             <div className="col-12">
               <h5 className="text-center mb-5">{`${
-                this.searchname !== null ? this.searchname[0] : "Result"
+                this.props.location.pathname.match(/\w+$/)
               } images`}</h5>
             </div>
           </div>
