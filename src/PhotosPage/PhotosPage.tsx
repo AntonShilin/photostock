@@ -42,11 +42,12 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
       <React.Fragment>
         <HeaderPhotoPage />
         <div
-          className="container-xl bg-light photospage_bg"
+          className="container-xl photospage_bg"
           style={{
             backgroundImage: `url(${this.props.data?.photos[0].src.landscape})`,
           }}
         >
+          <div className="photo_search_input">
           <h1 className="pb-1 text-white">
             The best free stock photos from talented authors.
           </h1>
@@ -74,10 +75,11 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
           </div>
           <h6>
           Suggested:
-            <span className="text-white">
+            <span className="text-white pl-2">
               car, adventure, crowd, dark, workout, butterfly, more...
             </span>
-          </h6>
+            </h6>
+            </div>
         </div>
         <NavigationPages />
         <div className="container-xl">

@@ -43,45 +43,47 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               }
             >
               <source
-                src={this.props.popularVideo.videos[0].video_files[3].link}
+                src={this.props.popularVideo.videos[0].video_files[4].link}
                 type={
-                  this.props.popularVideo.videos[0].video_files[3].file_type
+                  this.props.popularVideo.videos[0].video_files[4].file_type
                 }
               />
               Your browser doesn't support HTML5 video tag.
             </video>
           ) : null}
-          <h1 className="pb-1">
-            The best free stock videos from talented authors.
-          </h1>
-          <div className="input-group mb-3 input-group-lg">
-            <input
-              required={true}
-              type="text"
-              className="form-control"
-              placeholder="Find video"
-              value={this.props.searchNameVideo}
-              onChange={this.props.changeNameVideo}
-              autoFocus={false}
-            />
-            <div className="input-group-append">
-              <NavLink
-                to={`/videos/${this.props.searchNameVideo}`}
-                className="input-group-text"
-                onClick={() => {
-                  this.props.getSearchVideos(this.props.searchNameVideo);
-                }}
-              >
-                <FiSearch />
-              </NavLink>
+          <div className="video_search_item">
+            <h1 className="pb-1">
+              The best free stock videos from talented authors.
+            </h1>
+            <div className="input-group mb-3 input-group-lg">
+              <input
+                required={true}
+                type="text"
+                className="form-control"
+                placeholder="Find video"
+                value={this.props.searchNameVideo}
+                onChange={this.props.changeNameVideo}
+                autoFocus={false}
+              />
+              <div className="input-group-append">
+                <NavLink
+                  to={`/videos/${this.props.searchNameVideo}`}
+                  className="input-group-text"
+                  onClick={() => {
+                    this.props.getSearchVideos(this.props.searchNameVideo);
+                  }}
+                >
+                  <FiSearch />
+                </NavLink>
+              </div>
             </div>
-          </div>
           <h6>
             Suggested:
-            <span className="text-white">
+            <span className="text-white pl-2">
               businessman, hd wallpapers, abstract, phone, green, more...
             </span>
           </h6>
+          </div>
         </div>
         <NavigationPages />
         <div className="container-xl">

@@ -27,14 +27,18 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteCompon
 
   public render() {
     return (
-      <header>
+      <header className="main_item_foto_page">
         <div
           style={
             this.props.isToggleMenu ? { display: "block" } : { display: "none" }
           }
           onClick={() => this.props.handleToggleMenu()}
         />
-        <div id="main_menu_foto_page" className="container-xl">
+        <div className="container-xl navigation_foto_page"
+         style={
+          this.props.isScrolling ? { backgroundColor: "#050505d6" } : { backgroundColor: "transparent" }
+        }
+        >
           <div className="row align-items-center">
             <div className="col-2">
               <NavLink to="/photos" className="text-decoration-none btn">
@@ -55,9 +59,9 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteCompon
               onClick={() => this.props.handleToggleMenu()}
             >
               {!this.props.isToggleMenu ? (
-                <IoIosMenu style={{ fontSize: "2rem", color: "white" }} />
+                <IoIosMenu style={{ fontSize: "2rem", color: "white",strokeWidth:"20" }} />
               ) : (
-                <MdClose style={{ fontSize: "2rem", color: "white" }} />
+                <MdClose style={{ fontSize: "2rem", color: "white",strokeWidth:"2" }} />
               )}
             </button>
           </div>

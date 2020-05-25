@@ -1,21 +1,27 @@
 .bg-videos-page {
   position: relative;
-  min-height: 25rem;
-  padding-top: 5rem;
+  height: 100%;
+  max-height: 40rem;
+  min-height: 35rem;
+  padding-top: 15rem;
   padding-bottom: 5rem;
-  //  background-image: url(../media/clouds.jpg);
+  background-color: #8e8a8a;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   border-radius: 0;
   overflow: hidden;
   z-index: 0;
+  .video_search_item{
+    width: 75%;
+    margin: 0 auto;
+  }
   video{
     position: absolute;
     top: 0rem;
     left: 0rem;
     z-index: -1;
-    width: 100%;
+    width: max-content;
     height: auto;
   }
   h1 {
@@ -109,13 +115,12 @@ div.popular_video_item {
 
 @media screen and (max-width: 768px) {
   .bg-videos-page {
-    padding-top: 3rem;
+    padding-top: 13rem;
     padding-bottom: 3rem;
-    video{
-      width:auto;
-    }
   }
 }
+
+
 
 @media screen and (max-width: 440px) {
   div.video_item {
@@ -123,6 +128,10 @@ div.popular_video_item {
       top: 30%;
       left: 40%;
     }
+  }
+  .video_search_item{
+    width: 100% !important;
+    margin: 0 auto;
   }
 }
 
@@ -133,6 +142,10 @@ div.popular_video_item {
       top: 25%;
       left: 38%;
     }
+  }
+  .bg-videos-page {
+    padding-top: 7rem;
+    padding-bottom: 3rem;
   }
 }
 

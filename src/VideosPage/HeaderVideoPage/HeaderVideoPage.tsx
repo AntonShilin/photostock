@@ -27,14 +27,18 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
 
   public render() {
     return (
-      <header>
+      <header className="main_item_video_page">
         <div
           style={
             this.props.isToggleMenu ? { display: "block" } : { display: "none" }
           }
           onClick={() => this.props.handleToggleMenu()}
         />
-        <div id="main_menu" className="container-xl">
+        <div className="container-xl navigation_video_page"
+         style={
+          this.props.isScrolling ? { backgroundColor: "#050505d6" } : { backgroundColor: "transparent" }
+        }
+        >
           <div className="row align-items-center">
             <div className="col-2">
               <NavLink to="/photos" className="text-decoration-none btn">
@@ -55,9 +59,9 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
               onClick={() => this.props.handleToggleMenu()}
             >
               {!this.props.isToggleMenu ? (
-                <IoIosMenu style={{ fontSize: "2rem", color: "white" }} />
+                <IoIosMenu style={{ fontSize: "2rem", color: "white",strokeWidth:"20" }} />
               ) : (
-                <MdClose style={{ fontSize: "2rem", color: "white" }} />
+                <MdClose style={{ fontSize: "2rem", color: "white",strokeWidth:"2" }} />
               )}
             </button>
           </div>

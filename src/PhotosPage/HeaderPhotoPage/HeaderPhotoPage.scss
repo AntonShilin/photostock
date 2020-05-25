@@ -1,12 +1,11 @@
-header {
-  position: -webkit-sticky;
-  position: sticky;
+header.main_item_foto_page {
+  position: fixed;
   top: 0px;
   z-index: 5;
-  
-  div#main_menu_foto_page {
+  width: 100%;
+  div.navigation_foto_page {
     position: relative;
-    background-color: #232a34;
+    // background-color: #050505d6;
     a {
       color: #fff;
     }

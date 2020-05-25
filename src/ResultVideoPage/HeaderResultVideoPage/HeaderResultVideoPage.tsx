@@ -32,14 +32,14 @@ class HeaderResultVideoPage extends React.Component<IHeaderResultVideoPageProps,
 
   public render() {
     return (
-      <header>
+      <header className="main_item_result_video_page">
         <div
           style={
             this.props.isToggleMenu ? { display: "block" } : { display: "none" }
           }
           onClick={() => this.props.handleToggleMenu(this.elementMenu)}
         />
-        <div id="main_menu" className="container-xl">
+        <div className="container-xl navigation_result_video_page">
           <div className="row align-items-center">
             <div className="col-2">
               <NavLink to="/photos" className="p-2 text-decoration-none btn">
@@ -60,9 +60,9 @@ class HeaderResultVideoPage extends React.Component<IHeaderResultVideoPageProps,
               onClick={() => this.props.handleToggleMenu(this.elementMenu)}
             >
               {!this.props.isToggleMenu ? (
-                <IoIosMenu style={{ fontSize: "2rem", color: "white" }} />
+                <IoIosMenu style={{ fontSize: "2rem", color: "white",strokeWidth:"20"  }} />
               ) : (
-                <MdClose style={{ fontSize: "2rem", color: "white" }} />
+                <MdClose style={{ fontSize: "2rem", color: "white",strokeWidth:"2"  }} />
               )}
             </button>
           </div>
