@@ -48,38 +48,38 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
           }}
         >
           <div className="photo_search_input">
-          <h1 className="pb-1 text-white">
-            The best free stock photos from talented authors.
-          </h1>
-          <div className="input-group mb-3 input-group-lg">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Find a photo"
-              value={this.props.searchNamePhoto}
-              onChange={this.props.watchInputChange}
-              autoFocus={false}
-              /* onKeyDown={this.props.getKeyNumber} */
-            />
-            <div className="input-group-append">
-              <NavLink
-                to={`/photos/${this.props.searchNamePhoto}`}
-                className="input-group-text"
-                onClick={() => 
-                  this.props.getSearchImages(this.props.searchNamePhoto)              
-                }
-              >
-                <FiSearch />
-              </NavLink> 
+            <h1 className="pb-1 text-white">
+              The best free stock photos from talented authors.
+            </h1>
+            <div className="input-group mb-3 input-group-lg">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Find a photo"
+                value={this.props.searchNamePhoto}
+                onChange={this.props.watchInputChange}
+                autoFocus={false}
+                /* onKeyDown={this.props.getKeyNumber} */
+              />
+              <div className="input-group-append">
+                <NavLink
+                  to={`/photos/${this.props.searchNamePhoto}`}
+                  className="input-group-text"
+                  onClick={() =>
+                    this.props.getSearchImages(this.props.searchNamePhoto)
+                  }
+                >
+                  <FiSearch />
+                </NavLink>
+              </div>
             </div>
-          </div>
-          <h6>
-          Suggested:
-            <span className="text-white pl-2">
-              car, adventure, crowd, dark, workout, butterfly, more...
-            </span>
+            <h6>
+              Suggested:
+              <span className="text-white pl-2">
+                car, adventure, crowd, dark, workout, butterfly, more...
+              </span>
             </h6>
-            </div>
+          </div>
         </div>
         <NavigationPages />
         <div className="container-xl">
@@ -104,10 +104,12 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                       <p>{elem.photographer}</p>
                     </div>
                     <span>
-                      <MdControlPoint style={{ color: "white", fontSize:"1.5rem"}}/>
+                      <MdControlPoint
+                        style={{ color: "white", fontSize: "1.5rem" }}
+                      />
                     </span>
                     <span>
-                      <FiHeart style={{ color: "white",fontSize:"1.5rem"}}/>
+                      <FiHeart style={{ color: "white", fontSize: "1.5rem" }} />
                     </span>
                   </div>
                 </div>

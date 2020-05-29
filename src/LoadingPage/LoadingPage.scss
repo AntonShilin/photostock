@@ -1,7 +1,25 @@
- div.gear_icon_bg {
-  div.gear_icon {
-    animation: moving 2s infinite linear;
-    display: inline-block;
+ div.loading_page_bg {
+   position: absolute;
+   padding: 0;
+   z-index: 5;
+   top:0;
+   left:0;
+     div.loading_page_item {
+    position: relative;
+    height: 100vh;
+    background-color:  #17136f6b;
+    .loading_page_spinner{
+      animation: moving .7s infinite linear;
+      position: absolute;
+      top: 40%;
+      left: 40%;
+     border-left: .3rem solid  white;
+     border-top: .3rem solid white;
+     width: 5rem;
+     height: 5rem;
+     background-color: transparent;
+     border-radius: 50%;
+    }
   }
 }
 

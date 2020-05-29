@@ -1,15 +1,14 @@
 import * as React from "react";
 import "./LoadingPage.scss";
-import { GoGear } from "react-icons/go";
 
 class LoadingPage extends React.Component {
   public render() {
     return (
-      <div className="container-xl mt-5">
+      <div className="container-xl">
         <div className="row">
-          <div className="col-12 d-flex justify-content-center gear_icon_bg">
-            <div className="gear_icon">
-              <GoGear style={{ fontSize: "7rem" }} />
+          <div className="col-12 loading_page_bg">
+            <div className="loading_page_item">
+              <div className="loading_page_spinner"/>
             </div>
           </div>
         </div>

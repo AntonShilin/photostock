@@ -2,7 +2,7 @@
   height: 100%;
   max-height: 40rem;
   min-height: 35rem;
-  padding-top: 15rem;
+  padding-top: 10rem;
   padding-bottom: 5rem;
   background-color: #8e8a8a;
   background-repeat: no-repeat;
@@ -83,7 +83,7 @@ div.info-for-image {
 
 @media screen and (max-width: 768px) {
   .photospage_bg {
-    padding-top: 10rem;
+    padding-top: 13rem !important;
     padding-bottom: 3rem;
   }
 }
@@ -95,9 +95,16 @@ div.info-for-image {
   }
 }
 
+@media screen and (max-width: 414px) {
+  .photospage_bg {
+    padding-top: 7rem !important;
+    padding-bottom: 3rem;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .photospage_bg {
-    padding-top: 7rem;
+    padding-top: 5rem !important;
     padding-bottom: 3rem;
   }
 }

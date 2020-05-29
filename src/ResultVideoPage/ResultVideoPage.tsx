@@ -85,7 +85,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                     <div className="m-1 result_video_item">
                       <video
                         controls={false}
-                        // poster={num.image}
+                        poster={num.image}
                       >
                         <source
                           src={num.video_files[0].link}
