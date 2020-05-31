@@ -17,6 +17,8 @@ import {
   MoveScroll,
   DeletePrevVideo,
   IDeletePrevVideoAction,
+  ILikeHeartAction,
+  likeHeart,
 } from "../Types/ProductsTypes";
 
 /* delete prev video*/
@@ -31,21 +33,17 @@ export const deletePrevVideo: ActionCreator<IDeletePrevVideoAction> = () => {
 export const handleToggleMenu: ActionCreator<IToggleMenuAction> = (
   elem: React.ElementType<HTMLDivElement>
 ) => ({
-  type: ToggleMenu.TOGGLEMENU
+  type: ToggleMenu.TOGGLEMENU,
 });
-
 
 /*  get popular fotos */
 export const getPopularImages = () => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
   return (dispatch: Dispatch) => {
-    fetch(
-      `https://api.pexels.com/v1/curated?per_page=100&page=1`,
-      {
-        headers: { Authorization: keyAPI },
-      }
-    )
+    fetch(`https://api.pexels.com/v1/curated?per_page=100&page=1`, {
+      headers: { Authorization: keyAPI },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -61,8 +59,6 @@ export const getPopularImages = () => {
       );
   };
 };
-
-
 
 /* get key code number */
 export const handleSearchKeydown: ActionCreator<ISearchKeydownAction> = (
@@ -82,20 +78,14 @@ export const handleSearchChange: ActionCreator<IGetSearchValueAction> = (
   };
 };
 
-
-
-
 /*  get popular videos */
 export const getPopularVideo = () => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
   return (dispatch: Dispatch) => {
-    fetch(
-      `https://api.pexels.com/videos/popular?per_page=10&page=1`,
-      {
-        headers: { Authorization: keyAPI },
-      }
-    )
+    fetch(`https://api.pexels.com/videos/popular?per_page=10&page=1`, {
+      headers: { Authorization: keyAPI },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -106,13 +96,11 @@ export const getPopularVideo = () => {
       .then((data) =>
         dispatch({
           type: GetPopularVideoTypes.GETPOPULARVIDEO,
-      popularVideo: data,
+          popularVideo: data,
         })
       );
   };
 };
-
-
 
 /* change in input on video page */
 export const changeNameVideo: ActionCreator<IChangeNameVideoAction> = (
@@ -188,4 +176,12 @@ export const handleScroll: ActionCreator<IMoveScrollAction> = (event: any) => {
   };
 };
 
-
+/*click heart interesting video and foto*/
+export const handleLikeHeart: ActionCreator<ILikeHeartAction> = (
+ e: React.MouseEvent<SVGSVGElement,MouseEvent>
+) => {
+  e.currentTarget.classList.toggle('liked');
+  return {
+    type: likeHeart.LIKEHEART,
+  };
+};

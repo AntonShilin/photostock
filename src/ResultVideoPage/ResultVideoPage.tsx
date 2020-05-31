@@ -2,25 +2,31 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { IApplicationState } from "../Store/Store";
 import { IPopularVideos, IDataSearch } from "../Interfaces/Interfaces";
-import { getSearchVideos } from "../Actions/ProductsActions";
+import { getSearchVideos, handleLikeHeart } from "../Actions/ProductsActions";
 import { RouteComponentProps, NavLink } from "react-router-dom";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import HeaderResultVideoPage from "./HeaderResultVideoPage/HeaderResultVideoPage";
 import "./ResultVideoPage.scss";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { MdControlPoint } from "react-icons/md";
-import { FiHeart } from "react-icons/fi";
 
 export interface IPropsResultPage extends RouteComponentProps {
   resultSearchVideo: IPopularVideos | null;
   getSearchVideos: typeof getSearchVideos;
   resultSearchImage: IDataSearch | null;
   searchNameVideo: string;
+  handleLikeHeart: typeof handleLikeHeart;
 }
 
 class ResultVideoPage extends React.Component<IPropsResultPage> {
   private url = this.props.location.pathname;
   private searchname = this.url.match(/\w+$/);
+  private heart: React.RefObject<SVGSVGElement> | null;
+
+  constructor(props: IPropsResultPage) {
+    super(props);
+    this.heart = React.createRef();
+  }
 
   public componentDidMount() {
     if (this.searchname !== null) {
@@ -29,7 +35,6 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
   }
 
   public render() {
-    console.log(this.searchname!)
     return (
       <React.Fragment>
         <HeaderResultVideoPage />
@@ -85,7 +90,6 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                     <div className="m-1 result_video_item">
                       <video
                         controls={false}
-                        poster={num.image}
                       >
                         <source
                           src={num.video_files[0].link}
@@ -107,9 +111,25 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                         />
                       </span>
                       <span>
-                        <FiHeart
-                          style={{ color: "white", fontSize: "1.5rem" }}
-                        />
+                      <svg
+                          className="heart"
+                          viewBox="0 -2 35 35"
+                          xmlns="http://www.w3.org/2000/svg"
+                          strokeWidth="0"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          width="1.6em"
+                          height="1.3em"
+                          ref={this.heart}
+                          onClick={(e) =>
+                            this.props.handleLikeHeart(e)
+                          }
+                        >
+                          <path
+                            d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+	c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
+                          />
+                        </svg>
                       </span>
                     </div>
                   </div>
@@ -134,6 +154,8 @@ const mapStateToProps = (store: IApplicationState) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
+    handleLikeHeart: (e:React.MouseEvent<SVGSVGElement, MouseEvent>) =>
+      dispatch(handleLikeHeart(e)),
   };
 };
 

@@ -4,7 +4,7 @@ header.main_item_result_video_page {
   z-index: 5;
   .navigation_result_video_page {
     position: relative;
-    background-color: #050505d6;
+    background-color: #232a34ed;
     a {
       color: #fff;
     }
@@ -40,7 +40,7 @@ header.main_item_result_video_page {
 }
 
 
-div#main_menu_submenu {
+div#result_video_page_submenu {
   margin: 0;
   position: absolute;
   top: 4rem;
@@ -50,10 +50,13 @@ div#main_menu_submenu {
   padding: 0;
   background-color: #232a34ed;
   div > div > a {
-    color: #fff;
     text-decoration: none;
+    color: #FFFFFF;
+    opacity: .7;
+    font-size: 1.375rem;
     &:hover {
-      color: #dc448a;
+      opacity: 1;
+      color: white;
     }
   }
   div.row {

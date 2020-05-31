@@ -10,10 +10,12 @@ div.navigation-pages {
         display: inline-block;
         padding-top: 1rem;
         padding-bottom: 1rem;
-        font-size: 1.1rem;
-        font-weight: 700;
+        font-size: 1rem;
+        font-weight: 600;
         text-decoration: none;
         border-bottom: 0.25rem solid transparent;
+        text-transform: uppercase;
+        letter-spacing: .4px;
       }
     }
   }

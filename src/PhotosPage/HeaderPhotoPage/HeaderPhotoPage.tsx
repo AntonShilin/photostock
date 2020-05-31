@@ -36,7 +36,7 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteCompon
         />
         <div className="container-xl navigation_foto_page"
          style={
-          this.props.isScrolling ? { backgroundColor: "#050505d6" } : { backgroundColor: "transparent" }
+          this.props.isScrolling ? { backgroundColor: "#232a34ed" } : { backgroundColor: "transparent" }
         }
         >
           <div className="row align-items-center">
@@ -66,7 +66,7 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteCompon
             </button>
           </div>
         <div
-          id="main_menu_submenu"
+          id="photo_page_submenu"
           className={`container-xl d-lg-none`}
           style={
             this.props.isToggleMenu

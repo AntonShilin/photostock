@@ -30,6 +30,10 @@ h5 {
 div.info-for-image {
   position: relative;
   margin-bottom: 0.5rem;
+  min-height: 18rem;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
   cursor: pointer;
   &:hover {
     div.image-photographer {
@@ -60,5 +64,17 @@ div.info-for-image {
       margin: 1.5rem 1rem 0 1rem;
       color: white;
     }
+  }
+}
+
+@media screen and (max-width: 850px) {
+  div.info-for-image{
+    min-height: 15rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  div.info-for-image{
+    min-height: 11rem;
   }
 }

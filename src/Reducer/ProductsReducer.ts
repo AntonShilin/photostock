@@ -12,6 +12,7 @@ import {
   ToggleMenu,
   MoveScroll,
   DeletePrevVideo,
+  likeHeart,
 } from "../Types/ProductsTypes";
 
 const initialProductState: IProductsState = {
@@ -116,6 +117,12 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         isScrollTop: action.scrollTop,
         isScrollHeight: action.scrollHeight,
         isClientHeight: action.clientHeight,
+      };
+    }
+      
+    case likeHeart.LIKEHEART: {
+      return {
+        ...state
       };
     }
 

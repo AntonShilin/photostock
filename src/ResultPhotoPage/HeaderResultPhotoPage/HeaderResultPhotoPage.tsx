@@ -47,7 +47,7 @@ class HeaderResultPhotoPage extends React.Component<IHeaderResultPhotoPageProps,
               </NavLink>
             </div>
            <div className="col-8">
-              {this.props.isScrolling ? <SearchFotoSmallArea /> : null}
+             <SearchFotoSmallArea />
             </div>
             <div className="col-2 text-center  d-lg-block d-none ">
               <NavLink to="/login" className="p-2 text-decoration-none">
@@ -68,7 +68,7 @@ class HeaderResultPhotoPage extends React.Component<IHeaderResultPhotoPageProps,
           </div>
         <div
           ref={this.elementMenu}
-          id="main_menu_submenu"
+          id="result_photo_page_submenu"
           className={`container-xl d-lg-none`}
           style={
             this.props.isToggleMenu

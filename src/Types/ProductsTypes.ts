@@ -46,8 +46,17 @@ export enum DeletePrevVideo {
   DELETEPREVVIDEO="DELETEPREVVIDEO"
 }
 
+export enum likeHeart {
+  LIKEHEART="LIKEHEART"
+}
+
 
 /*  interfaces */
+
+export interface ILikeHeartAction {
+  type: likeHeart.LIKEHEART;
+}
+
 export interface IDeletePrevVideoAction {
   type: DeletePrevVideo.DELETEPREVVIDEO;
   data: null
@@ -112,7 +121,8 @@ export type ProductsActions =
   |ISearchKeydownAction
   | IGetVideoAction
   | IMoveScrollAction
-  |IDeletePrevVideoAction
+  | IDeletePrevVideoAction
+  |ILikeHeartAction
   | IToggleMenuAction;
 
 export interface IProductsState {

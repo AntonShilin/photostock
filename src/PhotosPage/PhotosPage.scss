@@ -49,6 +49,10 @@ div.info-for-image {
   position: relative;
   margin-bottom: 0.5rem;
   cursor: pointer;
+  min-height: 18rem;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
   &:hover {
     div.image-photographer {
       visibility: visible;
@@ -81,6 +85,22 @@ div.info-for-image {
   }
 }
 
+.liked{
+  fill:red !important;
+  stroke: red !important;
+}
+.heart{
+  fill: transparent;
+  stroke: white;
+  stroke-width: .2rem;
+}
+
+@media screen and (max-width: 850px) {
+  div.info-for-image {
+    min-height: 15rem;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .photospage_bg {
     padding-top: 13rem !important;
@@ -106,5 +126,8 @@ div.info-for-image {
   .photospage_bg {
     padding-top: 5rem !important;
     padding-bottom: 3rem;
+  }
+  div.info-for-image {
+    min-height: 11rem;
   }
 }

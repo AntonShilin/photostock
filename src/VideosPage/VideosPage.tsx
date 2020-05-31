@@ -5,11 +5,12 @@ import {
   getPopularVideo,
   getSearchVideos,
   changeNameVideo,
+  handleLikeHeart,
 } from "../Actions/ProductsActions";
 import { IApplicationState } from "../Store/Store";
 import "./VideosPage.scss";
 import LoadingPage from "../LoadingPage/LoadingPage";
-import { FiSearch, FiHeart } from "react-icons/fi";
+import { FiSearch} from "react-icons/fi";
 import NavigationPages from "../NavigationPages/NavigationPages";
 import HeaderVideoPage from "./HeaderVideoPage/HeaderVideoPage";
 import { NavLink } from "react-router-dom";
@@ -22,9 +23,17 @@ export interface IPropsVideosPage {
   searchNameVideo: string;
   getSearchVideos: typeof getSearchVideos;
   changeNameVideo: typeof changeNameVideo;
+  handleLikeHeart: typeof handleLikeHeart;
 }
 
 class VideosPage extends React.Component<IPropsVideosPage> {
+  private heart: React.RefObject<SVGSVGElement> | null;
+
+  constructor(props: IPropsVideosPage) {
+    super(props);
+    this.heart = React.createRef();
+  }
+
   public componentDidMount() {
     this.props.getPopularVideo();
   }
@@ -122,9 +131,25 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                         />
                       </span>
                       <span>
-                        <FiHeart
-                          style={{ color: "white", fontSize: "1.5rem" }}
-                        />
+                      <svg
+                          className="heart"
+                          viewBox="0 -2 35 35"
+                          xmlns="http://www.w3.org/2000/svg"
+                          strokeWidth="0"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          width="1.6em"
+                          height="1.3em"
+                          ref={this.heart}
+                          onClick={(e) =>
+                            this.props.handleLikeHeart(e)
+                          }
+                        >
+                          <path
+                            d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+	c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
+                          />
+                        </svg>
                       </span>
                     </div>
                   </div>
@@ -152,6 +177,8 @@ const mapDispatchToProps = (dispatch: any) => {
     getPopularVideo: () => dispatch(getPopularVideo()),
     changeNameVideo: (e: string) => dispatch(changeNameVideo(e)),
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
+    handleLikeHeart: (e:React.MouseEvent<SVGSVGElement, MouseEvent>) =>
+    dispatch(handleLikeHeart(e)),
   };
 };
 
