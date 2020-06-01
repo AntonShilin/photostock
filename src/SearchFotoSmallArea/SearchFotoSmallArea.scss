@@ -2,12 +2,17 @@
   form {
     div.input-group {
       input.form-control {
-        border-right: transparent;
+        border: none;
+        &:focus {
+          outline: 0;
+          outline-offset: 0;
+          box-shadow: none;
+        }
       }
       div.input-group-append {
         a.input-group-text {
-          background-color: #fff;
-          border-left: 0;
+          border: none;
+        background-color: #fff;
         }
       }
     }

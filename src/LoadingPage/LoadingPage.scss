@@ -4,10 +4,12 @@
    z-index: 5;
    top:0;
    left:0;
-     div.loading_page_item {
-    position: relative;
+   background-color:  #17136f6b;
+   width: 100%;
+   height: 100vh;
+   div.loading_page_item {
     height: 100vh;
-    background-color:  #17136f6b;
+    position: relative;
     .loading_page_spinner{
       animation: moving .7s infinite linear;
       position: absolute;

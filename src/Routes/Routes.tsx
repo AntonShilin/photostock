@@ -35,7 +35,6 @@ const Routes: React.SFC<RouteComponentProps> = props => {
         <Route path="/videos" exact={true} component={VideosPage} />
         <Route path="/videos/:searchvideo" component={ResultVideoPage} />
         <Route path="/photos/:searchphoto" component={ResultPhotoPage} />
-        <Route path="/load" component={LoadingPage} />
         <Route path="/admin">
           {loggedIn ? (
             <Suspense fallback={<LoadingPage />}>

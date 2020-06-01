@@ -23,12 +23,17 @@
   }
   div.input-group {
     input.form-control {
-      border-right: transparent;
+      border: none;
+      &:focus {
+        outline: 0;
+        outline-offset: 0;
+        box-shadow: none;
+      }
     }
     div.input-group-append {
       a.input-group-text {
+        border: none;
         background-color: #fff;
-        border-left: 0;
       }
     }
   }
@@ -85,14 +90,14 @@ div.info-for-image {
   }
 }
 
-.liked{
-  fill:red !important;
+.liked {
+  fill: red !important;
   stroke: red !important;
 }
-.heart{
+.heart {
   fill: transparent;
   stroke: white;
-  stroke-width: .2rem;
+  stroke-width: 0.2rem;
 }
 
 @media screen and (max-width: 850px) {
