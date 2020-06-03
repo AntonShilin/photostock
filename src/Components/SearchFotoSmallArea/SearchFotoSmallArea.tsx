@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FiSearch } from "react-icons/fi";
-import { IApplicationState } from "../Store/Store";
-import { handleSearchChange, getSearchImages } from "../Actions/ProductsActions";
+import { IApplicationState } from "../../Store/Store";
+import { handleSearchChange, getSearchImages } from "../../Actions/ProductsActions";
 import "./SearchFotoSmallArea.scss";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";

@@ -12,13 +12,17 @@ import {
   ISearchKeydownAction,
   IToggleMenuAction,
   SearchKeydownTypes,
-  ToggleMenu,
+  ToggleMenuTypes,
   IMoveScrollAction,
   MoveScroll,
   DeletePrevVideo,
   IDeletePrevVideoAction,
   ILikeHeartAction,
   likeHeart,
+  preplayVideoTypes,
+  IPreplayVideoAction,
+  IPauseVideoAction,
+  pauseVideoTypes,
 } from "../Types/ProductsTypes";
 
 /* delete prev video*/
@@ -33,7 +37,7 @@ export const deletePrevVideo: ActionCreator<IDeletePrevVideoAction> = () => {
 export const handleToggleMenu: ActionCreator<IToggleMenuAction> = (
   elem: React.ElementType<HTMLDivElement>
 ) => ({
-  type: ToggleMenu.TOGGLEMENU,
+  type: ToggleMenuTypes.TOGGLEMENU,
 });
 
 /*  get popular fotos */
@@ -41,7 +45,7 @@ export const getPopularImages = () => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
   return (dispatch: Dispatch) => {
-    fetch(`https://api.pexels.com/v1/curated?per_page=100&page=1`, {
+    fetch(`https://api.pexels.com/v1/curated?per_page=50&page=1`, {
       headers: { Authorization: keyAPI },
     })
       .then((response) => {
@@ -117,7 +121,7 @@ export const getSearchVideos = (name: string) => {
   return (dispatch: Dispatch) => {
     dispatch(deletePrevVideo());
     fetch(
-      `https://api.pexels.com/videos/search?query=${name}+query&per_page=100&page=1`,
+      `https://api.pexels.com/videos/search?query=${name}+query&per_page=50&page=1`,
       {
         headers: { Authorization: keyAPI },
       }
@@ -145,7 +149,7 @@ export const getSearchImages = (name: string) => {
   return (dispatch: Dispatch) => {
     dispatch(deletePrevVideo());
     fetch(
-      `https://api.pexels.com/v1/search?query=${name}+query&per_page=100&page=1`,
+      `https://api.pexels.com/v1/search?query=${name}+query&per_page=50&page=1`,
       {
         headers: { Authorization: keyAPI },
       }
@@ -185,3 +189,20 @@ export const handleLikeHeart: ActionCreator<ILikeHeartAction> = (
     type: likeHeart.LIKEHEART,
   };
 };
+
+
+/* preplay video */
+export const handlePreplayVideo: ActionCreator<IPreplayVideoAction> = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
+  e.currentTarget.play();
+  return {
+    type: preplayVideoTypes.PREPLAYVIDEO
+  }
+}
+
+/* stop video */
+export const handlePauseVideo: ActionCreator<IPauseVideoAction> = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
+  e.currentTarget.pause();
+  return {
+    type: pauseVideoTypes.PAUSEVIDEO
+  }
+}

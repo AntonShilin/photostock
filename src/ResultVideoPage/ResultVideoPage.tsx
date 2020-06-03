@@ -2,14 +2,20 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { IApplicationState } from "../Store/Store";
 import { IPopularVideos, IDataSearch } from "../Interfaces/Interfaces";
-import { getSearchVideos, handleLikeHeart } from "../Actions/ProductsActions";
+import {
+  getSearchVideos,
+  handleLikeHeart,
+  handlePauseVideo,
+  handlePreplayVideo,
+} from "../Actions/ProductsActions";
 import { RouteComponentProps, NavLink } from "react-router-dom";
-import LoadingPage from "../LoadingPage/LoadingPage";
+import LoadingPage from "../Components/LoadingPage/LoadingPage";
 import HeaderResultVideoPage from "./HeaderResultVideoPage/HeaderResultVideoPage";
 import "./ResultVideoPage.scss";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { MdControlPoint } from "react-icons/md";
-import CouldnotFindVideo from "../CouldnotFindVideo/CouldnotFindVideo";
+import CouldnotFindVideo from "../Components/CouldnotFindVideo/CouldnotFindVideo";
+import { FaRegImage, FaVideo } from "react-icons/fa";
 
 export interface IPropsResultPage extends RouteComponentProps {
   resultSearchVideo: IPopularVideos | null;
@@ -17,6 +23,8 @@ export interface IPropsResultPage extends RouteComponentProps {
   resultSearchImage: IDataSearch | null;
   searchNameVideo: string;
   handleLikeHeart: typeof handleLikeHeart;
+  handlePreplayVideo: typeof handlePreplayVideo;
+  handlePauseVideo: typeof handlePauseVideo;
 }
 
 class ResultVideoPage extends React.Component<IPropsResultPage> {
@@ -49,7 +57,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                     activeClassName="video-result-bages-active"
                     to={`/photos/${this.searchname}`}
                   >
-                    Photos
+                    <FaRegImage /> Photos
                     <span className="ml-1">
                       {this.props.resultSearchImage === null
                         ? 0
@@ -63,7 +71,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                     activeClassName="video-result-bages-active"
                     to={`${this.url}`}
                   >
-                    Videos
+                    <FaVideo /> Videos
                     <span className="ml-1">
                       {this.props.resultSearchVideo === null
                         ? 0
@@ -92,7 +100,10 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                       <div className="m-1 result_video_item">
                         <video
                           controls={false}
-                          // poster={num.image}
+                          poster={num.image}
+                          muted={true}
+                          onMouseOver={(e) => this.props.handlePreplayVideo(e)}
+                          onMouseLeave={(e) => this.props.handlePauseVideo(e)}
                         >
                           <source
                             src={num.video_files[0].link}
@@ -161,6 +172,10 @@ const mapDispatchToProps = (dispatch: any) => {
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
     handleLikeHeart: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
       dispatch(handleLikeHeart(e)),
+    handlePreplayVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
+      dispatch(handlePreplayVideo(e)),
+    handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
+      dispatch(handlePauseVideo(e)),
   };
 };
 

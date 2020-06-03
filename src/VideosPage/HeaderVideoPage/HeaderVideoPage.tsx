@@ -10,7 +10,7 @@ import "./HeaderVideoPage.scss";
 import { connect } from "react-redux";
 import { handleToggleMenu, handleScroll } from "../../Actions/ProductsActions";
 import { IApplicationState } from "../../Store/Store";
-import SearchVideoSmallArea from "../../SearchVideoSmallArea/SearchVideoSmallArea";
+import SearchVideoSmallArea from "../../Components/SearchVideoSmallArea/SearchVideoSmallArea";
 
 export interface IHeaderVideoPageProps {
   handleToggleMenu: typeof handleToggleMenu;
@@ -34,7 +34,7 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
           }
           onClick={() => this.props.handleToggleMenu()}
         />
-        <div className="container-xl navigation_video_page"
+        <div className="container-fluid navigation_video_page"
          style={
           this.props.isScrolling ? { backgroundColor: "#232a34ed" } : { backgroundColor: "transparent" }
         }

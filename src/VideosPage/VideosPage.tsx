@@ -6,12 +6,14 @@ import {
   getSearchVideos,
   changeNameVideo,
   handleLikeHeart,
+  handlePreplayVideo,
+  handlePauseVideo,
 } from "../Actions/ProductsActions";
 import { IApplicationState } from "../Store/Store";
 import "./VideosPage.scss";
-import LoadingPage from "../LoadingPage/LoadingPage";
-import { FiSearch} from "react-icons/fi";
-import NavigationPages from "../NavigationPages/NavigationPages";
+import LoadingPage from "../Components/LoadingPage/LoadingPage";
+import { FiSearch } from "react-icons/fi";
+import NavigationPages from "../Components/NavigationPages/NavigationPages";
 import HeaderVideoPage from "./HeaderVideoPage/HeaderVideoPage";
 import { NavLink } from "react-router-dom";
 import { AiOutlinePlayCircle } from "react-icons/ai";
@@ -24,6 +26,8 @@ export interface IPropsVideosPage {
   getSearchVideos: typeof getSearchVideos;
   changeNameVideo: typeof changeNameVideo;
   handleLikeHeart: typeof handleLikeHeart;
+  handlePreplayVideo: typeof handlePreplayVideo;
+  handlePauseVideo: typeof handlePauseVideo;
 }
 
 class VideosPage extends React.Component<IPropsVideosPage> {
@@ -41,15 +45,13 @@ class VideosPage extends React.Component<IPropsVideosPage> {
     return (
       <React.Fragment>
         <HeaderVideoPage />
-        <div className="container-xl bg-videos-page">
+        <div className="container-fluid bg-videos-page">
           {this.props.popularVideo !== null ? (
             <video
               controls={false}
               autoPlay={true}
               loop={true}
-              poster={
-                this.props.popularVideo.videos[0].image
-              }
+              poster={this.props.popularVideo.videos[0].image}
             >
               <source
                 src={this.props.popularVideo.videos[0].video_files[4].link}
@@ -59,7 +61,8 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               />
               Your browser doesn't support HTML5 video tag.
             </video>
-          ) : null}
+            ) : null}
+          <div className="container-xl">
           <div className="video_search_item">
             <h1 className="pb-1">
               The best free stock videos from talented authors.
@@ -86,12 +89,13 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                 </NavLink>
               </div>
             </div>
-          <h6>
-            Suggested:
-            <span className="text-white pl-2">
-              businessman, hd wallpapers, abstract, phone, green, more...
-            </span>
-          </h6>
+            <h6>
+              Suggested:
+              <span className="text-white pl-2">
+                businessman, hd wallpapers, abstract, phone, green, more...
+              </span>
+            </h6>
+          </div>
           </div>
         </div>
         <NavigationPages />
@@ -108,7 +112,10 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                   <div key={i} className="col-lg-6 col-md-6 col-sm-12">
                     <div className="m-1 popular_video_item">
                       <video
+                        onMouseOver={(e) => this.props.handlePreplayVideo(e)}
+                        onMouseLeave={(e) => this.props.handlePauseVideo(e)}
                         controls={false}
+                        muted={true}
                         poster={value.image}
                       >
                         <source
@@ -131,7 +138,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                         />
                       </span>
                       <span>
-                      <svg
+                        <svg
                           className="heart"
                           viewBox="0 -2 35 35"
                           xmlns="http://www.w3.org/2000/svg"
@@ -141,9 +148,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                           width="1.6em"
                           height="1.3em"
                           ref={this.heart}
-                          onClick={(e) =>
-                            this.props.handleLikeHeart(e)
-                          }
+                          onClick={(e) => this.props.handleLikeHeart(e)}
                         >
                           <path
                             d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
@@ -177,8 +182,10 @@ const mapDispatchToProps = (dispatch: any) => {
     getPopularVideo: () => dispatch(getPopularVideo()),
     changeNameVideo: (e: string) => dispatch(changeNameVideo(e)),
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
-    handleLikeHeart: (e:React.MouseEvent<SVGSVGElement, MouseEvent>) =>
-    dispatch(handleLikeHeart(e)),
+    handleLikeHeart: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
+      dispatch(handleLikeHeart(e)),
+    handlePreplayVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => dispatch(handlePreplayVideo(e)),
+    handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => dispatch(handlePauseVideo(e)),
   };
 };
 

@@ -8,13 +8,12 @@ import {
 } from "react-router-dom";
 import PhotosPage from "../PhotosPage/PhotosPage";
 import VideosPage from "../VideosPage/VideosPage";
-import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import LoginPage from "../LoginPage/LoginPage";
-import { Suspense } from "react";
+import NotFoundPage from "../Components/NotFoundPage/NotFoundPage";
+import LoginPage from "../Components/LoginPage/LoginPage";
 import ResultPhotoPage from "../ResultPhotoPage/ResultPhotoPage";
 import ResultVideoPage from "../ResultVideoPage/ResultVideoPage";
-import AdminPage from "../AdminPage/AdminPage";
-import LoadingPage from "../LoadingPage/LoadingPage";
+import AdminPage from "../Components/AdminPage/AdminPage";
+import LoadingPage from "../Components/LoadingPage/LoadingPage";
 
 const RoutesWrap: React.SFC = () => {
   return (
@@ -25,7 +24,6 @@ const RoutesWrap: React.SFC = () => {
 };
 
 const Routes: React.SFC<RouteComponentProps> = props => {
-  const [loggedIn, setLoggedIn] = React.useState(true);
   return (
     <React.Fragment>
       <Switch>
@@ -35,15 +33,7 @@ const Routes: React.SFC<RouteComponentProps> = props => {
         <Route path="/videos" exact={true} component={VideosPage} />
         <Route path="/videos/:searchvideo" component={ResultVideoPage} />
         <Route path="/photos/:searchphoto" component={ResultPhotoPage} />
-        <Route path="/admin">
-          {loggedIn ? (
-            <Suspense fallback={<LoadingPage />}>
-              <AdminPage />
-            </Suspense>
-          ) : (
-            <Redirect to="/login" />
-          )}
-        </Route>
+        <Route path="/admin"/>
         <Route component={NotFoundPage} />
       </Switch>
     </React.Fragment>

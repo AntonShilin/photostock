@@ -9,10 +9,12 @@ import {
   GetChangeNameVideoTypes,
   GetVideoTypes,
   SearchKeydownTypes,
-  ToggleMenu,
+  ToggleMenuTypes,
   MoveScroll,
   DeletePrevVideo,
   likeHeart,
+  preplayVideoTypes,
+  pauseVideoTypes,
 } from "../Types/ProductsTypes";
 
 const initialProductState: IProductsState = {
@@ -102,7 +104,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       };
     }
 
-    case ToggleMenu.TOGGLEMENU: {
+    case ToggleMenuTypes.TOGGLEMENU: {
 
       return {
         ...state,
@@ -121,6 +123,18 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     }
       
     case likeHeart.LIKEHEART: {
+      return {
+        ...state
+      };
+    }
+      
+    case preplayVideoTypes.PREPLAYVIDEO: {
+      return {
+        ...state
+      };
+    }
+      
+    case pauseVideoTypes.PAUSEVIDEO: {
       return {
         ...state
       };

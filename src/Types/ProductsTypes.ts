@@ -34,7 +34,7 @@ export enum GetVideoTypes {
   GETVIDEO = "GETVIDEO"
 }
 
-export enum ToggleMenu {
+export enum ToggleMenuTypes {
   TOGGLEMENU="TOGGLEMENU"
 }
 
@@ -50,8 +50,24 @@ export enum likeHeart {
   LIKEHEART="LIKEHEART"
 }
 
+export enum preplayVideoTypes {
+  PREPLAYVIDEO="PREPLAYVIDEO"
+}
+
+export enum pauseVideoTypes {
+  PAUSEVIDEO="PAUSEVIDEO"
+}
+
 
 /*  interfaces */
+export interface IPauseVideoAction {
+  type: pauseVideoTypes.PAUSEVIDEO
+}
+
+
+export interface IPreplayVideoAction {
+  type: preplayVideoTypes.PREPLAYVIDEO
+}
 
 export interface ILikeHeartAction {
   type: likeHeart.LIKEHEART;
@@ -64,7 +80,7 @@ export interface IDeletePrevVideoAction {
 
 
 export interface IToggleMenuAction {
-  type: ToggleMenu.TOGGLEMENU;
+  type: ToggleMenuTypes.TOGGLEMENU;
 }
 
 export interface ISearchKeydownAction {
@@ -122,7 +138,9 @@ export type ProductsActions =
   | IGetVideoAction
   | IMoveScrollAction
   | IDeletePrevVideoAction
-  |ILikeHeartAction
+  | ILikeHeartAction
+  | IPreplayVideoAction
+  |IPauseVideoAction
   | IToggleMenuAction;
 
 export interface IProductsState {

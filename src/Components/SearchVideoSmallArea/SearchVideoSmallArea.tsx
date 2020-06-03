@@ -1,10 +1,10 @@
 import * as React from "react";
 import { FiSearch } from "react-icons/fi";
-import { IApplicationState } from "../Store/Store";
-import {  changeNameVideo, getSearchVideos} from "../Actions/ProductsActions";
+import { IApplicationState } from "../../Store/Store";
+import {  changeNameVideo, getSearchVideos} from "../../Actions/ProductsActions";
 import "./SearchVideoSmallArea.scss";
 import { connect } from "react-redux";
-import { IPopularVideos } from "../Interfaces/Interfaces";
+import { IPopularVideos } from "../../Interfaces/Interfaces";
 import { NavLink } from "react-router-dom";
 
 export interface ISearchVideoSmallAreaProps  {

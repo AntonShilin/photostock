@@ -10,7 +10,7 @@ import "./HeaderPhotoPage.scss";
 import { connect } from "react-redux";
 import { handleToggleMenu, handleScroll } from "../../Actions/ProductsActions";
 import { IApplicationState } from "../../Store/Store";
-import SearchFotoSmallArea from "../../SearchFotoSmallArea/SearchFotoSmallArea";
+import SearchFotoSmallArea from "../../Components/SearchFotoSmallArea/SearchFotoSmallArea";
 
 export interface IHeaderPhotoPageProps {
   handleToggleMenu: typeof handleToggleMenu;
@@ -34,7 +34,7 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps, RouteCompon
           }
           onClick={() => this.props.handleToggleMenu()}
         />
-        <div className="container-xl navigation_foto_page"
+        <div className="container-fluid navigation_foto_page"
          style={
           this.props.isScrolling ? { backgroundColor: "#232a34ed" } : { backgroundColor: "transparent" }
         }

@@ -7,6 +7,7 @@
   background-color: #8e8a8a;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
   border-radius: 0;
   .photo_search_input {
     width: 75%;
@@ -54,10 +55,12 @@ div.info-for-image {
   position: relative;
   margin-bottom: 0.5rem;
   cursor: pointer;
-  min-height: 18rem;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
+  img{
+    display: block;
+    margin: 0 auto;
+    height: auto;
+    width: 100%;
+  }
   &:hover {
     div.image-photographer {
       visibility: visible;
@@ -86,6 +89,7 @@ div.info-for-image {
     p {
       margin: 1.5rem 1rem 0 1rem;
       color: white;
+      font-size: 1rem;
     }
   }
 }

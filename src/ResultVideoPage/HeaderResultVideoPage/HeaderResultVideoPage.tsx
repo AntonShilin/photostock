@@ -10,7 +10,7 @@ import "./HeaderResultVideoPage.scss";
 import { connect } from "react-redux";
 import { handleToggleMenu, handleScroll } from "../../Actions/ProductsActions";
 import { IApplicationState } from "../../Store/Store";
-import SearchVideoSmallArea from "../../SearchVideoSmallArea/SearchVideoSmallArea";
+import SearchVideoSmallArea from "../../Components/SearchVideoSmallArea/SearchVideoSmallArea";
 
 export interface IHeaderResultVideoPageProps {
   handleToggleMenu: typeof handleToggleMenu;
@@ -39,7 +39,7 @@ class HeaderResultVideoPage extends React.Component<IHeaderResultVideoPageProps,
           }
           onClick={() => this.props.handleToggleMenu(this.elementMenu)}
         />
-        <div className="container-xl navigation_result_video_page">
+        <div className="container-fluid navigation_result_video_page">
           <div className="row align-items-center">
             <div className="col-2">
               <NavLink to="/photos" className="p-2 text-decoration-none btn">
