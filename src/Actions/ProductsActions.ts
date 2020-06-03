@@ -121,7 +121,7 @@ export const getSearchVideos = (name: string) => {
   return (dispatch: Dispatch) => {
     dispatch(deletePrevVideo());
     fetch(
-      `https://api.pexels.com/videos/search?query=${name}+query&per_page=50&page=1`,
+      `https://api.pexels.com/videos/search?query=${name}+query&per_page=40&page=1`,
       {
         headers: { Authorization: keyAPI },
       }
