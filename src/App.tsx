@@ -1,10 +1,12 @@
 import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import Routes from "./Routes/Routes";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">Native React app page</header>
-    </div>
+    <BrowserRouter>
+      <Route component={Routes} />
+    </BrowserRouter>
   );
 };
 

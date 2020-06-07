@@ -2,19 +2,21 @@ import { Reducer } from "redux";
 import {
   ProductsActions,
   IProductsState,
-  DataActionTypes,
+  GetPopularImagesTypes,
   SearchValueTypes,
-  GetDataSearchValueTypes,
   GetPopularVideoTypes,
   GetChangeNameVideoTypes,
   GetVideoTypes,
   SearchKeydownTypes,
   ToggleMenuTypes,
   MoveScroll,
-  DeletePrevVideo,
+  DeletePrevData,
   likeHeart,
   preplayVideoTypes,
   pauseVideoTypes,
+  isLoadingImagesTypes,
+  isLoadingVideosTypes,
+  SearchImagesByNameTypes,
 } from "../Types/ProductsTypes";
 
 const initialProductState: IProductsState = {
@@ -31,6 +33,8 @@ const initialProductState: IProductsState = {
   isScrollTop: null,
   isScrollHeight: null,
   isClientHeight: null,
+  isLoadingImages:false,
+  isLoadingVideos:false
 };
 
 export const productsReducer: Reducer<IProductsState, ProductsActions> = (
@@ -38,10 +42,11 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
   action
 ) => {
   switch (action.type) {
-    case DataActionTypes.GETDATA: {
+    case GetPopularImagesTypes.GETPOPULARIMAGES: {
       return {
         ...state,
         data: action.popularPhoto,
+        isLoadingImages: action.isLoading
       };
     }
 
@@ -64,14 +69,15 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       return {
         ...state,
         searchNamePhoto: action.searchValue,
+        searchNameVideo: action.searchValue
       };
     }
 
-    case GetDataSearchValueTypes.GETDATASEARCHVALUE: {
+    case SearchImagesByNameTypes.SEARCHIMAGESBYNAME: {
       return {
         ...state,
-        searchNamePhoto: "",
         resultSearchImage: action.findPhoto,
+        isLoadingImages: action.isLoading
       };
     }
 
@@ -79,6 +85,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       return {
         ...state,
         videos: action.popularVideo,
+        isLoadingVideos: action.isLoading
       };
     }
 
@@ -86,18 +93,19 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       return {
         ...state,
         searchNameVideo: action.value,
+        searchNamePhoto: action.value
       };
     }
 
     case GetVideoTypes.GETVIDEO: {
       return {
         ...state,
-        searchNameVideo: "",
         resultSearchVideo: action.findVideo,
+        isLoadingVideos: action.isLoading
       };
     }
       
-    case DeletePrevVideo.DELETEPREVVIDEO: {
+    case DeletePrevData.DELETEPREVDATA: {
       return {
         ...state,
         resultSearchVideo: action.data,
@@ -105,7 +113,6 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     }
 
     case ToggleMenuTypes.TOGGLEMENU: {
-
       return {
         ...state,
         isToggleMenu: !state.isToggleMenu,
@@ -140,6 +147,19 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       };
     }
 
+    case isLoadingImagesTypes.LOADINGIMAGES: {
+      return {
+        ...state,
+        isLoadingImages:action.isLoading
+      };
+    }
+      
+    case isLoadingVideosTypes.LOADINGVIDEOS: {
+      return {
+        ...state,
+        isLoadingVideos:action.isLoading
+      };
+    }
    
   }
   return state || initialProductState;

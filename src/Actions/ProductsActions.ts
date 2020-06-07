@@ -1,9 +1,7 @@
 import { ActionCreator, Dispatch } from "redux";
 
 import {
-  DataActionTypes,
   SearchValueTypes,
-  GetDataSearchValueTypes,
   GetPopularVideoTypes,
   GetChangeNameVideoTypes,
   GetVideoTypes,
@@ -15,20 +13,26 @@ import {
   ToggleMenuTypes,
   IMoveScrollAction,
   MoveScroll,
-  DeletePrevVideo,
-  IDeletePrevVideoAction,
+  DeletePrevData,
+  IDeletePrevDataAction,
   ILikeHeartAction,
   likeHeart,
   preplayVideoTypes,
   IPreplayVideoAction,
   IPauseVideoAction,
   pauseVideoTypes,
+  isLoadingImagesTypes,
+  isLoadingVideosTypes,
+  GetPopularImagesTypes,
+  ILoadingImagesAction,
+  ILoadingVideosAction,
+  SearchImagesByNameTypes,
 } from "../Types/ProductsTypes";
 
 /* delete prev video*/
-export const deletePrevVideo: ActionCreator<IDeletePrevVideoAction> = () => {
+export const deletePrevData: ActionCreator<IDeletePrevDataAction> = () => {
   return {
-    type: DeletePrevVideo.DELETEPREVVIDEO,
+    type: DeletePrevData.DELETEPREVDATA,
     data: null,
   };
 };
@@ -40,11 +44,12 @@ export const handleToggleMenu: ActionCreator<IToggleMenuAction> = (
   type: ToggleMenuTypes.TOGGLEMENU,
 });
 
-/*  get popular fotos */
+/*  get  fotos for photo page */
 export const getPopularImages = () => {
   const keyAPI: string =
-    "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
+  "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
   return (dispatch: Dispatch) => {
+    dispatch(isLoadingImages());
     fetch(`https://api.pexels.com/v1/curated?per_page=50&page=1`, {
       headers: { Authorization: keyAPI },
     })
@@ -57,8 +62,9 @@ export const getPopularImages = () => {
       .then((response) => response.json())
       .then((data) =>
         dispatch({
-          type: DataActionTypes.GETDATA,
+          type: GetPopularImagesTypes.GETPOPULARIMAGES,
           popularPhoto: data,
+          isLoading: false
         })
       );
   };
@@ -87,6 +93,7 @@ export const getPopularVideo = () => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
   return (dispatch: Dispatch) => {
+    dispatch(isLoadingVideos());
     fetch(`https://api.pexels.com/videos/popular?per_page=10&page=1`, {
       headers: { Authorization: keyAPI },
     })
@@ -101,6 +108,7 @@ export const getPopularVideo = () => {
         dispatch({
           type: GetPopularVideoTypes.GETPOPULARVIDEO,
           popularVideo: data,
+          isLoading: false
         })
       );
   };
@@ -119,7 +127,8 @@ export const getSearchVideos = (name: string) => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
   return (dispatch: Dispatch) => {
-    dispatch(deletePrevVideo());
+    dispatch(deletePrevData());
+    dispatch(isLoadingVideos());
     fetch(
       `https://api.pexels.com/videos/search?query=${name}+query&per_page=40&page=1`,
       {
@@ -137,6 +146,7 @@ export const getSearchVideos = (name: string) => {
         dispatch({
           type: GetVideoTypes.GETVIDEO,
           findVideo: data,
+          isLoading: false
         })
       );
   };
@@ -145,9 +155,10 @@ export const getSearchVideos = (name: string) => {
 /* get images search by name  */
 export const getSearchImages = (name: string) => {
   const keyAPI: string =
-    "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
+  "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
   return (dispatch: Dispatch) => {
-    dispatch(deletePrevVideo());
+    dispatch(deletePrevData());
+    dispatch(isLoadingImages());
     fetch(
       `https://api.pexels.com/v1/search?query=${name}+query&per_page=50&page=1`,
       {
@@ -163,8 +174,9 @@ export const getSearchImages = (name: string) => {
       .then((response) => response.json())
       .then((data) =>
         dispatch({
-          type: GetDataSearchValueTypes.GETDATASEARCHVALUE,
+          type: SearchImagesByNameTypes.SEARCHIMAGESBYNAME,
           findPhoto: data,
+          isLoading: false
         })
       );
   };
@@ -204,5 +216,19 @@ export const handlePauseVideo: ActionCreator<IPauseVideoAction> = (e: React.Mous
   e.currentTarget.pause();
   return {
     type: pauseVideoTypes.PAUSEVIDEO
+  }
+}
+
+export const isLoadingImages:ActionCreator<ILoadingImagesAction> = () => {
+  return {
+    type: isLoadingImagesTypes.LOADINGIMAGES,
+    isLoading: true
+  }
+}
+
+export const isLoadingVideos:ActionCreator<ILoadingVideosAction> = () => {
+  return {
+    type: isLoadingVideosTypes.LOADINGVIDEOS,
+    isLoading: true
   }
 }

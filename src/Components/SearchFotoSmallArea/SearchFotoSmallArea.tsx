@@ -1,15 +1,17 @@
 import * as React from "react";
 import { FiSearch } from "react-icons/fi";
 import { IApplicationState } from "../../Store/Store";
-import { handleSearchChange, getSearchImages } from "../../Actions/ProductsActions";
+import { handleSearchChange, getSearchImages, getSearchVideos } from "../../Actions/ProductsActions";
 import "./SearchFotoSmallArea.scss";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 export interface ISearchFotoSmallAreaProps  {
   searchNamePhoto: string;
+  searchNameVideo: string;
   watchInputChange: typeof handleSearchChange;
   getSearchImages: typeof getSearchImages;
+  getSearchVideos: typeof getSearchVideos;
 }
 
 class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
@@ -25,13 +27,15 @@ class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
               value={this.props.searchNamePhoto}
               onChange={this.props.watchInputChange}
               autoFocus={false}
+              required={true}
             />
             <div className="input-group-append">
               <NavLink to={`/photos/${this.props.searchNamePhoto}`}
                 className="input-group-text"
-                onClick={() =>
-                  this.props.getSearchImages(this.props.searchNamePhoto)
-                }
+                onClick={() => {
+                  this.props.getSearchImages(this.props.searchNamePhoto);
+                  this.props.getSearchVideos(this.props.searchNameVideo);
+                }}
               >
                 <FiSearch style={{color:"black"}}/>
               </NavLink>
@@ -46,12 +50,14 @@ class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
 const mapStateToProps = (store: IApplicationState) => ({
   data: store.products.data,
   searchNamePhoto: store.products.searchNamePhoto,
+  searchNameVideo: store.products.searchNameVideo,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     watchInputChange: (e: string) => dispatch(handleSearchChange(e)),
     getSearchImages: (name: string) => dispatch(getSearchImages(name)),
+    getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
   };
 };
 

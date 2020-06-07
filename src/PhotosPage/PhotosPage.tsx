@@ -6,6 +6,7 @@ import {
   getPopularImages,
   handleSearchKeydown,
   handleLikeHeart,
+  getSearchVideos,
 } from "../Actions/ProductsActions";
 import { handleSearchChange } from "../Actions/ProductsActions";
 import { getSearchImages } from "../Actions/ProductsActions";
@@ -20,8 +21,9 @@ import { MdControlPoint } from "react-icons/md";
 export interface IPropsPhotosPage extends RouteComponentProps {
   data: ICuratedPhoto | null;
   getPopularImages: typeof getPopularImages;
+  getSearchVideos: typeof getSearchVideos;
   searchNamePhoto: string;
-  watchInputChange: typeof handleSearchChange;
+  handleSearchChange: typeof handleSearchChange;
   getSearchImages: typeof getSearchImages;
   getKeyNumber: typeof handleSearchKeydown;
   handleLikeHeart: typeof handleLikeHeart;
@@ -29,6 +31,7 @@ export interface IPropsPhotosPage extends RouteComponentProps {
   isScrollHeight: number | null;
   isClientHeight: number | null;
   isScrolling: boolean;
+  isLoadingImages: boolean;
 }
 
 class PhotosPage extends React.Component<IPropsPhotosPage> {
@@ -66,17 +69,19 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                   className="form-control"
                   placeholder="Find a photo"
                   value={this.props.searchNamePhoto}
-                  onChange={this.props.watchInputChange}
+                  onChange={this.props.handleSearchChange}
                   autoFocus={false}
+                  required={true}
                   /* onKeyDown={this.props.getKeyNumber} */
                 />
                 <div className="input-group-append">
                   <NavLink
                     to={`/photos/${this.props.searchNamePhoto}`}
                     className="input-group-text"
-                    onClick={() =>
-                      this.props.getSearchImages(this.props.searchNamePhoto)
-                    }
+                    onClick={() => {
+                      this.props.getSearchImages(this.props.searchNamePhoto);
+                      this.props.getSearchVideos(this.props.searchNamePhoto);
+                    }}
                   >
                     <FiSearch />
                   </NavLink>
@@ -91,7 +96,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
             </div>
           </div>
         </div>
-        {this.props.data === null ? (
+        {this.props.isLoadingImages ? (
           <LoadingPage />
         ) : (
           <React.Fragment>
@@ -213,13 +218,15 @@ const mapStateToProps = (store: IApplicationState) => ({
   isClientHeight: store.products.isClientHeight,
   isScrolling: store.products.isScrolling,
   searchNamePhoto: store.products.searchNamePhoto,
+  isLoadingImages: store.products.isLoadingImages
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getKeyNumber: (e: any) => dispatch(handleSearchKeydown(e)),
+    getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
     getPopularImages: () => dispatch(getPopularImages()),
-    watchInputChange: (e: string) => dispatch(handleSearchChange(e)),
+    handleSearchChange: (e: string) => dispatch(handleSearchChange(e)),
     getSearchImages: (name: string) => dispatch(getSearchImages(name)),
     handleLikeHeart: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
       dispatch(handleLikeHeart(e)),

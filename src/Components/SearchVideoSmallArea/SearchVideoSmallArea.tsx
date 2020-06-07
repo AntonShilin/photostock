@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FiSearch } from "react-icons/fi";
 import { IApplicationState } from "../../Store/Store";
-import {  changeNameVideo, getSearchVideos} from "../../Actions/ProductsActions";
+import {  changeNameVideo, getSearchVideos, getSearchImages} from "../../Actions/ProductsActions";
 import "./SearchVideoSmallArea.scss";
 import { connect } from "react-redux";
 import { IPopularVideos } from "../../Interfaces/Interfaces";
@@ -10,8 +10,10 @@ import { NavLink } from "react-router-dom";
 export interface ISearchVideoSmallAreaProps  {
   popularVideo: IPopularVideos | null;
   searchNameVideo: string;
+  searchNamePhoto: string;
   getSearchVideos: typeof getSearchVideos;
   changeNameVideo: typeof changeNameVideo;
+  getSearchImages: typeof getSearchImages;
 }
 
 class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> {
@@ -32,9 +34,10 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
             <div className="input-group-append">
               <NavLink to={`/videos/${this.props.searchNameVideo}`}
                 className="input-group-text"
-                onClick={() =>
-                  this.props.getSearchVideos(this.props.searchNameVideo)
-                }
+                onClick={() => {
+                  this.props.getSearchVideos(this.props.searchNameVideo);
+                  this.props.getSearchImages(this.props.searchNamePhoto);
+                }}
               >
                 <FiSearch style={{color:"black"}}/>
               </NavLink>
@@ -49,13 +52,15 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
 const mapStateToProps = (store: IApplicationState) => ({
   popularVideo: store.products.videos,
   searchNameVideo: store.products.searchNameVideo,
+  searchNamePhoto: store.products.searchNamePhoto,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getSearchVideos: (name:string) =>
       dispatch(getSearchVideos(name)),
-    changeNameVideo: (e: string) =>  dispatch(changeNameVideo(e)),
+    changeNameVideo: (e: string) => dispatch(changeNameVideo(e)),
+     getSearchImages: (name: string) => dispatch(getSearchImages(name)),
   };
 };
 

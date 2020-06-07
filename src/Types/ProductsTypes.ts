@@ -1,7 +1,7 @@
 import { ICuratedPhoto, IDataSearch, IPopularVideos } from "../Interfaces/Interfaces";
 
-export enum DataActionTypes {
-  GETDATA = "GETDATA"
+export enum GetPopularImagesTypes {
+  GETPOPULARIMAGES = "GETPOPULARIMAGES"
 }
 
 export enum SearchValueTypes {
@@ -13,8 +13,8 @@ export enum SearchKeydownTypes {
 }
 
 
-export enum GetDataSearchValueTypes {
-  GETDATASEARCHVALUE = "GETDATASEARCHVALUE"
+export enum SearchImagesByNameTypes {
+  SEARCHIMAGESBYNAME = "SEARCHIMAGESBYNAME"
 }
 
 export enum GetPopularVideoTypes {
@@ -42,8 +42,8 @@ export enum MoveScroll {
   MOVESCROLL="MOVESCROLL"
 }
 
-export enum DeletePrevVideo {
-  DELETEPREVVIDEO="DELETEPREVVIDEO"
+export enum DeletePrevData {
+  DELETEPREVDATA="DELETEPREVDATA"
 }
 
 export enum likeHeart {
@@ -58,8 +58,26 @@ export enum pauseVideoTypes {
   PAUSEVIDEO="PAUSEVIDEO"
 }
 
+export enum isLoadingImagesTypes {
+  LOADINGIMAGES="LOADINGIMAGES"
+}
+
+export enum isLoadingVideosTypes {
+  LOADINGVIDEOS="LOADINGVIDEOS"
+}
+
 
 /*  interfaces */
+export interface ILoadingImagesAction {
+  type: isLoadingImagesTypes.LOADINGIMAGES
+  isLoading: boolean
+}
+
+export interface ILoadingVideosAction {
+  type: isLoadingVideosTypes.LOADINGVIDEOS
+  isLoading: boolean
+}
+
 export interface IPauseVideoAction {
   type: pauseVideoTypes.PAUSEVIDEO
 }
@@ -73,8 +91,8 @@ export interface ILikeHeartAction {
   type: likeHeart.LIKEHEART;
 }
 
-export interface IDeletePrevVideoAction {
-  type: DeletePrevVideo.DELETEPREVVIDEO;
+export interface IDeletePrevDataAction {
+  type: DeletePrevData.DELETEPREVDATA;
   data: null
 }
 
@@ -95,19 +113,22 @@ export interface IGetSearchValueAction {
 
 
 export interface IGetPopularPhotoAction {
-  type: DataActionTypes.GETDATA;
+  type: GetPopularImagesTypes.GETPOPULARIMAGES;
   popularPhoto: ICuratedPhoto;
+  isLoading: boolean;
 }
 
 
-export interface IDataSearchValueAction {
-  type: GetDataSearchValueTypes.GETDATASEARCHVALUE;
+export interface ISearchImagesByNameAction {
+  type: SearchImagesByNameTypes.SEARCHIMAGESBYNAME
   findPhoto: IDataSearch;
+  isLoading: boolean;
 }
 
 export interface IPopularVideoAction {
   type: GetPopularVideoTypes.GETPOPULARVIDEO;
   popularVideo: IPopularVideos;
+  isLoading: boolean;
 }
 
 export interface IChangeNameVideoAction {
@@ -118,6 +139,7 @@ export interface IChangeNameVideoAction {
 export interface IGetVideoAction{
   type: GetVideoTypes.GETVIDEO;
   findVideo: IPopularVideos;
+  isLoading: boolean;
 }
 
 export interface IMoveScrollAction{
@@ -131,16 +153,18 @@ export interface IMoveScrollAction{
 export type ProductsActions =
   | IGetPopularPhotoAction
   | IGetSearchValueAction
-  | IDataSearchValueAction
+  | ISearchImagesByNameAction
   | IPopularVideoAction
   | IChangeNameVideoAction
   |ISearchKeydownAction
   | IGetVideoAction
   | IMoveScrollAction
-  | IDeletePrevVideoAction
+  | IDeletePrevDataAction
   | ILikeHeartAction
   | IPreplayVideoAction
-  |IPauseVideoAction
+  | IPauseVideoAction
+  |ILoadingImagesAction
+  |ILoadingVideosAction
   | IToggleMenuAction;
 
 export interface IProductsState {
@@ -157,4 +181,6 @@ export interface IProductsState {
   readonly isScrollTop: number|null;
   readonly isScrollHeight: number|null;
   readonly isClientHeight: number|null;
+  readonly isLoadingImages: boolean;
+  readonly isLoadingVideos: boolean;
 }

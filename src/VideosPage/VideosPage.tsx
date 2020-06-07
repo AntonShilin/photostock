@@ -8,6 +8,7 @@ import {
   handleLikeHeart,
   handlePreplayVideo,
   handlePauseVideo,
+  getSearchImages,
 } from "../Actions/ProductsActions";
 import { IApplicationState } from "../Store/Store";
 import "./VideosPage.scss";
@@ -23,11 +24,14 @@ export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
   popularVideo: IPopularVideos | null;
   searchNameVideo: string;
+  searchNamePhoto: string;
   getSearchVideos: typeof getSearchVideos;
   changeNameVideo: typeof changeNameVideo;
   handleLikeHeart: typeof handleLikeHeart;
   handlePreplayVideo: typeof handlePreplayVideo;
   handlePauseVideo: typeof handlePauseVideo;
+  getSearchImages: typeof getSearchImages;
+  isLoadingVideos: boolean;
 }
 
 class VideosPage extends React.Component<IPropsVideosPage> {
@@ -83,6 +87,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                     className="input-group-text"
                     onClick={() => {
                       this.props.getSearchVideos(this.props.searchNameVideo);
+                      this.props.getSearchImages(this.props.searchNamePhoto);
                     }}
                   >
                     <FiSearch />
@@ -98,7 +103,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
             </div>
           </div>
         </div>
-        {this.props.popularVideo === null ? (
+        {this.props.isLoadingVideos ? (
           <LoadingPage />
         ) : (
           <React.Fragment>
@@ -265,6 +270,8 @@ const mapStateToProps = (store: IApplicationState) => {
   return {
     popularVideo: store.products.videos,
     searchNameVideo: store.products.searchNameVideo,
+    searchNamePhoto: store.products.searchNamePhoto,
+    isLoadingVideos: store.products.isLoadingVideos
   };
 };
 
@@ -279,6 +286,7 @@ const mapDispatchToProps = (dispatch: any) => {
       dispatch(handlePreplayVideo(e)),
     handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
       dispatch(handlePauseVideo(e)),
+      getSearchImages: (name: string) => dispatch(getSearchImages(name)),
   };
 };
 

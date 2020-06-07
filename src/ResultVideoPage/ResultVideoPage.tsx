@@ -25,11 +25,11 @@ export interface IPropsResultPage extends RouteComponentProps {
   handleLikeHeart: typeof handleLikeHeart;
   handlePreplayVideo: typeof handlePreplayVideo;
   handlePauseVideo: typeof handlePauseVideo;
+  isLoadingVideos: boolean;
 }
 
 class ResultVideoPage extends React.Component<IPropsResultPage> {
-  private url = this.props.location.pathname;
-  private searchname = this.url.match(/\w+$/);
+
   private heart: React.RefObject<SVGSVGElement> | null;
 
   constructor(props: IPropsResultPage) {
@@ -37,17 +37,11 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
     this.heart = React.createRef();
   }
 
-  public componentDidMount() {
-    if (this.searchname !== null) {
-      this.props.getSearchVideos(this.searchname[0]);
-    }
-  }
-
   public render() {
     return (
       <React.Fragment>
         <HeaderResultVideoPage />
-        {this.props.resultSearchVideo === null ? (
+        {this.props.isLoadingVideos? (
           <LoadingPage />
         ) : (
             <div className="container-xl">
@@ -58,7 +52,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                       {" "}
                       <NavLink
                         activeClassName="video-result-bages-active"
-                        to={`/photos/${this.searchname}`}
+                        to={`/photos/${this.props.searchNameVideo}`}
                       >
                         <FaRegImage /> Photos
                         <span className="ml-1">
@@ -72,7 +66,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                       {" "}
                       <NavLink
                         activeClassName="video-result-bages-active"
-                        to={`${this.url}`}
+                        to="#"
                       >
                         <FaVideo /> Videos
                         <span className="ml-1">
@@ -85,13 +79,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                   </ul>
                 </div>
               </div>
-              <div className="row mt-3 mb-3">
-                <div className="col-12">
-                  <h5 className="text-center mb-5">{`${this.props.location.pathname.match(
-                    /\w+$/
-                  )} videos`}</h5>
-                </div>
-              </div>
+              <CouldnotFindVideo />
               <div className="row ">
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="row">
@@ -248,6 +236,7 @@ const mapStateToProps = (store: IApplicationState) => {
     resultSearchVideo: store.products.resultSearchVideo,
     searchNameVideo: store.products.searchNameVideo,
     resultSearchImage: store.products.resultSearchImage,
+    isLoadingVideos: store.products.isLoadingVideos
   };
 };
 
