@@ -11,6 +11,7 @@ import NotFoundPage from "../Components/NotFoundPage/NotFoundPage";
 import LoginPage from "../Components/LoginPage/LoginPage";
 import ResultPhotoPage from "../ResultPhotoPage/ResultPhotoPage";
 import ResultVideoPage from "../ResultVideoPage/ResultVideoPage";
+import ShowDetailsPhoto from "../Components/ModalWindow/ShowDetailsPhoto/ModalWindowPhotoPage";
 
 
 
@@ -19,13 +20,12 @@ const Routes: React.SFC<RouteComponentProps> = props => {
     <React.Fragment>
       <Switch>
         <Route path="/login" component={LoginPage} />
-        {/* <Redirect exact={true} path="/" to="/photos" /> */}
-        <Route path="/" exact={true} component={PhotosPage} />
+        <Redirect exact={true} path="/" to="/photos" />
         <Route path="/photos" exact={true} component={PhotosPage} />
         <Route path="/videos" exact={true} component={VideosPage} />
         <Route path="/videos/:searchvideo" component={ResultVideoPage} />
         <Route path="/photos/:searchphoto" component={ResultPhotoPage} />
-        <Route path="/admin"/>
+        <Route path="/detail" component={ShowDetailsPhoto} />
         <Route component={NotFoundPage} />
       </Switch>
     </React.Fragment>

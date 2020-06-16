@@ -27,7 +27,13 @@ import {
   ILoadingImagesAction,
   ILoadingVideosAction,
   SearchImagesByNameTypes,
+  SearchBySuggestedWordTypes,
+  DownloadImageTypes,
+  ToggleWindowPhotoPageTypes,
+  IToggleWindowPhotoPageAction,
+  GetIdPhotoTypes,
 } from "../Types/ProductsTypes";
+import { ICuratedPhoto } from "../Interfaces/Interfaces";
 
 /* delete prev video*/
 export const deletePrevData: ActionCreator<IDeletePrevDataAction> = () => {
@@ -47,7 +53,7 @@ export const handleToggleMenu: ActionCreator<IToggleMenuAction> = (
 /*  get  fotos for photo page */
 export const getPopularImages = () => {
   const keyAPI: string =
-  "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
+    "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
   return (dispatch: Dispatch) => {
     dispatch(isLoadingImages());
     fetch(`https://api.pexels.com/v1/curated?per_page=50&page=1`, {
@@ -64,7 +70,7 @@ export const getPopularImages = () => {
         dispatch({
           type: GetPopularImagesTypes.GETPOPULARIMAGES,
           popularPhoto: data,
-          isLoading: false
+          isLoading: false,
         })
       );
   };
@@ -72,10 +78,10 @@ export const getPopularImages = () => {
 
 /* get key code number */
 export const handleSearchKeydown: ActionCreator<ISearchKeydownAction> = (
-  e: React.KeyboardEvent<HTMLInputElement>
+  num: React.KeyboardEvent<HTMLInputElement>
 ) => ({
-  type: SearchKeydownTypes.SEARCKEYDOWN,
-  keydownKey: e.keyCode,
+  type: SearchKeydownTypes.SEARCHKEYDOWN,
+  keydownKey: num.keyCode,
 });
 
 /* change in input on foto page */
@@ -108,7 +114,7 @@ export const getPopularVideo = () => {
         dispatch({
           type: GetPopularVideoTypes.GETPOPULARVIDEO,
           popularVideo: data,
-          isLoading: false
+          isLoading: false,
         })
       );
   };
@@ -146,7 +152,7 @@ export const getSearchVideos = (name: string) => {
         dispatch({
           type: GetVideoTypes.GETVIDEO,
           findVideo: data,
-          isLoading: false
+          isLoading: false,
         })
       );
   };
@@ -155,7 +161,7 @@ export const getSearchVideos = (name: string) => {
 /* get images search by name  */
 export const getSearchImages = (name: string) => {
   const keyAPI: string =
-  "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
+    "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
   return (dispatch: Dispatch) => {
     dispatch(deletePrevData());
     dispatch(isLoadingImages());
@@ -176,7 +182,7 @@ export const getSearchImages = (name: string) => {
         dispatch({
           type: SearchImagesByNameTypes.SEARCHIMAGESBYNAME,
           findPhoto: data,
-          isLoading: false
+          isLoading: false,
         })
       );
   };
@@ -194,41 +200,93 @@ export const handleScroll: ActionCreator<IMoveScrollAction> = (event: any) => {
 
 /*click heart interesting video and foto*/
 export const handleLikeHeart: ActionCreator<ILikeHeartAction> = (
- e: React.MouseEvent<SVGSVGElement,MouseEvent>
+  e: React.MouseEvent<SVGSVGElement, MouseEvent>
 ) => {
-  e.currentTarget.classList.toggle('liked');
+  e.currentTarget.classList.toggle("liked");
   return {
     type: likeHeart.LIKEHEART,
   };
 };
 
-
 /* preplay video */
-export const handlePreplayVideo: ActionCreator<IPreplayVideoAction> = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
+export const handlePreplayVideo: ActionCreator<IPreplayVideoAction> = (
+  e: React.MouseEvent<HTMLVideoElement, MouseEvent>
+) => {
   e.currentTarget.play();
   return {
-    type: preplayVideoTypes.PREPLAYVIDEO
-  }
-}
+    type: preplayVideoTypes.PREPLAYVIDEO,
+  };
+};
 
 /* stop video */
-export const handlePauseVideo: ActionCreator<IPauseVideoAction> = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
+export const handlePauseVideo: ActionCreator<IPauseVideoAction> = (
+  e: React.MouseEvent<HTMLVideoElement, MouseEvent>
+) => {
   e.currentTarget.pause();
   return {
-    type: pauseVideoTypes.PAUSEVIDEO
-  }
-}
+    type: pauseVideoTypes.PAUSEVIDEO,
+  };
+};
 
-export const isLoadingImages:ActionCreator<ILoadingImagesAction> = () => {
+/* loading page for photos page */
+export const isLoadingImages: ActionCreator<ILoadingImagesAction> = () => {
   return {
     type: isLoadingImagesTypes.LOADINGIMAGES,
-    isLoading: true
-  }
-}
+    isLoading: true,
+  };
+};
 
-export const isLoadingVideos:ActionCreator<ILoadingVideosAction> = () => {
+/* loading page for videos page */
+export const isLoadingVideos: ActionCreator<ILoadingVideosAction> = () => {
   return {
     type: isLoadingVideosTypes.LOADINGVIDEOS,
-    isLoading: true
+    isLoading: true,
+  };
+};
+
+/* search image and video by suggested word */
+export const searchBySuggestedWord = (value: string) => {
+  return {
+    type: SearchBySuggestedWordTypes.SEARCHBYSUGGESTEDWORD,
+    name: value,
+  };
+};
+
+/* download image */
+export const downloadImage = (elem: any) => {
+  while (elem.children.length > 1) {
+    elem.removeChild(elem.lastChild);
   }
-}
+  const image = elem.parentNode.parentNode.firstChild;
+  const w = elem.parentNode.parentNode.firstChild.width;
+  const h = elem.parentNode.parentNode.firstChild.height;
+  const canvas = document.createElement("canvas");
+  canvas.style.display = "none";
+  const ctx = canvas.getContext("2d");
+  canvas.width = w;
+  canvas.height = h;
+
+  ctx!.drawImage(image, 0, 0);
+  const dataURL = canvas.toDataURL();
+  elem.href = dataURL;
+
+  return {
+    type: DownloadImageTypes.DOWNLOADIMAGE,
+  };
+};
+
+/* get ID photo from photo page */
+export const getIdPhoto = (id: number) => {
+  console.log(id);
+  return {
+    type: GetIdPhotoTypes.GETIDPHOTO,
+    id,
+  };
+};
+
+/* toggle modal window for photo page */
+export const toggleWindowPhotoPage: ActionCreator<IToggleWindowPhotoPageAction> = (
+  elem: React.ElementType<HTMLDivElement>
+) => ({
+  type: ToggleWindowPhotoPageTypes.TOGGLEWINDOWPHOTOPAGE,
+});

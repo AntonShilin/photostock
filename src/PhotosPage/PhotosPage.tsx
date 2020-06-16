@@ -5,8 +5,10 @@ import { IApplicationState } from "../Store/Store";
 import {
   getPopularImages,
   handleSearchKeydown,
-  handleLikeHeart,
   getSearchVideos,
+  downloadImage,
+  getIdPhoto,
+  toggleWindowPhotoPage,
 } from "../Actions/ProductsActions";
 import { handleSearchChange } from "../Actions/ProductsActions";
 import { getSearchImages } from "../Actions/ProductsActions";
@@ -17,16 +19,22 @@ import { FiSearch } from "react-icons/fi";
 import NavigationPages from "../Components/NavigationPages/NavigationPages";
 import HeaderPhotoPage from "./HeaderPhotoPage/HeaderPhotoPage";
 import { MdControlPoint } from "react-icons/md";
+import SuggestedPhotoWords from "../Components/SuggestedPhotoWords/SuggestedPhotoWords";
+import Heart from "../Components/SVGIcons/Heart/Heart";
+import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
+import ModalWindowPhotoPage from "../Components/ModalWindow/ShowDetailsPhoto/ModalWindowPhotoPage";
 
 export interface IPropsPhotosPage extends RouteComponentProps {
   data: ICuratedPhoto | null;
   getPopularImages: typeof getPopularImages;
+  getIdPhoto: typeof getIdPhoto;
   getSearchVideos: typeof getSearchVideos;
   searchNamePhoto: string;
   handleSearchChange: typeof handleSearchChange;
   getSearchImages: typeof getSearchImages;
   getKeyNumber: typeof handleSearchKeydown;
-  handleLikeHeart: typeof handleLikeHeart;
+  downloadImage: typeof downloadImage;
+  toggleWindowPhotoPage: typeof toggleWindowPhotoPage;
   isScrollTop: number | null;
   isScrollHeight: number | null;
   isClientHeight: number | null;
@@ -35,11 +43,11 @@ export interface IPropsPhotosPage extends RouteComponentProps {
 }
 
 class PhotosPage extends React.Component<IPropsPhotosPage> {
-  private heart: React.RefObject<SVGSVGElement> | null;
+  private link: React.RefObject<HTMLAnchorElement> | null;
 
   constructor(props: IPropsPhotosPage) {
     super(props);
-    this.heart = React.createRef();
+    this.link = React.createRef();
   }
 
   public componentDidMount() {
@@ -52,6 +60,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
     return (
       <React.Fragment>
         <HeaderPhotoPage />
+        <ModalWindowPhotoPage />
         <div
           className="container-fluid photospage_bg"
           style={{
@@ -72,7 +81,9 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                   onChange={this.props.handleSearchChange}
                   autoFocus={false}
                   required={true}
-                  /* onKeyDown={this.props.getKeyNumber} */
+                  onKeyDown={(e) => {
+                    this.props.getKeyNumber(e);
+                  }}
                 />
                 <div className="input-group-append">
                   <NavLink
@@ -87,12 +98,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                   </NavLink>
                 </div>
               </div>
-              <h6>
-                Suggested:
-                <span className="text-white pl-2">
-                  car, adventure, crowd, dark, workout, butterfly, more...
-                </span>
-              </h6>
+              <SuggestedPhotoWords />
             </div>
           </div>
         </div>
@@ -116,10 +122,31 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                           i % 2 ? (
                             <div key={i} className="col-12">
                               <div className="info-for-image">
-                                <img src={image.src.large} alt={`img_${i}`} />
+                                <img
+                                  onClick={() => {
+                                    this.props.getIdPhoto(image.id);
+                                    this.props.toggleWindowPhotoPage();
+                                  }}
+                                  src={image.src.large}
+                                  alt={`img_${i}`}
+                                  crossOrigin="anonymous"
+                                />
                                 <div className="image-photographer">
-                                  <p>{image.photographer}</p>
+                                  <p>
+                                    {image.photographer}
+                                    {image.id}
+                                  </p>
                                 </div>
+                                <span>
+                                  <a
+                                    download={true}
+                                    onClick={(e) =>
+                                      this.props.downloadImage(e.currentTarget)
+                                    }
+                                  >
+                                    <DownloadIcon />
+                                  </a>
+                                </span>
                                 <span>
                                   <MdControlPoint
                                     style={{
@@ -129,25 +156,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                                   />
                                 </span>
                                 <span>
-                                  <svg
-                                    className="heart"
-                                    viewBox="0 -2 35 35"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    strokeWidth="0"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    width="1.6em"
-                                    height="1.3em"
-                                    ref={this.heart}
-                                    onClick={(e) =>
-                                      this.props.handleLikeHeart(e)
-                                    }
-                                  >
-                                    <path
-                                      d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-	c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
-                                    />
-                                  </svg>
+                                  <Heart />
                                 </span>
                               </div>
                             </div>
@@ -163,10 +172,28 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                           i % 2 === 0 ? (
                             <div key={i} className="col-12">
                               <div className="info-for-image">
-                                <img src={image.src.large} alt={`img_${i}`} />
+                                <img
+                                  src={image.src.large}
+                                  alt={`img_${i}`}
+                                  crossOrigin="anonymous"
+                                  onClick={() => {
+                                    this.props.getIdPhoto(image.id);
+                                    this.props.toggleWindowPhotoPage();
+                                  }}
+                                />
                                 <div className="image-photographer">
                                   <p>{image.photographer}</p>
                                 </div>
+                                <span>
+                                  <a
+                                    download={true}
+                                    onClick={(e) =>
+                                      this.props.downloadImage(e.currentTarget)
+                                    }
+                                  >
+                                    <DownloadIcon />
+                                  </a>
+                                </span>
                                 <span>
                                   <MdControlPoint
                                     style={{
@@ -176,25 +203,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                                   />
                                 </span>
                                 <span>
-                                  <svg
-                                    className="heart"
-                                    viewBox="0 -2 35 35"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    strokeWidth="0"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    width="1.6em"
-                                    height="1.3em"
-                                    ref={this.heart}
-                                    onClick={(e) =>
-                                      this.props.handleLikeHeart(e)
-                                    }
-                                  >
-                                    <path
-                                      d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-	c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
-                                    />
-                                  </svg>
+                                  <Heart />
                                 </span>
                               </div>
                             </div>
@@ -218,18 +227,19 @@ const mapStateToProps = (store: IApplicationState) => ({
   isClientHeight: store.products.isClientHeight,
   isScrolling: store.products.isScrolling,
   searchNamePhoto: store.products.searchNamePhoto,
-  isLoadingImages: store.products.isLoadingImages
+  isLoadingImages: store.products.isLoadingImages,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getKeyNumber: (e: any) => dispatch(handleSearchKeydown(e)),
+    getKeyNumber: (num: number) => dispatch(handleSearchKeydown(num)),
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
     getPopularImages: () => dispatch(getPopularImages()),
     handleSearchChange: (e: string) => dispatch(handleSearchChange(e)),
     getSearchImages: (name: string) => dispatch(getSearchImages(name)),
-    handleLikeHeart: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
-      dispatch(handleLikeHeart(e)),
+    downloadImage: (elem: any) => dispatch(downloadImage(elem)),
+    getIdPhoto: (id: number) => dispatch(getIdPhoto(id)),
+    toggleWindowPhotoPage: () => dispatch(toggleWindowPhotoPage()),
   };
 };
 

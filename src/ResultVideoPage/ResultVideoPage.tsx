@@ -4,7 +4,6 @@ import { IApplicationState } from "../Store/Store";
 import { IPopularVideos, IDataSearch } from "../Interfaces/Interfaces";
 import {
   getSearchVideos,
-  handleLikeHeart,
   handlePauseVideo,
   handlePreplayVideo,
 } from "../Actions/ProductsActions";
@@ -16,26 +15,19 @@ import { AiOutlinePlayCircle } from "react-icons/ai";
 import { MdControlPoint } from "react-icons/md";
 import CouldnotFindVideo from "../Components/CouldnotFindVideo/CouldnotFindVideo";
 import { FaRegImage, FaVideo } from "react-icons/fa";
+import Heart from "../Components/SVGIcons/Heart/Heart";
 
 export interface IPropsResultPage extends RouteComponentProps {
   resultSearchVideo: IPopularVideos | null;
   getSearchVideos: typeof getSearchVideos;
   resultSearchImage: IDataSearch | null;
   searchNameVideo: string;
-  handleLikeHeart: typeof handleLikeHeart;
   handlePreplayVideo: typeof handlePreplayVideo;
   handlePauseVideo: typeof handlePauseVideo;
   isLoadingVideos: boolean;
 }
 
 class ResultVideoPage extends React.Component<IPropsResultPage> {
-
-  private heart: React.RefObject<SVGSVGElement> | null;
-
-  constructor(props: IPropsResultPage) {
-    super(props);
-    this.heart = React.createRef();
-  }
 
   public render() {
     return (
@@ -125,25 +117,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                                   />
                                 </span>
                                 <span>
-                                  <svg
-                                    className="heart"
-                                    viewBox="0 -2 35 35"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    strokeWidth="0"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    width="1.6em"
-                                    height="1.3em"
-                                    ref={this.heart}
-                                    onClick={(e) =>
-                                      this.props.handleLikeHeart(e)
-                                    }
-                                  >
-                                    <path
-                                      d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-	c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
-                                    />
-                                  </svg>
+                                 <Heart/>
                                 </span>
                               </div>
                             </div>
@@ -196,25 +170,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                                   />
                                 </span>
                                 <span>
-                                  <svg
-                                    className="heart"
-                                    viewBox="0 -2 35 35"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    strokeWidth="0"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    width="1.6em"
-                                    height="1.3em"
-                                    ref={this.heart}
-                                    onClick={(e) =>
-                                      this.props.handleLikeHeart(e)
-                                    }
-                                  >
-                                    <path
-                                      d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-	c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
-                                    />
-                                  </svg>
+                                <Heart/>
                                 </span>
                               </div>
                             </div>
@@ -243,8 +199,6 @@ const mapStateToProps = (store: IApplicationState) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
-    handleLikeHeart: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
-      dispatch(handleLikeHeart(e)),
     handlePreplayVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
       dispatch(handlePreplayVideo(e)),
     handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>

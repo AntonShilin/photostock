@@ -5,10 +5,10 @@ import {
   getPopularVideo,
   getSearchVideos,
   changeNameVideo,
-  handleLikeHeart,
   handlePreplayVideo,
   handlePauseVideo,
   getSearchImages,
+  handleSearchKeydown,
 } from "../Actions/ProductsActions";
 import { IApplicationState } from "../Store/Store";
 import "./VideosPage.scss";
@@ -19,6 +19,8 @@ import HeaderVideoPage from "./HeaderVideoPage/HeaderVideoPage";
 import { NavLink } from "react-router-dom";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { MdControlPoint } from "react-icons/md";
+import SuggestedVideoWords from "../Components/SuggestedVideoWords/SuggestedVideoWords";
+import Heart from "../Components/SVGIcons/Heart/Heart";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
@@ -27,20 +29,14 @@ export interface IPropsVideosPage {
   searchNamePhoto: string;
   getSearchVideos: typeof getSearchVideos;
   changeNameVideo: typeof changeNameVideo;
-  handleLikeHeart: typeof handleLikeHeart;
   handlePreplayVideo: typeof handlePreplayVideo;
   handlePauseVideo: typeof handlePauseVideo;
   getSearchImages: typeof getSearchImages;
+  getKeyNumber: typeof handleSearchKeydown;
   isLoadingVideos: boolean;
 }
 
 class VideosPage extends React.Component<IPropsVideosPage> {
-  private heart: React.RefObject<SVGSVGElement> | null;
-
-  constructor(props: IPropsVideosPage) {
-    super(props);
-    this.heart = React.createRef();
-  }
 
   public componentDidMount() {
     this.props.getPopularVideo();
@@ -80,6 +76,9 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                   value={this.props.searchNameVideo}
                   onChange={this.props.changeNameVideo}
                   autoFocus={false}
+                  onKeyDown={(e) => {
+                    this.props.getKeyNumber(e);
+                  }} 
                 />
                 <div className="input-group-append">
                   <NavLink
@@ -94,12 +93,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                   </NavLink>
                 </div>
               </div>
-              <h6>
-                Suggested:
-                <span className="text-white pl-2">
-                  businessman, hd wallpapers, abstract, phone, green, more...
-                </span>
-              </h6>
+              <SuggestedVideoWords/>
             </div>
           </div>
         </div>
@@ -159,25 +153,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                   />
                                 </span>
                                 <span>
-                                  <svg
-                                    className="heart"
-                                    viewBox="0 -2 35 35"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    strokeWidth="0"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    width="1.6em"
-                                    height="1.3em"
-                                    ref={this.heart}
-                                    onClick={(e) =>
-                                      this.props.handleLikeHeart(e)
-                                    }
-                                  >
-                                    <path
-                                      d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-	c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
-                                    />
-                                  </svg>
+                                 <Heart/>
                                 </span>
                               </div>
                             </div>
@@ -230,25 +206,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                   />
                                 </span>
                                 <span>
-                                  <svg
-                                    className="heart"
-                                    viewBox="0 -2 35 35"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    strokeWidth="0"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    width="1.6em"
-                                    height="1.3em"
-                                    ref={this.heart}
-                                    onClick={(e) =>
-                                      this.props.handleLikeHeart(e)
-                                    }
-                                  >
-                                    <path
-                                      d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-	c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
-                                    />
-                                  </svg>
+                                <Heart/>
                                 </span>
                               </div>
                             </div>
@@ -277,11 +235,10 @@ const mapStateToProps = (store: IApplicationState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
+    getKeyNumber: (num: number) => dispatch(handleSearchKeydown(num)),
     getPopularVideo: () => dispatch(getPopularVideo()),
     changeNameVideo: (e: string) => dispatch(changeNameVideo(e)),
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
-    handleLikeHeart: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
-      dispatch(handleLikeHeart(e)),
     handlePreplayVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
       dispatch(handlePreplayVideo(e)),
     handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>

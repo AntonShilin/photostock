@@ -1,7 +1,7 @@
 div.navigation-pages {
   border-bottom: 0.25rem solid #d3d3d3a3;
   div.row {
-    height: 3.6rem;
+    height: 3.5rem;
     div {
       .active {
         border-bottom: 0.25rem solid blue;
@@ -16,6 +16,11 @@ div.navigation-pages {
         border-bottom: 0.25rem solid transparent;
         text-transform: uppercase;
         letter-spacing: .4px;
+        color: #5e5e5e;
+        &:hover{
+          color: blue;
+          opacity: .8;
+        }
       }
     }
   }

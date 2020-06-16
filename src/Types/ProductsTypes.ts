@@ -9,7 +9,7 @@ export enum SearchValueTypes {
 }
 
 export enum SearchKeydownTypes {
-  SEARCKEYDOWN = "SEARCKEYDOWN"
+  SEARCHKEYDOWN = "SEARCHKEYDOWN"
 }
 
 
@@ -66,8 +66,44 @@ export enum isLoadingVideosTypes {
   LOADINGVIDEOS="LOADINGVIDEOS"
 }
 
+export enum SearchBySuggestedWordTypes{
+  SEARCHBYSUGGESTEDWORD="SEARCHBYSUGGESTEDWORD"
+}
+
+export enum DownloadImageTypes{
+  DOWNLOADIMAGE="DOWNLOADIMAGE"
+}
+
+export enum GetIdPhotoTypes{
+  GETIDPHOTO="GETIDPHOTO"
+}
+
+export enum ToggleWindowPhotoPageTypes{
+  TOGGLEWINDOWPHOTOPAGE="TOGGLEWINDOWPHOTOPAGE"
+}
+
+
 
 /*  interfaces */
+export interface IToggleWindowPhotoPageAction{
+  type: ToggleWindowPhotoPageTypes.TOGGLEWINDOWPHOTOPAGE
+}
+
+
+export interface IShowDetailsPhotoAction{
+  type: GetIdPhotoTypes.GETIDPHOTO
+  id:number
+}
+
+export interface IDownloadImageAction{
+  type: DownloadImageTypes.DOWNLOADIMAGE
+}
+
+export interface ISearchBySuggestedWordAction {
+  type: SearchBySuggestedWordTypes.SEARCHBYSUGGESTEDWORD
+  name:string
+}
+
 export interface ILoadingImagesAction {
   type: isLoadingImagesTypes.LOADINGIMAGES
   isLoading: boolean
@@ -102,7 +138,7 @@ export interface IToggleMenuAction {
 }
 
 export interface ISearchKeydownAction {
-  type: SearchKeydownTypes.SEARCKEYDOWN;
+  type: SearchKeydownTypes.SEARCHKEYDOWN;
   keydownKey: any;
 }
 
@@ -164,11 +200,16 @@ export type ProductsActions =
   | IPreplayVideoAction
   | IPauseVideoAction
   |ILoadingImagesAction
-  |ILoadingVideosAction
+  | ILoadingVideosAction
+  | ILoadingImagesAction
+  | ISearchBySuggestedWordAction
+  | IDownloadImageAction
+  | IShowDetailsPhotoAction
+  |IToggleWindowPhotoPageAction
   | IToggleMenuAction;
 
 export interface IProductsState {
-  readonly keyboardKey: any;
+  readonly keyboardKey: number|null;
   readonly data: ICuratedPhoto | null;
   readonly videos: IPopularVideos | null;
   readonly productsLoading: boolean;
@@ -183,4 +224,9 @@ export interface IProductsState {
   readonly isClientHeight: number|null;
   readonly isLoadingImages: boolean;
   readonly isLoadingVideos: boolean;
+  readonly suggestedWords: string[];
+  readonly modalWindowPhotoPage: {
+    id: number | null;
+    isOpen: boolean;
+  }
 }

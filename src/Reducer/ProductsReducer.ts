@@ -17,7 +17,12 @@ import {
   isLoadingImagesTypes,
   isLoadingVideosTypes,
   SearchImagesByNameTypes,
+  SearchBySuggestedWordTypes,
+  DownloadImageTypes,
+  ToggleWindowPhotoPageTypes,
+  GetIdPhotoTypes,
 } from "../Types/ProductsTypes";
+import { ICuratedPhoto } from "../Interfaces/Interfaces";
 
 const initialProductState: IProductsState = {
   productsLoading: false,
@@ -33,8 +38,23 @@ const initialProductState: IProductsState = {
   isScrollTop: null,
   isScrollHeight: null,
   isClientHeight: null,
-  isLoadingImages:false,
-  isLoadingVideos:false
+  isLoadingImages: false,
+  isLoadingVideos: false,
+  suggestedWords: [
+    "background",
+    "motorcycle",
+    "business",
+    "town",
+    "ball",
+    "bike",
+    "butterfly",
+    "sea",
+    "ocean",
+  ],
+  modalWindowPhotoPage: {
+    id: 0,
+    isOpen: false,
+  },
 };
 
 export const productsReducer: Reducer<IProductsState, ProductsActions> = (
@@ -43,22 +63,17 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
 ) => {
   switch (action.type) {
     case GetPopularImagesTypes.GETPOPULARIMAGES: {
+      action.popularPhoto.photos.map((elem, i) => {
+        elem.id = i;
+      });
       return {
         ...state,
         data: action.popularPhoto,
-        isLoadingImages: action.isLoading
+        isLoadingImages: action.isLoading,
       };
     }
 
-    case SearchKeydownTypes.SEARCKEYDOWN: {
-      if (action.keydownKey === 13 || action.keydownKey === 32) {
-        if (state.searchNamePhoto !== "") {
-          /*   const currentLocation = document.location.pathname;
-          const searchphoto = state.searchNamePhoto;
-           document.location.assign(currentLocation + "/" + searchphoto);  */
-        }
-      }
-
+    case SearchKeydownTypes.SEARCHKEYDOWN: {
       return {
         ...state,
         keyboardKey: action.keydownKey,
@@ -69,7 +84,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       return {
         ...state,
         searchNamePhoto: action.searchValue,
-        searchNameVideo: action.searchValue
+        searchNameVideo: action.searchValue,
       };
     }
 
@@ -77,7 +92,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       return {
         ...state,
         resultSearchImage: action.findPhoto,
-        isLoadingImages: action.isLoading
+        isLoadingImages: action.isLoading,
       };
     }
 
@@ -85,7 +100,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       return {
         ...state,
         videos: action.popularVideo,
-        isLoadingVideos: action.isLoading
+        isLoadingVideos: action.isLoading,
       };
     }
 
@@ -93,7 +108,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       return {
         ...state,
         searchNameVideo: action.value,
-        searchNamePhoto: action.value
+        searchNamePhoto: action.value,
       };
     }
 
@@ -101,10 +116,10 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
       return {
         ...state,
         resultSearchVideo: action.findVideo,
-        isLoadingVideos: action.isLoading
+        isLoadingVideos: action.isLoading,
       };
     }
-      
+
     case DeletePrevData.DELETEPREVDATA: {
       return {
         ...state,
@@ -128,39 +143,74 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         isClientHeight: action.clientHeight,
       };
     }
-      
+
     case likeHeart.LIKEHEART: {
       return {
-        ...state
+        ...state,
       };
     }
-      
+
     case preplayVideoTypes.PREPLAYVIDEO: {
       return {
-        ...state
+        ...state,
       };
     }
-      
+
     case pauseVideoTypes.PAUSEVIDEO: {
       return {
-        ...state
+        ...state,
       };
     }
 
     case isLoadingImagesTypes.LOADINGIMAGES: {
       return {
         ...state,
-        isLoadingImages:action.isLoading
+        isLoadingImages: action.isLoading,
       };
     }
-      
+
     case isLoadingVideosTypes.LOADINGVIDEOS: {
       return {
         ...state,
-        isLoadingVideos:action.isLoading
+        isLoadingVideos: action.isLoading,
       };
     }
-   
+
+    case SearchBySuggestedWordTypes.SEARCHBYSUGGESTEDWORD: {
+      return {
+        ...state,
+        searchNameVideo: action.name,
+        searchNamePhoto: action.name,
+      };
+    }
+
+    case DownloadImageTypes.DOWNLOADIMAGE: {
+      return {
+        ...state,
+      };
+    }
+
+    case GetIdPhotoTypes.GETIDPHOTO: {
+      return {
+        ...state,
+        modalWindowPhotoPage: {
+          ...state.modalWindowPhotoPage,
+          id:action.id
+        }
+      };
+    }
+
+    case ToggleWindowPhotoPageTypes.TOGGLEWINDOWPHOTOPAGE: {
+      return {
+        ...state,
+        modalWindowPhotoPage: {
+          ...state.modalWindowPhotoPage,
+          isOpen: !state.modalWindowPhotoPage.isOpen,
+        },
+      };
+    }
+
+    default:
+      return state;
   }
-  return state || initialProductState;
 };
