@@ -82,9 +82,27 @@ export enum ToggleWindowPhotoPageTypes{
   TOGGLEWINDOWPHOTOPAGE="TOGGLEWINDOWPHOTOPAGE"
 }
 
+export enum ImageForwardTypes {
+  IMAGEFORWARD="IMAGEFORWARD"
+}
+
+export enum ImageBackTypes {
+  IMAGEBACK="IMAGEBACK"
+}
 
 
 /*  interfaces */
+export interface IImageBackAction{
+  type: ImageBackTypes.IMAGEBACK
+  stepBack: number
+}
+
+export interface IImageForwardAction{
+  type: ImageForwardTypes.IMAGEFORWARD
+  stepForward: number
+}
+
+
 export interface IToggleWindowPhotoPageAction{
   type: ToggleWindowPhotoPageTypes.TOGGLEWINDOWPHOTOPAGE
 }
@@ -205,7 +223,9 @@ export type ProductsActions =
   | ISearchBySuggestedWordAction
   | IDownloadImageAction
   | IShowDetailsPhotoAction
-  |IToggleWindowPhotoPageAction
+  | IToggleWindowPhotoPageAction
+  | IImageForwardAction
+  |IImageBackAction
   | IToggleMenuAction;
 
 export interface IProductsState {

@@ -1,14 +1,14 @@
 div.modal_window_photo_basis {
   position: absolute;
   background-color: rgba(44, 40, 40, 0.8);
-  padding: 1rem 0rem 1rem 0rem;
+  padding: 0rem 0rem 1rem 0rem;
   height: 100%;
   width: 100%;
   z-index: 5;
   div.modal_window_photo_bg {
     background-color: white;
     position: relative;
-    padding: 2rem;
+    padding: 2rem 1rem 2rem 1rem;
     height: auto;
     width: 80vw;
     border-radius: 6px;
@@ -17,15 +17,16 @@ div.modal_window_photo_basis {
       position: absolute;
       cursor: pointer;
       font-size: 2.5rem;
-      left: 0%;
+      left: -7%;
       top: 0%;
+      color:white;
     }
     svg.heart {
       stroke: black;
     }
 
     .description_photo {
-      padding: 1rem 0rem 0rem 2rem;
+
     }
     .modal_window_photo {
       margin: 3rem auto;
@@ -38,7 +39,7 @@ div.modal_window_photo_basis {
       .arrow_left {
         position: absolute;
         top: 40%;
-        left: -5%;
+        left: -3%;
         &:hover {
           color: rgb(255, 0, 0);
           cursor: pointer;
@@ -47,7 +48,7 @@ div.modal_window_photo_basis {
       .arrow_right {
         position: absolute;
         top: 40%;
-        right: -5%;
+        right: -3%;
         &:hover {
           color: rgb(255, 0, 0);
           cursor: pointer;
@@ -58,11 +59,15 @@ div.modal_window_photo_basis {
 }
 
 @media screen and (max-width: 850px) {
-  .modal_window_photo {
-    img {
-     width: 100%;
-     height: auto;
+  div.modal_window_photo_bg{
+    width: 100% !important;
+    svg.close_icon {
+      left: 0% !important;
+      color: black !important;
     }
+      }
+  .modal_window_photo {
+    margin: 1rem auto !important;
     .arrow_left {
       color: #05a081 !important;
     }
@@ -74,7 +79,9 @@ div.modal_window_photo_basis {
 
 
 @media screen and (max-width: 650px) {
-  div.modal_window_photo_bg{
-width: 100% !important;
-  }
+  .modal_window_photo {
+    img {
+     width: 100%;
+     height: auto;
+    }}
 }

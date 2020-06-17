@@ -6,14 +6,20 @@ import "./ModalWindowPhotoPage.scss";
 import Heart from "../../SVGIcons/Heart/Heart";
 import { MdControlPoint, MdClose } from "react-icons/md";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
-import { toggleWindowPhotoPage } from "../../../Actions/ProductsActions";
+import {
+  toggleWindowPhotoPage,
+  watchingImageForward,
+  watchingImageBack,
+} from "../../../Actions/ProductsActions";
 
 export interface IWindowPhotoPageProps {
   data: ICuratedPhoto | null;
   id: number | null;
   isOpen: boolean;
-  toggleWindowPhotoPage: typeof toggleWindowPhotoPage;
   isScrollTop: number | null;
+  toggleWindowPhotoPage: typeof toggleWindowPhotoPage;
+  watchingImageForward: typeof watchingImageForward;
+  watchingImageBack: typeof watchingImageBack;
 }
 
 export interface State {}
@@ -42,16 +48,16 @@ class ModalWindowPhotoPage extends React.Component<
                 />
                 <div className="col-12 description_photo">
                   <div className="row">
-                    <div className="col-lg-4 col-md-12 col-sm-12 mb-2">
-                      <p>
+                    <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
+                      <p className="text-center">
                         {this.props.data!.photos[id].photographer}
                       </p>
                     </div>
-                    <div className="col-lg-4 col-md-12 col-sm-12 mb-2">
-                      <button className="btn btn-light mr-2">
+                    <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
+                      <button className="btn  btn-lg btn-light mr-2 mb-2">
                         <Heart /> Likes
                       </button>
-                      <button className="btn btn-light mr-2">
+                      <button className="btn  btn-lg btn-light mr-2 mb-2">
                         <MdControlPoint
                           className="control_point"
                           style={{
@@ -65,7 +71,7 @@ class ModalWindowPhotoPage extends React.Component<
                       </button>
                     </div>
                     <div className="col-lg-4 col-md-12 col-sm-12 mb-2">
-                    <div className="btn-group w-100">
+                      <div className="btn-group btn-group-lg w-100">
                         <button className="btn btn-success">
                           Free download
                         </button>
@@ -80,7 +86,10 @@ class ModalWindowPhotoPage extends React.Component<
                 </div>
                 <div className="col-12 modal_window_photo">
                   <img src={this.props.data!.photos[id].src.medium} alt="img" />
-                  <span className="arrow_left">
+                  <span
+                    className="arrow_left"
+                    onClick={() => this.props.watchingImageBack(id)}
+                  >
                     <IoIosArrowBack
                       style={{
                         fontSize: "3rem",
@@ -88,7 +97,10 @@ class ModalWindowPhotoPage extends React.Component<
                       }}
                     />
                   </span>
-                  <span className="arrow_right">
+                  <span
+                    className="arrow_right"
+                    onClick={() => this.props.watchingImageForward(id)}
+                  >
                     <IoIosArrowForward
                       style={{
                         fontSize: "3rem",
@@ -116,6 +128,8 @@ const mapStateToProps = (state: IApplicationState) => ({
 const mapDispatchToProps = (dispatch: any) => {
   return {
     toggleWindowPhotoPage: () => dispatch(toggleWindowPhotoPage()),
+    watchingImageForward: (id: number) => dispatch(watchingImageForward(id)),
+    watchingImageBack: (id: number) => dispatch(watchingImageBack(id)),
   };
 };
 

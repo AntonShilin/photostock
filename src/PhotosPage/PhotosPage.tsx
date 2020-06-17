@@ -22,7 +22,7 @@ import { MdControlPoint } from "react-icons/md";
 import SuggestedPhotoWords from "../Components/SuggestedPhotoWords/SuggestedPhotoWords";
 import Heart from "../Components/SVGIcons/Heart/Heart";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
-import ModalWindowPhotoPage from "../Components/ModalWindow/ShowDetailsPhoto/ModalWindowPhotoPage";
+import ModalWindowPhotoPage from "../Components/ModalWindow/ModalWindowPhotoPage/ModalWindowPhotoPage";
 
 export interface IPropsPhotosPage extends RouteComponentProps {
   data: ICuratedPhoto | null;

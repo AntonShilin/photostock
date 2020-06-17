@@ -21,8 +21,9 @@ import {
   DownloadImageTypes,
   ToggleWindowPhotoPageTypes,
   GetIdPhotoTypes,
+  ImageForwardTypes,
+  ImageBackTypes,
 } from "../Types/ProductsTypes";
-import { ICuratedPhoto } from "../Interfaces/Interfaces";
 
 const initialProductState: IProductsState = {
   productsLoading: false,
@@ -206,6 +207,35 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         modalWindowPhotoPage: {
           ...state.modalWindowPhotoPage,
           isOpen: !state.modalWindowPhotoPage.isOpen,
+        },
+      };
+    }
+      
+      
+    case ImageForwardTypes.IMAGEFORWARD: {
+      if (action.stepForward>=state.data!.photos.length) {
+        action.stepForward = 0;
+      }
+
+      return {
+        ...state,
+        modalWindowPhotoPage: {
+          ...state.modalWindowPhotoPage,
+          id:action.stepForward
+        },
+      };
+    }
+      
+    case ImageBackTypes.IMAGEBACK: {
+      if (action.stepBack<=0) {
+        action.stepBack = state.data!.photos.length-1;
+      }
+      
+      return {
+        ...state,
+        modalWindowPhotoPage: {
+          ...state.modalWindowPhotoPage,
+          id:action.stepBack
         },
       };
     }

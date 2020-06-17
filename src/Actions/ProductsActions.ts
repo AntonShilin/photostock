@@ -32,6 +32,8 @@ import {
   ToggleWindowPhotoPageTypes,
   IToggleWindowPhotoPageAction,
   GetIdPhotoTypes,
+  ImageForwardTypes,
+  ImageBackTypes,
 } from "../Types/ProductsTypes";
 import { ICuratedPhoto } from "../Interfaces/Interfaces";
 
@@ -290,3 +292,23 @@ export const toggleWindowPhotoPage: ActionCreator<IToggleWindowPhotoPageAction> 
 ) => ({
   type: ToggleWindowPhotoPageTypes.TOGGLEWINDOWPHOTOPAGE,
 });
+
+
+/*watching image forward in modal window*/
+export const watchingImageForward = (id: number) => {
+  ++id
+  return {
+    type: ImageForwardTypes.IMAGEFORWARD,
+    stepForward: id
+  }
+}
+
+
+/*watching image back in modal window*/
+export const watchingImageBack = (id: number) => {
+  --id
+  return {
+    type: ImageBackTypes.IMAGEBACK,
+    stepBack: id
+  }
+}
