@@ -44,10 +44,10 @@ class CouldnotFindVideo extends React.Component<ICouldnotFindVideoProps, State> 
   }
 }
 
-const mapStateToProps = (store: IApplicationState) => {
+const mapStateToProps = (state: IApplicationState) => {
   return {
-    searchNameVideo: store.products.searchNameVideo,
-  resultSearchVideo: store.products.resultSearchVideo
+    searchNameVideo: state.products.searchNameVideo,
+  resultSearchVideo: state.products.resultSearchVideo
   };
 };
 

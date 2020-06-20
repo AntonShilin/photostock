@@ -102,9 +102,9 @@ class HeaderResultVideoPage extends React.Component<IHeaderResultVideoPageProps,
 }
 
 
-const mapStateToProps = (store: IApplicationState) => ({
-  isToggleMenu: store.products.isToggleMenu,
-  isScrolling: store.products.isScrolling
+const mapStateToProps = (state: IApplicationState) => ({
+  isToggleMenu: state.products.isToggleMenu,
+  isScrolling: state.products.isScrolling
 });
 
 const mapDispatchToProps = (dispatch: any) => {

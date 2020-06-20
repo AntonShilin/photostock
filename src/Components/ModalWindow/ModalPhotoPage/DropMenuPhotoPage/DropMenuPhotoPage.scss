@@ -1,0 +1,41 @@
+.dropmenu_photo_page {
+  border-radius: 6px;
+  cursor: pointer;
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+  border: 1px solid lightgrey;
+  background-color: white;
+  width: 15rem;
+  height: auto;
+  padding: 0.5rem 0rem 0rem 0rem;
+  z-index: 1;
+  overflow: hidden;
+  p {
+    border-bottom: 1px solid lightgrey;
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+  div {
+    border-bottom: 1px solid lightgrey;
+    label {
+      margin-left: 1rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: .2rem 0rem 0.2rem 0rem;
+      line-height: 1;
+    }
+  }
+  span.btn {
+    font-size: 1rem;
+    background-color: #05a081;
+    color: white !important;
+    display: block;
+    margin: 1rem;
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+}

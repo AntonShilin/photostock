@@ -1,22 +1,21 @@
 import * as React from "react";
 import { handleLikeHeart } from "../../../Actions/ProductsActions";
 import { connect } from "react-redux";
-import { IApplicationState } from "../../../Store/Store";
-import "./Heart.scss"
+import "./Heart.scss";
 
 export interface IHeartProps {
-    handleLikeHeart: typeof handleLikeHeart;
+  handleLikeHeart: typeof handleLikeHeart;
 }
 
 export interface State {}
 
 class Heart extends React.Component<IHeartProps, State> {
-    private heart: React.RefObject<SVGSVGElement> | null;
+  private heart: React.RefObject<SVGSVGElement> | null;
 
-    constructor(props: IHeartProps) {
-        super(props);
-        this.heart = React.createRef();
-      }
+  constructor(props: IHeartProps) {
+    super(props);
+    this.heart = React.createRef();
+  }
 
   public render() {
     return (
@@ -41,15 +40,11 @@ c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
   }
 }
 
-const mapStateToProps = (store: IApplicationState) => ({
-
-  });
-  
-  const mapDispatchToProps = (dispatch: any) => {
-    return {
-      handleLikeHeart: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
-        dispatch(handleLikeHeart(e)),
-    };
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    handleLikeHeart: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
+      dispatch(handleLikeHeart(e)),
   };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(Heart);
+export default connect(null, mapDispatchToProps)(Heart);

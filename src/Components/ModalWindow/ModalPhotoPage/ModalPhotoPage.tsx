@@ -2,15 +2,17 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { IApplicationState } from "../../../Store/Store";
 import { ICuratedPhoto } from "../../../Interfaces/Interfaces";
-import "./ModalWindowPhotoPage.scss";
+import "./ModalPhotoPage.scss";
 import Heart from "../../SVGIcons/Heart/Heart";
 import { MdControlPoint, MdClose } from "react-icons/md";
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowBack, IoIosArrowDown } from "react-icons/io";
 import {
   toggleWindowPhotoPage,
   watchingImageForward,
   watchingImageBack,
+  toggleDropMenuPhotoPage,
 } from "../../../Actions/ProductsActions";
+import DropMenuPhotoPage from "./DropMenuPhotoPage/DropMenuPhotoPage";
 
 export interface IWindowPhotoPageProps {
   data: ICuratedPhoto | null;
@@ -20,6 +22,7 @@ export interface IWindowPhotoPageProps {
   toggleWindowPhotoPage: typeof toggleWindowPhotoPage;
   watchingImageForward: typeof watchingImageForward;
   watchingImageBack: typeof watchingImageBack;
+  toggleDropMenuPhotoPage: typeof toggleDropMenuPhotoPage;
 }
 
 export interface State {}
@@ -38,13 +41,12 @@ class ModalWindowPhotoPage extends React.Component<
             className={
               this.props.isOpen ? "d-block modal_window_photo_basis" : "d-none"
             }
-            style={{ top: this.props.isScrollTop! }}
           >
             <div className="container-xl">
               <div className="row modal_window_photo_bg">
                 <MdClose
                   className="close_icon"
-                  onClick={this.props.toggleWindowPhotoPage}
+                  onClick={() => this.props.toggleWindowPhotoPage()}
                 />
                 <div className="col-12 description_photo">
                   <div className="row">
@@ -54,59 +56,37 @@ class ModalWindowPhotoPage extends React.Component<
                       </p>
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
-                      <button className="btn  btn-lg btn-light mr-2 mb-2">
+                      <button className="btn btn-light mr-2 mb-2 heart">
                         <Heart /> Likes
                       </button>
-                      <button className="btn  btn-lg btn-light mr-2 mb-2">
-                        <MdControlPoint
-                          className="control_point"
-                          style={{
-                            color: "white",
-                            fontSize: "1.5rem",
-                            marginRight: ".5rem",
-                            fill: "black",
-                          }}
-                        />
-                        Collect
+                      <button className="btn btn-light mr-2 mb-2   control_point">
+                        <MdControlPoint /> Collect
                       </button>
                     </div>
-                    <div className="col-lg-4 col-md-12 col-sm-12 mb-2">
-                      <div className="btn-group btn-group-lg w-100">
-                        <button className="btn btn-success">
-                          Free download
-                        </button>
-                        <button className="btn btn-success dropdown-toggle dropdown-toggle-split" />
-                        <div className="dropdown-menu">
-                          <span className="dropdown-item">Original</span>
-                          <span className="dropdown-item">Large</span>
-                        </div>
-                      </div>
+                    <div className="col-lg-4 col-md-12 col-sm-12 mb-2 download_item_bg">
+                      <button
+                        className="btn download w-100"
+                        onClick={this.props.toggleDropMenuPhotoPage}
+                      >
+                        Free download <IoIosArrowDown />
+                      </button>
+                      <DropMenuPhotoPage />
                     </div>
                   </div>
                 </div>
-                <div className="col-12 modal_window_photo">
+                <div className="col-12 align-self-center modal_window_photo">
                   <img src={this.props.data!.photos[id].src.medium} alt="img" />
                   <span
                     className="arrow_left"
                     onClick={() => this.props.watchingImageBack(id)}
                   >
-                    <IoIosArrowBack
-                      style={{
-                        fontSize: "3rem",
-                        strokeWidth: "1rem",
-                      }}
-                    />
+                    <IoIosArrowBack />
                   </span>
                   <span
                     className="arrow_right"
                     onClick={() => this.props.watchingImageForward(id)}
                   >
-                    <IoIosArrowForward
-                      style={{
-                        fontSize: "3rem",
-                        strokeWidth: "1rem",
-                      }}
-                    />
+                    <IoIosArrowForward />
                   </span>
                 </div>
               </div>
@@ -130,6 +110,8 @@ const mapDispatchToProps = (dispatch: any) => {
     toggleWindowPhotoPage: () => dispatch(toggleWindowPhotoPage()),
     watchingImageForward: (id: number) => dispatch(watchingImageForward(id)),
     watchingImageBack: (id: number) => dispatch(watchingImageBack(id)),
+    toggleDropMenuPhotoPage: (id: number) =>
+      dispatch(toggleDropMenuPhotoPage(id)),
   };
 };
 

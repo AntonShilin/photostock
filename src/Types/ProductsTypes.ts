@@ -90,8 +90,50 @@ export enum ImageBackTypes {
   IMAGEBACK="IMAGEBACK"
 }
 
+export enum ToggleDropMenuPhotoPageTypes{
+  TOGGLEDROPMENUPHOTOPAGE="TOGGLEDROPMENUPHOTOPAGE"
+}
+
+export enum SelectImageSizeTypes{
+  SELECTIMAGESIZE="SELECTIMAGESIZE"
+}
+
+export enum DownloadImageSizeTypes{
+  DOWNLOADIMAGESIZE="DOWNLOADIMAGESIZE"
+}
+
+export enum ClearEarlierSizeTypes{
+  CLEAREARLIERSIZE="CLEAREARLIERSIZE"
+}
+
+export enum ClearRadioBoxesTypes{
+  CLEARRADIOBOXES="CLEARRADIOBOXES"
+}
 
 /*  interfaces */
+export interface IClearRadioBoxesAction{
+  type: ClearRadioBoxesTypes.CLEARRADIOBOXES
+}
+
+export interface IClearEarlierSizeAction{
+  type: ClearEarlierSizeTypes.CLEAREARLIERSIZE
+  clear: undefined;
+}
+
+export interface IDownloadImageSizeAction{
+  type: DownloadImageSizeTypes.DOWNLOADIMAGESIZE
+}
+
+
+export interface ISelectImageSizeAction{
+  type: SelectImageSizeTypes.SELECTIMAGESIZE
+  size: string;
+}
+
+export interface IToggleDropMenuPhotoPageAction{
+  type: ToggleDropMenuPhotoPageTypes.TOGGLEDROPMENUPHOTOPAGE
+}
+
 export interface IImageBackAction{
   type: ImageBackTypes.IMAGEBACK
   stepBack: number
@@ -225,7 +267,12 @@ export type ProductsActions =
   | IShowDetailsPhotoAction
   | IToggleWindowPhotoPageAction
   | IImageForwardAction
-  |IImageBackAction
+  | IImageBackAction
+  |ISelectImageSizeAction
+  | IToggleDropMenuPhotoPageAction
+  | IDownloadImageSizeAction
+  | IClearEarlierSizeAction
+  |IClearRadioBoxesAction
   | IToggleMenuAction;
 
 export interface IProductsState {
@@ -248,5 +295,7 @@ export interface IProductsState {
   readonly modalWindowPhotoPage: {
     id: number | null;
     isOpen: boolean;
+    isOpenDropDownMenu: boolean;
+    sizeURL: string | undefined;
   }
 }

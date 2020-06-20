@@ -224,12 +224,12 @@ class VideosPage extends React.Component<IPropsVideosPage> {
   }
 }
 
-const mapStateToProps = (store: IApplicationState) => {
+const mapStateToProps = (state: IApplicationState) => {
   return {
-    popularVideo: store.products.videos,
-    searchNameVideo: store.products.searchNameVideo,
-    searchNamePhoto: store.products.searchNamePhoto,
-    isLoadingVideos: store.products.isLoadingVideos
+    popularVideo: state.products.videos,
+    searchNameVideo: state.products.searchNameVideo,
+    searchNamePhoto: state.products.searchNamePhoto,
+    isLoadingVideos: state.products.isLoadingVideos
   };
 };
 

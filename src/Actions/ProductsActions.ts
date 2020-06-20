@@ -30,12 +30,21 @@ import {
   SearchBySuggestedWordTypes,
   DownloadImageTypes,
   ToggleWindowPhotoPageTypes,
+  ToggleDropMenuPhotoPageTypes,
   IToggleWindowPhotoPageAction,
   GetIdPhotoTypes,
   ImageForwardTypes,
   ImageBackTypes,
+  IToggleDropMenuPhotoPageAction,
+  SelectImageSizeTypes,
+  ISelectImageSizeAction,
+  IDownloadImageSizeAction,
+  DownloadImageSizeTypes,
+  IClearEarlierSizeAction,
+  ClearEarlierSizeTypes,
+  ClearRadioBoxesTypes,
+  IClearRadioBoxesAction,
 } from "../Types/ProductsTypes";
-import { ICuratedPhoto } from "../Interfaces/Interfaces";
 
 /* delete prev video*/
 export const deletePrevData: ActionCreator<IDeletePrevDataAction> = () => {
@@ -279,7 +288,6 @@ export const downloadImage = (elem: any) => {
 
 /* get ID photo from photo page */
 export const getIdPhoto = (id: number) => {
-  console.log(id);
   return {
     type: GetIdPhotoTypes.GETIDPHOTO,
     id,
@@ -287,28 +295,110 @@ export const getIdPhoto = (id: number) => {
 };
 
 /* toggle modal window for photo page */
-export const toggleWindowPhotoPage: ActionCreator<IToggleWindowPhotoPageAction> = (
-  elem: React.ElementType<HTMLDivElement>
-) => ({
-  type: ToggleWindowPhotoPageTypes.TOGGLEWINDOWPHOTOPAGE,
-});
-
+export const toggleWindowPhotoPage: ActionCreator<IToggleWindowPhotoPageAction> = () => {
+  return {
+    type: ToggleWindowPhotoPageTypes.TOGGLEWINDOWPHOTOPAGE,
+  };
+};
 
 /*watching image forward in modal window*/
 export const watchingImageForward = (id: number) => {
-  ++id
+  ++id;
   return {
     type: ImageForwardTypes.IMAGEFORWARD,
-    stepForward: id
+    stepForward: id,
+  };
+};
+
+/*watching image back in modal window*/
+export const watchingImageBack = (id: number) => {
+  --id;
+  return {
+    type: ImageBackTypes.IMAGEBACK,
+    stepBack: id,
+  };
+};
+
+/*show/hide dropmenu in modal window for photo page */
+export const toggleDropMenuPhotoPage: ActionCreator<IToggleDropMenuPhotoPageAction> = () => {
+  return {
+    type: ToggleDropMenuPhotoPageTypes.TOGGLEDROPMENUPHOTOPAGE,
+  };
+};
+
+/*select image size for download  */
+export const handleSelectImageSize: ActionCreator<ISelectImageSizeAction> = (
+  size: string
+) => {
+  return {
+    type: SelectImageSizeTypes.SELECTIMAGESIZE,
+    size,
+  };
+};
+
+/* download select size image */
+export const downloadSelectImageSize: ActionCreator<IDownloadImageSizeAction> = (
+  elem: any,
+  sizeURL: string
+) => {
+
+  while (elem.children.length > 0) {
+    elem.removeChild(elem.lastChild);
+  }
+
+  const image = document.createElement("img");
+  image.setAttribute("crossorigin", "anonymous");
+  image.setAttribute("src", sizeURL);
+
+  const x = sizeURL.match(/(w)=(\d+)/g)
+  const w = x!==null? x![0].match(/\d+/g) : ["1000"]
+
+  const y = sizeURL.match(/(h)=(\d+)/g)
+ const h = y!==null ? y![0].match(/\d+/g) : ["1000"]
+
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = +w![0];
+  canvas.height = +h![0];
+
+  image.style.display = "none";
+  canvas.style.display = "none";
+
+  elem.appendChild(image);
+  elem.appendChild(canvas);
+  
+  image.onload = () => {
+    ctx!.drawImage(image, 0, 0);
+    const link = document.createElement('a');
+    link.download = 'image.png';
+    
+    const dataURL = canvas.toDataURL();
+    link.href = dataURL;
+    link.click();
+    link.parentNode?.removeChild(link);
+ }
+  
+  return {
+    type: DownloadImageSizeTypes.DOWNLOADIMAGESIZE,
+  };
+};
+
+
+/* clear earlier selected image size */
+export const clearEarlierSize:ActionCreator<IClearEarlierSizeAction> =() => {
+  return {
+    type: ClearEarlierSizeTypes.CLEAREARLIERSIZE,
+    clear: undefined
   }
 }
 
 
-/*watching image back in modal window*/
-export const watchingImageBack = (id: number) => {
-  --id
+/* clear all radio boxes from dropdown menu */
+export const clearRadioBoxes: ActionCreator<IClearRadioBoxesAction> = (inputs: any) => {
+ 
+  inputs.map((elem: any) => elem.checked = false)
+  
   return {
-    type: ImageBackTypes.IMAGEBACK,
-    stepBack: id
+    type: ClearRadioBoxesTypes.CLEARRADIOBOXES,
   }
 }

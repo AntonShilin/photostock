@@ -49,10 +49,10 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
   }
 }
 
-const mapStateToProps = (store: IApplicationState) => ({
-  popularVideo: store.products.videos,
-  searchNameVideo: store.products.searchNameVideo,
-  searchNamePhoto: store.products.searchNamePhoto,
+const mapStateToProps = (state: IApplicationState) => ({
+  popularVideo: state.products.videos,
+  searchNameVideo: state.products.searchNameVideo,
+  searchNamePhoto: state.products.searchNamePhoto,
 });
 
 const mapDispatchToProps = (dispatch: any) => {

@@ -152,12 +152,12 @@ class ResultPhotoPage extends React.Component<IDataResult> {
   }
 }
 
-const mapStateToProps = (store: IApplicationState) => {
+const mapStateToProps = (state: IApplicationState) => {
   return {
-    resultSearchImage: store.products.resultSearchImage,
-    searchNamePhoto: store.products.searchNamePhoto,
-    resultSearchVideo: store.products.resultSearchVideo,
-    isLoadingImages: store.products.isLoadingImages,
+    resultSearchImage: state.products.resultSearchImage,
+    searchNamePhoto: state.products.searchNamePhoto,
+    resultSearchVideo: state.products.resultSearchVideo,
+    isLoadingImages: state.products.isLoadingImages,
   };
 };
 

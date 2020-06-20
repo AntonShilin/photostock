@@ -42,8 +42,8 @@ class SuggestedVideoWords extends React.Component<ISuggestedVideosProps, State> 
   }
 }
 
-const mapStateToProps = (store: IApplicationState) => ({
-  suggestedWords: store.products.suggestedWords,
+const mapStateToProps = (state: IApplicationState) => ({
+  suggestedWords: state.products.suggestedWords,
 });
 
 const mapDispatchToProps = (dispatch: any) => {

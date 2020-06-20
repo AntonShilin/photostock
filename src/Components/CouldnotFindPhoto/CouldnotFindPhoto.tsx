@@ -45,10 +45,10 @@ class CouldnotFindPhoto extends React.Component<INotFindPhotoProps, State> {
   }
 }
 
-const mapStateToProps = (store: IApplicationState) => {
+const mapStateToProps = (state: IApplicationState) => {
   return {
-    searchNamePhoto: store.products.searchNamePhoto,
-  resultSearchImage: store.products.resultSearchImage
+    searchNamePhoto: state.products.searchNamePhoto,
+  resultSearchImage: state.products.resultSearchImage
   };
 };
 

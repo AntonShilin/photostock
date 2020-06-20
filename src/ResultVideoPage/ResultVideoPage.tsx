@@ -187,12 +187,12 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
   }
 }
 
-const mapStateToProps = (store: IApplicationState) => {
+const mapStateToProps = (state: IApplicationState) => {
   return {
-    resultSearchVideo: store.products.resultSearchVideo,
-    searchNameVideo: store.products.searchNameVideo,
-    resultSearchImage: store.products.resultSearchImage,
-    isLoadingVideos: store.products.isLoadingVideos
+    resultSearchVideo: state.products.resultSearchVideo,
+    searchNameVideo: state.products.searchNameVideo,
+    resultSearchImage: state.products.resultSearchImage,
+    isLoadingVideos: state.products.isLoadingVideos
   };
 };
 

@@ -22,7 +22,7 @@ import { MdControlPoint } from "react-icons/md";
 import SuggestedPhotoWords from "../Components/SuggestedPhotoWords/SuggestedPhotoWords";
 import Heart from "../Components/SVGIcons/Heart/Heart";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
-import ModalWindowPhotoPage from "../Components/ModalWindow/ModalWindowPhotoPage/ModalWindowPhotoPage";
+import ModalWindowPhotoPage from "../Components/ModalWindow/ModalPhotoPage/ModalPhotoPage";
 
 export interface IPropsPhotosPage extends RouteComponentProps {
   data: ICuratedPhoto | null;
@@ -220,14 +220,14 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
   }
 }
 
-const mapStateToProps = (store: IApplicationState) => ({
-  data: store.products.data,
-  isScrollTop: store.products.isScrollTop,
-  isScrollHeight: store.products.isScrollHeight,
-  isClientHeight: store.products.isClientHeight,
-  isScrolling: store.products.isScrolling,
-  searchNamePhoto: store.products.searchNamePhoto,
-  isLoadingImages: store.products.isLoadingImages,
+const mapStateToProps = (state: IApplicationState) => ({
+  data: state.products.data,
+  isScrollTop: state.products.isScrollTop,
+  isScrollHeight: state.products.isScrollHeight,
+  isClientHeight: state.products.isClientHeight,
+  isScrolling: state.products.isScrolling,
+  searchNamePhoto: state.products.searchNamePhoto,
+  isLoadingImages: state.products.isLoadingImages,
 });
 
 const mapDispatchToProps = (dispatch: any) => {

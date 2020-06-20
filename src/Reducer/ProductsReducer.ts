@@ -23,6 +23,11 @@ import {
   GetIdPhotoTypes,
   ImageForwardTypes,
   ImageBackTypes,
+  ToggleDropMenuPhotoPageTypes,
+  SelectImageSizeTypes,
+  DownloadImageSizeTypes,
+  ClearEarlierSizeTypes,
+  ClearRadioBoxesTypes,
 } from "../Types/ProductsTypes";
 
 const initialProductState: IProductsState = {
@@ -55,6 +60,8 @@ const initialProductState: IProductsState = {
   modalWindowPhotoPage: {
     id: 0,
     isOpen: false,
+    isOpenDropDownMenu: false,
+    sizeURL: undefined
   },
 };
 
@@ -196,8 +203,8 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         ...state,
         modalWindowPhotoPage: {
           ...state.modalWindowPhotoPage,
-          id:action.id
-        }
+          id: action.id,
+        },
       };
     }
 
@@ -210,10 +217,9 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         },
       };
     }
-      
-      
+
     case ImageForwardTypes.IMAGEFORWARD: {
-      if (action.stepForward>=state.data!.photos.length) {
+      if (action.stepForward >= state.data!.photos.length) {
         action.stepForward = 0;
       }
 
@@ -221,24 +227,66 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         ...state,
         modalWindowPhotoPage: {
           ...state.modalWindowPhotoPage,
-          id:action.stepForward
+          id: action.stepForward,
         },
       };
     }
-      
+
     case ImageBackTypes.IMAGEBACK: {
-      if (action.stepBack<=0) {
-        action.stepBack = state.data!.photos.length-1;
+      if (action.stepBack <= 0) {
+        action.stepBack = state.data!.photos.length - 1;
       }
-      
+
       return {
         ...state,
         modalWindowPhotoPage: {
           ...state.modalWindowPhotoPage,
-          id:action.stepBack
+          id: action.stepBack,
         },
       };
     }
+
+    case ToggleDropMenuPhotoPageTypes.TOGGLEDROPMENUPHOTOPAGE: {
+      return {
+        ...state,
+        modalWindowPhotoPage: {
+          ...state.modalWindowPhotoPage,
+          isOpenDropDownMenu: !state.modalWindowPhotoPage.isOpenDropDownMenu,
+        },
+      };
+    }
+      
+    case SelectImageSizeTypes.SELECTIMAGESIZE: {
+      return {
+        ...state,
+        modalWindowPhotoPage: {
+          ...state.modalWindowPhotoPage,
+          sizeURL: action.size,
+        },
+      };
+    }
+      
+    case DownloadImageSizeTypes.DOWNLOADIMAGESIZE: {
+      return {
+        ...state,
+      };
+    }
+      
+    case ClearEarlierSizeTypes.CLEAREARLIERSIZE: {
+      return {
+        ...state,
+        modalWindowPhotoPage: {
+          ...state.modalWindowPhotoPage,
+          sizeURL: action.clear,
+        },
+      };
+    } 
+      
+    case ClearRadioBoxesTypes.CLEARRADIOBOXES: {
+      return {
+        ...state,
+      };
+    } 
 
     default:
       return state;
