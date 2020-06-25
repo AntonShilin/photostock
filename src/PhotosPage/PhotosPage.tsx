@@ -28,13 +28,13 @@ export interface IPropsPhotosPage extends RouteComponentProps {
   data: ICuratedPhoto | null;
   getPopularImages: typeof getPopularImages;
   getIdPhoto: typeof getIdPhoto;
+  toggleWindowPhotoPage: typeof toggleWindowPhotoPage;
   getSearchVideos: typeof getSearchVideos;
   searchNamePhoto: string;
   handleSearchChange: typeof handleSearchChange;
   getSearchImages: typeof getSearchImages;
   getKeyNumber: typeof handleSearchKeydown;
   downloadImage: typeof downloadImage;
-  toggleWindowPhotoPage: typeof toggleWindowPhotoPage;
   isScrollTop: number | null;
   isScrollHeight: number | null;
   isClientHeight: number | null;

@@ -1,186 +1,184 @@
-import { ICuratedPhoto, IDataSearch, IPopularVideos } from "../Interfaces/Interfaces";
+import {
+  ICuratedPhoto,
+  IDataSearch,
+  IPopularVideos,
+} from "../Interfaces/Interfaces";
 
 export enum GetPopularImagesTypes {
-  GETPOPULARIMAGES = "GETPOPULARIMAGES"
+  GETPOPULARIMAGES = "GETPOPULARIMAGES",
 }
 
 export enum SearchValueTypes {
-  GETSEARCHVALUE = "GETSEARCHVALUE"
+  GETSEARCHVALUE = "GETSEARCHVALUE",
 }
 
 export enum SearchKeydownTypes {
-  SEARCHKEYDOWN = "SEARCHKEYDOWN"
+  SEARCHKEYDOWN = "SEARCHKEYDOWN",
 }
 
-
 export enum SearchImagesByNameTypes {
-  SEARCHIMAGESBYNAME = "SEARCHIMAGESBYNAME"
+  SEARCHIMAGESBYNAME = "SEARCHIMAGESBYNAME",
 }
 
 export enum GetPopularVideoTypes {
-  GETPOPULARVIDEO = "GETPOPULARVIDEO"
+  GETPOPULARVIDEO = "GETPOPULARVIDEO",
 }
 
 export enum GetSearchVideoTypes {
-  GETSEARCHVIDEO = "GETSEARCHVIDEO"
+  GETSEARCHVIDEO = "GETSEARCHVIDEO",
 }
 
-
 export enum GetChangeNameVideoTypes {
-  GETCHANGENAMEVIDEO = "GETCHANGENAMEVIDEO"
+  GETCHANGENAMEVIDEO = "GETCHANGENAMEVIDEO",
 }
 
 export enum GetVideoTypes {
-  GETVIDEO = "GETVIDEO"
+  GETVIDEO = "GETVIDEO",
 }
 
 export enum ToggleMenuTypes {
-  TOGGLEMENU="TOGGLEMENU"
+  TOGGLEMENU = "TOGGLEMENU",
 }
 
 export enum MoveScroll {
-  MOVESCROLL="MOVESCROLL"
+  MOVESCROLL = "MOVESCROLL",
 }
 
 export enum DeletePrevData {
-  DELETEPREVDATA="DELETEPREVDATA"
+  DELETEPREVDATA = "DELETEPREVDATA",
 }
 
 export enum likeHeart {
-  LIKEHEART="LIKEHEART"
+  LIKEHEART = "LIKEHEART",
 }
 
 export enum preplayVideoTypes {
-  PREPLAYVIDEO="PREPLAYVIDEO"
+  PREPLAYVIDEO = "PREPLAYVIDEO",
 }
 
 export enum pauseVideoTypes {
-  PAUSEVIDEO="PAUSEVIDEO"
+  PAUSEVIDEO = "PAUSEVIDEO",
 }
 
 export enum isLoadingImagesTypes {
-  LOADINGIMAGES="LOADINGIMAGES"
+  LOADINGIMAGES = "LOADINGIMAGES",
 }
 
 export enum isLoadingVideosTypes {
-  LOADINGVIDEOS="LOADINGVIDEOS"
+  LOADINGVIDEOS = "LOADINGVIDEOS",
 }
 
-export enum SearchBySuggestedWordTypes{
-  SEARCHBYSUGGESTEDWORD="SEARCHBYSUGGESTEDWORD"
+export enum SearchBySuggestedWordTypes {
+  SEARCHBYSUGGESTEDWORD = "SEARCHBYSUGGESTEDWORD",
 }
 
-export enum DownloadImageTypes{
-  DOWNLOADIMAGE="DOWNLOADIMAGE"
+export enum DownloadImageTypes {
+  DOWNLOADIMAGE = "DOWNLOADIMAGE",
 }
 
-export enum GetIdPhotoTypes{
-  GETIDPHOTO="GETIDPHOTO"
+export enum GetIdPhotoTypes {
+  GETIDPHOTO = "GETIDPHOTO",
 }
 
-export enum ToggleWindowPhotoPageTypes{
-  TOGGLEWINDOWPHOTOPAGE="TOGGLEWINDOWPHOTOPAGE"
+export enum ToggleWindowPhotoPageTypes {
+  TOGGLEWINDOWPHOTOPAGE = "TOGGLEWINDOWPHOTOPAGE",
 }
 
 export enum ImageForwardTypes {
-  IMAGEFORWARD="IMAGEFORWARD"
+  IMAGEFORWARD = "IMAGEFORWARD",
 }
 
 export enum ImageBackTypes {
-  IMAGEBACK="IMAGEBACK"
+  IMAGEBACK = "IMAGEBACK",
 }
 
-export enum ToggleDropMenuPhotoPageTypes{
-  TOGGLEDROPMENUPHOTOPAGE="TOGGLEDROPMENUPHOTOPAGE"
+export enum ToggleDropMenuPhotoPageTypes {
+  TOGGLEDROPMENUPHOTOPAGE = "TOGGLEDROPMENUPHOTOPAGE",
 }
 
-export enum SelectImageSizeTypes{
-  SELECTIMAGESIZE="SELECTIMAGESIZE"
+export enum SelectImageSizeTypes {
+  SELECTIMAGESIZE = "SELECTIMAGESIZE",
 }
 
-export enum DownloadImageSizeTypes{
-  DOWNLOADIMAGESIZE="DOWNLOADIMAGESIZE"
+export enum DownloadImageSizeTypes {
+  DOWNLOADIMAGESIZE = "DOWNLOADIMAGESIZE",
 }
 
-export enum ClearEarlierSizeTypes{
-  CLEAREARLIERSIZE="CLEAREARLIERSIZE"
+export enum ClearEarlierSizeTypes {
+  CLEAREARLIERSIZE = "CLEAREARLIERSIZE",
 }
 
-export enum ClearRadioBoxesTypes{
-  CLEARRADIOBOXES="CLEARRADIOBOXES"
+export enum ClearRadioBoxesTypes {
+  CLEARRADIOBOXES = "CLEARRADIOBOXES",
 }
 
 /*  interfaces */
-export interface IClearRadioBoxesAction{
-  type: ClearRadioBoxesTypes.CLEARRADIOBOXES
+export interface IClearRadioBoxesAction {
+  type: ClearRadioBoxesTypes.CLEARRADIOBOXES;
 }
 
-export interface IClearEarlierSizeAction{
-  type: ClearEarlierSizeTypes.CLEAREARLIERSIZE
+export interface IClearEarlierSizeAction {
+  type: ClearEarlierSizeTypes.CLEAREARLIERSIZE;
   clear: undefined;
 }
 
-export interface IDownloadImageSizeAction{
-  type: DownloadImageSizeTypes.DOWNLOADIMAGESIZE
+export interface IDownloadImageSizeAction {
+  type: DownloadImageSizeTypes.DOWNLOADIMAGESIZE;
 }
 
-
-export interface ISelectImageSizeAction{
-  type: SelectImageSizeTypes.SELECTIMAGESIZE
+export interface ISelectImageSizeAction {
+  type: SelectImageSizeTypes.SELECTIMAGESIZE;
   size: string;
 }
 
-export interface IToggleDropMenuPhotoPageAction{
-  type: ToggleDropMenuPhotoPageTypes.TOGGLEDROPMENUPHOTOPAGE
+export interface IToggleDropMenuPhotoPageAction {
+  type: ToggleDropMenuPhotoPageTypes.TOGGLEDROPMENUPHOTOPAGE;
 }
 
-export interface IImageBackAction{
-  type: ImageBackTypes.IMAGEBACK
-  stepBack: number
+export interface IImageBackAction {
+  type: ImageBackTypes.IMAGEBACK;
+  stepBack: number;
 }
 
-export interface IImageForwardAction{
-  type: ImageForwardTypes.IMAGEFORWARD
-  stepForward: number
+export interface IImageForwardAction {
+  type: ImageForwardTypes.IMAGEFORWARD;
+  stepForward: number;
 }
 
-
-export interface IToggleWindowPhotoPageAction{
-  type: ToggleWindowPhotoPageTypes.TOGGLEWINDOWPHOTOPAGE
+export interface IToggleWindowPhotoPageAction {
+  type: ToggleWindowPhotoPageTypes.TOGGLEWINDOWPHOTOPAGE;
 }
 
-
-export interface IShowDetailsPhotoAction{
-  type: GetIdPhotoTypes.GETIDPHOTO
-  id:number
+export interface IShowDetailsPhotoAction {
+  type: GetIdPhotoTypes.GETIDPHOTO;
+  id: number;
 }
 
-export interface IDownloadImageAction{
-  type: DownloadImageTypes.DOWNLOADIMAGE
+export interface IDownloadImageAction {
+  type: DownloadImageTypes.DOWNLOADIMAGE;
 }
 
 export interface ISearchBySuggestedWordAction {
-  type: SearchBySuggestedWordTypes.SEARCHBYSUGGESTEDWORD
-  name:string
+  type: SearchBySuggestedWordTypes.SEARCHBYSUGGESTEDWORD;
+  name: string;
 }
 
 export interface ILoadingImagesAction {
-  type: isLoadingImagesTypes.LOADINGIMAGES
-  isLoading: boolean
+  type: isLoadingImagesTypes.LOADINGIMAGES;
+  isLoading: boolean;
 }
 
 export interface ILoadingVideosAction {
-  type: isLoadingVideosTypes.LOADINGVIDEOS
-  isLoading: boolean
+  type: isLoadingVideosTypes.LOADINGVIDEOS;
+  isLoading: boolean;
 }
 
 export interface IPauseVideoAction {
-  type: pauseVideoTypes.PAUSEVIDEO
+  type: pauseVideoTypes.PAUSEVIDEO;
 }
 
-
 export interface IPreplayVideoAction {
-  type: preplayVideoTypes.PREPLAYVIDEO
+  type: preplayVideoTypes.PREPLAYVIDEO;
 }
 
 export interface ILikeHeartAction {
@@ -189,9 +187,8 @@ export interface ILikeHeartAction {
 
 export interface IDeletePrevDataAction {
   type: DeletePrevData.DELETEPREVDATA;
-  data: null
+  data: null;
 }
-
 
 export interface IToggleMenuAction {
   type: ToggleMenuTypes.TOGGLEMENU;
@@ -207,16 +204,14 @@ export interface IGetSearchValueAction {
   searchValue: string;
 }
 
-
 export interface IGetPopularPhotoAction {
   type: GetPopularImagesTypes.GETPOPULARIMAGES;
   popularPhoto: ICuratedPhoto;
   isLoading: boolean;
 }
 
-
 export interface ISearchImagesByNameAction {
-  type: SearchImagesByNameTypes.SEARCHIMAGESBYNAME
+  type: SearchImagesByNameTypes.SEARCHIMAGESBYNAME;
   findPhoto: IDataSearch;
   isLoading: boolean;
 }
@@ -232,19 +227,18 @@ export interface IChangeNameVideoAction {
   value: string;
 }
 
-export interface IGetVideoAction{
+export interface IGetVideoAction {
   type: GetVideoTypes.GETVIDEO;
   findVideo: IPopularVideos;
   isLoading: boolean;
 }
 
-export interface IMoveScrollAction{
+export interface IMoveScrollAction {
   type: MoveScroll.MOVESCROLL;
-  scrollTop: number|null;
-  scrollHeight: number|null;
-  clientHeight: number|null;
+  scrollTop: number | null;
+  scrollHeight: number | null;
+  clientHeight: number | null;
 }
-
 
 export type ProductsActions =
   | IGetPopularPhotoAction
@@ -252,14 +246,14 @@ export type ProductsActions =
   | ISearchImagesByNameAction
   | IPopularVideoAction
   | IChangeNameVideoAction
-  |ISearchKeydownAction
+  | ISearchKeydownAction
   | IGetVideoAction
   | IMoveScrollAction
   | IDeletePrevDataAction
   | ILikeHeartAction
   | IPreplayVideoAction
   | IPauseVideoAction
-  |ILoadingImagesAction
+  | ILoadingImagesAction
   | ILoadingVideosAction
   | ILoadingImagesAction
   | ISearchBySuggestedWordAction
@@ -268,15 +262,15 @@ export type ProductsActions =
   | IToggleWindowPhotoPageAction
   | IImageForwardAction
   | IImageBackAction
-  |ISelectImageSizeAction
+  | ISelectImageSizeAction
   | IToggleDropMenuPhotoPageAction
   | IDownloadImageSizeAction
   | IClearEarlierSizeAction
-  |IClearRadioBoxesAction
+  | IClearRadioBoxesAction
   | IToggleMenuAction;
 
 export interface IProductsState {
-  readonly keyboardKey: number|null;
+  readonly keyboardKey: number | null;
   readonly data: ICuratedPhoto | null;
   readonly videos: IPopularVideos | null;
   readonly productsLoading: boolean;
@@ -286,9 +280,9 @@ export interface IProductsState {
   resultSearchVideo: IPopularVideos | null;
   readonly isToggleMenu: boolean;
   readonly isScrolling: boolean;
-  readonly isScrollTop: number|null;
-  readonly isScrollHeight: number|null;
-  readonly isClientHeight: number|null;
+  readonly isScrollTop: number | null;
+  readonly isScrollHeight: number | null;
+  readonly isClientHeight: number | null;
   readonly isLoadingImages: boolean;
   readonly isLoadingVideos: boolean;
   readonly suggestedWords: string[];
@@ -297,5 +291,7 @@ export interface IProductsState {
     isOpen: boolean;
     isOpenDropDownMenu: boolean;
     sizeURL: string | undefined;
-  }
+  };
 }
+
+

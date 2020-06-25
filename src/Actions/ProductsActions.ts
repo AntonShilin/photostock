@@ -280,8 +280,8 @@ export const downloadImage = (elem: any) => {
   ctx!.drawImage(image, 0, 0);
   const dataURL = canvas.toDataURL();
   elem.href = dataURL;
-  elem.setAttribute('target','_blank')
-  elem.rel = "noopener noreferrer"
+  elem.setAttribute("target", "_blank");
+  elem.rel = "noopener noreferrer";
 
   return {
     type: DownloadImageTypes.DOWNLOADIMAGE,
@@ -343,7 +343,6 @@ export const downloadSelectImageSize: ActionCreator<IDownloadImageSizeAction> = 
   elem: any,
   sizeURL: string
 ) => {
-
   while (elem.children.length > 0) {
     elem.removeChild(elem.lastChild);
   }
@@ -352,14 +351,14 @@ export const downloadSelectImageSize: ActionCreator<IDownloadImageSizeAction> = 
   image.setAttribute("crossorigin", "anonymous");
   image.setAttribute("src", sizeURL);
 
-  const x = sizeURL.match(/(w)=(\d+)/g)
-  const w = x!==null? x![0].match(/\d+/g) : ["1000"]
-
-  const y = sizeURL.match(/(h)=(\d+)/g)
- const h = y!==null ? y![0].match(/\d+/g) : ["1000"]
-
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
+
+  const x = sizeURL.match(/(w)=(\d+)/g);
+  const w = x !== null ? x![0].match(/\d+/g) : ["1000"];
+
+  const y = sizeURL.match(/(h)=(\d+)/g);
+  const h = y !== null ? y![0].match(/\d+/g) : ["1000"];
   canvas.width = +w![0];
   canvas.height = +h![0];
 
@@ -368,42 +367,40 @@ export const downloadSelectImageSize: ActionCreator<IDownloadImageSizeAction> = 
 
   elem.appendChild(image);
   elem.appendChild(canvas);
-  
+
   image.onload = () => {
     ctx!.drawImage(image, 0, 0);
-    const link = document.createElement('a');
-    link.download = 'image.png';
-    link.setAttribute('target','_blank')
-    link.rel = "noopener noreferrer"
-    
+    const link = document.createElement("a");
+    link.download = "image.png";
+    link.setAttribute("target", "_blank");
+    link.rel = "noopener noreferrer";
+
     const dataURL = canvas.toDataURL();
     link.href = dataURL;
-    console.log(link)
     link.click();
     link.parentNode?.removeChild(link);
- }
-  
+  };
+
   return {
     type: DownloadImageSizeTypes.DOWNLOADIMAGESIZE,
   };
 };
 
-
 /* clear earlier selected image size */
-export const clearEarlierSize:ActionCreator<IClearEarlierSizeAction> =() => {
+export const clearEarlierSize: ActionCreator<IClearEarlierSizeAction> = () => {
   return {
     type: ClearEarlierSizeTypes.CLEAREARLIERSIZE,
-    clear: undefined
-  }
-}
-
+    clear: undefined,
+  };
+};
 
 /* clear all radio boxes from dropdown menu */
-export const clearRadioBoxes: ActionCreator<IClearRadioBoxesAction> = (inputs: any) => {
- 
-  inputs.map((elem: any) => elem.checked = false)
-  
+export const clearRadioBoxes: ActionCreator<IClearRadioBoxesAction> = (
+  inputs: any
+) => {
+  inputs.map((elem: any) => (elem.checked = false));
+
   return {
     type: ClearRadioBoxesTypes.CLEARRADIOBOXES,
-  }
-}
+  };
+};

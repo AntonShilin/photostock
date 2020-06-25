@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IApplicationState } from "../../../../Store/Store";
 import { connect } from "react-redux";
-import { ICuratedPhoto } from "../../../../Interfaces/Interfaces";
+import { IDataSearch } from "../../../../Interfaces/Interfaces";
 import {
   getPopularImages,
   handleSelectImageSize,
@@ -9,10 +9,10 @@ import {
   clearEarlierSize,
   clearRadioBoxes,
 } from "../../../../Actions/ProductsActions";
-import "./DropMenuPhotoPage.scss";
+import "./DropMenuResultPhotoPage.scss";
 
-export interface IDropMenuPhotoPageProps {
-  data: ICuratedPhoto | null;
+export interface IDropMenuResultPhotoPageProps {
+  resultSearchImage: IDataSearch | null;
   id: number | null;
   sizeURL: string | undefined;
   isOpen: boolean;
@@ -26,22 +26,22 @@ export interface IDropMenuPhotoPageProps {
 
 export interface State {}
 
-class DropMenuPhotoPage extends React.Component<
-  IDropMenuPhotoPageProps,
+class DropMenuResultPhotoPage extends React.Component<
+  IDropMenuResultPhotoPageProps,
   State
 > {
   private inputs: HTMLInputElement[];
 
-  constructor(props: IDropMenuPhotoPageProps) {
+  constructor(props: IDropMenuResultPhotoPageProps) {
     super(props);
     this.inputs = [];
   }
 
   public render() {
     const { id, isOpenDropDownMenu, sizeURL } = this.props;
-    const sizes = this.props.data!.photos[id!].src;
+    const sizes = this.props.resultSearchImage!.photos[id!].src;
 
-    return this.props.data! ? (
+    return this.props.resultSearchImage! ? (
       <form
         className={
           isOpenDropDownMenu ? "d-block dropmenu_photo_page" : "d-none"
@@ -89,7 +89,7 @@ class DropMenuPhotoPage extends React.Component<
 }
 
 const mapStateToProps = (state: IApplicationState) => ({
-  data: state.products.data,
+  resultSearchImage: state.products.resultSearchImage,
   id: state.products.modalWindowPhotoPage.id,
   sizeURL: state.products.modalWindowPhotoPage.sizeURL,
   isOpen: state.products.modalWindowPhotoPage.isOpen,
@@ -108,4 +108,7 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DropMenuPhotoPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DropMenuResultPhotoPage);

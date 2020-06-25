@@ -47,15 +47,20 @@ const initialProductState: IProductsState = {
   isLoadingImages: false,
   isLoadingVideos: false,
   suggestedWords: [
-    "background",
-    "motorcycle",
-    "business",
+    "mountain",
+    "sport",
     "town",
     "ball",
     "bike",
     "butterfly",
     "sea",
     "ocean",
+    "london",
+    "sky",
+    "prague",
+    "wave",
+    "village",
+    "country side"
   ],
   modalWindowPhotoPage: {
     id: 0,
@@ -97,6 +102,9 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
     }
 
     case SearchImagesByNameTypes.SEARCHIMAGESBYNAME: {
+      action.findPhoto.photos.map((elem, i) => {
+        elem.id = i;
+      });
       return {
         ...state,
         resultSearchImage: action.findPhoto,

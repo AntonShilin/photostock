@@ -21,7 +21,7 @@ export interface State {}
 class SuggestedPhotoWords extends React.Component<ISuggestedImagesProps, State> {
   public render() {
     return (
-      <p className="suggested_words">
+      <div className="suggested_photo_words">
         Suggested:
         {this.props.suggestedWords.map((word, i) => (
           <NavLink
@@ -37,7 +37,7 @@ class SuggestedPhotoWords extends React.Component<ISuggestedImagesProps, State> 
             {word}
           </NavLink>
         ))}
-      </p>
+      </div>
     );
   }
 }

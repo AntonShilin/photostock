@@ -4,7 +4,13 @@ import { IApplicationState } from "../Store/Store";
 import { IDataSearch, IPopularVideos } from "../Interfaces/Interfaces";
 import { RouteComponentProps, NavLink } from "react-router-dom";
 import LoadingPage from "../Components/LoadingPage/LoadingPage";
-import { getSearchImages, getSearchVideos, downloadImage } from "../Actions/ProductsActions";
+import {
+  getSearchImages,
+  getSearchVideos,
+  downloadImage,
+  toggleWindowPhotoPage,
+  getIdPhoto,
+} from "../Actions/ProductsActions";
 import HeaderResultPhotoPage from "./HeaderResultPhotoPage/HeaderResultPhotoPage";
 import "./ResultPhotoPage.scss";
 import { MdControlPoint } from "react-icons/md";
@@ -13,6 +19,7 @@ import { FaRegImage } from "react-icons/fa";
 import CouldnotFindPhoto from "../Components/CouldnotFindPhoto/CouldnotFindPhoto";
 import Heart from "../Components/SVGIcons/Heart/Heart";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
+import ModalWindowResultPhotoPage from "../Components/ModalWindow/ModalWindowResultPhotoPage/ModalWindowResultPhotoPage";
 
 export interface IDataResult extends RouteComponentProps {
   getSearchImages: typeof getSearchImages;
@@ -22,6 +29,8 @@ export interface IDataResult extends RouteComponentProps {
   getSearchVideos: typeof getSearchVideos;
   downloadImage: typeof downloadImage;
   isLoadingImages: boolean;
+  getIdPhoto: typeof getIdPhoto;
+  toggleWindowPhotoPage: typeof toggleWindowPhotoPage;
 }
 
 class ResultPhotoPage extends React.Component<IDataResult> {
@@ -29,6 +38,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
     return (
       <React.Fragment>
         <HeaderResultPhotoPage />
+        <ModalWindowResultPhotoPage />
         {this.props.isLoadingImages ? (
           <LoadingPage />
         ) : (
@@ -76,6 +86,10 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                                 src={image.src.large}
                                 alt={`img_${i}`}
                                 crossOrigin="anonymous"
+                                onClick={() => {
+                                  this.props.getIdPhoto(image.id);
+                                  this.props.toggleWindowPhotoPage();
+                                }}
                               />
                               <div className="image-photographer">
                                 <p>{image.photographer}</p>
@@ -116,6 +130,10 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                                 src={image.src.large}
                                 alt={`img_${i}`}
                                 crossOrigin="anonymous"
+                                onClick={() => {
+                                  this.props.getIdPhoto(image.id);
+                                  this.props.toggleWindowPhotoPage();
+                                }}
                               />
                               <div className="image-photographer">
                                 <p>{image.photographer}</p>
@@ -166,6 +184,8 @@ const mapDispatchToProps = (dispatch: any) => {
     getSearchImages: (name: string) => dispatch(getSearchImages(name)),
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
     downloadImage: (elem: any) => dispatch(downloadImage(elem)),
+    getIdPhoto: (id: number) => dispatch(getIdPhoto(id)),
+    toggleWindowPhotoPage: () => dispatch(toggleWindowPhotoPage()),
   };
 };
 

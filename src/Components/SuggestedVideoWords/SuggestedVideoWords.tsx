@@ -21,7 +21,7 @@ export interface State {}
 class SuggestedVideoWords extends React.Component<ISuggestedVideosProps, State> {
   public render() {
     return (
-      <p className="suggested_words">
+      <div className="suggested_video_words">
         Suggested:
         {this.props.suggestedWords.map((word, i) => (
           <NavLink
@@ -37,7 +37,7 @@ class SuggestedVideoWords extends React.Component<ISuggestedVideosProps, State> 
             {word}
           </NavLink>
         ))}
-      </p>
+      </div>
     );
   }
 }
