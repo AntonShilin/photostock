@@ -5,7 +5,7 @@ import { ICuratedPhoto } from "../../../Interfaces/Interfaces";
 import "./ModalPhotoPage.scss";
 import Heart from "../../SVGIcons/Heart/Heart";
 import { MdControlPoint, MdClose } from "react-icons/md";
-import { IoIosArrowForward, IoIosArrowBack, IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowBack, IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import {
   toggleWindowPhotoPage,
   watchingImageForward,
@@ -19,6 +19,7 @@ export interface IWindowPhotoPageProps {
   id: number | null;
   isOpen: boolean;
   isScrollTop: number | null;
+  isOpenDropDownMenu: boolean;
   toggleWindowPhotoPage: typeof toggleWindowPhotoPage;
   watchingImageForward: typeof watchingImageForward;
   watchingImageBack: typeof watchingImageBack;
@@ -33,6 +34,7 @@ class ModalWindowPhotoPage extends React.Component<
 > {
   public render() {
     const id = this.props.id!;
+    const { isOpenDropDownMenu } = this.props;
 
     return (
       <React.Fragment>
@@ -68,7 +70,7 @@ class ModalWindowPhotoPage extends React.Component<
                         className="btn download w-100"
                         onClick={this.props.toggleDropMenuPhotoPage}
                       >
-                        Free download <IoIosArrowDown />
+                        Free download {isOpenDropDownMenu ? <IoIosArrowUp /> : <IoIosArrowDown />}
                       </button>
                       <DropMenuPhotoPage />
                     </div>
@@ -103,6 +105,7 @@ const mapStateToProps = (state: IApplicationState) => ({
   id: state.products.modalWindowPhotoPage.id,
   isOpen: state.products.modalWindowPhotoPage.isOpen,
   isScrollTop: state.products.isScrollTop,
+  isOpenDropDownMenu: state.products.modalWindowPhotoPage.isOpenDropDownMenu,
 });
 
 const mapDispatchToProps = (dispatch: any) => {

@@ -280,6 +280,8 @@ export const downloadImage = (elem: any) => {
   ctx!.drawImage(image, 0, 0);
   const dataURL = canvas.toDataURL();
   elem.href = dataURL;
+  elem.setAttribute('target','_blank')
+  elem.rel = "noopener noreferrer"
 
   return {
     type: DownloadImageTypes.DOWNLOADIMAGE,
@@ -371,9 +373,12 @@ export const downloadSelectImageSize: ActionCreator<IDownloadImageSizeAction> = 
     ctx!.drawImage(image, 0, 0);
     const link = document.createElement('a');
     link.download = 'image.png';
+    link.setAttribute('target','_blank')
+    link.rel = "noopener noreferrer"
     
     const dataURL = canvas.toDataURL();
     link.href = dataURL;
+    console.log(link)
     link.click();
     link.parentNode?.removeChild(link);
  }
