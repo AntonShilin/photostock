@@ -28,7 +28,7 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
               className="form-control"
               placeholder="Find a photo"
               value={this.props.searchNameVideo}
-              onChange={this.props.changeNameVideo}
+              onChange={(e)=>this.props.changeNameVideo(e)}
               autoFocus={false}
             />
             <div className="input-group-append">
@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     getSearchVideos: (name:string) =>
       dispatch(getSearchVideos(name)),
-    changeNameVideo: (e: string) => dispatch(changeNameVideo(e)),
+    changeNameVideo: (e: React.ChangeEvent<HTMLInputElement>) => dispatch(changeNameVideo(e)),
      getSearchImages: (name: string) => dispatch(getSearchImages(name)),
   };
 };

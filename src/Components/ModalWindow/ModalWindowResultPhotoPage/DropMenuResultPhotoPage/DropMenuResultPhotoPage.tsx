@@ -83,7 +83,7 @@ class DropMenuResultPhotoPage extends React.Component<
     ) : null;
   }
 
-  private setRef = (node: any) => {
+  private setRef = (node: HTMLInputElement) => {
     this.inputs.push(node);
   };
 }

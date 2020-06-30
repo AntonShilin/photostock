@@ -235,9 +235,9 @@ const mapStateToProps = (state: IApplicationState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getKeyNumber: (num: number) => dispatch(handleSearchKeydown(num)),
+    getKeyNumber: (e:React.KeyboardEvent<HTMLInputElement>) => dispatch(handleSearchKeydown(e)),
     getPopularVideo: () => dispatch(getPopularVideo()),
-    changeNameVideo: (e: string) => dispatch(changeNameVideo(e)),
+    changeNameVideo: (e: React.ChangeEvent<HTMLInputElement>) => dispatch(changeNameVideo(e)),
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
     handlePreplayVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
       dispatch(handlePreplayVideo(e)),

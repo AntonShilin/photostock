@@ -22,7 +22,7 @@ class SuggestedPhotoWords extends React.Component<ISuggestedImagesProps, State> 
   public render() {
     return (
       <div className="suggested_photo_words">
-        Suggested:
+       <span>Suggested:</span>
         {this.props.suggestedWords.map((word, i) => (
           <NavLink
             to={`/photos/${word}`}

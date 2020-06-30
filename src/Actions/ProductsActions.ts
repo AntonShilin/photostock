@@ -1,4 +1,3 @@
-import { ActionCreator, Dispatch } from "redux";
 
 import {
   SearchValueTypes,
@@ -44,10 +43,19 @@ import {
   ClearEarlierSizeTypes,
   ClearRadioBoxesTypes,
   IClearRadioBoxesAction,
+  IImageBackAction,
+  IImageForwardAction,
+  IShowDetailsPhotoAction,
+  IDownloadImageAction,
+  ISearchBySuggestedWordAction,
+  ISearchImagesByNameAction,
+  IGetVideoAction,
+  IPopularVideoAction,
+  IGetPopularPhotoAction,
 } from "../Types/ProductsTypes";
 
 /* delete prev video*/
-export const deletePrevData: ActionCreator<IDeletePrevDataAction> = () => {
+export const deletePrevData = ():IDeletePrevDataAction => {
   return {
     type: DeletePrevData.DELETEPREVDATA,
     data: null,
@@ -55,9 +63,8 @@ export const deletePrevData: ActionCreator<IDeletePrevDataAction> = () => {
 };
 
 /* toggle menu button */
-export const handleToggleMenu: ActionCreator<IToggleMenuAction> = (
-  elem: React.ElementType<HTMLDivElement>
-) => ({
+export const handleToggleMenu = (
+):IToggleMenuAction => ({
   type: ToggleMenuTypes.TOGGLEMENU,
 });
 
@@ -65,7 +72,7 @@ export const handleToggleMenu: ActionCreator<IToggleMenuAction> = (
 export const getPopularImages = () => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
-  return (dispatch: Dispatch) => {
+  return (dispatch: (arg0: ILoadingImagesAction|IGetPopularPhotoAction) => void) => {
     dispatch(isLoadingImages());
     fetch(`https://api.pexels.com/v1/curated?per_page=50&page=1`, {
       headers: { Authorization: keyAPI },
@@ -88,17 +95,17 @@ export const getPopularImages = () => {
 };
 
 /* get key code number */
-export const handleSearchKeydown: ActionCreator<ISearchKeydownAction> = (
-  num: React.KeyboardEvent<HTMLInputElement>
-) => ({
+export const handleSearchKeydown = (
+  e: React.KeyboardEvent<HTMLInputElement>
+):ISearchKeydownAction => ({
   type: SearchKeydownTypes.SEARCHKEYDOWN,
-  keydownKey: num.keyCode,
+  keydownKey: e.keyCode,
 });
 
 /* change in input on foto page */
-export const handleSearchChange: ActionCreator<IGetSearchValueAction> = (
+export const handleSearchChange = (
   e: React.ChangeEvent<HTMLInputElement>
-) => {
+):IGetSearchValueAction => {
   return {
     type: SearchValueTypes.GETSEARCHVALUE,
     searchValue: e.target.value,
@@ -109,7 +116,7 @@ export const handleSearchChange: ActionCreator<IGetSearchValueAction> = (
 export const getPopularVideo = () => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
-  return (dispatch: Dispatch) => {
+  return (dispatch: (arg0: ILoadingVideosAction|IPopularVideoAction) => void) => {
     dispatch(isLoadingVideos());
     fetch(`https://api.pexels.com/videos/popular?per_page=10&page=1`, {
       headers: { Authorization: keyAPI },
@@ -132,9 +139,9 @@ export const getPopularVideo = () => {
 };
 
 /* change in input on video page */
-export const changeNameVideo: ActionCreator<IChangeNameVideoAction> = (
+export const changeNameVideo = (
   e: React.ChangeEvent<HTMLInputElement>
-) => ({
+):IChangeNameVideoAction => ({
   type: GetChangeNameVideoTypes.GETCHANGENAMEVIDEO,
   value: e.target.value,
 });
@@ -143,7 +150,11 @@ export const changeNameVideo: ActionCreator<IChangeNameVideoAction> = (
 export const getSearchVideos = (name: string) => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
-  return (dispatch: Dispatch) => {
+  return (
+    dispatch: (
+      arg0: IDeletePrevDataAction | ILoadingVideosAction | IGetVideoAction
+    ) => void
+  ) => {
     dispatch(deletePrevData());
     dispatch(isLoadingVideos());
     fetch(
@@ -173,7 +184,14 @@ export const getSearchVideos = (name: string) => {
 export const getSearchImages = (name: string) => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
-  return (dispatch: Dispatch) => {
+  return (
+    dispatch: (
+      arg0:
+        | IDeletePrevDataAction
+        | ILoadingImagesAction
+        | ISearchImagesByNameAction
+    ) => void
+  ) => {
     dispatch(deletePrevData());
     dispatch(isLoadingImages());
     fetch(
@@ -200,7 +218,7 @@ export const getSearchImages = (name: string) => {
 };
 
 /* some scroll events parametres*/
-export const handleScroll: ActionCreator<IMoveScrollAction> = (event: any) => {
+export const handleScroll = (event: any): IMoveScrollAction => {
   return {
     type: MoveScroll.MOVESCROLL,
     scrollTop: event.srcElement.scrollingElement.scrollTop,
@@ -210,9 +228,9 @@ export const handleScroll: ActionCreator<IMoveScrollAction> = (event: any) => {
 };
 
 /*click heart interesting video and foto*/
-export const handleLikeHeart: ActionCreator<ILikeHeartAction> = (
+export const handleLikeHeart = (
   e: React.MouseEvent<SVGSVGElement, MouseEvent>
-) => {
+): ILikeHeartAction => {
   e.currentTarget.classList.toggle("liked");
   return {
     type: likeHeart.LIKEHEART,
@@ -220,9 +238,9 @@ export const handleLikeHeart: ActionCreator<ILikeHeartAction> = (
 };
 
 /* preplay video */
-export const handlePreplayVideo: ActionCreator<IPreplayVideoAction> = (
+export const handlePreplayVideo = (
   e: React.MouseEvent<HTMLVideoElement, MouseEvent>
-) => {
+): IPreplayVideoAction => {
   e.currentTarget.play();
   return {
     type: preplayVideoTypes.PREPLAYVIDEO,
@@ -230,9 +248,9 @@ export const handlePreplayVideo: ActionCreator<IPreplayVideoAction> = (
 };
 
 /* stop video */
-export const handlePauseVideo: ActionCreator<IPauseVideoAction> = (
+export const handlePauseVideo = (
   e: React.MouseEvent<HTMLVideoElement, MouseEvent>
-) => {
+): IPauseVideoAction => {
   e.currentTarget.pause();
   return {
     type: pauseVideoTypes.PAUSEVIDEO,
@@ -240,7 +258,7 @@ export const handlePauseVideo: ActionCreator<IPauseVideoAction> = (
 };
 
 /* loading page for photos page */
-export const isLoadingImages: ActionCreator<ILoadingImagesAction> = () => {
+export const isLoadingImages = (): ILoadingImagesAction => {
   return {
     type: isLoadingImagesTypes.LOADINGIMAGES,
     isLoading: true,
@@ -248,7 +266,7 @@ export const isLoadingImages: ActionCreator<ILoadingImagesAction> = () => {
 };
 
 /* loading page for videos page */
-export const isLoadingVideos: ActionCreator<ILoadingVideosAction> = () => {
+export const isLoadingVideos = (): ILoadingVideosAction => {
   return {
     type: isLoadingVideosTypes.LOADINGVIDEOS,
     isLoading: true,
@@ -256,7 +274,9 @@ export const isLoadingVideos: ActionCreator<ILoadingVideosAction> = () => {
 };
 
 /* search image and video by suggested word */
-export const searchBySuggestedWord = (value: string) => {
+export const searchBySuggestedWord = (
+  value: string
+): ISearchBySuggestedWordAction => {
   return {
     type: SearchBySuggestedWordTypes.SEARCHBYSUGGESTEDWORD,
     name: value,
@@ -264,7 +284,7 @@ export const searchBySuggestedWord = (value: string) => {
 };
 
 /* download image */
-export const downloadImage = (elem: any) => {
+export const downloadImage = (elem: any): IDownloadImageAction => {
   while (elem.children.length > 1) {
     elem.removeChild(elem.lastChild);
   }
@@ -289,7 +309,7 @@ export const downloadImage = (elem: any) => {
 };
 
 /* get ID photo from photo page */
-export const getIdPhoto = (id: number) => {
+export const getIdPhoto = (id: number): IShowDetailsPhotoAction => {
   return {
     type: GetIdPhotoTypes.GETIDPHOTO,
     id,
@@ -297,14 +317,14 @@ export const getIdPhoto = (id: number) => {
 };
 
 /* toggle modal window for photo page */
-export const toggleWindowPhotoPage: ActionCreator<IToggleWindowPhotoPageAction> = () => {
+export const toggleWindowPhotoPage = (): IToggleWindowPhotoPageAction => {
   return {
     type: ToggleWindowPhotoPageTypes.TOGGLEWINDOWPHOTOPAGE,
   };
 };
 
 /*watching image forward in modal window*/
-export const watchingImageForward = (id: number) => {
+export const watchingImageForward = (id: number): IImageForwardAction => {
   ++id;
   return {
     type: ImageForwardTypes.IMAGEFORWARD,
@@ -313,7 +333,7 @@ export const watchingImageForward = (id: number) => {
 };
 
 /*watching image back in modal window*/
-export const watchingImageBack = (id: number) => {
+export const watchingImageBack = (id: number): IImageBackAction => {
   --id;
   return {
     type: ImageBackTypes.IMAGEBACK,
@@ -322,16 +342,14 @@ export const watchingImageBack = (id: number) => {
 };
 
 /*show/hide dropmenu in modal window for photo page */
-export const toggleDropMenuPhotoPage: ActionCreator<IToggleDropMenuPhotoPageAction> = () => {
+export const toggleDropMenuPhotoPage = (): IToggleDropMenuPhotoPageAction => {
   return {
     type: ToggleDropMenuPhotoPageTypes.TOGGLEDROPMENUPHOTOPAGE,
   };
 };
 
 /*select image size for download  */
-export const handleSelectImageSize: ActionCreator<ISelectImageSizeAction> = (
-  size: string
-) => {
+export const handleSelectImageSize = (size: string): ISelectImageSizeAction => {
   return {
     type: SelectImageSizeTypes.SELECTIMAGESIZE,
     size,
@@ -339,10 +357,10 @@ export const handleSelectImageSize: ActionCreator<ISelectImageSizeAction> = (
 };
 
 /* download select size image */
-export const downloadSelectImageSize: ActionCreator<IDownloadImageSizeAction> = (
+export const downloadSelectImageSize = (
   elem: any,
   sizeURL: string
-) => {
+): IDownloadImageSizeAction => {
   while (elem.children.length > 0) {
     elem.removeChild(elem.lastChild);
   }
@@ -387,7 +405,7 @@ export const downloadSelectImageSize: ActionCreator<IDownloadImageSizeAction> = 
 };
 
 /* clear earlier selected image size */
-export const clearEarlierSize: ActionCreator<IClearEarlierSizeAction> = () => {
+export const clearEarlierSize = (): IClearEarlierSizeAction => {
   return {
     type: ClearEarlierSizeTypes.CLEAREARLIERSIZE,
     clear: undefined,
@@ -395,9 +413,7 @@ export const clearEarlierSize: ActionCreator<IClearEarlierSizeAction> = () => {
 };
 
 /* clear all radio boxes from dropdown menu */
-export const clearRadioBoxes: ActionCreator<IClearRadioBoxesAction> = (
-  inputs: any
-) => {
+export const clearRadioBoxes = (inputs: any): IClearRadioBoxesAction => {
   inputs.map((elem: any) => (elem.checked = false));
 
   return {

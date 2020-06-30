@@ -232,10 +232,10 @@ const mapStateToProps = (state: IApplicationState) => ({
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getKeyNumber: (num: number) => dispatch(handleSearchKeydown(num)),
+    getKeyNumber: (e: React.KeyboardEvent<HTMLInputElement>) => dispatch(handleSearchKeydown(e)),
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
     getPopularImages: () => dispatch(getPopularImages()),
-    handleSearchChange: (e: string) => dispatch(handleSearchChange(e)),
+    handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => dispatch(handleSearchChange(e)),
     getSearchImages: (name: string) => dispatch(getSearchImages(name)),
     downloadImage: (elem: any) => dispatch(downloadImage(elem)),
     getIdPhoto: (id: number) => dispatch(getIdPhoto(id)),

@@ -25,7 +25,7 @@ class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
               className="form-control w-100"
               placeholder="Find a photo"
               value={this.props.searchNamePhoto}
-              onChange={this.props.watchInputChange}
+              onChange={(e) => this.props.watchInputChange(e)}
               autoFocus={false}
               required={true}
             />
@@ -55,11 +55,10 @@ const mapStateToProps = (state: IApplicationState) => ({
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    watchInputChange: (e: string) => dispatch(handleSearchChange(e)),
+    watchInputChange: (e: React.ChangeEvent<HTMLInputElement>) => dispatch(handleSearchChange(e)),
     getSearchImages: (name: string) => dispatch(getSearchImages(name)),
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
   };
 };
 
-export default  connect(mapStateToProps, mapDispatchToProps)(SearchFotoSmallArea)
-;
+export default  connect(mapStateToProps, mapDispatchToProps)(SearchFotoSmallArea);

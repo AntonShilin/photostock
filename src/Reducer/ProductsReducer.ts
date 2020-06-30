@@ -1,4 +1,3 @@
-import { Reducer } from "redux";
 import {
   ProductsActions,
   IProductsState,
@@ -60,20 +59,20 @@ const initialProductState: IProductsState = {
     "prague",
     "wave",
     "village",
-    "country side"
+    "country side",
   ],
   modalWindowPhotoPage: {
     id: 0,
     isOpen: false,
     isOpenDropDownMenu: false,
-    sizeURL: undefined
+    sizeURL: undefined,
   },
 };
 
-export const productsReducer: Reducer<IProductsState, ProductsActions> = (
-  state = initialProductState,
-  action
-) => {
+export const productsReducer = (
+  state: IProductsState = initialProductState,
+  action: ProductsActions
+): IProductsState => {
   switch (action.type) {
     case GetPopularImagesTypes.GETPOPULARIMAGES: {
       action.popularPhoto.photos.map((elem, i) => {
@@ -263,7 +262,7 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         },
       };
     }
-      
+
     case SelectImageSizeTypes.SELECTIMAGESIZE: {
       return {
         ...state,
@@ -273,13 +272,13 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
         },
       };
     }
-      
+
     case DownloadImageSizeTypes.DOWNLOADIMAGESIZE: {
       return {
         ...state,
       };
     }
-      
+
     case ClearEarlierSizeTypes.CLEAREARLIERSIZE: {
       return {
         ...state,
@@ -288,13 +287,13 @@ export const productsReducer: Reducer<IProductsState, ProductsActions> = (
           sizeURL: action.clear,
         },
       };
-    } 
-      
+    }
+
     case ClearRadioBoxesTypes.CLEARRADIOBOXES: {
       return {
         ...state,
       };
-    } 
+    }
 
     default:
       return state;

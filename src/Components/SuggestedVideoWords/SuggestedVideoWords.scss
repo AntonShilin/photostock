@@ -9,6 +9,9 @@ div.suggested_video_words {
   }
   scrollbar-width: 1px;
   scrollbar-color: white;
+  span{
+    display: inline;
+  }
   a {
     font-size: 1rem;
     cursor: pointer;
@@ -17,6 +20,15 @@ div.suggested_video_words {
     opacity: 0.7;
     &:hover {
       opacity: 1;
+    }
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  div.suggested_video_words{
+    span{
+      display: none;
     }
   }
 }

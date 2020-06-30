@@ -22,7 +22,7 @@ class SuggestedVideoWords extends React.Component<ISuggestedVideosProps, State> 
   public render() {
     return (
       <div className="suggested_video_words">
-        Suggested:
+        <span>Suggested:</span>
         {this.props.suggestedWords.map((word, i) => (
           <NavLink
             to={`/videos/${word}`}

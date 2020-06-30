@@ -20,11 +20,6 @@ export interface IHeaderResultPhotoPageProps {
 }
 
 class HeaderResultPhotoPage extends React.Component<IHeaderResultPhotoPageProps, RouteComponentProps> {
-  public elementMenu: React.RefObject<HTMLDivElement>;
-  constructor(props: IHeaderResultPhotoPageProps) {
-    super(props);
-    this.elementMenu = React.createRef();
-  }
 
   public componentDidMount() {
     window.addEventListener("scroll", this.props.handleScroll);
@@ -37,7 +32,7 @@ class HeaderResultPhotoPage extends React.Component<IHeaderResultPhotoPageProps,
           style={
             this.props.isToggleMenu ? { display: "block" } : { display: "none" }
           }
-          onClick={() => this.props.handleToggleMenu(this.elementMenu)}
+          onClick={this.props.handleToggleMenu}
         />
         <div className="container-fluid navigation_result_video_page">
           <div className="row align-items-center">
@@ -57,7 +52,7 @@ class HeaderResultPhotoPage extends React.Component<IHeaderResultPhotoPageProps,
 
             <button
               className="d-lg-none"
-              onClick={() => this.props.handleToggleMenu(this.elementMenu)}
+              onClick={this.props.handleToggleMenu}
             >
               {!this.props.isToggleMenu ? (
                 <IoIosMenu style={{ fontSize: "2rem", color: "white",strokeWidth:"20"  }} />
@@ -67,7 +62,6 @@ class HeaderResultPhotoPage extends React.Component<IHeaderResultPhotoPageProps,
             </button>
           </div>
         <div
-          ref={this.elementMenu}
           id="result_photo_page_submenu"
           className={`container-xl d-lg-none`}
           style={
@@ -109,8 +103,8 @@ const mapStateToProps = (state: IApplicationState) => ({
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    handleToggleMenu: (element: React.ElementType<HTMLDivElement>) =>
-      dispatch(handleToggleMenu(element)),
+    handleToggleMenu: () =>
+      dispatch(handleToggleMenu()),
     handleScroll: (event:any) => dispatch(handleScroll(event))
   };
 };

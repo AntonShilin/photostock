@@ -113,8 +113,8 @@ const mapDispatchToProps = (dispatch: any) => {
     toggleWindowPhotoPage: () => dispatch(toggleWindowPhotoPage()),
     watchingImageForward: (id: number) => dispatch(watchingImageForward(id)),
     watchingImageBack: (id: number) => dispatch(watchingImageBack(id)),
-    toggleDropMenuPhotoPage: (id: number) =>
-      dispatch(toggleDropMenuPhotoPage(id)),
+    toggleDropMenuPhotoPage: () =>
+      dispatch(toggleDropMenuPhotoPage()),
   };
 };
 
