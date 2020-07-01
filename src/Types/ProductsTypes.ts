@@ -274,9 +274,9 @@ export interface IProductsState {
   readonly data: ICuratedPhoto | null;
   readonly videos: IPopularVideos | null;
   readonly productsLoading: boolean;
-  readonly searchNamePhoto: string;
+  readonly searchNamePhoto: string | "";
   resultSearchImage: IDataSearch | null;
-  readonly searchNameVideo: string;
+  readonly searchNameVideo: string | "";
   resultSearchVideo: IPopularVideos | null;
   readonly isToggleMenu: boolean;
   readonly isScrolling: boolean;

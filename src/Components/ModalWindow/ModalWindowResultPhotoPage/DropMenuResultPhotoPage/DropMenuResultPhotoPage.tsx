@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IApplicationState } from "../../../../Store/Store";
 import { connect } from "react-redux";
-import { IDataSearch } from "../../../../Interfaces/Interfaces";
+import { IDataSearch, IDataSrc } from "../../../../Interfaces/Interfaces";
 import {
   getPopularImages,
   handleSelectImageSize,
@@ -39,9 +39,9 @@ class DropMenuResultPhotoPage extends React.Component<
 
   public render() {
     const { id, isOpenDropDownMenu, sizeURL } = this.props;
-    const sizes = this.props.resultSearchImage!.photos[id!].src;
+    const sizes:IDataSrc = this.props.resultSearchImage!.photos[id!]?.src;
 
-    return this.props.resultSearchImage! ? (
+    return sizes! && sizes!==undefined ? (
       <form
         className={
           isOpenDropDownMenu ? "d-block dropmenu_photo_page" : "d-none"

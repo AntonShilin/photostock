@@ -9,8 +9,8 @@ import { NavLink } from "react-router-dom";
 
 export interface ISearchVideoSmallAreaProps  {
   popularVideo: IPopularVideos | null;
-  searchNameVideo: string;
-  searchNamePhoto: string;
+  searchNameVideo: string |null;
+  searchNamePhoto: string |null;
   getSearchVideos: typeof getSearchVideos;
   changeNameVideo: typeof changeNameVideo;
   getSearchImages: typeof getSearchImages;
@@ -27,7 +27,7 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
               type="text"
               className="form-control"
               placeholder="Find a photo"
-              value={this.props.searchNameVideo}
+              value={this.props.searchNameVideo!}
               onChange={(e)=>this.props.changeNameVideo(e)}
               autoFocus={false}
             />
@@ -35,8 +35,8 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
               <NavLink to={`/videos/${this.props.searchNameVideo}`}
                 className="input-group-text"
                 onClick={() => {
-                  this.props.getSearchVideos(this.props.searchNameVideo);
-                  this.props.getSearchImages(this.props.searchNamePhoto);
+                  this.props.getSearchVideos(this.props.searchNameVideo!);
+                  this.props.getSearchImages(this.props.searchNamePhoto!);
                 }}
               >
                 <FiSearch style={{color:"black"}}/>

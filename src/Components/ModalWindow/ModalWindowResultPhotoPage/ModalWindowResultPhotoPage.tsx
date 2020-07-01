@@ -36,9 +36,10 @@ IWindowResultPhotoPageProps,
     const id = this.props.id!;
     const { isOpenDropDownMenu } = this.props;
 
+
     return (
       <React.Fragment>
-        {this.props.resultSearchImage! ? (
+        {this.props.resultSearchImage!==null ? (
           <div
             className={
               this.props.isOpen ? "d-block modal_window_photo_basis" : "d-none"
@@ -54,7 +55,7 @@ IWindowResultPhotoPageProps,
                   <div className="row">
                     <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
                       <p className="text-center">
-                        {this.props.resultSearchImage!.photos[id].photographer}
+                        {this.props.resultSearchImage?.photos[id]?.photographer}
                       </p>
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
@@ -77,7 +78,7 @@ IWindowResultPhotoPageProps,
                   </div>
                 </div>
                 <div className="col-12 align-self-center modal_window_photo">
-                  <img src={this.props.resultSearchImage!.photos[id].src.medium} alt="img" />
+                  <img src={this.props.resultSearchImage?.photos[id]?.src.medium} alt="img" />
                   <span
                     className="arrow_left"
                     onClick={() => this.props.watchingImageBack(id)}

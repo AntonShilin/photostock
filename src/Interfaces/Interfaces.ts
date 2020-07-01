@@ -1,15 +1,5 @@
 
 /* photo */
-interface IDataSrc {
-  original: string;
-  large2x: string;
-  large: string;
-  medium: string;
-  small: string;
-  portrait: string;
-  landscape: string;
-  tiny: string;
-}
 
 export interface IData {
   id: number;
@@ -21,6 +11,17 @@ export interface IData {
   photographer_id: string;
   liked: boolean;
   src: IDataSrc;
+}
+
+export interface IDataSrc {
+  original: string;
+  large2x: string;
+  large: string;
+  medium: string;
+  small: string;
+  portrait: string;
+  landscape: string;
+  tiny: string;
 }
 
 export interface ICuratedPhoto {

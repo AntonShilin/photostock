@@ -77,7 +77,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                   type="text"
                   className="form-control"
                   placeholder="Find a photo"
-                  value={this.props.searchNamePhoto}
+                  value={this.props.searchNamePhoto!}
                   onChange={this.props.handleSearchChange}
                   autoFocus={false}
                   required={true}
@@ -90,8 +90,8 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                     to={`/photos/${this.props.searchNamePhoto}`}
                     className="input-group-text"
                     onClick={() => {
-                      this.props.getSearchImages(this.props.searchNamePhoto);
-                      this.props.getSearchVideos(this.props.searchNamePhoto);
+                      this.props.getSearchImages(this.props.searchNamePhoto!);
+                      this.props.getSearchVideos(this.props.searchNamePhoto!);
                     }}
                   >
                     <FiSearch />

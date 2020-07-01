@@ -18,7 +18,7 @@ class CouldnotFindPhoto extends React.Component<INotFindPhotoProps, State> {
     return (
       <React.Fragment>
         {
-        this.props.resultSearchImage?.photos.length === 0 ? (
+        this.props.resultSearchImage?.photos?.length===0 ? (
           <div className="row">
             <div className="col-12">
               <h2 className="text-center mb-5">

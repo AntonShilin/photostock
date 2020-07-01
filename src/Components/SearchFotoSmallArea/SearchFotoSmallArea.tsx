@@ -7,8 +7,8 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 export interface ISearchFotoSmallAreaProps  {
-  searchNamePhoto: string;
-  searchNameVideo: string;
+  searchNamePhoto: string |null;
+  searchNameVideo: string |null;
   watchInputChange: typeof handleSearchChange;
   getSearchImages: typeof getSearchImages;
   getSearchVideos: typeof getSearchVideos;
@@ -24,7 +24,7 @@ class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
               type="text"
               className="form-control w-100"
               placeholder="Find a photo"
-              value={this.props.searchNamePhoto}
+              value={this.props.searchNamePhoto!}
               onChange={(e) => this.props.watchInputChange(e)}
               autoFocus={false}
               required={true}
@@ -33,8 +33,8 @@ class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
               <NavLink to={`/photos/${this.props.searchNamePhoto}`}
                 className="input-group-text"
                 onClick={() => {
-                  this.props.getSearchImages(this.props.searchNamePhoto);
-                  this.props.getSearchVideos(this.props.searchNameVideo);
+                  this.props.getSearchImages(this.props.searchNamePhoto!);
+                  this.props.getSearchVideos(this.props.searchNameVideo!);
                 }}
               >
                 <FiSearch style={{color:"black"}}/>
