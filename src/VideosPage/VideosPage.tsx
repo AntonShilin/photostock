@@ -47,13 +47,11 @@ class VideosPage extends React.Component<IPropsVideosPage> {
       <React.Fragment>
         <HeaderVideoPage />
         <div className="container-fluid bg-videos-page">
-          <div className="container-xl video_search_item_bg">
-          {this.props.popularVideo !== null ? (
             <video controls={false} autoPlay={true} loop={true}>
               <source src={forest} type="video/mp4" />
               Your browser doesn't support HTML5 video tag.
             </video>
-          ) : null}
+          <div className="container-xl video_search_item_bg">
             <div className="video_search_item">
               <h1 className="pb-1">
                 The best free stock videos from talented authors.

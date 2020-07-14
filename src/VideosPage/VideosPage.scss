@@ -6,12 +6,11 @@
   border-radius: 0;
   padding-right: 0;
   padding-left: 0;
+  overflow: hidden;
+  z-index: 0;
   .video_search_item_bg {
-    overflow: hidden;
-    z-index: 0;
     padding-top: 10rem;
     padding-bottom: 5rem;
-    position: relative;
     max-height: 40rem;
     min-height: 35rem;
 
@@ -45,12 +44,8 @@
 
   video {
     position: absolute;
-    top: 0rem;
-    left: 0rem;
     z-index: -1;
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;
+    min-width: 100%;
     height: auto;
   }
 }
@@ -152,6 +147,3 @@ div.popular_video_item {
     padding-bottom: 3rem;
   }
 }
-
-
-
