@@ -1,52 +1,57 @@
 .bg-videos-page {
   position: relative;
-  height: 100%;
   max-height: 40rem;
   min-height: 35rem;
-  padding-top: 10rem;
-  padding-bottom: 5rem;
   background-color: #8e8a8a;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
   border-radius: 0;
-  overflow: hidden;
-  z-index: 0;
-  .video_search_item{
-    width: 75%;
-    margin: 0 auto;
+  padding-right: 0;
+  padding-left: 0;
+  .video_search_item_bg {
+    overflow: hidden;
+    z-index: 0;
+    padding-top: 10rem;
+    padding-bottom: 5rem;
+    position: relative;
+    max-height: 40rem;
+    min-height: 35rem;
+
+    .video_search_item {
+      width: 75%;
+      margin: 0 auto;
+      h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        font-family: "Archivo Black", sans-serif;
+        color: white !important;
+      }
+      div.input-group {
+        input.form-control {
+          border: none;
+          &:focus {
+            outline: 0;
+            outline-offset: 0;
+            box-shadow: none;
+          }
+        }
+        div.input-group-append {
+          a.input-group-text {
+            border: none;
+            background-color: #fff;
+          }
+        }
+      }
+    }
   }
-  video{
+
+  video {
     position: absolute;
     top: 0rem;
     left: 0rem;
     z-index: -1;
-     width: -webkit-max-content;
-     width: -moz-max-content;
-     width: max-content;
-    height: auto; 
-  }
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    font-family: "Archivo Black", sans-serif;
-    color: white !important;
-  }
-  div.input-group {
-    input.form-control {
-      border: none;
-      &:focus {
-        outline: 0;
-        outline-offset: 0;
-        box-shadow: none;
-      }
-    }
-    div.input-group-append {
-      a.input-group-text {
-        border: none;
-        background-color: #fff;
-      }
-    }
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    height: auto;
   }
 }
 
@@ -63,7 +68,7 @@ div {
 
 div.popular_video_item {
   position: relative;
-  video{
+  video {
     width: 100%;
     height: auto;
   }
@@ -95,7 +100,12 @@ div.popular_video_item {
   }
   div.video-person-name {
     visibility: hidden;
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.76), transparent);
+    background-image: linear-gradient(
+      0deg,
+      transparent,
+      rgba(0, 0, 0, 0.76),
+      transparent
+    );
     position: absolute;
     min-height: 4rem;
     width: 100%;
@@ -110,13 +120,11 @@ div.popular_video_item {
 }
 
 @media screen and (max-width: 768px) {
-  .bg-videos-page {
+  .video_search_item_bg {
     padding-top: 13rem;
     padding-bottom: 3rem;
   }
 }
-
-
 
 @media screen and (max-width: 440px) {
   div.popular_video_item {
@@ -125,22 +133,21 @@ div.popular_video_item {
       left: 40% !important;
     }
   }
-  .video_search_item{
+  .video_search_item {
     width: 100% !important;
     margin: 0 auto;
   }
 }
 
-
 @media screen and (max-width: 414px) {
-  .bg-videos-page {
+  .video_search_item_bg {
     padding-top: 7rem !important;
     padding-bottom: 3rem;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .bg-videos-page {
+  .video_search_item_bg {
     padding-top: 5rem !important;
     padding-bottom: 3rem;
   }
@@ -148,26 +155,24 @@ div.popular_video_item {
 
 @media screen and (min-width: 2750px) {
   .bg-videos-page {
-    video{
-      left: 15%;
+    video {
+      // left: 15%;
     }
-
   }
 }
 
 @media screen and (min-width: 4000px) {
   .bg-videos-page {
-    video{
-      left: 20%;
+    video {
+      // left: 20%;
     }
-
   }
 }
 
 @media screen and (min-width: 5000px) {
   .bg-videos-page {
-    video{
-      left: 22%;
+    video {
+      // left: 22%;
     }
   }
 }

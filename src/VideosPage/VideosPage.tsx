@@ -21,6 +21,7 @@ import { AiOutlinePlayCircle } from "react-icons/ai";
 import { MdControlPoint } from "react-icons/md";
 import SuggestedVideoWords from "../Components/SuggestedVideoWords/SuggestedVideoWords";
 import Heart from "../Components/SVGIcons/Heart/Heart";
+import forest from "../Components/media/forest.mp4";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
@@ -37,32 +38,22 @@ export interface IPropsVideosPage {
 }
 
 class VideosPage extends React.Component<IPropsVideosPage> {
-
   public componentDidMount() {
     this.props.getPopularVideo();
   }
+
   public render() {
     return (
       <React.Fragment>
         <HeaderVideoPage />
         <div className="container-fluid bg-videos-page">
+          <div className="container-xl video_search_item_bg">
           {this.props.popularVideo !== null ? (
-            <video
-              controls={false}
-              autoPlay={true}
-              loop={true}
-              poster={this.props.popularVideo.videos[0].image}
-            >
-              <source
-                src={this.props.popularVideo.videos[0].video_files[4].link}
-                type={
-                  this.props.popularVideo.videos[0].video_files[4].file_type
-                }
-              />
+            <video controls={false} autoPlay={true} loop={true}>
+              <source src={forest} type="video/mp4" />
               Your browser doesn't support HTML5 video tag.
             </video>
           ) : null}
-          <div className="container-xl">
             <div className="video_search_item">
               <h1 className="pb-1">
                 The best free stock videos from talented authors.
@@ -78,7 +69,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                   autoFocus={false}
                   onKeyDown={(e) => {
                     this.props.getKeyNumber(e);
-                  }} 
+                  }}
                 />
                 <div className="input-group-append">
                   <NavLink
@@ -93,7 +84,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                   </NavLink>
                 </div>
               </div>
-              <SuggestedVideoWords/>
+              <SuggestedVideoWords />
             </div>
           </div>
         </div>
@@ -153,7 +144,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                   />
                                 </span>
                                 <span>
-                                 <Heart/>
+                                  <Heart />
                                 </span>
                               </div>
                             </div>
@@ -206,7 +197,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                   />
                                 </span>
                                 <span>
-                                <Heart/>
+                                  <Heart />
                                 </span>
                               </div>
                             </div>
@@ -229,21 +220,23 @@ const mapStateToProps = (state: IApplicationState) => {
     popularVideo: state.products.videos,
     searchNameVideo: state.products.searchNameVideo,
     searchNamePhoto: state.products.searchNamePhoto,
-    isLoadingVideos: state.products.isLoadingVideos
+    isLoadingVideos: state.products.isLoadingVideos,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getKeyNumber: (e:React.KeyboardEvent<HTMLInputElement>) => dispatch(handleSearchKeydown(e)),
+    getKeyNumber: (e: React.KeyboardEvent<HTMLInputElement>) =>
+      dispatch(handleSearchKeydown(e)),
     getPopularVideo: () => dispatch(getPopularVideo()),
-    changeNameVideo: (e: React.ChangeEvent<HTMLInputElement>) => dispatch(changeNameVideo(e)),
+    changeNameVideo: (e: React.ChangeEvent<HTMLInputElement>) =>
+      dispatch(changeNameVideo(e)),
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
     handlePreplayVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
       dispatch(handlePreplayVideo(e)),
     handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
       dispatch(handlePauseVideo(e)),
-      getSearchImages: (name: string) => dispatch(getSearchImages(name)),
+    getSearchImages: (name: string) => dispatch(getSearchImages(name)),
   };
 };
 
