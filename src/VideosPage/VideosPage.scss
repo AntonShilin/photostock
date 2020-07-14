@@ -1,4 +1,4 @@
-.bg-videos-page {
+.videos-page-bg {
   position: relative;
   max-height: 40rem;
   min-height: 35rem;
@@ -116,8 +116,8 @@ div.popular_video_item {
 
 @media screen and (max-width: 768px) {
   .video_search_item_bg {
-    padding-top: 13rem;
-    padding-bottom: 3rem;
+    padding-top: 13rem !important;
+    padding-bottom: 3rem !important;
   }
 }
 
@@ -137,13 +137,13 @@ div.popular_video_item {
 @media screen and (max-width: 414px) {
   .video_search_item_bg {
     padding-top: 7rem !important;
-    padding-bottom: 3rem;
+    padding-bottom: 3rem !important;
   }
 }
 
 @media screen and (max-width: 320px) {
   .video_search_item_bg {
     padding-top: 5rem !important;
-    padding-bottom: 3rem;
+    padding-bottom: 3rem !important;
   }
 }

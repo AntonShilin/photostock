@@ -46,7 +46,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
     return (
       <React.Fragment>
         <HeaderVideoPage />
-        <div className="container-fluid bg-videos-page">
+        <div className="container-fluid videos-page-bg">
             <video controls={false} autoPlay={true} loop={true}>
               <source src={forest} type="video/mp4" />
               Your browser doesn't support HTML5 video tag.
