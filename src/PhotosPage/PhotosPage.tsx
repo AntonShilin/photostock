@@ -22,7 +22,7 @@ import { MdControlPoint } from "react-icons/md";
 import SuggestedPhotoWords from "../Components/SuggestedPhotoWords/SuggestedPhotoWords";
 import Heart from "../Components/SVGIcons/Heart/Heart";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
-import ModalWindowPhotoPage from "../Components/ModalWindow/ModalPhotoPage/ModalPhotoPage";
+import ModalPhotoPage from "../Components/ModalWindow/ModalPhotoPage/ModalPhotoPage";
 
 export interface IPropsPhotosPage extends RouteComponentProps {
   data: ICuratedPhoto | null;
@@ -60,7 +60,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
     return (
       <React.Fragment>
         <HeaderPhotoPage />
-        <ModalWindowPhotoPage />
+        <ModalPhotoPage />
         <div
           className="container-fluid photospage_bg"
           style={{

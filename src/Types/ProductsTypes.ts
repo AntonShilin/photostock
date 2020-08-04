@@ -80,8 +80,16 @@ export enum GetIdPhotoTypes {
   GETIDPHOTO = "GETIDPHOTO",
 }
 
+export enum GetIdVideoTypes {
+  GETIDVIDEO = "GETIDVIDEO",
+}
+
 export enum ToggleWindowPhotoPageTypes {
   TOGGLEWINDOWPHOTOPAGE = "TOGGLEWINDOWPHOTOPAGE",
+}
+
+export enum ToggleWindowVideoPageTypes {
+  TOGGLEWINDOWVIDEOPAGE = "TOGGLEWINDOWVIDEOPAGE",
 }
 
 export enum ImageForwardTypes {
@@ -112,7 +120,18 @@ export enum ClearRadioBoxesTypes {
   CLEARRADIOBOXES = "CLEARRADIOBOXES",
 }
 
+export enum ToggleMediaPlayerTypes {
+  TOGGLEMEDIAPLAYER = "TOGGLEMEDIAPLAYER",
+}
+
+
 /*  interfaces */
+export interface IToggleMediaPlayerAction {
+  type: ToggleMediaPlayerTypes.TOGGLEMEDIAPLAYER;
+  isPlay: boolean;
+}
+
+
 export interface IClearRadioBoxesAction {
   type: ClearRadioBoxesTypes.CLEARRADIOBOXES;
 }
@@ -149,8 +168,17 @@ export interface IToggleWindowPhotoPageAction {
   type: ToggleWindowPhotoPageTypes.TOGGLEWINDOWPHOTOPAGE;
 }
 
+export interface IToggleWindowVideoPageAction {
+  type: ToggleWindowVideoPageTypes.TOGGLEWINDOWVIDEOPAGE;
+}
+
 export interface IShowDetailsPhotoAction {
   type: GetIdPhotoTypes.GETIDPHOTO;
+  id: number;
+}
+
+export interface IShowDetailsVideoAction {
+  type: GetIdVideoTypes.GETIDVIDEO;
   id: number;
 }
 
@@ -241,6 +269,7 @@ export interface IMoveScrollAction {
 }
 
 export type ProductsActions =
+  |IToggleMediaPlayerAction
   | IGetPopularPhotoAction
   | IGetSearchValueAction
   | ISearchImagesByNameAction
@@ -259,7 +288,9 @@ export type ProductsActions =
   | ISearchBySuggestedWordAction
   | IDownloadImageAction
   | IShowDetailsPhotoAction
+  | IShowDetailsVideoAction
   | IToggleWindowPhotoPageAction
+  | IToggleWindowVideoPageAction
   | IImageForwardAction
   | IImageBackAction
   | ISelectImageSizeAction
@@ -291,6 +322,13 @@ export interface IProductsState {
     isOpen: boolean;
     isOpenDropDownMenu: boolean;
     sizeURL: string | undefined;
+  };
+  readonly modalWindowVideoPage: {
+    id: number|null;
+    isOpen: boolean;
+    isOpenDropDownMenu: boolean;
+    sizeURL: string | undefined;
+    isPlay: boolean;
   };
 }
 

@@ -1,4 +1,3 @@
-
 import {
   SearchValueTypes,
   GetPopularVideoTypes,
@@ -52,10 +51,15 @@ import {
   IGetVideoAction,
   IPopularVideoAction,
   IGetPopularPhotoAction,
+  IToggleWindowVideoPageAction,
+  ToggleWindowVideoPageTypes,
+  IShowDetailsVideoAction,
+  GetIdVideoTypes,
+  ToggleMediaPlayerTypes,
 } from "../Types/ProductsTypes";
 
 /* delete prev video*/
-export const deletePrevData = ():IDeletePrevDataAction => {
+export const deletePrevData = (): IDeletePrevDataAction => {
   return {
     type: DeletePrevData.DELETEPREVDATA,
     data: null,
@@ -63,8 +67,7 @@ export const deletePrevData = ():IDeletePrevDataAction => {
 };
 
 /* toggle menu button */
-export const handleToggleMenu = (
-):IToggleMenuAction => ({
+export const handleToggleMenu = (): IToggleMenuAction => ({
   type: ToggleMenuTypes.TOGGLEMENU,
 });
 
@@ -72,7 +75,9 @@ export const handleToggleMenu = (
 export const getPopularImages = () => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
-  return (dispatch: (arg0: ILoadingImagesAction|IGetPopularPhotoAction) => void) => {
+  return (
+    dispatch: (arg0: ILoadingImagesAction | IGetPopularPhotoAction) => void
+  ) => {
     dispatch(isLoadingImages());
     fetch(`https://api.pexels.com/v1/curated?per_page=50&page=1`, {
       headers: { Authorization: keyAPI },
@@ -97,7 +102,7 @@ export const getPopularImages = () => {
 /* get key code number */
 export const handleSearchKeydown = (
   e: React.KeyboardEvent<HTMLInputElement>
-):ISearchKeydownAction => ({
+): ISearchKeydownAction => ({
   type: SearchKeydownTypes.SEARCHKEYDOWN,
   keydownKey: e.keyCode,
 });
@@ -105,7 +110,7 @@ export const handleSearchKeydown = (
 /* change in input on foto page */
 export const handleSearchChange = (
   e: React.ChangeEvent<HTMLInputElement>
-):IGetSearchValueAction => {
+): IGetSearchValueAction => {
   return {
     type: SearchValueTypes.GETSEARCHVALUE,
     searchValue: e.target.value,
@@ -116,7 +121,9 @@ export const handleSearchChange = (
 export const getPopularVideo = () => {
   const keyAPI: string =
     "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
-  return (dispatch: (arg0: ILoadingVideosAction|IPopularVideoAction) => void) => {
+  return (
+    dispatch: (arg0: ILoadingVideosAction | IPopularVideoAction) => void
+  ) => {
     dispatch(isLoadingVideos());
     fetch(`https://api.pexels.com/videos/popular?per_page=10&page=1`, {
       headers: { Authorization: keyAPI },
@@ -141,7 +148,7 @@ export const getPopularVideo = () => {
 /* change in input on video page */
 export const changeNameVideo = (
   e: React.ChangeEvent<HTMLInputElement>
-):IChangeNameVideoAction => ({
+): IChangeNameVideoAction => ({
   type: GetChangeNameVideoTypes.GETCHANGENAMEVIDEO,
   value: e.target.value,
 });
@@ -316,10 +323,25 @@ export const getIdPhoto = (id: number): IShowDetailsPhotoAction => {
   };
 };
 
+/* get ID video from video page */
+export const getIdVideo = (id: number): IShowDetailsVideoAction => {
+  return {
+    type: GetIdVideoTypes.GETIDVIDEO,
+    id,
+  };
+};
+
 /* toggle modal window for photo page */
 export const toggleWindowPhotoPage = (): IToggleWindowPhotoPageAction => {
   return {
     type: ToggleWindowPhotoPageTypes.TOGGLEWINDOWPHOTOPAGE,
+  };
+};
+
+/* toggle modal window for video page */
+export const toggleWindowVideoPage = (): IToggleWindowVideoPageAction => {
+  return {
+    type: ToggleWindowVideoPageTypes.TOGGLEWINDOWVIDEOPAGE,
   };
 };
 
@@ -415,8 +437,20 @@ export const clearEarlierSize = (): IClearEarlierSizeAction => {
 /* clear all radio boxes from dropdown menu */
 export const clearRadioBoxes = (inputs: any): IClearRadioBoxesAction => {
   inputs.map((elem: any) => (elem.checked = false));
-
   return {
     type: ClearRadioBoxesTypes.CLEARRADIOBOXES,
+  };
+};
+
+export const toggleMediaPlayer = (isPlay: boolean, elem: HTMLVideoElement) => {
+  if (isPlay) {
+    elem!.pause();
+  } else {
+    // elem.load();
+    elem!.play();
+  }
+  return {
+    type: ToggleMediaPlayerTypes.TOGGLEMEDIAPLAYER,
+    isPlay: !isPlay,
   };
 };

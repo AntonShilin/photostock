@@ -9,6 +9,8 @@ import {
   handlePauseVideo,
   getSearchImages,
   handleSearchKeydown,
+  toggleWindowVideoPage,
+  getIdVideo,
 } from "../Actions/ProductsActions";
 import { IApplicationState } from "../Store/Store";
 import "./VideosPage.scss";
@@ -21,7 +23,7 @@ import { AiOutlinePlayCircle } from "react-icons/ai";
 import { MdControlPoint } from "react-icons/md";
 import SuggestedVideoWords from "../Components/SuggestedVideoWords/SuggestedVideoWords";
 import Heart from "../Components/SVGIcons/Heart/Heart";
-import forest from "../Components/media/forest.mp4";
+import ModalVideoPage from "../Components/ModalWindow/ModalWindowVideoPage/ModalVideoPage";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
@@ -34,7 +36,9 @@ export interface IPropsVideosPage {
   handlePauseVideo: typeof handlePauseVideo;
   getSearchImages: typeof getSearchImages;
   getKeyNumber: typeof handleSearchKeydown;
+  toggleWindowVideoPage: typeof toggleWindowVideoPage;
   isLoadingVideos: boolean;
+  getIdVideo: typeof getIdVideo;
 }
 
 class VideosPage extends React.Component<IPropsVideosPage> {
@@ -46,11 +50,15 @@ class VideosPage extends React.Component<IPropsVideosPage> {
     return (
       <React.Fragment>
         <HeaderVideoPage />
+        <ModalVideoPage />
         <div className="container-fluid videos-page-bg">
-            <video controls={false} autoPlay={true} loop={true}>
-              <source src={forest} type="video/mp4" />
-              Your browser doesn't support HTML5 video tag.
-            </video>
+          <video controls={false} autoPlay={false} loop={true}>
+            <source
+              src="https://firebasestorage.googleapis.com/v0/b/photoandvideo-b979e.appspot.com/o/forest.mp4?alt=media&token=d0db507a-dc26-42f7-aeb2-6046f7481bb4"
+              type="video/mp4"
+            />
+            Your browser doesn't support HTML5 video tag.
+          </video>
           <div className="container-xl video_search_item_bg">
             <div className="video_search_item">
               <h1 className="pb-1">
@@ -97,67 +105,71 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                   <h6 className="mt-4 mb-4">Trending Free Stock Videos</h6>
                 </div>
               </div>
-              <div className="row ">
+              <div className="row">
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="row">
-                    {this.props.popularVideo !== null
-                      ? this.props.popularVideo.videos.map((value, i) =>
-                          i % 2 ? (
-                            <div key={i} className="col-12">
-                              <div className="m-1 popular_video_item">
-                                <video
-                                  onMouseOver={(e) =>
-                                    this.props.handlePreplayVideo(e)
-                                  }
-                                  onMouseLeave={(e) =>
-                                    this.props.handlePauseVideo(e)
-                                  }
-                                  controls={false}
-                                  muted={true}
-                                  poster={value.image}
-                                >
-                                  <source
-                                    src={value.video_files[0].link}
-                                    type={value.video_files[0].file_type}
-                                  />
-                                  Your browser doesn't support HTML5 video tag.
-                                </video>
-                                <div className="video_item_control">
-                                  <AiOutlinePlayCircle
-                                    style={{
-                                      fontSize: "3.5rem",
-                                      color: "white",
-                                    }}
-                                  />
-                                </div>
-                                <div className="video-person-name">
-                                  <p>{value.user.name}</p>
-                                </div>
-                                <span>
-                                  <MdControlPoint
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1.5rem",
-                                    }}
-                                  />
-                                </span>
-                                <span>
-                                  <Heart />
-                                </span>
+                    {this.props.popularVideo! &&
+                      this.props.popularVideo!.videos.map((value, i) =>
+                        i % 2 ? (
+                          <div key={i} className="col-12">
+                            <div
+                              className="m-1 popular_video_item"
+                              data-id={value.id}
+                              onClick={() => {
+                                this.props.toggleWindowVideoPage()
+                                  this.props.getIdVideo(value.id)
+                              }}
+                            >
+                              <video
+                                onMouseOver={(e) =>
+                                  this.props.handlePreplayVideo(e)
+                                }
+                                onMouseLeave={(e) =>
+                                  this.props.handlePauseVideo(e)
+                                }
+                                controls={false}
+                                muted={true}
+                                poster={value.image}
+                              >
+                                <source
+                                  src={value.video_files[0].link}
+                                  type={value.video_files[0].file_type}
+                                />
+                                Your browser doesn't support HTML5 video tag.
+                              </video>
+                              <div className="video_item_control">
+                                <AiOutlinePlayCircle />
                               </div>
+                              <div className="video-person-name">
+                                <p>{value.user.name}</p>
+                              </div>
+                              <span>
+                                <MdControlPoint />
+                              </span>
+                              <span>
+                                <Heart />
+                              </span>
                             </div>
-                          ) : null
-                        )
-                      : null}
+                          </div>
+                        ) : null
+                      )}
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="row">
-                    {this.props.popularVideo !== null
-                      ? this.props.popularVideo.videos.map((value, i) =>
-                          i % 2 === 0 ? (
+                    {this.props.popularVideo! &&
+                      this.props.popularVideo!.videos.map(
+                        (value, i) =>
+                          i % 2 === 0 && (
                             <div key={i} className="col-12">
-                              <div className="m-1 popular_video_item">
+                              <div
+                                className="m-1 popular_video_item"
+                                data-id={value.id}
+                                onClick={() => {
+                                  this.props.toggleWindowVideoPage()
+                                    this.props.getIdVideo(value.id)
+                                }}
+                              >
                                 <video
                                   onMouseOver={(e) =>
                                     this.props.handlePreplayVideo(e)
@@ -176,32 +188,21 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                   Your browser doesn't support HTML5 video tag.
                                 </video>
                                 <div className="video_item_control">
-                                  <AiOutlinePlayCircle
-                                    style={{
-                                      fontSize: "3.5rem",
-                                      color: "white",
-                                    }}
-                                  />
+                                  <AiOutlinePlayCircle />
                                 </div>
                                 <div className="video-person-name">
                                   <p>{value.user.name}</p>
                                 </div>
                                 <span>
-                                  <MdControlPoint
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1.5rem",
-                                    }}
-                                  />
+                                  <MdControlPoint />
                                 </span>
                                 <span>
                                   <Heart />
                                 </span>
                               </div>
                             </div>
-                          ) : null
-                        )
-                      : null}
+                          )
+                      )}
                   </div>
                 </div>
               </div>
@@ -235,6 +236,8 @@ const mapDispatchToProps = (dispatch: any) => {
     handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
       dispatch(handlePauseVideo(e)),
     getSearchImages: (name: string) => dispatch(getSearchImages(name)),
+    toggleWindowVideoPage: () => dispatch(toggleWindowVideoPage()),
+    getIdVideo: (id: number) => dispatch(getIdVideo(id)),
   };
 };
 

@@ -47,7 +47,7 @@ export interface IPopularVideos {
   videos: IVideos[];
 }
 
-interface IVideos {
+export interface IVideos {
   lenght: number;
   id: number;
   width: number;
