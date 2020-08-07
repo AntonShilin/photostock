@@ -96,6 +96,14 @@ export enum ImageForwardTypes {
   IMAGEFORWARD = "IMAGEFORWARD",
 }
 
+export enum VideoBackTypes {
+  VIDEOBACK = "VIDEOBACK",
+}
+
+export enum VideoForwardTypes {
+  VIDEOFORWARD = "VIDEOFORWARD",
+}
+
 export enum ImageBackTypes {
   IMAGEBACK = "IMAGEBACK",
 }
@@ -140,23 +148,19 @@ export enum PauseMediaPlayerTypes {
   PAUSEMEDIAPLAYER = "PAUSEMEDIAPLAYER",
 }
 
-
-
-
 /*  interfaces */
 
 export interface IPauseMediaPlayerAction {
-  type: PauseMediaPlayerTypes.PAUSEMEDIAPLAYER
+  type: PauseMediaPlayerTypes.PAUSEMEDIAPLAYER;
 }
 
-
 export interface ISetCurrentTimeAction {
-  type: SetCurrentTimeTypes.SETCURRENTTIME
+  type: SetCurrentTimeTypes.SETCURRENTTIME;
   time: number;
 }
 
 export interface IStartMediaPlayerAction {
-  type: StartMediaPlayerTypes.STARTMEDIAPLAYER
+  type: StartMediaPlayerTypes.STARTMEDIAPLAYER;
   timer: any;
 }
 
@@ -199,6 +203,16 @@ export interface IImageBackAction {
 
 export interface IImageForwardAction {
   type: ImageForwardTypes.IMAGEFORWARD;
+  stepForward: number;
+}
+
+export interface IVideoBackAction {
+  type: VideoBackTypes.VIDEOBACK;
+  stepBack: number;
+}
+
+export interface IVideoForwardAction {
+  type: VideoForwardTypes.VIDEOFORWARD;
   stepForward: number;
 }
 
@@ -307,11 +321,13 @@ export interface IMoveScrollAction {
 }
 
 export type ProductsActions =
-  |IPauseMediaPlayerAction
-  |ISetCurrentTimeAction
-  |IStartMediaPlayerAction
-  |IStopMediaPlayerAction
-  |IToggleBtnMediaPlayerAction
+  | IVideoBackAction
+  | IVideoForwardAction
+  | IPauseMediaPlayerAction
+  | ISetCurrentTimeAction
+  | IStartMediaPlayerAction
+  | IStopMediaPlayerAction
+  | IToggleBtnMediaPlayerAction
   | IGetPopularPhotoAction
   | IGetSearchValueAction
   | ISearchImagesByNameAction
@@ -373,7 +389,6 @@ export interface IProductsState {
     isPlay: boolean;
     timer: number;
     currentTime: number;
+    videoID: number;
   };
 }
-
-

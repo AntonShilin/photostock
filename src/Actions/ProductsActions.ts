@@ -65,6 +65,10 @@ import {
   SetCurrentTimeTypes,
   IPauseMediaPlayerAction,
   PauseMediaPlayerTypes,
+  IVideoForwardAction,
+  VideoForwardTypes,
+  IVideoBackAction,
+  VideoBackTypes,
 } from "../Types/ProductsTypes";
 
 /* delete prev video*/
@@ -510,5 +514,26 @@ export const pauseMediaPlayer = (
   elem.pause();
   return {
     type: PauseMediaPlayerTypes.PAUSEMEDIAPLAYER,
+  };
+};
+
+
+
+/*watching video forward in modal window*/
+export const watchingVideoForward = (id: number): IVideoForwardAction => {
+  ++id;
+  return {
+    type: VideoForwardTypes.VIDEOFORWARD,
+    stepForward: id,
+  };
+};
+
+
+/*watching video back in modal window*/
+export const watchingVideoBack = (id: number): IVideoBackAction => {
+  --id;
+  return {
+    type: VideoBackTypes.VIDEOBACK,
+    stepBack: id,
   };
 };

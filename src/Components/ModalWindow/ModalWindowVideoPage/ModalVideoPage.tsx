@@ -16,6 +16,8 @@ import {
   toggleWindowVideoPage,
   toggleBtnMediaPlayer,
   stopMediaPlayer,
+  watchingVideoForward,
+  watchingVideoBack,
 } from "../../../Actions/ProductsActions";
 import MediaPlayer from "./MediaPlayer/MediaPlayer";
 
@@ -29,13 +31,16 @@ export interface IWindowVideoPageProps {
   toggleDropMenuPhotoPage: typeof toggleDropMenuPhotoPage;
   toggleBtnMediaPlayer: typeof toggleBtnMediaPlayer;
   stopMediaPlayer: typeof stopMediaPlayer;
+  watchingVideoForward: typeof watchingVideoForward;
+  watchingVideoBack: typeof watchingVideoBack;
+  videoID: number;
 }
 
 export interface State {}
 
 class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
   public render() {
-    const { isOpenDropDownMenu, data, id } = this.props;
+    const { isOpenDropDownMenu, data, id ,videoID} = this.props;
     
     return (
       <React.Fragment>
@@ -90,11 +95,21 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                   <MediaPlayer/>
                   <span
                     className="arrow_left"
+                    onClick={() => {
+                      this.props.toggleBtnMediaPlayer(false)
+                      this.props.stopMediaPlayer()
+                      this.props.watchingVideoBack(id[0])
+                    }}
                   >
                     <IoIosArrowBack />
                   </span>
                   <span
                     className="arrow_right"
+                    onClick={() => {
+                      this.props.toggleBtnMediaPlayer(false)
+                      this.props.stopMediaPlayer()
+                      this.props.watchingVideoForward(id[0])
+                    }}
                   >
                     <IoIosArrowForward />
                   </span>
@@ -114,6 +129,7 @@ const mapStateToProps = (state: IApplicationState) => ({
   isOpen: state.products.modalWindowVideoPage.isOpen,
   isScrollTop: state.products.isScrollTop,
   isOpenDropDownMenu: state.products.modalWindowVideoPage.isOpenDropDownMenu,
+  videoID: state.products.modalWindowVideoPage.videoID,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
@@ -121,7 +137,9 @@ const mapDispatchToProps = (dispatch: any) => {
     toggleWindowVideoPage: () => dispatch(toggleWindowVideoPage()),
     toggleDropMenuPhotoPage: () => dispatch(toggleDropMenuPhotoPage()),
     toggleBtnMediaPlayer: (value:boolean)=>dispatch(toggleBtnMediaPlayer(value)),
-    stopMediaPlayer: ()=>dispatch(stopMediaPlayer())
+    stopMediaPlayer: ()=>dispatch(stopMediaPlayer()),
+    watchingVideoForward: (id:number)=>dispatch(watchingVideoForward(id)),
+    watchingVideoBack: (id:number)=>dispatch(watchingVideoBack(id)),
   };
 };
 

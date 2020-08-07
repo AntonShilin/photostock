@@ -34,6 +34,8 @@ import {
   SetCurrentTimeTypes,
   StartMediaPlayerTypes,
   PauseMediaPlayerTypes,
+  VideoForwardTypes,
+  VideoBackTypes,
 } from "../Types/ProductsTypes";
 
 const initialProductState: IProductsState = {
@@ -82,6 +84,7 @@ const initialProductState: IProductsState = {
     isPlay: false,
     timer: 0,
     currentTime: 0,
+    videoID:0,
   },
 };
 
@@ -268,7 +271,6 @@ export const productsReducer = (
       if (action.stepForward >= state.data!.photos.length) {
         action.stepForward = 0;
       }
-
       return {
         ...state,
         modalWindowPhotoPage: {
@@ -282,7 +284,6 @@ export const productsReducer = (
       if (action.stepBack <= 0) {
         action.stepBack = state.data!.photos.length - 1;
       }
-
       return {
         ...state,
         modalWindowPhotoPage: {
@@ -382,6 +383,33 @@ export const productsReducer = (
       clearInterval(state.modalWindowVideoPage.timer);
       return {
         ...state
+      };
+    }
+
+
+    case VideoForwardTypes.VIDEOFORWARD: {
+      if (action.stepForward >= state.videos!.videos.length) {
+        action.stepForward = 0;
+      }
+      return {
+        ...state,
+        modalWindowVideoPage: {
+          ...state.modalWindowVideoPage,
+          id: [action.stepForward],
+        },
+      };
+    }
+
+    case VideoBackTypes.VIDEOBACK: {
+      if (action.stepBack <= 0) {
+        action.stepBack = state.videos!.videos.length - 1;
+      }
+      return {
+        ...state,
+        modalWindowVideoPage: {
+          ...state.modalWindowVideoPage,
+          id: [action.stepBack],
+        },
       };
     }
 
