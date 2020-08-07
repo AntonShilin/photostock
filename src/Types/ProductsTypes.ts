@@ -120,17 +120,55 @@ export enum ClearRadioBoxesTypes {
   CLEARRADIOBOXES = "CLEARRADIOBOXES",
 }
 
-export enum ToggleMediaPlayerTypes {
-  TOGGLEMEDIAPLAYER = "TOGGLEMEDIAPLAYER",
+export enum ToggleBtnMediaPlayerTypes {
+  TOGGLEBTNMEDIAPLAYER = "TOGGLEBTNMEDIAPLAYER",
 }
+
+export enum StopMediaPlayerTypes {
+  STOPMEDIAPLAYER = "STOPMEDIAPLAYER",
+}
+
+export enum StartMediaPlayerTypes {
+  STARTMEDIAPLAYER = "STARTMEDIAPLAYER",
+}
+
+export enum SetCurrentTimeTypes {
+  SETCURRENTTIME = "SETCURRENTTIME",
+}
+
+export enum PauseMediaPlayerTypes {
+  PAUSEMEDIAPLAYER = "PAUSEMEDIAPLAYER",
+}
+
+
 
 
 /*  interfaces */
-export interface IToggleMediaPlayerAction {
-  type: ToggleMediaPlayerTypes.TOGGLEMEDIAPLAYER;
-  isPlay: boolean;
+
+export interface IPauseMediaPlayerAction {
+  type: PauseMediaPlayerTypes.PAUSEMEDIAPLAYER
 }
 
+
+export interface ISetCurrentTimeAction {
+  type: SetCurrentTimeTypes.SETCURRENTTIME
+  time: number;
+}
+
+export interface IStartMediaPlayerAction {
+  type: StartMediaPlayerTypes.STARTMEDIAPLAYER
+  timer: any;
+}
+
+export interface IStopMediaPlayerAction {
+  type: StopMediaPlayerTypes.STOPMEDIAPLAYER;
+  time: number;
+}
+
+export interface IToggleBtnMediaPlayerAction {
+  type: ToggleBtnMediaPlayerTypes.TOGGLEBTNMEDIAPLAYER;
+  isPlay: boolean;
+}
 
 export interface IClearRadioBoxesAction {
   type: ClearRadioBoxesTypes.CLEARRADIOBOXES;
@@ -269,7 +307,11 @@ export interface IMoveScrollAction {
 }
 
 export type ProductsActions =
-  |IToggleMediaPlayerAction
+  |IPauseMediaPlayerAction
+  |ISetCurrentTimeAction
+  |IStartMediaPlayerAction
+  |IStopMediaPlayerAction
+  |IToggleBtnMediaPlayerAction
   | IGetPopularPhotoAction
   | IGetSearchValueAction
   | ISearchImagesByNameAction
@@ -324,11 +366,13 @@ export interface IProductsState {
     sizeURL: string | undefined;
   };
   readonly modalWindowVideoPage: {
-    id: number|null;
+    id: number[];
     isOpen: boolean;
     isOpenDropDownMenu: boolean;
     sizeURL: string | undefined;
     isPlay: boolean;
+    timer: number;
+    currentTime: number;
   };
 }
 

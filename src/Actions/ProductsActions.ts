@@ -55,7 +55,16 @@ import {
   ToggleWindowVideoPageTypes,
   IShowDetailsVideoAction,
   GetIdVideoTypes,
-  ToggleMediaPlayerTypes,
+  ToggleBtnMediaPlayerTypes,
+  IToggleBtnMediaPlayerAction,
+  IStopMediaPlayerAction,
+  StopMediaPlayerTypes,
+  IStartMediaPlayerAction,
+  StartMediaPlayerTypes,
+  ISetCurrentTimeAction,
+  SetCurrentTimeTypes,
+  IPauseMediaPlayerAction,
+  PauseMediaPlayerTypes,
 } from "../Types/ProductsTypes";
 
 /* delete prev video*/
@@ -442,15 +451,64 @@ export const clearRadioBoxes = (inputs: any): IClearRadioBoxesAction => {
   };
 };
 
-export const toggleMediaPlayer = (isPlay: boolean, elem: HTMLVideoElement) => {
-  if (isPlay) {
-    elem!.pause();
-  } else {
-    // elem.load();
-    elem!.play();
-  }
+/* toggle media player button */
+export const toggleBtnMediaPlayer = (
+  value: boolean
+): IToggleBtnMediaPlayerAction => {
   return {
-    type: ToggleMediaPlayerTypes.TOGGLEMEDIAPLAYER,
-    isPlay: !isPlay,
+    type: ToggleBtnMediaPlayerTypes.TOGGLEBTNMEDIAPLAYER,
+    isPlay: value,
+  };
+};
+
+/* stop media player button */
+export const stopMediaPlayer = () => {
+  return (
+    dispatch: (
+      arg0: IStopMediaPlayerAction | IToggleBtnMediaPlayerAction
+    ) => void
+  ) => {
+    dispatch(toggleBtnMediaPlayer(false));
+    dispatch({
+      type: StopMediaPlayerTypes.STOPMEDIAPLAYER,
+      time: 0,
+    });
+  };
+};
+
+/* start media player button */
+export const startMediaPlayer = (elem: HTMLVideoElement) => {
+  return (
+    dispatch: (arg0: ISetCurrentTimeAction | IStartMediaPlayerAction) => void
+  ) => {
+    const timer = setInterval(() => {
+      const durVideo: number = elem.duration;
+      const t: number = elem.currentTime;
+      const x: number = (t * 100) / durVideo;
+      dispatch(setCurrentTime(x));
+    }, 100);
+    elem.play();
+    dispatch({
+      type: StartMediaPlayerTypes.STARTMEDIAPLAYER,
+      timer,
+    });
+  };
+};
+
+/* set current time */
+export const setCurrentTime = (x: number): ISetCurrentTimeAction => {
+  return {
+    type: SetCurrentTimeTypes.SETCURRENTTIME,
+    time: x,
+  };
+};
+
+/* pause media player button */
+export const pauseMediaPlayer = (
+  elem: HTMLVideoElement
+): IPauseMediaPlayerAction => {
+  elem.pause();
+  return {
+    type: PauseMediaPlayerTypes.PAUSEMEDIAPLAYER,
   };
 };

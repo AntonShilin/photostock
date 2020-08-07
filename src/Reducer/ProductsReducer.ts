@@ -29,7 +29,11 @@ import {
   ClearRadioBoxesTypes,
   ToggleWindowVideoPageTypes,
   GetIdVideoTypes,
-  ToggleMediaPlayerTypes,
+  ToggleBtnMediaPlayerTypes,
+  StopMediaPlayerTypes,
+  SetCurrentTimeTypes,
+  StartMediaPlayerTypes,
+  PauseMediaPlayerTypes,
 } from "../Types/ProductsTypes";
 
 const initialProductState: IProductsState = {
@@ -71,11 +75,13 @@ const initialProductState: IProductsState = {
     sizeURL: undefined,
   },
   modalWindowVideoPage: {
-    id: 1,
+    id: [1],
     isOpen: false,
     isOpenDropDownMenu: false,
     sizeURL: undefined,
-    isPlay: false
+    isPlay: false,
+    timer: 0,
+    currentTime: 0,
   },
 };
 
@@ -233,8 +239,8 @@ export const productsReducer = (
         ...state,
         modalWindowVideoPage: {
           ...state.modalWindowVideoPage,
-          id: action.id,
-        },
+          id: [action.id],
+        }
       };
     }
 
@@ -327,16 +333,59 @@ export const productsReducer = (
         ...state,
       };
     }
-
-    case ToggleMediaPlayerTypes.TOGGLEMEDIAPLAYER: {
+      
+      
+    case ToggleBtnMediaPlayerTypes.TOGGLEBTNMEDIAPLAYER: {
       return {
         ...state,
         modalWindowVideoPage: {
           ...state.modalWindowVideoPage,
-          isPlay: action.isPlay,
+          isPlay:action.isPlay
         },
       };
     }
+      
+    case StopMediaPlayerTypes.STOPMEDIAPLAYER: {
+      clearInterval(state.modalWindowVideoPage.timer);
+      return {
+        ...state,
+        modalWindowVideoPage: {
+          ...state.modalWindowVideoPage,
+          currentTime: action.time
+        },
+      };
+    }
+
+    case StartMediaPlayerTypes.STARTMEDIAPLAYER: {
+      return {
+        ...state,
+        modalWindowVideoPage: {
+          ...state.modalWindowVideoPage,
+          timer: action.timer
+        },
+      };
+    }
+      
+      
+    case SetCurrentTimeTypes.SETCURRENTTIME: {
+      return {
+        ...state,
+        modalWindowVideoPage: {
+          ...state.modalWindowVideoPage,
+          currentTime: action.time
+        },
+      };
+    }
+      
+      
+    case PauseMediaPlayerTypes.PAUSEMEDIAPLAYER: {
+      clearInterval(state.modalWindowVideoPage.timer);
+      return {
+        ...state
+      };
+    }
+
+
       
     default:
       return state;

@@ -14,17 +14,21 @@ import {
 import {
   toggleDropMenuPhotoPage,
   toggleWindowVideoPage,
+  toggleBtnMediaPlayer,
+  stopMediaPlayer,
 } from "../../../Actions/ProductsActions";
 import MediaPlayer from "./MediaPlayer/MediaPlayer";
 
 export interface IWindowVideoPageProps {
   data: IPopularVideos | null;
-  id: number | null;
+  id: number[];
   isOpen: boolean;
   isScrollTop: number | null;
   isOpenDropDownMenu: boolean;
   toggleWindowVideoPage: typeof toggleWindowVideoPage;
   toggleDropMenuPhotoPage: typeof toggleDropMenuPhotoPage;
+  toggleBtnMediaPlayer: typeof toggleBtnMediaPlayer;
+  stopMediaPlayer: typeof stopMediaPlayer;
 }
 
 export interface State {}
@@ -45,13 +49,17 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
               <div className="row modal_window_video_bg">
                 <MdClose
                   className="close_icon"
-                  onClick={() => this.props.toggleWindowVideoPage()}
+                  onClick={() => {
+                    this.props.toggleWindowVideoPage()
+                    this.props.toggleBtnMediaPlayer(false)
+                    this.props.stopMediaPlayer()
+                  }}
                 />
                 <div className="col-12 description_video">
                   <div className="row">
                     <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
                       <p className="text-center">
-                        {id! && data!.videos[id!].user.name}
+                        {data.videos[id[0]].user.name}
                       </p>
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
@@ -112,6 +120,8 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     toggleWindowVideoPage: () => dispatch(toggleWindowVideoPage()),
     toggleDropMenuPhotoPage: () => dispatch(toggleDropMenuPhotoPage()),
+    toggleBtnMediaPlayer: (value:boolean)=>dispatch(toggleBtnMediaPlayer(value)),
+    stopMediaPlayer: ()=>dispatch(stopMediaPlayer())
   };
 };
 
