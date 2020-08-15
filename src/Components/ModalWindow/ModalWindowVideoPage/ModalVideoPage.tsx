@@ -12,14 +12,15 @@ import {
   IoIosArrowUp,
 } from "react-icons/io";
 import {
-  toggleDropMenuPhotoPage,
   toggleWindowVideoPage,
   toggleBtnMediaPlayer,
   stopMediaPlayer,
   watchingVideoForward,
   watchingVideoBack,
+  toggleDropMenuVideoPage,
 } from "../../../Actions/ProductsActions";
 import MediaPlayer from "./MediaPlayer/MediaPlayer";
+import DropMenuVideoPage from "./DropMenuVideoPage/DropMenuVideoPage";
 
 export interface IWindowVideoPageProps {
   data: IPopularVideos | null;
@@ -28,19 +29,18 @@ export interface IWindowVideoPageProps {
   isScrollTop: number | null;
   isOpenDropDownMenu: boolean;
   toggleWindowVideoPage: typeof toggleWindowVideoPage;
-  toggleDropMenuPhotoPage: typeof toggleDropMenuPhotoPage;
+  toggleDropMenuVideoPage: typeof toggleDropMenuVideoPage;
   toggleBtnMediaPlayer: typeof toggleBtnMediaPlayer;
   stopMediaPlayer: typeof stopMediaPlayer;
   watchingVideoForward: typeof watchingVideoForward;
   watchingVideoBack: typeof watchingVideoBack;
-  videoID: number;
 }
 
 export interface State {}
 
 class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
   public render() {
-    const { isOpenDropDownMenu, data, id ,videoID} = this.props;
+    const { isOpenDropDownMenu, data, id } = this.props;
     
     return (
       <React.Fragment>
@@ -78,7 +78,7 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                     <div className="col-lg-4 col-md-12 col-sm-12 mb-2 download_item_bg">
                       <button
                         className="btn download w-100"
-                        onClick={this.props.toggleDropMenuPhotoPage}
+                        onClick={this.props.toggleDropMenuVideoPage}
                       >
                         Free download{" "}
                         {isOpenDropDownMenu ? (
@@ -87,7 +87,7 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                           <IoIosArrowDown />
                         )}
                       </button>
-                      {/* <DropMenuVideoPage /> */}
+                      <DropMenuVideoPage />
                     </div>
                   </div>
                 </div>
@@ -129,17 +129,16 @@ const mapStateToProps = (state: IApplicationState) => ({
   isOpen: state.products.modalWindowVideoPage.isOpen,
   isScrollTop: state.products.isScrollTop,
   isOpenDropDownMenu: state.products.modalWindowVideoPage.isOpenDropDownMenu,
-  videoID: state.products.modalWindowVideoPage.videoID,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     toggleWindowVideoPage: () => dispatch(toggleWindowVideoPage()),
-    toggleDropMenuPhotoPage: () => dispatch(toggleDropMenuPhotoPage()),
+    toggleDropMenuVideoPage: () => dispatch(toggleDropMenuVideoPage()),
     toggleBtnMediaPlayer: (value:boolean)=>dispatch(toggleBtnMediaPlayer(value)),
     stopMediaPlayer: ()=>dispatch(stopMediaPlayer()),
     watchingVideoForward: (id:number)=>dispatch(watchingVideoForward(id)),
-    watchingVideoBack: (id:number)=>dispatch(watchingVideoBack(id)),
+    watchingVideoBack: (id: number) => dispatch(watchingVideoBack(id)),
   };
 };
 

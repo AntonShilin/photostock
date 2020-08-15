@@ -36,6 +36,8 @@ import {
   PauseMediaPlayerTypes,
   VideoForwardTypes,
   VideoBackTypes,
+  SelectVideoSizeTypes,
+  ToggleDropMenuVideoPageTypes,
 } from "../Types/ProductsTypes";
 
 const initialProductState: IProductsState = {
@@ -84,7 +86,7 @@ const initialProductState: IProductsState = {
     isPlay: false,
     timer: 0,
     currentTime: 0,
-    videoID:0,
+    sizeVideoURL: undefined,
   },
 };
 
@@ -150,6 +152,9 @@ export const productsReducer = (
     }
 
     case GetVideoTypes.GETVIDEO: {
+      action.findVideo.videos.map((elem, i) => {
+        elem.id = i;
+      });
       return {
         ...state,
         resultSearchVideo: action.findVideo,
@@ -226,6 +231,7 @@ export const productsReducer = (
         ...state,
       };
     }
+      
 
     case GetIdPhotoTypes.GETIDPHOTO: {
       return {
@@ -299,6 +305,16 @@ export const productsReducer = (
         modalWindowPhotoPage: {
           ...state.modalWindowPhotoPage,
           isOpenDropDownMenu: !state.modalWindowPhotoPage.isOpenDropDownMenu,
+        },
+      };
+    }
+      
+    case ToggleDropMenuVideoPageTypes.TOGGLEDROPMENUVIDEOPAGE: {
+      return {
+        ...state,
+        modalWindowVideoPage: {
+          ...state.modalWindowVideoPage,
+          isOpenDropDownMenu: !state.modalWindowVideoPage.isOpenDropDownMenu,
         },
       };
     }
@@ -409,6 +425,17 @@ export const productsReducer = (
         modalWindowVideoPage: {
           ...state.modalWindowVideoPage,
           id: [action.stepBack],
+        },
+      };
+    }
+
+      
+    case SelectVideoSizeTypes.SELECTVIDEOSIZE: {
+      return {
+        ...state,
+        modalWindowVideoPage: {
+          ...state.modalWindowVideoPage,
+          sizeVideoURL: action.size,
         },
       };
     }

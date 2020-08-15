@@ -24,6 +24,7 @@ import { MdControlPoint } from "react-icons/md";
 import SuggestedVideoWords from "../Components/SuggestedVideoWords/SuggestedVideoWords";
 import Heart from "../Components/SVGIcons/Heart/Heart";
 import ModalVideoPage from "../Components/ModalWindow/ModalWindowVideoPage/ModalVideoPage";
+import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
 
 export interface IPropsVideosPage {
   getPopularVideo: typeof getPopularVideo;
@@ -36,8 +37,8 @@ export interface IPropsVideosPage {
   handlePauseVideo: typeof handlePauseVideo;
   getSearchImages: typeof getSearchImages;
   getKeyNumber: typeof handleSearchKeydown;
-  toggleWindowVideoPage: typeof toggleWindowVideoPage;
   isLoadingVideos: boolean;
+  toggleWindowVideoPage: typeof toggleWindowVideoPage;
   getIdVideo: typeof getIdVideo;
 }
 
@@ -115,10 +116,6 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                             <div
                               className="m-1 popular_video_item"
                               data-id={value.id}
-                              onClick={() => {
-                                this.props.toggleWindowVideoPage()
-                                  this.props.getIdVideo(value.id)
-                              }}
                             >
                               <video
                                 onMouseOver={(e) =>
@@ -137,12 +134,28 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                 />
                                 Your browser doesn't support HTML5 video tag.
                               </video>
-                              <div className="video_item_control">
+                              <div
+                                className="video_item_control"
+                                onClick={() => {
+                                  this.props.toggleWindowVideoPage();
+                                  this.props.getIdVideo(value.id);
+                                }}
+                              >
                                 <AiOutlinePlayCircle />
                               </div>
                               <div className="video-person-name">
                                 <p>{value.user.name}</p>
                               </div>
+                              <span>
+                                <a
+                                  rel="noopener"
+                                  target="_blank"
+                                  download={true}
+                                  href={value.video_files[0].link}
+                                >
+                                  <DownloadIcon />
+                                </a>
+                              </span>
                               <span>
                                 <MdControlPoint />
                               </span>
@@ -165,10 +178,6 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                               <div
                                 className="m-1 popular_video_item"
                                 data-id={value.id}
-                                onClick={() => {
-                                  this.props.toggleWindowVideoPage()
-                                    this.props.getIdVideo(value.id)
-                                }}
                               >
                                 <video
                                   onMouseOver={(e) =>
@@ -180,19 +189,35 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                   controls={false}
                                   muted={true}
                                   poster={value.image}
-                                >
+                                  >
                                   <source
-                                    src={value.video_files[0].link}
+                                  src={value.video_files[0].link}
                                     type={value.video_files[0].file_type}
                                   />
                                   Your browser doesn't support HTML5 video tag.
                                 </video>
-                                <div className="video_item_control">
+                                <div
+                                  className="video_item_control"
+                                  onClick={() => {
+                                    this.props.toggleWindowVideoPage();
+                                    this.props.getIdVideo(value.id);
+                                  }}
+                                >
                                   <AiOutlinePlayCircle />
                                 </div>
                                 <div className="video-person-name">
                                   <p>{value.user.name}</p>
                                 </div>
+                                <span>
+                                  <a
+                                    rel="noopener"
+                                    target="_blank"
+                                    download={true}
+                                    href={value.video_files[0].link}
+                                  >
+                                    <DownloadIcon />
+                                  </a>
+                                </span>
                                 <span>
                                   <MdControlPoint />
                                 </span>

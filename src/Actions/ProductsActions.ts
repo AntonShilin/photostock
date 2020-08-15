@@ -69,6 +69,10 @@ import {
   VideoForwardTypes,
   IVideoBackAction,
   VideoBackTypes,
+  ISelectVideoSizeAction,
+  SelectVideoSizeTypes,
+  IToggleDropMenuVideoPageAction,
+  ToggleDropMenuVideoPageTypes,
 } from "../Types/ProductsTypes";
 
 /* delete prev video*/
@@ -383,6 +387,14 @@ export const toggleDropMenuPhotoPage = (): IToggleDropMenuPhotoPageAction => {
   };
 };
 
+
+/*show/hide dropmenu in modal window for video page */
+export const toggleDropMenuVideoPage = (): IToggleDropMenuVideoPageAction => {
+  return {
+    type: ToggleDropMenuVideoPageTypes.TOGGLEDROPMENUVIDEOPAGE,
+  };
+};
+
 /*select image size for download  */
 export const handleSelectImageSize = (size: string): ISelectImageSizeAction => {
   return {
@@ -537,3 +549,14 @@ export const watchingVideoBack = (id: number): IVideoBackAction => {
     stepBack: id,
   };
 };
+
+
+/*select video size for download  */
+export const handleSelectVideoSize = (size: string): ISelectVideoSizeAction => {
+  return {
+    type: SelectVideoSizeTypes.SELECTVIDEOSIZE,
+    size,
+  };
+};
+
+

@@ -76,6 +76,7 @@ export enum DownloadImageTypes {
   DOWNLOADIMAGE = "DOWNLOADIMAGE",
 }
 
+
 export enum GetIdPhotoTypes {
   GETIDPHOTO = "GETIDPHOTO",
 }
@@ -112,9 +113,18 @@ export enum ToggleDropMenuPhotoPageTypes {
   TOGGLEDROPMENUPHOTOPAGE = "TOGGLEDROPMENUPHOTOPAGE",
 }
 
+export enum ToggleDropMenuVideoPageTypes {
+  TOGGLEDROPMENUVIDEOPAGE = "TOGGLEDROPMENUVIDEOPAGE",
+}
+
 export enum SelectImageSizeTypes {
   SELECTIMAGESIZE = "SELECTIMAGESIZE",
 }
+
+export enum SelectVideoSizeTypes {
+  SELECTVIDEOSIZE = "SELECTVIDEOSIZE",
+}
+
 
 export enum DownloadImageSizeTypes {
   DOWNLOADIMAGESIZE = "DOWNLOADIMAGESIZE",
@@ -187,13 +197,23 @@ export interface IDownloadImageSizeAction {
   type: DownloadImageSizeTypes.DOWNLOADIMAGESIZE;
 }
 
+
 export interface ISelectImageSizeAction {
   type: SelectImageSizeTypes.SELECTIMAGESIZE;
   size: string;
 }
 
+export interface ISelectVideoSizeAction {
+  type: SelectVideoSizeTypes.SELECTVIDEOSIZE;
+  size: string;
+}
+
 export interface IToggleDropMenuPhotoPageAction {
   type: ToggleDropMenuPhotoPageTypes.TOGGLEDROPMENUPHOTOPAGE;
+}
+
+export interface IToggleDropMenuVideoPageAction {
+  type: ToggleDropMenuVideoPageTypes.TOGGLEDROPMENUVIDEOPAGE
 }
 
 export interface IImageBackAction {
@@ -237,6 +257,7 @@ export interface IShowDetailsVideoAction {
 export interface IDownloadImageAction {
   type: DownloadImageTypes.DOWNLOADIMAGE;
 }
+
 
 export interface ISearchBySuggestedWordAction {
   type: SearchBySuggestedWordTypes.SEARCHBYSUGGESTEDWORD;
@@ -321,6 +342,8 @@ export interface IMoveScrollAction {
 }
 
 export type ProductsActions =
+  |IToggleDropMenuVideoPageAction
+  |ISelectVideoSizeAction
   | IVideoBackAction
   | IVideoForwardAction
   | IPauseMediaPlayerAction
@@ -389,6 +412,6 @@ export interface IProductsState {
     isPlay: boolean;
     timer: number;
     currentTime: number;
-    videoID: number;
+    sizeVideoURL: string | undefined;
   };
 }
