@@ -1,7 +1,7 @@
 import * as React from "react";
-import { IApplicationState } from "../../../../Store/Store";
+import { IApplicationState } from "../../../Store/Store";
 import { connect } from "react-redux";
-import { IPopularVideos, IVideos } from "../../../../Interfaces/Interfaces";
+import { IPopularVideos, IVideos } from "../../../Interfaces/Interfaces";
 import { FiPause, FiPlay } from "react-icons/fi";
 import "./MediaPlayer.scss";
 import {
@@ -9,7 +9,7 @@ import {
   stopMediaPlayer,
   startMediaPlayer,
   pauseMediaPlayer,
-} from "../../../../Actions/ProductsActions";
+} from "../../../Actions/ProductsActions";
 
 export interface IMediaPlayerProps {
   data: IPopularVideos | null;

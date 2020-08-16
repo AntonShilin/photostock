@@ -29,6 +29,11 @@ header.main_item_result_video_page {
       background-color: transparent;
       border: 0;
       outline: none;
+      svg{
+        font-size: 2rem; 
+        color: white;
+        stroke-width:20;  
+      }
     }
     form > div.input-group {
       div {
@@ -58,6 +63,9 @@ div#result_video_page_submenu {
     &:hover {
       opacity: 1;
       color: white;
+    }
+    svg{
+      font-size: 1.5rem;
     }
   }
   div.row {

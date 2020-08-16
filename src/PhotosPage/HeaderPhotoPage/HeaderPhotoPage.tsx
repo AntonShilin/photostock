@@ -62,15 +62,10 @@ class HeaderPhotoPage extends React.Component<
             <button className="d-lg-none" onClick={this.props.handleToggleMenu}>
               {!this.props.isToggleMenu ? (
                 <IoIosMenu
-                  style={{
-                    fontSize: "2rem",
-                    color: "white",
-                    strokeWidth: "20",
-                  }}
                 />
               ) : (
                 <MdClose
-                  style={{ fontSize: "2rem", color: "white", strokeWidth: "2" }}
+                  style={{ fontSize: "2rem", color: "white", strokeWidth: "1" }}
                 />
               )}
             </button>
@@ -87,17 +82,17 @@ class HeaderPhotoPage extends React.Component<
             <div className="row align-items-center">
               <div className="col-12 text-center">
                 <NavLink to="/photos" className=" text-decoration-none">
-                  <AiFillPicture style={{ fontSize: "1.5rem" }} /> Photos
+                  <AiFillPicture/> Photos
                 </NavLink>
               </div>
               <div className="col-12 text-center">
                 <NavLink to="/videos" className=" text-decoration-none">
-                  <FaVideo style={{ fontSize: "1.5rem" }} /> Videos
+                  <FaVideo/> Videos
                 </NavLink>
               </div>
               <div className="col-12 text-center">
                 <NavLink to="/login" className="">
-                  <FaRegUserCircle style={{ fontSize: "1.5rem" }} /> Sign In
+                  <FaRegUserCircle/> Sign In
                 </NavLink>
               </div>
             </div>

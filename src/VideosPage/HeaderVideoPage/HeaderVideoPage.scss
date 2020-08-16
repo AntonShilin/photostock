@@ -18,10 +18,10 @@ header.main_item_video_page {
           font-size: 2rem;
           font-weight: 900;
           line-height: 1.9rem;
-          font-family: 'Fredoka One', cursive;
+          font-family: "Fredoka One", cursive;
           background-color: rgb(5, 160, 129);
         }
-      } 
+      }
     }
     button {
       position: absolute;
@@ -29,6 +29,11 @@ header.main_item_video_page {
       background-color: transparent;
       border: 0;
       outline: none;
+      svg {
+        font-size: 2rem;
+        color: white;
+        stroke-width: 20;
+      }
     }
     form > div.input-group {
       div {
@@ -57,6 +62,9 @@ header.main_item_video_page {
       &:hover {
         opacity: 1;
         color: white;
+      }
+      svg{
+        font-size: 1.5rem;
       }
     }
     div.row {

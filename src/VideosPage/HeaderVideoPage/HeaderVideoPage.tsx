@@ -20,7 +20,6 @@ export interface IHeaderVideoPageProps {
 }
 
 class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
-
   public componentDidMount() {
     window.addEventListener("scroll", this.props.handleScroll);
   }
@@ -34,10 +33,13 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
           }
           onClick={() => this.props.handleToggleMenu()}
         />
-        <div className="container-fluid navigation_video_page"
-         style={
-          this.props.isScrolling ? { backgroundColor: "#232a34ed" } : { backgroundColor: "transparent" }
-        }
+        <div
+          className="container-fluid navigation_video_page"
+          style={
+            this.props.isScrolling
+              ? { backgroundColor: "#232a34ed" }
+              : { backgroundColor: "transparent" }
+          }
         >
           <div className="row align-items-center">
             <div className="col-2">
@@ -45,7 +47,7 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
                 F
               </NavLink>
             </div>
-           <div className="col-8">
+            <div className="col-8">
               {this.props.isScrolling ? <SearchVideoSmallArea /> : null}
             </div>
             <div className="col-2 text-center  d-lg-block d-none ">
@@ -59,57 +61,59 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
               onClick={() => this.props.handleToggleMenu()}
             >
               {!this.props.isToggleMenu ? (
-                <IoIosMenu style={{ fontSize: "2rem", color: "white",strokeWidth:"20" }} />
+                <IoIosMenu />
               ) : (
-                <MdClose style={{ fontSize: "2rem", color: "white",strokeWidth:"2" }} />
+                <MdClose
+                  style={{ fontSize: "2rem", color: "white", strokeWidth: "1" }}
+                />
               )}
             </button>
           </div>
-        <div
-          id="video_page_submenu"
-          className={`container-xl d-lg-none`}
-          style={
-            this.props.isToggleMenu
-              ? { display: "block" }
-              : { display: "none", width: "0%" }
-          }
-        >
-          <div className="row align-items-center">
-            <div className="col-12 text-center">
-              <NavLink to="/photos" className=" text-decoration-none">
-                <AiFillPicture style={{ fontSize: "1.5rem" }} /> Photos
-              </NavLink>
+          <div
+            id="video_page_submenu"
+            className={`container-xl d-lg-none`}
+            style={
+              this.props.isToggleMenu
+                ? { display: "block" }
+                : { display: "none", width: "0%" }
+            }
+          >
+            <div className="row align-items-center">
+              <div className="col-12 text-center">
+                <NavLink to="/photos" className=" text-decoration-none">
+                  <AiFillPicture /> Photos
+                </NavLink>
+              </div>
+              <div className="col-12 text-center">
+                <NavLink to="/videos" className=" text-decoration-none">
+                  <FaVideo/> Videos
+                </NavLink>
+              </div>
+              <div className="col-12 text-center">
+                <NavLink to="/login" className="">
+                  <FaRegUserCircle/> Sign In
+                </NavLink>
+              </div>
             </div>
-            <div className="col-12 text-center">
-              <NavLink to="/videos" className=" text-decoration-none">
-                <FaVideo style={{ fontSize: "1.5rem" }} /> Videos
-              </NavLink>
-            </div>
-            <div className="col-12 text-center">
-              <NavLink to="/login" className="">
-                <FaRegUserCircle style={{ fontSize: "1.5rem" }} /> Sign In
-              </NavLink>
-            </div>
+            <div />
           </div>
-          <div />
-        </div>
         </div>
       </header>
     );
   }
 }
 
-
 const mapStateToProps = (state: IApplicationState) => ({
   isToggleMenu: state.products.isToggleMenu,
-  isScrolling: state.products.isScrolling
+  isScrolling: state.products.isScrolling,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    handleToggleMenu: () =>
-      dispatch(handleToggleMenu()),
-    handleScroll: (event:any) => dispatch(handleScroll(event))
+    handleToggleMenu: () => dispatch(handleToggleMenu()),
+    handleScroll: (event: any) => dispatch(handleScroll(event)),
   };
 };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderVideoPage));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HeaderVideoPage)
+);

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { IApplicationState } from "../../../Store/Store";
-import { IPopularVideos } from "../../../Interfaces/Interfaces";
-import "./ModalVideoPage.scss";
+import { IPopularVideos, IVideos } from "../../../Interfaces/Interfaces";
+import "./ModalWindowResultVideoPage.scss";
 import Heart from "../../SVGIcons/Heart/Heart";
 import { MdControlPoint, MdClose } from "react-icons/md";
 import {
@@ -19,11 +19,10 @@ import {
   watchingVideoBack,
   toggleDropMenuVideoPage,
 } from "../../../Actions/ProductsActions";
-import MediaPlayer from "../../MediaPlayers/MediaPlayer/MediaPlayer";
-import DropMenuVideoPage from "./DropMenuVideoPage/DropMenuVideoPage";
+import ResultVideoMediaPlayer from "../../MediaPlayers/ResultVideoMediaPlayer/ResultVideoMediaPlayer";
 
-export interface IWindowVideoPageProps {
-  data: IPopularVideos | null;
+export interface IWindowResultVideoPageProps {
+  resultSearchVideo: IPopularVideos | null;
   id: number[];
   isOpen: boolean;
   isScrollTop: number | null;
@@ -38,33 +37,39 @@ export interface IWindowVideoPageProps {
 
 export interface State {}
 
-class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
+class ModalWindowResultVideoPage extends React.Component<
+  IWindowResultVideoPageProps,
+  State
+> {
   public render() {
-    const { isOpenDropDownMenu, data, id } = this.props;
-    
+    const { isOpenDropDownMenu, resultSearchVideo, id } = this.props;
+
     return (
       <React.Fragment>
-        {data!==null && (
+        {resultSearchVideo !== null && (
           <div
             className={
-              this.props.isOpen ? "d-block modal_window_video_basis" : "d-none"
+              this.props.isOpen
+                ? "d-block modal_result_window_video_basis"
+                : "d-none"
             }
           >
             <div className="container-xl">
-              <div className="row modal_window_video_bg">
+              <div className="row modal_result_window_video_bg">
                 <MdClose
                   className="close_icon"
                   onClick={() => {
-                    this.props.toggleWindowVideoPage()
-                    this.props.toggleBtnMediaPlayer(false)
-                    this.props.stopMediaPlayer()
+                    this.props.toggleWindowVideoPage();
+                    this.props.toggleBtnMediaPlayer(false);
+                    this.props.stopMediaPlayer();
                   }}
                 />
                 <div className="col-12 description_video">
                   <div className="row">
                     <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
                       <p className="text-center">
-                        {data.videos[id[0]].user.name}
+                        {resultSearchVideo.videos.length > 0 &&
+                          resultSearchVideo.videos[id[0]].user.name}
                       </p>
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
@@ -87,18 +92,18 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                           <IoIosArrowDown />
                         )}
                       </button>
-                      <DropMenuVideoPage />
+                      {/* <DropMenuVideoPage /> */}
                     </div>
                   </div>
                 </div>
                 <div className="col-12 align-self-center modal_window_video">
-                  <MediaPlayer/>
+                  <ResultVideoMediaPlayer/>
                   <span
                     className="arrow_left"
                     onClick={() => {
-                      this.props.toggleBtnMediaPlayer(false)
-                      this.props.stopMediaPlayer()
-                      this.props.watchingVideoBack(id[0])
+                      this.props.toggleBtnMediaPlayer(false);
+                      this.props.stopMediaPlayer();
+                      this.props.watchingVideoBack(id[0]);
                     }}
                   >
                     <IoIosArrowBack />
@@ -106,9 +111,9 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                   <span
                     className="arrow_right"
                     onClick={() => {
-                      this.props.toggleBtnMediaPlayer(false)
-                      this.props.stopMediaPlayer()
-                      this.props.watchingVideoForward(id[0])
+                      this.props.toggleBtnMediaPlayer(false);
+                      this.props.stopMediaPlayer();
+                      this.props.watchingVideoForward(id[0]);
                     }}
                   >
                     <IoIosArrowForward />
@@ -124,7 +129,7 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
 }
 
 const mapStateToProps = (state: IApplicationState) => ({
-  data: state.products.videos,
+  resultSearchVideo: state.products.resultSearchVideo,
   id: state.products.modalWindowVideoPage.id,
   isOpen: state.products.modalWindowVideoPage.isOpen,
   isScrollTop: state.products.isScrollTop,
@@ -135,11 +140,15 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     toggleWindowVideoPage: () => dispatch(toggleWindowVideoPage()),
     toggleDropMenuVideoPage: () => dispatch(toggleDropMenuVideoPage()),
-    toggleBtnMediaPlayer: (value:boolean)=>dispatch(toggleBtnMediaPlayer(value)),
-    stopMediaPlayer: ()=>dispatch(stopMediaPlayer()),
-    watchingVideoForward: (id:number)=>dispatch(watchingVideoForward(id)),
+    toggleBtnMediaPlayer: (value: boolean) =>
+      dispatch(toggleBtnMediaPlayer(value)),
+    stopMediaPlayer: () => dispatch(stopMediaPlayer()),
+    watchingVideoForward: (id: number) => dispatch(watchingVideoForward(id)),
     watchingVideoBack: (id: number) => dispatch(watchingVideoBack(id)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalVideoPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ModalWindowResultVideoPage);

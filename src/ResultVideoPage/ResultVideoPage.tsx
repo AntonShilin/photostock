@@ -19,6 +19,7 @@ import CouldnotFindVideo from "../Components/CouldnotFindVideo/CouldnotFindVideo
 import { FaRegImage, FaVideo } from "react-icons/fa";
 import Heart from "../Components/SVGIcons/Heart/Heart";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
+import ModalWindowResultVideoPage from "../Components/ModalWindow/ModalWindowResultVideoPage/ModalWindowResultVideoPage";
 
 export interface IPropsResultPage extends RouteComponentProps {
   resultSearchVideo: IPopularVideos | null;
@@ -37,6 +38,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
     return (
       <React.Fragment>
         <HeaderResultVideoPage />
+        <ModalWindowResultVideoPage/>
         {this.props.isLoadingVideos ? (
           <LoadingPage />
         ) : (
