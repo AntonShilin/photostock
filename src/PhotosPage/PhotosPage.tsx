@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import { IApplicationState } from "../Store/Store";
 import {
   getPopularImages,
-  handleSearchKeydown,
   getSearchVideos,
   downloadImage,
   getIdPhoto,
   toggleWindowPhotoPage,
+  clearKeyPressNumber,
 } from "../Actions/ProductsActions";
 import { handleSearchChange } from "../Actions/ProductsActions";
 import { getSearchImages } from "../Actions/ProductsActions";
@@ -33,13 +33,14 @@ export interface IPropsPhotosPage extends RouteComponentProps {
   searchNamePhoto: string;
   handleSearchChange: typeof handleSearchChange;
   getSearchImages: typeof getSearchImages;
-  getKeyNumber: typeof handleSearchKeydown;
   downloadImage: typeof downloadImage;
+  clearKeyPressNumber: typeof clearKeyPressNumber;
   isScrollTop: number | null;
   isScrollHeight: number | null;
   isClientHeight: number | null;
   isScrolling: boolean;
   isLoadingImages: boolean;
+  keyboardKey: number | null;
 }
 
 class PhotosPage extends React.Component<IPropsPhotosPage> {
@@ -55,6 +56,15 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
       this.props.getPopularImages();
     }
   }
+
+  public pressEnterKey = () => {
+    if (this.props.searchNamePhoto.trim().length > 0) {
+     this.props.getSearchImages(this.props.searchNamePhoto!);
+      this.props.getSearchVideos(this.props.searchNamePhoto!); 
+      this.props.history.push(`/photos/${this.props.searchNamePhoto}`);
+      this.props.clearKeyPressNumber();
+    }
+  };
 
   public render() {
     return (
@@ -82,7 +92,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                   autoFocus={false}
                   required={true}
                   onKeyDown={(e) => {
-                    this.props.getKeyNumber(e);
+                    if (e.keyCode === 13) { this.pressEnterKey() };
                   }}
                 />
                 <div className="input-group-append">
@@ -228,18 +238,20 @@ const mapStateToProps = (state: IApplicationState) => ({
   isScrolling: state.products.isScrolling,
   searchNamePhoto: state.products.searchNamePhoto,
   isLoadingImages: state.products.isLoadingImages,
+  keyboardKey: state.products.keyboardKey,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getKeyNumber: (e: React.KeyboardEvent<HTMLInputElement>) => dispatch(handleSearchKeydown(e)),
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
     getPopularImages: () => dispatch(getPopularImages()),
-    handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => dispatch(handleSearchChange(e)),
+    handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+      dispatch(handleSearchChange(e)),
     getSearchImages: (name: string) => dispatch(getSearchImages(name)),
     downloadImage: (elem: any) => dispatch(downloadImage(elem)),
     getIdPhoto: (id: number) => dispatch(getIdPhoto(id)),
     toggleWindowPhotoPage: () => dispatch(toggleWindowPhotoPage()),
+    clearKeyPressNumber: () => dispatch(clearKeyPressNumber()),
   };
 };
 

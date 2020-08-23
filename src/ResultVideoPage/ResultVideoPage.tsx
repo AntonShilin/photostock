@@ -52,7 +52,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                       activeClassName="video-result-bages-active"
                       to={`/photos/${this.props.searchNameVideo}`}
                     >
-                      <FaRegImage /> Photos
+                      <FaRegImage /> Videos
                       <span className="ml-1">
                         {this.props.resultSearchImage === null
                           ? 0

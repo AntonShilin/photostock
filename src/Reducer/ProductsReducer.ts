@@ -38,6 +38,7 @@ import {
   VideoBackTypes,
   SelectVideoSizeTypes,
   ToggleDropMenuVideoPageTypes,
+  ClearKeyPressNumberTypes,
 } from "../Types/ProductsTypes";
 
 const initialProductState: IProductsState = {
@@ -439,7 +440,13 @@ export const productsReducer = (
         },
       };
     }
-
+      
+    case ClearKeyPressNumberTypes.CLEARKEYPRESSNUMBER: {
+      return {
+        ...state,
+        keyboardKey: action.keyPressNumber
+      };
+    }
 
       
     default:

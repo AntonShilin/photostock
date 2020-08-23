@@ -158,7 +158,17 @@ export enum PauseMediaPlayerTypes {
   PAUSEMEDIAPLAYER = "PAUSEMEDIAPLAYER",
 }
 
+export enum ClearKeyPressNumberTypes{
+  CLEARKEYPRESSNUMBER = "CLEARKEYPRESSNUMBER"
+}
+
+
 /*  interfaces */
+
+export interface IClearKeyPressNumberAction {
+  type: ClearKeyPressNumberTypes.CLEARKEYPRESSNUMBER;
+  keyPressNumber: null;
+}
 
 export interface IPauseMediaPlayerAction {
   type: PauseMediaPlayerTypes.PAUSEMEDIAPLAYER;
@@ -342,6 +352,7 @@ export interface IMoveScrollAction {
 }
 
 export type ProductsActions =
+|IClearKeyPressNumberAction
   |IToggleDropMenuVideoPageAction
   |ISelectVideoSizeAction
   | IVideoBackAction

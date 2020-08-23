@@ -73,6 +73,8 @@ import {
   SelectVideoSizeTypes,
   IToggleDropMenuVideoPageAction,
   ToggleDropMenuVideoPageTypes,
+  IClearKeyPressNumberAction,
+  ClearKeyPressNumberTypes,
 } from "../Types/ProductsTypes";
 
 /* delete prev video*/
@@ -91,7 +93,7 @@ export const handleToggleMenu = (): IToggleMenuAction => ({
 /*  get  fotos for photo page */
 export const getPopularImages = () => {
   const keyAPI: string =
-    "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
+    "563492ad6f91700001000001b4262993b26c4cc4bf2c27140f1d4880";
   return (
     dispatch: (arg0: ILoadingImagesAction | IGetPopularPhotoAction) => void
   ) => {
@@ -122,7 +124,8 @@ export const handleSearchKeydown = (
 ): ISearchKeydownAction => ({
   type: SearchKeydownTypes.SEARCHKEYDOWN,
   keydownKey: e.keyCode,
-});
+  });
+
 
 /* change in input on foto page */
 export const handleSearchChange = (
@@ -137,7 +140,7 @@ export const handleSearchChange = (
 /*  get popular videos */
 export const getPopularVideo = () => {
   const keyAPI: string =
-    "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
+    "563492ad6f91700001000001b4262993b26c4cc4bf2c27140f1d4880";
   return (
     dispatch: (arg0: ILoadingVideosAction | IPopularVideoAction) => void
   ) => {
@@ -173,7 +176,7 @@ export const changeNameVideo = (
 /* get videos search by name*/
 export const getSearchVideos = (name: string) => {
   const keyAPI: string =
-    "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
+    "563492ad6f91700001000001b4262993b26c4cc4bf2c27140f1d4880";
   return (
     dispatch: (
       arg0: IDeletePrevDataAction | ILoadingVideosAction | IGetVideoAction
@@ -207,7 +210,7 @@ export const getSearchVideos = (name: string) => {
 /* get images search by name  */
 export const getSearchImages = (name: string) => {
   const keyAPI: string =
-    "563492ad6f91700001000001a29e431ec66d410ba87b2a60195328b2";
+    "563492ad6f91700001000001b4262993b26c4cc4bf2c27140f1d4880";
   return (
     dispatch: (
       arg0:
@@ -559,4 +562,12 @@ export const handleSelectVideoSize = (size: string): ISelectVideoSizeAction => {
   };
 };
 
+
+/* clear earlier selected image size */
+export const clearKeyPressNumber = (): IClearKeyPressNumberAction => {
+  return {
+    type: ClearKeyPressNumberTypes.CLEARKEYPRESSNUMBER,
+    keyPressNumber: null,
+  };
+};
 

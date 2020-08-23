@@ -8,9 +8,9 @@ import {
   handlePreplayVideo,
   handlePauseVideo,
   getSearchImages,
-  handleSearchKeydown,
   toggleWindowVideoPage,
   getIdVideo,
+  clearKeyPressNumber,
 } from "../Actions/ProductsActions";
 import { IApplicationState } from "../Store/Store";
 import "./VideosPage.scss";
@@ -18,7 +18,7 @@ import LoadingPage from "../Components/LoadingPage/LoadingPage";
 import { FiSearch } from "react-icons/fi";
 import NavigationPages from "../Components/NavigationPages/NavigationPages";
 import HeaderVideoPage from "./HeaderVideoPage/HeaderVideoPage";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter, RouteComponentProps } from "react-router-dom";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { MdControlPoint } from "react-icons/md";
 import SuggestedVideoWords from "../Components/SuggestedVideoWords/SuggestedVideoWords";
@@ -26,7 +26,7 @@ import Heart from "../Components/SVGIcons/Heart/Heart";
 import ModalVideoPage from "../Components/ModalWindow/ModalWindowVideoPage/ModalVideoPage";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
 
-export interface IPropsVideosPage {
+export interface IPropsVideosPage extends RouteComponentProps {
   getPopularVideo: typeof getPopularVideo;
   popularVideo: IPopularVideos | null;
   searchNameVideo: string;
@@ -36,16 +36,26 @@ export interface IPropsVideosPage {
   handlePreplayVideo: typeof handlePreplayVideo;
   handlePauseVideo: typeof handlePauseVideo;
   getSearchImages: typeof getSearchImages;
-  getKeyNumber: typeof handleSearchKeydown;
   isLoadingVideos: boolean;
   toggleWindowVideoPage: typeof toggleWindowVideoPage;
   getIdVideo: typeof getIdVideo;
+  keyboardKey: number | null;
+  clearKeyPressNumber: typeof clearKeyPressNumber;
 }
 
 class VideosPage extends React.Component<IPropsVideosPage> {
   public componentDidMount() {
     this.props.getPopularVideo();
   }
+
+  public pressEnterKey = () => {
+    if (this.props.searchNameVideo.trim().length > 0) {
+     this.props.getSearchImages(this.props.searchNameVideo!);
+      this.props.getSearchVideos(this.props.searchNameVideo!); 
+      this.props.history.push(`/videos/${this.props.searchNameVideo}`);
+      this.props.clearKeyPressNumber();
+    }
+  };
 
   public render() {
     return (
@@ -75,7 +85,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                   onChange={this.props.changeNameVideo}
                   autoFocus={false}
                   onKeyDown={(e) => {
-                    this.props.getKeyNumber(e);
+                    if (e.keyCode === 13) { this.pressEnterKey() };
                   }}
                 />
                 <div className="input-group-append">
@@ -245,13 +255,12 @@ const mapStateToProps = (state: IApplicationState) => {
     searchNameVideo: state.products.searchNameVideo,
     searchNamePhoto: state.products.searchNamePhoto,
     isLoadingVideos: state.products.isLoadingVideos,
+    keyboardKey: state.products.keyboardKey,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getKeyNumber: (e: React.KeyboardEvent<HTMLInputElement>) =>
-      dispatch(handleSearchKeydown(e)),
     getPopularVideo: () => dispatch(getPopularVideo()),
     changeNameVideo: (e: React.ChangeEvent<HTMLInputElement>) =>
       dispatch(changeNameVideo(e)),
@@ -263,7 +272,9 @@ const mapDispatchToProps = (dispatch: any) => {
     getSearchImages: (name: string) => dispatch(getSearchImages(name)),
     toggleWindowVideoPage: () => dispatch(toggleWindowVideoPage()),
     getIdVideo: (id: number) => dispatch(getIdVideo(id)),
+    clearKeyPressNumber: () => dispatch(clearKeyPressNumber()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(VideosPage);
+const withRouterProps = withRouter(VideosPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouterProps);
