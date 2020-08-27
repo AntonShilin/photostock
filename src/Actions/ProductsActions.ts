@@ -76,6 +76,7 @@ import {
   IClearKeyPressNumberAction,
   ClearKeyPressNumberTypes,
 } from "../Types/ProductsTypes";
+import { MouseEvent, HTMLAttributes, EventHandler } from "react";
 
 /* delete prev video*/
 export const deletePrevData = (): IDeletePrevDataAction => {
@@ -124,8 +125,7 @@ export const handleSearchKeydown = (
 ): ISearchKeydownAction => ({
   type: SearchKeydownTypes.SEARCHKEYDOWN,
   keydownKey: e.keyCode,
-  });
-
+});
 
 /* change in input on foto page */
 export const handleSearchChange = (
@@ -245,18 +245,20 @@ export const getSearchImages = (name: string) => {
 };
 
 /* some scroll events parametres*/
-export const handleScroll = (event: any): IMoveScrollAction => {
+export const handleScroll = (
+  event: any
+): IMoveScrollAction => {
   return {
     type: MoveScroll.MOVESCROLL,
-    scrollTop: event.srcElement.scrollingElement.scrollTop,
-    scrollHeight: event.srcElement.scrollingElement.scrollHeight,
-    clientHeight: event.srcElement.scrollingElement.clientHeight,
+    scrollTop: event.currentTarget.scrollTop,
+    scrollHeight: event.currentTarget.scrollHeight,
+    clientHeight: event.currentTarget.clientHeight,
   };
 };
 
 /*click heart interesting video and foto*/
 export const handleLikeHeart = (
-  e: React.MouseEvent<SVGSVGElement, MouseEvent>
+  e: React.MouseEvent<SVGSVGElement>
 ): ILikeHeartAction => {
   e.currentTarget.classList.toggle("liked");
   return {
@@ -266,7 +268,7 @@ export const handleLikeHeart = (
 
 /* preplay video */
 export const handlePreplayVideo = (
-  e: React.MouseEvent<HTMLVideoElement, MouseEvent>
+  e: React.MouseEvent<HTMLVideoElement>
 ): IPreplayVideoAction => {
   e.currentTarget.play();
   return {
@@ -276,7 +278,7 @@ export const handlePreplayVideo = (
 
 /* stop video */
 export const handlePauseVideo = (
-  e: React.MouseEvent<HTMLVideoElement, MouseEvent>
+  e: React.MouseEvent<HTMLVideoElement>
 ): IPauseVideoAction => {
   e.currentTarget.pause();
   return {
@@ -389,7 +391,6 @@ export const toggleDropMenuPhotoPage = (): IToggleDropMenuPhotoPageAction => {
     type: ToggleDropMenuPhotoPageTypes.TOGGLEDROPMENUPHOTOPAGE,
   };
 };
-
 
 /*show/hide dropmenu in modal window for video page */
 export const toggleDropMenuVideoPage = (): IToggleDropMenuVideoPageAction => {
@@ -532,8 +533,6 @@ export const pauseMediaPlayer = (
   };
 };
 
-
-
 /*watching video forward in modal window*/
 export const watchingVideoForward = (id: number): IVideoForwardAction => {
   ++id;
@@ -542,7 +541,6 @@ export const watchingVideoForward = (id: number): IVideoForwardAction => {
     stepForward: id,
   };
 };
-
 
 /*watching video back in modal window*/
 export const watchingVideoBack = (id: number): IVideoBackAction => {
@@ -553,7 +551,6 @@ export const watchingVideoBack = (id: number): IVideoBackAction => {
   };
 };
 
-
 /*select video size for download  */
 export const handleSelectVideoSize = (size: string): ISelectVideoSizeAction => {
   return {
@@ -562,7 +559,6 @@ export const handleSelectVideoSize = (size: string): ISelectVideoSizeAction => {
   };
 };
 
-
 /* clear earlier selected image size */
 export const clearKeyPressNumber = (): IClearKeyPressNumberAction => {
   return {
@@ -570,4 +566,3 @@ export const clearKeyPressNumber = (): IClearKeyPressNumberAction => {
     keyPressNumber: null,
   };
 };
-

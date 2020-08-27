@@ -213,9 +213,9 @@ const mapStateToProps = (state: IApplicationState) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
-    handlePreplayVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
+    handlePreplayVideo: (e: React.MouseEvent<HTMLVideoElement>) =>
       dispatch(handlePreplayVideo(e)),
-    handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
+    handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement>) =>
       dispatch(handlePauseVideo(e)),
     toggleWindowVideoPage: () => dispatch(toggleWindowVideoPage()),
     getIdVideo: (id: number) => dispatch(getIdVideo(id)),

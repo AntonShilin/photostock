@@ -17,7 +17,7 @@ export interface IHeaderPhotoPageProps {
   isToggleMenu: boolean;
   handleScroll: typeof handleScroll;
   isScrolling: boolean;
-  isScrollTop: number| null;
+  isScrollTop: number | null;
 }
 
 class HeaderPhotoPage extends React.Component<
@@ -29,7 +29,6 @@ class HeaderPhotoPage extends React.Component<
   }
 
   public render() {
-    console.log( this.props.isScrollTop)
     return (
       <header className="main_item_foto_page">
         <div
@@ -53,7 +52,7 @@ class HeaderPhotoPage extends React.Component<
               </NavLink>
             </div>
             <div className="col-8">
-              {this.props.isScrollTop!>400 && <SearchFotoSmallArea />}
+              {this.props.isScrollTop! > 390 && <SearchFotoSmallArea />}
             </div>
             <div className="col-2 text-center  d-lg-block d-none ">
               <NavLink to="/login" className="p-2 text-decoration-none">
@@ -63,12 +62,9 @@ class HeaderPhotoPage extends React.Component<
 
             <button className="d-lg-none" onClick={this.props.handleToggleMenu}>
               {!this.props.isToggleMenu ? (
-                <IoIosMenu
-                />
+                <IoIosMenu />
               ) : (
-                <MdClose
-                  style={{ fontSize: "2rem", color: "white", strokeWidth: "1" }}
-                />
+                <MdClose style={{ strokeWidth: "1" }} />
               )}
             </button>
           </div>
@@ -84,17 +80,17 @@ class HeaderPhotoPage extends React.Component<
             <div className="row align-items-center">
               <div className="col-12 text-center">
                 <NavLink to="/photos" className=" text-decoration-none">
-                  <AiFillPicture/> Photos
+                  <AiFillPicture /> Photos
                 </NavLink>
               </div>
               <div className="col-12 text-center">
                 <NavLink to="/videos" className=" text-decoration-none">
-                  <FaVideo/> Videos
+                  <FaVideo /> Videos
                 </NavLink>
               </div>
               <div className="col-12 text-center">
                 <NavLink to="/login" className="">
-                  <FaRegUserCircle/> Sign In
+                  <FaRegUserCircle /> Sign In
                 </NavLink>
               </div>
             </div>
@@ -115,9 +111,12 @@ const mapStateToProps = (state: IApplicationState) => ({
 const mapDispatchToProps = (dispatch: any) => {
   return {
     handleToggleMenu: () => dispatch(handleToggleMenu()),
-    handleScroll: (event: any) => dispatch(handleScroll(event)),
+    handleScroll: (
+      event: any
+    ) => dispatch(handleScroll(event)),
   };
 };
+
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(HeaderPhotoPage)
 );

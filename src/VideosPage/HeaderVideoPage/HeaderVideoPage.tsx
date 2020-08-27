@@ -49,7 +49,7 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
               </NavLink>
             </div>
             <div className="col-8">
-              {this.props.isScrollTop!>380 && <SearchVideoSmallArea /> }
+              {this.props.isScrollTop!>390 && <SearchVideoSmallArea /> }
             </div>
             <div className="col-2 text-center  d-lg-block d-none ">
               <NavLink to="/login" className="p-2 text-decoration-none">
@@ -65,7 +65,7 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
                 <IoIosMenu />
               ) : (
                 <MdClose
-                  style={{ fontSize: "2rem", color: "white", strokeWidth: "1" }}
+                  style={{ strokeWidth: "1" }}
                 />
               )}
             </button>

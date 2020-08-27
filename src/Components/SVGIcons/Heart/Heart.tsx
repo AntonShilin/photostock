@@ -10,12 +10,7 @@ export interface IHeartProps {
 export interface State {}
 
 class Heart extends React.Component<IHeartProps, State> {
-  private heart: React.RefObject<SVGSVGElement> | null;
 
-  constructor(props: IHeartProps) {
-    super(props);
-    this.heart = React.createRef();
-  }
 
   public render() {
     return (
@@ -28,7 +23,6 @@ class Heart extends React.Component<IHeartProps, State> {
         strokeLinejoin="round"
         width="1.6em"
         height="1.3em"
-        ref={this.heart}
         onClick={(e) => this.props.handleLikeHeart(e)}
       >
         <path
@@ -42,7 +36,7 @@ c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    handleLikeHeart: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
+    handleLikeHeart: (e: React.MouseEvent<SVGSVGElement>) =>
       dispatch(handleLikeHeart(e)),
   };
 };
