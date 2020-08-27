@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { IApplicationState } from "../../../Store/Store";
-import { IPopularVideos, IVideos } from "../../../Interfaces/Interfaces";
+import { IPopularVideos } from "../../../Interfaces/Interfaces";
 import "./ModalWindowResultVideoPage.scss";
 import Heart from "../../SVGIcons/Heart/Heart";
 import { MdControlPoint, MdClose } from "react-icons/md";

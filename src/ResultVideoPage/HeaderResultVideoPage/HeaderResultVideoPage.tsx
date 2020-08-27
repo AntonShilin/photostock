@@ -37,7 +37,7 @@ class HeaderResultVideoPage extends React.Component<IHeaderResultVideoPageProps,
         <div className="container-fluid navigation_result_video_page">
           <div className="row align-items-center">
             <div className="col-2">
-              <NavLink to="/photos" className="p-2 text-decoration-none btn">
+              <NavLink to="/videos" className="p-2 text-decoration-none btn">
                 F
               </NavLink>
             </div>

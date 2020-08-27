@@ -158,7 +158,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                               </div>
                               <span>
                                 <a
-                                  rel="noopener"
+                                 rel="noopener noreferrer"
                                   target="_blank"
                                   download={true}
                                   href={value.video_files[0].link}
@@ -220,7 +220,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                 </div>
                                 <span>
                                   <a
-                                    rel="noopener"
+                                   rel="noopener noreferrer"
                                     target="_blank"
                                     download={true}
                                     href={value.video_files[0].link}

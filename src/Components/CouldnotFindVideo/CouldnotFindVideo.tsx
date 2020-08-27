@@ -27,7 +27,7 @@ class CouldnotFindVideo extends React.Component<ICouldnotFindVideoProps, State> 
             <div className="col-12">
               <p className="text-left">Try spelling the word correctly</p>
               <p className="text-left">
-                Discover beautiful photos on{" "}
+                Discover beautiful videos on{" "}
                 <NavLink to="/videos">the main page »</NavLink>
               </p>
             </div>
@@ -35,7 +35,7 @@ class CouldnotFindVideo extends React.Component<ICouldnotFindVideoProps, State> 
           ) :
           <div className="row mb-3">
             <div className="col-12">
-              <h2 className="text-center">{this.props.searchNameVideo} Images</h2>
+              <h2 className="text-center">{this.props.searchNameVideo} Videos</h2>
             </div>
         </div>
         }

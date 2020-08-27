@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IApplicationState } from "../../../../Store/Store";
 import { connect } from "react-redux";
-import { ICuratedPhoto,IDataSrc } from "../../../../Interfaces/Interfaces";
+import { ICuratedPhoto } from "../../../../Interfaces/Interfaces";
 import {
   getPopularImages,
   handleSelectImageSize,

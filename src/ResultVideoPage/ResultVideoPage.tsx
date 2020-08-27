@@ -38,7 +38,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
     return (
       <React.Fragment>
         <HeaderResultVideoPage />
-        <ModalWindowResultVideoPage/>
+        <ModalWindowResultVideoPage />
         {this.props.isLoadingVideos ? (
           <LoadingPage />
         ) : (
@@ -52,7 +52,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                       activeClassName="video-result-bages-active"
                       to={`/photos/${this.props.searchNameVideo}`}
                     >
-                      <FaRegImage /> Videos
+                      <FaRegImage /> Photos
                       <span className="ml-1">
                         {this.props.resultSearchImage === null
                           ? 0
@@ -114,7 +114,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                             </div>
                             <span>
                               <a
-                                rel="noopener"
+                                rel="noopener noreferrer"
                                 target="_blank"
                                 download={true}
                                 href={value.video_files[0].link}
@@ -173,10 +173,10 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                               </div>
                               <span>
                                 <a
-                                  rel="noopener"
                                   target="_blank"
                                   download={true}
                                   href={value.video_files[0].link}
+                                  rel="noopener noreferrer"
                                 >
                                   <DownloadIcon />
                                 </a>

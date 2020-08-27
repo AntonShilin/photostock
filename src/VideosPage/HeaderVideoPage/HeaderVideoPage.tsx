@@ -17,6 +17,7 @@ export interface IHeaderVideoPageProps {
   isToggleMenu: boolean;
   handleScroll: typeof handleScroll;
   isScrolling: boolean;
+  isScrollTop: number| null;
 }
 
 class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
@@ -48,7 +49,7 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
               </NavLink>
             </div>
             <div className="col-8">
-              {this.props.isScrolling ? <SearchVideoSmallArea /> : null}
+              {this.props.isScrollTop!>380 && <SearchVideoSmallArea /> }
             </div>
             <div className="col-2 text-center  d-lg-block d-none ">
               <NavLink to="/login" className="p-2 text-decoration-none">
@@ -106,6 +107,7 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
 const mapStateToProps = (state: IApplicationState) => ({
   isToggleMenu: state.products.isToggleMenu,
   isScrolling: state.products.isScrolling,
+  isScrollTop: state.products.isScrollTop,
 });
 
 const mapDispatchToProps = (dispatch: any) => {

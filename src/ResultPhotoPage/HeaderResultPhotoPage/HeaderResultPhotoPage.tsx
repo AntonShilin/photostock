@@ -98,7 +98,7 @@ class HeaderResultPhotoPage extends React.Component<IHeaderResultPhotoPageProps,
 
 const mapStateToProps = (state: IApplicationState) => ({
   isToggleMenu: state.products.isToggleMenu,
-  isScrolling: state.products.isScrolling
+  isScrolling: state.products.isScrolling,
 });
 
 const mapDispatchToProps = (dispatch: any) => {

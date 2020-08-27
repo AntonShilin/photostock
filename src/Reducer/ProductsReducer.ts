@@ -40,6 +40,7 @@ import {
   ToggleDropMenuVideoPageTypes,
   ClearKeyPressNumberTypes,
 } from "../Types/ProductsTypes";
+import { IData, IVideos } from "../Interfaces/Interfaces";
 
 const initialProductState: IProductsState = {
   productsLoading: false,
@@ -80,7 +81,7 @@ const initialProductState: IProductsState = {
     sizeURL: undefined,
   },
   modalWindowVideoPage: {
-    id: [1],
+    id: [0],
     isOpen: false,
     isOpenDropDownMenu: false,
     sizeURL: undefined,
@@ -97,7 +98,7 @@ export const productsReducer = (
 ): IProductsState => {
   switch (action.type) {
     case GetPopularImagesTypes.GETPOPULARIMAGES: {
-      action.popularPhoto.photos.map((elem, i) => {
+      action.popularPhoto.photos.map((elem:IData, i:number) => {
         elem.id = i;
       });
       return {
@@ -123,7 +124,7 @@ export const productsReducer = (
     }
 
     case SearchImagesByNameTypes.SEARCHIMAGESBYNAME: {
-      action.findPhoto.photos.map((elem, i) => {
+      action.findPhoto.photos.map((elem:IData, i:number) => {
         elem.id = i;
       });
       return {
@@ -134,7 +135,7 @@ export const productsReducer = (
     }
 
     case GetPopularVideoTypes.GETPOPULARVIDEO: {
-      action.popularVideo.videos.map((elem, i) => {
+      action.popularVideo.videos.map((elem:IVideos, i:number) => {
         elem.id = i;
       });
       return {
@@ -153,7 +154,7 @@ export const productsReducer = (
     }
 
     case GetVideoTypes.GETVIDEO: {
-      action.findVideo.videos.map((elem, i) => {
+      action.findVideo.videos.map((elem:IVideos, i:number) => {
         elem.id = i;
       });
       return {

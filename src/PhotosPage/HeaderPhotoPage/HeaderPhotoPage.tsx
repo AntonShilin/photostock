@@ -17,6 +17,7 @@ export interface IHeaderPhotoPageProps {
   isToggleMenu: boolean;
   handleScroll: typeof handleScroll;
   isScrolling: boolean;
+  isScrollTop: number| null;
 }
 
 class HeaderPhotoPage extends React.Component<
@@ -28,6 +29,7 @@ class HeaderPhotoPage extends React.Component<
   }
 
   public render() {
+    console.log( this.props.isScrollTop)
     return (
       <header className="main_item_foto_page">
         <div
@@ -51,7 +53,7 @@ class HeaderPhotoPage extends React.Component<
               </NavLink>
             </div>
             <div className="col-8">
-              {this.props.isScrolling ? <SearchFotoSmallArea /> : null}
+              {this.props.isScrollTop!>400 && <SearchFotoSmallArea />}
             </div>
             <div className="col-2 text-center  d-lg-block d-none ">
               <NavLink to="/login" className="p-2 text-decoration-none">
@@ -107,6 +109,7 @@ class HeaderPhotoPage extends React.Component<
 const mapStateToProps = (state: IApplicationState) => ({
   isToggleMenu: state.products.isToggleMenu,
   isScrolling: state.products.isScrolling,
+  isScrollTop: state.products.isScrollTop,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
