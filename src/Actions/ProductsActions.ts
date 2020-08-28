@@ -77,6 +77,7 @@ import {
   ClearKeyPressNumberTypes,
 } from "../Types/ProductsTypes";
 import { MouseEvent, HTMLAttributes, EventHandler } from "react";
+import { EventEmitter } from "events";
 
 /* delete prev video*/
 export const deletePrevData = (): IDeletePrevDataAction => {
@@ -246,13 +247,13 @@ export const getSearchImages = (name: string) => {
 
 /* some scroll events parametres*/
 export const handleScroll = (
-  event: any
+  event:  any
 ): IMoveScrollAction => {
   return {
     type: MoveScroll.MOVESCROLL,
-    scrollTop: event.currentTarget.scrollTop,
-    scrollHeight: event.currentTarget.scrollHeight,
-    clientHeight: event.currentTarget.clientHeight,
+    scrollTop: event.srcElement.scrollingElement.scrollTop,
+    scrollHeight: event.srcElement.scrollingElement.scrollHeight,
+    clientHeight: event.srcElement.scrollingElement.clientHeight,
   };
 };
 

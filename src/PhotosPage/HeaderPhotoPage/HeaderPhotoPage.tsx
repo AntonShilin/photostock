@@ -111,9 +111,7 @@ const mapStateToProps = (state: IApplicationState) => ({
 const mapDispatchToProps = (dispatch: any) => {
   return {
     handleToggleMenu: () => dispatch(handleToggleMenu()),
-    handleScroll: (
-      event: any
-    ) => dispatch(handleScroll(event)),
+    handleScroll: (event: any) => dispatch(handleScroll(event)),
   };
 };
 
