@@ -23,7 +23,6 @@ const Routes: React.SFC<RouteComponentProps> = props => {
         <Redirect exact={true} path="/" to="/photos" />
         <Route path="/photos" exact={true} component={PhotosPage} />
         <Route path="/videos" exact={true} component={VideosPage} />
-        <Route path="/loading" exact={true} component={LoadingPage} />
         <Route path="/videos/:searchvideo" component={ResultVideoPage} />
         <Route path="/photos/:searchphoto" component={ResultPhotoPage} />
         <Route component={NotFoundPage} />

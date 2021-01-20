@@ -23,6 +23,7 @@ import SuggestedPhotoWords from "../Components/SuggestedPhotoWords/SuggestedPhot
 import Heart from "../Components/SVGIcons/Heart/Heart";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
 import ModalPhotoPage from "../Components/ModalWindow/ModalPhotoPage/ModalPhotoPage";
+import Footer from "../Components/Footer/Footer";
 
 export interface IPropsPhotosPage extends RouteComponentProps {
   data: ICuratedPhoto | null;
@@ -229,7 +230,8 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
               </div>
             </div>
           </React.Fragment>
-        )}
+          )}
+        <Footer/>
       </React.Fragment>
     );
   }
