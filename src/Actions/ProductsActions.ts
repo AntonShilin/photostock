@@ -247,13 +247,13 @@ export const getSearchImages = (name: string) => {
 
 /* some scroll events parametres*/
 export const handleScroll = (
-  event:  any
+  event:any
 ): IMoveScrollAction => {
   return {
     type: MoveScroll.MOVESCROLL,
-    scrollTop: event.srcElement.scrollingElement.scrollTop,
-    scrollHeight: event.srcElement.scrollingElement.scrollHeight,
-    clientHeight: event.srcElement.scrollingElement.clientHeight,
+    scrollTop:event.srcElement.scrollingElement.scrollTop,
+    scrollHeight:event.srcElement.scrollingElement.scrollHeight,
+    clientHeight:event.srcElement.scrollingElement.clientHeight,
   };
 };
 

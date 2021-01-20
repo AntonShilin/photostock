@@ -59,8 +59,8 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
 
   public pressEnterKey = () => {
     if (this.props.searchNamePhoto.trim().length > 0) {
-     this.props.getSearchImages(this.props.searchNamePhoto!);
-      this.props.getSearchVideos(this.props.searchNamePhoto!); 
+      this.props.getSearchImages(this.props.searchNamePhoto!);
+      this.props.getSearchVideos(this.props.searchNamePhoto!);
       this.props.history.push(`/photos/${this.props.searchNamePhoto}`);
       this.props.clearKeyPressNumber();
     }
@@ -92,7 +92,9 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                   autoFocus={false}
                   required={true}
                   onKeyDown={(e) => {
-                    if (e.keyCode === 13) { this.pressEnterKey() };
+                    if (e.keyCode === 13) {
+                      this.pressEnterKey();
+                    }
                   }}
                 />
                 <div className="input-group-append">
@@ -111,6 +113,9 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
               <SuggestedPhotoWords />
             </div>
           </div>
+          <p className="photo_by">
+            Photo by {this.props.data?.photos[0].photographer}
+          </p>
         </div>
         {this.props.isLoadingImages ? (
           <LoadingPage />

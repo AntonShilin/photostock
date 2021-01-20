@@ -9,6 +9,17 @@
   background-position: center;
   background-size: cover;
   border-radius: 0;
+  position: relative;
+  .photo_by{
+    position: absolute;
+    bottom: 3%;
+    right: 5%;
+    font-size: .8rem !important;
+    font-weight: 300 !important;
+    margin: 0;
+    color: #fff !important;
+    opacity: .5;
+  }
   .photo_search_input {
     width: 75%;
     margin: 0 auto;
@@ -107,6 +118,9 @@ div.info-for-image {
   .photospage_bg {
     padding-top: 13rem !important;
     padding-bottom: 3rem;
+    .photo_by{
+      display: none;
+    }
   }
 }
 

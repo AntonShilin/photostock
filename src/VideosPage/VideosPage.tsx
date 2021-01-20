@@ -50,8 +50,8 @@ class VideosPage extends React.Component<IPropsVideosPage> {
 
   public pressEnterKey = () => {
     if (this.props.searchNameVideo.trim().length > 0) {
-     this.props.getSearchImages(this.props.searchNameVideo!);
-      this.props.getSearchVideos(this.props.searchNameVideo!); 
+      this.props.getSearchImages(this.props.searchNameVideo!);
+      this.props.getSearchVideos(this.props.searchNameVideo!);
       this.props.history.push(`/videos/${this.props.searchNameVideo}`);
       this.props.clearKeyPressNumber();
     }
@@ -63,7 +63,11 @@ class VideosPage extends React.Component<IPropsVideosPage> {
         <HeaderVideoPage />
         <ModalVideoPage />
         <div className="container-fluid videos-page-bg">
-          <video controls={false} autoPlay={false} loop={true}>
+          <video
+            controls={false}
+            autoPlay={navigator.appCodeName === "Safari" ? false : true}
+            loop={true}
+          >
             <source
               src="https://firebasestorage.googleapis.com/v0/b/photoandvideo-b979e.appspot.com/o/forest.mp4?alt=media&token=d0db507a-dc26-42f7-aeb2-6046f7481bb4"
               type="video/mp4"
@@ -85,7 +89,9 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                   onChange={this.props.changeNameVideo}
                   autoFocus={false}
                   onKeyDown={(e) => {
-                    if (e.keyCode === 13) { this.pressEnterKey() };
+                    if (e.keyCode === 13) {
+                      this.pressEnterKey();
+                    }
                   }}
                 />
                 <div className="input-group-append">
@@ -158,7 +164,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                               </div>
                               <span>
                                 <a
-                                 rel="noopener noreferrer"
+                                  rel="noopener noreferrer"
                                   target="_blank"
                                   download={true}
                                   href={value.video_files[0].link}
@@ -199,9 +205,9 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                   controls={false}
                                   muted={true}
                                   poster={value.image}
-                                  >
+                                >
                                   <source
-                                  src={value.video_files[0].link}
+                                    src={value.video_files[0].link}
                                     type={value.video_files[0].file_type}
                                   />
                                   Your browser doesn't support HTML5 video tag.
@@ -220,7 +226,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                 </div>
                                 <span>
                                   <a
-                                   rel="noopener noreferrer"
+                                    rel="noopener noreferrer"
                                     target="_blank"
                                     download={true}
                                     href={value.video_files[0].link}

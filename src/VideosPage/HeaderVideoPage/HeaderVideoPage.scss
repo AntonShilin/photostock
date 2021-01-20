@@ -44,35 +44,6 @@ header.main_item_video_page {
     }
   }
 
-  div#video_page_submenu {
-    margin: 0;
-    position: absolute;
-    top: 0rem;
-    left: 0rem;
-    width: 100%;
-    height: 100vh;
-    padding: 0;
-    background-color: #232a34ed;
-    z-index: -1;
-    div > div > a {
-      color: #ffffff;
-      opacity: 0.7;
-      font-size: 1.375rem;
-      text-decoration: none;
-      &:hover {
-        opacity: 1;
-        color: white;
-      }
-      svg{
-        font-size: 1.5rem;
-      }
-    }
-    div.row {
-      height: 80%;
-      margin: 0;
-      padding-top: 5rem;
-    }
-  }
 
   div.streak {
     opacity: 0.3;
