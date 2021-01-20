@@ -25,6 +25,7 @@ import SuggestedVideoWords from "../Components/SuggestedVideoWords/SuggestedVide
 import Heart from "../Components/SVGIcons/Heart/Heart";
 import ModalVideoPage from "../Components/ModalWindow/ModalWindowVideoPage/ModalVideoPage";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
+import Footer from "../Components/Footer/Footer";
 
 export interface IPropsVideosPage extends RouteComponentProps {
   getPopularVideo: typeof getPopularVideo;
@@ -248,8 +249,9 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                 </div>
               </div>
             </div>
+            <Footer/>
           </React.Fragment>
-        )}
+          )}
       </React.Fragment>
     );
   }

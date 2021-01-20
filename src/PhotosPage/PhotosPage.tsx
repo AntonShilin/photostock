@@ -229,9 +229,9 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                 </div>
               </div>
             </div>
+            <Footer />
           </React.Fragment>
-          )}
-        <Footer/>
+        )}
       </React.Fragment>
     );
   }

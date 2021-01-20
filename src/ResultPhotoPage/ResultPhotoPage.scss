@@ -1,3 +1,5 @@
+.photo_result_bg{
+min-height: 90vh;
 div.photo-result-bages.row {
   div {
     ul {
@@ -74,6 +76,7 @@ div.result_info-for-image {
       font-size: 1rem;
     }
   }
+}
 }
 
 @media screen and (max-width: 850px) {

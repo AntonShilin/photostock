@@ -20,6 +20,7 @@ import CouldnotFindPhoto from "../Components/CouldnotFindPhoto/CouldnotFindPhoto
 import Heart from "../Components/SVGIcons/Heart/Heart";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
 import ModalWindowResultPhotoPage from "../Components/ModalWindow/ModalWindowResultPhotoPage/ModalWindowResultPhotoPage";
+import Footer from "../Components/Footer/Footer";
 
 export interface IDataResult extends RouteComponentProps {
   getSearchImages: typeof getSearchImages;
@@ -42,128 +43,140 @@ class ResultPhotoPage extends React.Component<IDataResult> {
         {this.props.isLoadingImages ? (
           <LoadingPage />
         ) : (
-          <div className="container-xl">
-            <div className="photo-result-bages row align-items-center justify-content-md-center mt-3 mb-5">
-              <div className="col-auto">
-                <ul className="list-group list-group-horizontal">
-                  <li className="list-group-item">
-                    <NavLink activeClassName="photo-result-bages-active" to="#">
-                      <FaRegImage /> Photos
-                      <span className="ml-1">
-                        {this.props.resultSearchImage === null
-                          ? 0
-                          : this.props.resultSearchImage.photos.length}
-                      </span>
-                    </NavLink>
-                  </li>
-                  <li className="list-group-item">
-                    <NavLink
-                      activeClassName="photo-result-bages-active"
-                      to={`/videos/${this.props.searchNamePhoto}`}
-                    >
-                      <FaVideo /> Videos
-                      <span className="ml-1">
-                        {this.props.resultSearchVideo === null
-                          ? 0
-                          : this.props.resultSearchVideo.videos.length}
-                      </span>
-                    </NavLink>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <CouldnotFindPhoto />
-            <div className="row">
-              <div className="col-lg-6 col-md-6 col-sm-12">
-                <div className="row">
-                  {this.props.resultSearchImage === null
-                    ? null
-                    : this.props.resultSearchImage.photos.map((image, i) =>
-                        i % 2 ? (
-                          <div key={i} className="col-12">
-                            <div className="info-for-image">
-                              <img
-                                src={image.src.large}
-                                alt={`img_${i}`}
-                                crossOrigin="anonymous"
-                                onClick={() => {
-                                  this.props.getIdPhoto(image.id);
-                                  this.props.toggleWindowPhotoPage();
-                                }}
-                              />
-                              <div className="image-photographer">
-                                <p>{image.photographer}</p>
-                              </div>
-                              <span>
-                                <a
-                                  download={true}
-                                  onClick={(e) =>
-                                    this.props.downloadImage(e.currentTarget)
-                                  }
-                                >
-                                  <DownloadIcon />
-                                </a>
-                              </span>
-                              <span>
-                                <MdControlPoint
-                                  style={{ color: "white", fontSize: "1.5rem" }}
-                                />
-                              </span>
-                              <span>
-                                <Heart />
-                              </span>
-                            </div>
-                          </div>
-                        ) : null
-                      )}
+          <>
+            <div className="container-xl photo_result_bg">
+              <div className="photo-result-bages row align-items-center justify-content-md-center mt-3 mb-5">
+                <div className="col-auto">
+                  <ul className="list-group list-group-horizontal">
+                    <li className="list-group-item">
+                      <NavLink
+                        activeClassName="photo-result-bages-active"
+                        to="#"
+                      >
+                        <FaRegImage /> Photos
+                        <span className="ml-1">
+                          {this.props.resultSearchImage === null
+                            ? 0
+                            : this.props.resultSearchImage.photos.length}
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li className="list-group-item">
+                      <NavLink
+                        activeClassName="photo-result-bages-active"
+                        to={`/videos/${this.props.searchNamePhoto}`}
+                      >
+                        <FaVideo /> Videos
+                        <span className="ml-1">
+                          {this.props.resultSearchVideo === null
+                            ? 0
+                            : this.props.resultSearchVideo.videos.length}
+                        </span>
+                      </NavLink>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <div className="col-lg-6 col-md-6 col-sm-12">
-                <div className="row">
-                  {this.props.resultSearchImage === null
-                    ? null
-                    : this.props.resultSearchImage.photos.map((image, i) =>
-                        i % 2 === 0 ? (
-                          <div key={i} className="col-12">
-                            <div className="info-for-image">
-                              <img
-                                src={image.src.large}
-                                alt={`img_${i}`}
-                                crossOrigin="anonymous"
-                                onClick={() => {
-                                  this.props.getIdPhoto(image.id);
-                                  this.props.toggleWindowPhotoPage();
-                                }}
-                              />
-                              <div className="image-photographer">
-                                <p>{image.photographer}</p>
-                              </div>
-                              <span>
-                                <a
-                                  download={true}
-                                  onClick={(e) =>
-                                    this.props.downloadImage(e.currentTarget)
-                                  }
-                                >
-                                  <DownloadIcon />
-                                </a>
-                              </span>
-                              <span>
-                                <MdControlPoint
-                                  style={{ color: "white", fontSize: "1.5rem" }}
+              <CouldnotFindPhoto />
+              <div className="row">
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                  <div className="row">
+                    {this.props.resultSearchImage === null
+                      ? null
+                      : this.props.resultSearchImage.photos.map((image, i) =>
+                          i % 2 ? (
+                            <div key={i} className="col-12">
+                              <div className="info-for-image">
+                                <img
+                                  src={image.src.large}
+                                  alt={`img_${i}`}
+                                  crossOrigin="anonymous"
+                                  onClick={() => {
+                                    this.props.getIdPhoto(image.id);
+                                    this.props.toggleWindowPhotoPage();
+                                  }}
                                 />
-                              </span>
-                              <span>
-                                <Heart />
-                              </span>
+                                <div className="image-photographer">
+                                  <p>{image.photographer}</p>
+                                </div>
+                                <span>
+                                  <a
+                                    download={true}
+                                    onClick={(e) =>
+                                      this.props.downloadImage(e.currentTarget)
+                                    }
+                                  >
+                                    <DownloadIcon />
+                                  </a>
+                                </span>
+                                <span>
+                                  <MdControlPoint
+                                    style={{
+                                      color: "white",
+                                      fontSize: "1.5rem",
+                                    }}
+                                  />
+                                </span>
+                                <span>
+                                  <Heart />
+                                </span>
+                              </div>
                             </div>
-                          </div>
-                        ) : null
-                      )}
+                          ) : null
+                        )}
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                  <div className="row">
+                    {this.props.resultSearchImage === null
+                      ? null
+                      : this.props.resultSearchImage.photos.map((image, i) =>
+                          i % 2 === 0 ? (
+                            <div key={i} className="col-12">
+                              <div className="info-for-image">
+                                <img
+                                  src={image.src.large}
+                                  alt={`img_${i}`}
+                                  crossOrigin="anonymous"
+                                  onClick={() => {
+                                    this.props.getIdPhoto(image.id);
+                                    this.props.toggleWindowPhotoPage();
+                                  }}
+                                />
+                                <div className="image-photographer">
+                                  <p>{image.photographer}</p>
+                                </div>
+                                <span>
+                                  <a
+                                    download={true}
+                                    onClick={(e) =>
+                                      this.props.downloadImage(e.currentTarget)
+                                    }
+                                  >
+                                    <DownloadIcon />
+                                  </a>
+                                </span>
+                                <span>
+                                  <MdControlPoint
+                                    style={{
+                                      color: "white",
+                                      fontSize: "1.5rem",
+                                    }}
+                                  />
+                                </span>
+                                <span>
+                                  <Heart />
+                                </span>
+                              </div>
+                            </div>
+                          ) : null
+                        )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+            <Footer />
+          </>
         )}
       </React.Fragment>
     );
