@@ -36,7 +36,7 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps> {
             onClick={() => this.props.handleToggleMenu()}
           />
           <div
-            className="container-fluid navigation_foto_page"
+            className="container-xl navigation_foto_page"
             style={
               this.props.isScrolling
                 ? { backgroundColor: "#232a34ed" }

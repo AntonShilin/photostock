@@ -1,25 +1,27 @@
 div.navigation-pages {
   border-bottom: 0.25rem solid #d3d3d3a3;
-  div.row {
-    height: 3.5rem;
+  max-width: 1500px;
+  div {
+    height: auto;
     div {
+      display: flex;
+      height: 3.5rem;
       .active {
         border-bottom: 0.25rem solid blue;
       }
       a {
-        display: inline-block;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
+        margin: 0 auto;
+        padding-top: 0.9rem;
         font-size: 1rem;
         font-weight: 600;
         text-decoration: none;
         border-bottom: 0.25rem solid transparent;
         text-transform: uppercase;
-        letter-spacing: .4px;
+        letter-spacing: 0.4px;
         color: #5e5e5e;
-        &:hover{
+        &:hover {
           color: blue;
-          opacity: .8;
+          opacity: 0.8;
         }
       }
     }

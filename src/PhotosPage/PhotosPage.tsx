@@ -73,7 +73,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
         <HeaderPhotoPage />
         <ModalPhotoPage />
         <div
-          className="container-fluid photospage_bg"
+          className="container-xl photospage_bg"
           style={{
             backgroundImage: `url(${this.props.data?.photos[0].src.original})`,
           }}
@@ -123,7 +123,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
         ) : (
           <React.Fragment>
             <NavigationPages />
-            <div className="container-xl">
+            <div className="container-xl trending_photos">
               <div className="row mb-2">
                 <div className="col-12">
                   <h6 className="mb-4 mt-4">Trending Free Stock Photos</h6>

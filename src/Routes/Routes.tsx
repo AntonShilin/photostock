@@ -11,7 +11,6 @@ import NotFoundPage from "../Components/NotFoundPage/NotFoundPage";
 import LoginPage from "../Components/LoginPage/LoginPage";
 import ResultPhotoPage from "../ResultPhotoPage/ResultPhotoPage";
 import ResultVideoPage from "../ResultVideoPage/ResultVideoPage";
-import LoadingPage from "../Components/LoadingPage/LoadingPage";
 
 
 
