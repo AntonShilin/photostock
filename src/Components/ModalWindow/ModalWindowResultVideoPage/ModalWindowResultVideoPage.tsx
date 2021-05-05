@@ -23,7 +23,7 @@ import ResultVideoMediaPlayer from "../../MediaPlayers/ResultVideoMediaPlayer/Re
 
 export interface IWindowResultVideoPageProps {
   resultSearchVideo: IPopularVideos | null;
-  id: number[];
+  id: number;
   isOpen: boolean;
   isScrollTop: number | null;
   isOpenDropDownMenu: boolean;
@@ -69,10 +69,11 @@ class ModalWindowResultVideoPage extends React.Component<
                     <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
                       <p>
                         <span>
-                          {resultSearchVideo.videos[id[0]].user.name.charAt(0)}
+                          {resultSearchVideo.videos.length > 0 &&
+                            resultSearchVideo.videos[id].user.name.charAt(0)}
                         </span>
                         {resultSearchVideo.videos.length > 0 &&
-                          resultSearchVideo.videos[id[0]].user.name}
+                          resultSearchVideo.videos[id].user.name}
                       </p>
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
@@ -106,7 +107,7 @@ class ModalWindowResultVideoPage extends React.Component<
                     onClick={() => {
                       this.props.toggleBtnMediaPlayer(false);
                       this.props.stopMediaPlayer();
-                      this.props.watchingVideoBack(id[0]);
+                      this.props.watchingVideoBack(id);
                     }}
                   >
                     <IoIosArrowBack />
@@ -116,7 +117,7 @@ class ModalWindowResultVideoPage extends React.Component<
                     onClick={() => {
                       this.props.toggleBtnMediaPlayer(false);
                       this.props.stopMediaPlayer();
-                      this.props.watchingVideoForward(id[0]);
+                      this.props.watchingVideoForward(id);
                     }}
                   >
                     <IoIosArrowForward />

@@ -24,7 +24,7 @@ import DropMenuVideoPage from "./DropMenuVideoPage/DropMenuVideoPage";
 
 export interface IWindowVideoPageProps {
   data: IPopularVideos | null;
-  id: number[];
+  id: number;
   isOpen: boolean;
   isScrollTop: number | null;
   isOpenDropDownMenu: boolean;
@@ -64,8 +64,8 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                   <div className="row">
                     <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
                       <p>
-                        <span>{data.videos[id[0]].user.name.charAt(0)}</span>
-                        {data.videos[id[0]].user.name}
+                        <span>{data.videos[id].user.name.charAt(0)}</span>
+                        {data.videos[id].user.name}
                       </p>
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
@@ -99,7 +99,7 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                     onClick={() => {
                       this.props.toggleBtnMediaPlayer(false);
                       this.props.stopMediaPlayer();
-                      this.props.watchingVideoBack(id[0]);
+                      this.props.watchingVideoBack(id);
                     }}
                   >
                     <IoIosArrowBack />
@@ -109,7 +109,7 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                     onClick={() => {
                       this.props.toggleBtnMediaPlayer(false);
                       this.props.stopMediaPlayer();
-                      this.props.watchingVideoForward(id[0]);
+                      this.props.watchingVideoForward(id);
                     }}
                   >
                     <IoIosArrowForward />

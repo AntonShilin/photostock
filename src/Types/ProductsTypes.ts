@@ -416,7 +416,7 @@ export interface IProductsState {
     sizeURL: string | undefined;
   };
   readonly modalWindowVideoPage: {
-    id: number[];
+    id: number;
     isOpen: boolean;
     isOpenDropDownMenu: boolean;
     sizeURL: string | undefined;

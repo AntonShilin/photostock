@@ -81,7 +81,7 @@ const initialProductState: IProductsState = {
     sizeURL: undefined,
   },
   modalWindowVideoPage: {
-    id: [0],
+    id: 0,
     isOpen: false,
     isOpenDropDownMenu: false,
     sizeURL: undefined,
@@ -250,7 +250,7 @@ export const productsReducer = (
         ...state,
         modalWindowVideoPage: {
           ...state.modalWindowVideoPage,
-          id: [action.id],
+          id: action.id,
         }
       };
     }
@@ -413,7 +413,7 @@ export const productsReducer = (
         ...state,
         modalWindowVideoPage: {
           ...state.modalWindowVideoPage,
-          id: [action.stepForward],
+          id: action.stepForward,
         },
       };
     }
@@ -426,7 +426,7 @@ export const productsReducer = (
         ...state,
         modalWindowVideoPage: {
           ...state.modalWindowVideoPage,
-          id: [action.stepBack],
+          id: action.stepBack,
         },
       };
     }

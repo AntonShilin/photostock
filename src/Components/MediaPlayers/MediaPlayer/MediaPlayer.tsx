@@ -13,7 +13,7 @@ import {
 
 export interface IMediaPlayerProps {
   data: IPopularVideos | null;
-  id: number[];
+  id: number;
   isOpen: boolean;
   isPlay: boolean;
   toggleBtnMediaPlayer: typeof toggleBtnMediaPlayer;
@@ -48,9 +48,9 @@ class MediaPlayer extends React.Component<
         <video
           controls={false}
           muted={true}
-          poster={videos[id[0]].image}
+          poster={videos[id].image}
           ref={this.myPlayer}
-          src={videos[id[0]].video_files[0].link}
+          src={videos[id].video_files[0].link}
         >
           Your browser doesn't support HTML5 video tag.
         </video>

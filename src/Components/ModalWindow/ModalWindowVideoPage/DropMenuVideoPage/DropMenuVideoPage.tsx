@@ -12,7 +12,7 @@ import "./DropMenuVideoPage.scss";
 
 export interface IDropMenuVideoPageProps {
   data: IPopularVideos | null;
-  id: number[];
+  id: number;
   sizeURL: string | undefined;
   isOpen: boolean;
   handleSelectVideoSize: typeof handleSelectVideoSize;
@@ -37,7 +37,7 @@ class DropMenuVideoPage extends React.Component<
 
   public render() {
     const { id, isOpenDropDownMenu, sizeURL } = this.props;
-    const sizes = this.props.data!.videos[id[0]].video_files;
+    const sizes = this.props.data!.videos[id].video_files;
 
     return this.props.data !== undefined ? (
       <form
