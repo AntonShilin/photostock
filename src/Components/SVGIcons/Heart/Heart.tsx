@@ -11,7 +11,6 @@ export interface State {}
 
 class Heart extends React.Component<IHeartProps, State> {
 
-
   public render() {
     return (
       <svg

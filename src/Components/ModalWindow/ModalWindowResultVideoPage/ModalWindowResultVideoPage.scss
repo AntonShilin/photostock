@@ -31,14 +31,27 @@ div.modal_result_window_video_basis {
         top: 0%;
         color: white;
       }
-
       .description_video {
+        small {
+          display: none;
+          font-size: 10px;
+          line-height: 19px;
+          font-weight: 300;
+          margin-top: 0;
+          letter-spacing: 0.4px;
+          margin-top: .5rem;
+          margin-bottom: 0.5rem;
+          text-decoration: none;
+          text-transform: uppercase;
+          color: #5e5e5e;
+          text-align: center;
+        }
         p {
           margin: 0;
           font-weight: 500;
           white-space: nowrap;
           text-align: center;
-          span{
+          span {
             display: inline-block;
             margin-right: 10px;
             max-width: 52px;
@@ -47,7 +60,7 @@ div.modal_result_window_video_basis {
             min-height: 52px;
             border-radius: 50%;
             border: 1px solid lightgrey;
-            padding-top: 0.5rem;
+            padding-top: 0.7rem;
             text-transform: capitalize;
           }
         }
@@ -82,7 +95,6 @@ div.modal_result_window_video_basis {
         margin: 3rem auto;
         position: relative;
         padding: 0;
-
         .arrow_left {
           position: absolute;
           top: 40%;
@@ -129,8 +141,19 @@ div.modal_result_window_video_basis {
       left: 0% !important;
       color: black !important;
     }
-  }
-  .modal_result_window_video {
-    margin: 1rem auto !important;
+    .description_video {
+      small{
+        display: block !important;
+      }
+      p {
+        margin-top: 0.5rem;
+      }
+      button.heart {
+        width: 47% !important;
+      }
+      button.control_point {
+        width: 47% !important;
+      }
+    }
   }
 }

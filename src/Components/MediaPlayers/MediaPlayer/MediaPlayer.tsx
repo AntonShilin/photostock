@@ -57,7 +57,6 @@ class MediaPlayer extends React.Component<
         <div className="media_player_control_panel">
           {isPlay ? (
             <button
-              className="btn"
               onClick={() => {
                 this.props.pauseMediaPlayer(this.myPlayer.current!);
                 this.props.toggleBtnMediaPlayer(false);
@@ -67,7 +66,6 @@ class MediaPlayer extends React.Component<
             </button>
           ) : (
             <button
-              className="btn"
               onClick={() => {
                 this.props.startMediaPlayer(this.myPlayer.current!);
                 this.props.toggleBtnMediaPlayer(true);

@@ -13,12 +13,14 @@
     bottom: 0rem;
     left: 0rem;
     display: flex;
-    button.btn {
+    button {
       width: 4.5em;
       height: 2.9em;
       background: rgba(23, 35, 34, 0.75);
-      border-radius: 0.5em;
+      border: none;
       &:focus {
+        outline: none;
+        border-radius: none;
         box-shadow: none !important;
       }
       &:hover {

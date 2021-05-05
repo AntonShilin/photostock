@@ -39,6 +39,7 @@ export interface IWindowVideoPageProps {
 export interface State {}
 
 class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
+ 
   public render() {
     const { isOpenDropDownMenu, data, id } = this.props;
 
@@ -60,9 +61,10 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                     this.props.stopMediaPlayer();
                   }}
                 />
-                <div className="col-12 description_video">
+                <div className="col-12 description_video order-lg-first order-last">
                   <div className="row">
-                    <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <div className="col-lg-3 col-md-12 col-sm-12 mb-2 order-lg-first order-last">
+                    <small>VIDEOGRAPHER</small>
                       <p>
                         <span>{data.videos[id].user.name.charAt(0)}</span>
                         {data.videos[id].user.name}
