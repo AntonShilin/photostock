@@ -13,85 +13,102 @@ div.modal_window_video_basis {
   scrollbar-color: white;
   padding: 1rem 0 1rem 0;
   top: 0rem;
-  div.modal_window_video_bg {
-    background-color: white;
-    position: relative;
-    padding: 2rem 1rem 2rem 1rem;
-    min-height: 100vh;
-    width: 80vw;
-    border-radius: 6px;
-    margin: 0rem auto;
-    svg.close_icon {
-      position: absolute;
-      cursor: pointer;
-      font-size: 2.5rem;
-      left: -7%;
-      top: 0%;
-      color: white;
-    }
-
-    .description_video {
-      p {
-        margin: 0;
+  div {
+    max-width: 1200px;
+    div.modal_window_video_bg {
+      background-color: white;
+      position: relative;
+      padding: 2rem 1rem 2rem 1rem;
+      height: auto;
+      width: 80vw;
+      border-radius: 6px;
+      margin: 0rem auto;
+      svg.close_icon {
+        position: absolute;
+        cursor: pointer;
+        font-size: 2.5rem;
+        left: -7%;
+        top: 0%;
+        color: white;
       }
-      button.heart {
-        font-size: 1rem;
-        svg {
-          stroke: black;
-          font-size: 1rem;
+      .description_video {
+        p {
+          margin: 0;
+          font-weight: 500;
+          white-space: nowrap;
+          text-align: center;
+          span{
+            display: inline-block;
+            margin-right: 10px;
+            max-width: 52px;
+            max-height: 52px;
+            min-width: 52px;
+            min-height: 52px;
+            border-radius: 50%;
+            border: 1px solid lightgrey;
+            padding-top: 0.5rem;
+            text-transform: capitalize;
+          }
         }
-      }
-      button.control_point {
-        font-size: 1rem;
-        svg {
-          stroke: black;
-          font-size: 1.5rem;
-        }
-      }
-      .download_item_bg {
-        position: relative;
-        button.download {
+        button.heart {
           font-size: 1rem;
-          background-color: #05a081;
-          color: white;
-          &:focus {
-            outline: 0;
-            box-shadow: none;
+          svg {
+            stroke: black;
+            font-size: 1rem;
+          }
+        }
+        button.control_point {
+          font-size: 1rem;
+          svg {
+            stroke: black;
+            font-size: 1.5rem;
+          }
+        }
+        .download_item_bg {
+          position: relative;
+          button.download {
+            font-size: 1rem;
+            background-color: #05a081;
+            color: white;
+            &:focus {
+              outline: 0;
+              box-shadow: none;
+            }
           }
         }
       }
-    }
-    .modal_window_video {
-      margin: 3rem auto;
-      position: relative;
-      padding: 0;
+      .modal_window_video {
+        margin: 3rem auto;
+        position: relative;
+        padding: 0;
 
-      .arrow_left {
-        position: absolute;
-        top: 40%;
-        left: -3%;
-        &:hover {
-          color: rgb(255, 0, 0);
-          cursor: pointer;
+        .arrow_left {
+          position: absolute;
+          top: 40%;
+          left: -3%;
+          &:hover {
+            color: rgb(255, 0, 0);
+            cursor: pointer;
+          }
+          svg {
+            font-size: 3rem;
+            stroke-width: 1rem;
+            color: #05a081;
+          }
         }
-        svg {
-          font-size: 3rem;
-          stroke-width: 1rem;
-          color: #05a081;
-        }
-      }
-      .arrow_right {
-        position: absolute;
-        top: 40%;
-        right: -3%;
-        &:hover {
-          color: rgb(255, 0, 0);
-          cursor: pointer;
-        }
-        svg {
-          font-size: 3rem;
-          stroke-width: 1rem;
-          color: #05a081;
+        .arrow_right {
+          position: absolute;
+          top: 40%;
+          right: -3%;
+          &:hover {
+            color: rgb(255, 0, 0);
+            cursor: pointer;
+          }
+          svg {
+            font-size: 3rem;
+            stroke-width: 1rem;
+            color: #05a081;
+          }
         }
       }
     }
@@ -116,4 +133,3 @@ div.modal_window_video_basis {
     margin: 1rem auto !important;
   }
 }
-

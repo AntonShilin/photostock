@@ -63,7 +63,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
       <React.Fragment>
         <HeaderVideoPage />
         <ModalVideoPage />
-        <div className="container-fluid videos-page-bg">
+        <div className="container-xl videos-page-bg">
           <video
             controls={false}
             autoPlay={navigator.appCodeName === "Safari" ? false : true}
@@ -117,7 +117,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
         ) : (
           <React.Fragment>
             <NavigationPages />
-            <div className="container-xl">
+            <div className="container-xl trending_video">
               <div className="row">
                 <div className="col-12">
                   <h6 className="mt-4 mb-4">Trending Free Stock Videos</h6>

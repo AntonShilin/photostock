@@ -54,7 +54,7 @@ class ModalWindowResultVideoPage extends React.Component<
                 : "d-none"
             }
           >
-            <div className="container-xl">
+            <div className="container-xl modal_result_window_video_main">
               <div className="row modal_result_window_video_bg">
                 <MdClose
                   className="close_icon"
@@ -67,7 +67,10 @@ class ModalWindowResultVideoPage extends React.Component<
                 <div className="col-12 description_video">
                   <div className="row">
                     <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
-                      <p className="text-center">
+                      <p>
+                        <span>
+                          {resultSearchVideo.videos[id[0]].user.name.charAt(0)}
+                        </span>
                         {resultSearchVideo.videos.length > 0 &&
                           resultSearchVideo.videos[id[0]].user.name}
                       </p>
@@ -97,7 +100,7 @@ class ModalWindowResultVideoPage extends React.Component<
                   </div>
                 </div>
                 <div className="col-12 align-self-center modal_window_video">
-                  <ResultVideoMediaPlayer/>
+                  <ResultVideoMediaPlayer />
                   <span
                     className="arrow_left"
                     onClick={() => {

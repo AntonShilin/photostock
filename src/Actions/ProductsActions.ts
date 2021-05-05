@@ -76,8 +76,9 @@ import {
   IClearKeyPressNumberAction,
   ClearKeyPressNumberTypes,
 } from "../Types/ProductsTypes";
-import { MouseEvent, HTMLAttributes, EventHandler } from "react";
-import { EventEmitter } from "events";
+
+const keyApi: string =
+  "563492ad6f9170000100000130a559403d65480189d8b56e5e05791c";
 
 /* delete prev video*/
 export const deletePrevData = (): IDeletePrevDataAction => {
@@ -94,17 +95,16 @@ export const handleToggleMenu = (): IToggleMenuAction => ({
 
 /*  get  fotos for photo page */
 export const getPopularImages = () => {
-  const keyAPI: string =
-    "563492ad6f91700001000001b4262993b26c4cc4bf2c27140f1d4880";
   return (
     dispatch: (arg0: ILoadingImagesAction | IGetPopularPhotoAction) => void
   ) => {
     dispatch(isLoadingImages());
-    fetch(`https://api.pexels.com/v1/curated?per_page=50&page=1`, {
-      headers: { Authorization: keyAPI },
+    fetch(`https://api.pexels.com/v1/curated?page=1&per_page=40`, {
+      headers: { Authorization: keyApi },
     })
       .then((response) => {
         if (!response.ok) {
+          console.log(response.statusText)
           throw new Error(response.statusText);
         }
         return response;
@@ -140,14 +140,12 @@ export const handleSearchChange = (
 
 /*  get popular videos */
 export const getPopularVideo = () => {
-  const keyAPI: string =
-    "563492ad6f91700001000001b4262993b26c4cc4bf2c27140f1d4880";
   return (
     dispatch: (arg0: ILoadingVideosAction | IPopularVideoAction) => void
   ) => {
     dispatch(isLoadingVideos());
     fetch(`https://api.pexels.com/videos/popular?per_page=10&page=1`, {
-      headers: { Authorization: keyAPI },
+      headers: { Authorization: keyApi },
     })
       .then((response) => {
         if (!response.ok) {
@@ -176,8 +174,6 @@ export const changeNameVideo = (
 
 /* get videos search by name*/
 export const getSearchVideos = (name: string) => {
-  const keyAPI: string =
-    "563492ad6f91700001000001b4262993b26c4cc4bf2c27140f1d4880";
   return (
     dispatch: (
       arg0: IDeletePrevDataAction | ILoadingVideosAction | IGetVideoAction
@@ -188,7 +184,7 @@ export const getSearchVideos = (name: string) => {
     fetch(
       `https://api.pexels.com/videos/search?query=${name}+query&per_page=40&page=1`,
       {
-        headers: { Authorization: keyAPI },
+        headers: { Authorization: keyApi },
       }
     )
       .then((response) => {
@@ -210,8 +206,6 @@ export const getSearchVideos = (name: string) => {
 
 /* get images search by name  */
 export const getSearchImages = (name: string) => {
-  const keyAPI: string =
-    "563492ad6f91700001000001b4262993b26c4cc4bf2c27140f1d4880";
   return (
     dispatch: (
       arg0:
@@ -222,12 +216,9 @@ export const getSearchImages = (name: string) => {
   ) => {
     dispatch(deletePrevData());
     dispatch(isLoadingImages());
-    fetch(
-      `https://api.pexels.com/v1/search?query=${name}+query&per_page=50&page=1`,
-      {
-        headers: { Authorization: keyAPI },
-      }
-    )
+    fetch(`https://api.pexels.com/v1/search?query=${name}+query&per_page=50&page=1`, {
+      headers: { Authorization: keyApi },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -246,14 +237,12 @@ export const getSearchImages = (name: string) => {
 };
 
 /* some scroll events parametres*/
-export const handleScroll = (
-  event:any
-): IMoveScrollAction => {
+export const handleScroll = (event: any): IMoveScrollAction => {
   return {
     type: MoveScroll.MOVESCROLL,
-    scrollTop:event.srcElement.scrollingElement.scrollTop,
-    scrollHeight:event.srcElement.scrollingElement.scrollHeight,
-    clientHeight:event.srcElement.scrollingElement.clientHeight,
+    scrollTop: event.srcElement.scrollingElement.scrollTop,
+    scrollHeight: event.srcElement.scrollingElement.scrollHeight,
+    clientHeight: event.srcElement.scrollingElement.clientHeight,
   };
 };
 

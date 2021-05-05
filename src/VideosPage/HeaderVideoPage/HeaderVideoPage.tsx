@@ -36,7 +36,7 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
             onClick={() => this.props.handleToggleMenu()}
           />
           <div
-            className="container-fluid navigation_video_page"
+            className="container-xl navigation_video_page"
             style={
               this.props.isScrolling
                 ? { backgroundColor: "#232a34ed" }

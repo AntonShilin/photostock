@@ -12,6 +12,7 @@
   padding-left: 0;
   overflow: hidden;
   z-index: 0;
+  max-width: 1500px !important;
   .video_search_item_bg {
     padding-top: 13rem;
     padding-bottom: 5rem;
@@ -63,6 +64,10 @@ div {
       }
     }
   }
+}
+
+.trending_video{
+  max-width: 1500px;
 }
 
 div.popular_video_item {
@@ -133,6 +138,15 @@ div.popular_video_item {
       margin: 1.5rem 1rem 0 1rem;
       color: white;
       font-size: 1rem;
+    }
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  div.popular_video_item {
+    div.video_item_control {
+      top: 40% !important;
+      left: 45% !important;
     }
   }
 }

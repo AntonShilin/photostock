@@ -5,7 +5,12 @@ import { ICuratedPhoto } from "../../../Interfaces/Interfaces";
 import "./ModalPhotoPage.scss";
 import Heart from "../../SVGIcons/Heart/Heart";
 import { MdControlPoint, MdClose } from "react-icons/md";
-import { IoIosArrowForward, IoIosArrowBack, IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import {
+  IoIosArrowForward,
+  IoIosArrowBack,
+  IoIosArrowDown,
+  IoIosArrowUp,
+} from "react-icons/io";
 import {
   toggleWindowPhotoPage,
   watchingImageForward,
@@ -54,8 +59,11 @@ class ModalWindowPhotoPage extends React.Component<
                 <div className="col-12 description_photo">
                   <div className="row">
                     <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
-                      <p className="text-center">
-                        <FaRegUserCircle/> {this.props.data!.photos[id].photographer}
+                      <p>
+                        <span>
+                        {this.props.data!.photos[id].photographer.charAt(0)}
+                        </span>{" "}
+                        {this.props.data!.photos[id].photographer}
                       </p>
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
@@ -71,7 +79,12 @@ class ModalWindowPhotoPage extends React.Component<
                         className="btn download w-100"
                         onClick={this.props.toggleDropMenuPhotoPage}
                       >
-                        Free download {isOpenDropDownMenu ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                        Free download{" "}
+                        {isOpenDropDownMenu ? (
+                          <IoIosArrowUp />
+                        ) : (
+                          <IoIosArrowDown />
+                        )}
                       </button>
                       <DropMenuPhotoPage />
                     </div>
@@ -114,8 +127,7 @@ const mapDispatchToProps = (dispatch: any) => {
     toggleWindowPhotoPage: () => dispatch(toggleWindowPhotoPage()),
     watchingImageForward: (id: number) => dispatch(watchingImageForward(id)),
     watchingImageBack: (id: number) => dispatch(watchingImageBack(id)),
-    toggleDropMenuPhotoPage: () =>
-      dispatch(toggleDropMenuPhotoPage()),
+    toggleDropMenuPhotoPage: () => dispatch(toggleDropMenuPhotoPage()),
   };
 };
 

@@ -1,11 +1,16 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { IApplicationState } from "../../../Store/Store";
-import {  IDataSearch } from "../../../Interfaces/Interfaces";
+import { IDataSearch } from "../../../Interfaces/Interfaces";
 import "./ModalWindowResultPhotoPage.scss";
 import Heart from "../../SVGIcons/Heart/Heart";
 import { MdControlPoint, MdClose } from "react-icons/md";
-import { IoIosArrowForward, IoIosArrowBack, IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import {
+  IoIosArrowForward,
+  IoIosArrowBack,
+  IoIosArrowDown,
+  IoIosArrowUp,
+} from "react-icons/io";
 import {
   toggleWindowPhotoPage,
   watchingImageForward,
@@ -15,7 +20,7 @@ import {
 import DropMenuResultPhotoPage from "./DropMenuResultPhotoPage/DropMenuResultPhotoPage";
 
 export interface IWindowResultPhotoPageProps {
-   resultSearchImage: IDataSearch | null;
+  resultSearchImage: IDataSearch | null;
   id: number | null;
   isOpen: boolean;
   isScrollTop: number | null;
@@ -29,17 +34,16 @@ export interface IWindowResultPhotoPageProps {
 export interface State {}
 
 class ModalWindowResultPhotoPage extends React.Component<
-IWindowResultPhotoPageProps,
+  IWindowResultPhotoPageProps,
   State
 > {
   public render() {
     const id = this.props.id!;
     const { isOpenDropDownMenu } = this.props;
 
-
     return (
       <React.Fragment>
-        {this.props.resultSearchImage!==null ? (
+        {this.props.resultSearchImage !== null ? (
           <div
             className={
               this.props.isOpen ? "d-block modal_window_photo_basis" : "d-none"
@@ -54,7 +58,12 @@ IWindowResultPhotoPageProps,
                 <div className="col-12 description_photo">
                   <div className="row">
                     <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
-                      <p className="text-center">
+                      <p>
+                        <span>
+                          {this.props.resultSearchImage?.photos[
+                            id
+                          ]?.photographer.charAt(0)}
+                        </span>
                         {this.props.resultSearchImage?.photos[id]?.photographer}
                       </p>
                     </div>
@@ -71,14 +80,22 @@ IWindowResultPhotoPageProps,
                         className="btn download w-100"
                         onClick={this.props.toggleDropMenuPhotoPage}
                       >
-                        Free download {isOpenDropDownMenu ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                        Free download{" "}
+                        {isOpenDropDownMenu ? (
+                          <IoIosArrowUp />
+                        ) : (
+                          <IoIosArrowDown />
+                        )}
                       </button>
                       <DropMenuResultPhotoPage />
                     </div>
                   </div>
                 </div>
                 <div className="col-12 align-self-center modal_window_photo">
-                  <img src={this.props.resultSearchImage?.photos[id]?.src.medium} alt="img" />
+                  <img
+                    src={this.props.resultSearchImage?.photos[id]?.src.medium}
+                    alt="img"
+                  />
                   <span
                     className="arrow_left"
                     onClick={() => this.props.watchingImageBack(id)}
@@ -102,7 +119,7 @@ IWindowResultPhotoPageProps,
 }
 
 const mapStateToProps = (state: IApplicationState) => ({
-    resultSearchImage: state.products.resultSearchImage,
+  resultSearchImage: state.products.resultSearchImage,
   id: state.products.modalWindowPhotoPage.id,
   isOpen: state.products.modalWindowPhotoPage.isOpen,
   isScrollTop: state.products.isScrollTop,
@@ -114,8 +131,7 @@ const mapDispatchToProps = (dispatch: any) => {
     toggleWindowPhotoPage: () => dispatch(toggleWindowPhotoPage()),
     watchingImageForward: (id: number) => dispatch(watchingImageForward(id)),
     watchingImageBack: (id: number) => dispatch(watchingImageBack(id)),
-    toggleDropMenuPhotoPage: () =>
-      dispatch(toggleDropMenuPhotoPage()),
+    toggleDropMenuPhotoPage: () => dispatch(toggleDropMenuPhotoPage()),
   };
 };
 

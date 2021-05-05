@@ -37,7 +37,7 @@ class HeaderResultVideoPage extends React.Component<
             }
             onClick={this.props.handleToggleMenu}
           />
-          <div className="container-fluid navigation_result_video_page">
+          <div className="container-xl navigation_result_video_page">
             <div className="row align-items-center">
               <div className="col-2">
                 <NavLink to="/videos" className="p-2 text-decoration-none btn">

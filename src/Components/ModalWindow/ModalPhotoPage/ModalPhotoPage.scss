@@ -34,11 +34,22 @@ div.modal_window_photo_basis {
 
       .description_photo {
         p {
-          svg{
-            font-size: 2rem;
-            margin-right: .5rem;
+          span {
+            display: inline-block;
+            margin-right: 10px;
+            max-width: 52px;
+            max-height: 52px;
+            min-width: 52px;
+            min-height: 52px;
+            border-radius: 50%;
+            border: 1px solid lightgrey;
+            padding-top: 0.5rem;
+            text-transform: capitalize;
           }
           margin: 0;
+          font-weight: 500;
+          white-space: nowrap;
+          text-align: center;
         }
         button.heart {
           font-size: 1rem;
@@ -80,7 +91,7 @@ div.modal_window_photo_basis {
           top: 40%;
           left: -3%;
           &:hover {
-            color: rgb(255, 0, 0);
+            color: #05a081;
             cursor: pointer;
           }
           svg {
@@ -93,7 +104,7 @@ div.modal_window_photo_basis {
           top: 40%;
           right: -3%;
           &:hover {
-            color: rgb(255, 0, 0);
+            color: #05a081;
             cursor: pointer;
           }
           svg {

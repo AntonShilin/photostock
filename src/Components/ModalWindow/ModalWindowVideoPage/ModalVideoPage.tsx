@@ -41,10 +41,10 @@ export interface State {}
 class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
   public render() {
     const { isOpenDropDownMenu, data, id } = this.props;
-    
+
     return (
       <React.Fragment>
-        {data!==null && (
+        {data !== null && (
           <div
             className={
               this.props.isOpen ? "d-block modal_window_video_basis" : "d-none"
@@ -55,15 +55,16 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                 <MdClose
                   className="close_icon"
                   onClick={() => {
-                    this.props.toggleWindowVideoPage()
-                    this.props.toggleBtnMediaPlayer(false)
-                    this.props.stopMediaPlayer()
+                    this.props.toggleWindowVideoPage();
+                    this.props.toggleBtnMediaPlayer(false);
+                    this.props.stopMediaPlayer();
                   }}
                 />
                 <div className="col-12 description_video">
                   <div className="row">
                     <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
-                      <p className="text-center">
+                      <p>
+                        <span>{data.videos[id[0]].user.name.charAt(0)}</span>
                         {data.videos[id[0]].user.name}
                       </p>
                     </div>
@@ -92,13 +93,13 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                   </div>
                 </div>
                 <div className="col-12 align-self-center modal_window_video">
-                  <MediaPlayer/>
+                  <MediaPlayer />
                   <span
                     className="arrow_left"
                     onClick={() => {
-                      this.props.toggleBtnMediaPlayer(false)
-                      this.props.stopMediaPlayer()
-                      this.props.watchingVideoBack(id[0])
+                      this.props.toggleBtnMediaPlayer(false);
+                      this.props.stopMediaPlayer();
+                      this.props.watchingVideoBack(id[0]);
                     }}
                   >
                     <IoIosArrowBack />
@@ -106,9 +107,9 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                   <span
                     className="arrow_right"
                     onClick={() => {
-                      this.props.toggleBtnMediaPlayer(false)
-                      this.props.stopMediaPlayer()
-                      this.props.watchingVideoForward(id[0])
+                      this.props.toggleBtnMediaPlayer(false);
+                      this.props.stopMediaPlayer();
+                      this.props.watchingVideoForward(id[0]);
                     }}
                   >
                     <IoIosArrowForward />
@@ -135,9 +136,10 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     toggleWindowVideoPage: () => dispatch(toggleWindowVideoPage()),
     toggleDropMenuVideoPage: () => dispatch(toggleDropMenuVideoPage()),
-    toggleBtnMediaPlayer: (value:boolean)=>dispatch(toggleBtnMediaPlayer(value)),
-    stopMediaPlayer: ()=>dispatch(stopMediaPlayer()),
-    watchingVideoForward: (id:number)=>dispatch(watchingVideoForward(id)),
+    toggleBtnMediaPlayer: (value: boolean) =>
+      dispatch(toggleBtnMediaPlayer(value)),
+    stopMediaPlayer: () => dispatch(stopMediaPlayer()),
+    watchingVideoForward: (id: number) => dispatch(watchingVideoForward(id)),
     watchingVideoBack: (id: number) => dispatch(watchingVideoBack(id)),
   };
 };
