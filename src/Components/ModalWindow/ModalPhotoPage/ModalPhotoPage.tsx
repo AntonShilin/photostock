@@ -13,6 +13,7 @@ import {
   toggleDropMenuPhotoPage,
 } from "../../../Actions/ProductsActions";
 import DropMenuPhotoPage from "./DropMenuPhotoPage/DropMenuPhotoPage";
+import { FaRegUserCircle } from "react-icons/fa";
 
 export interface IWindowPhotoPageProps {
   data: ICuratedPhoto | null;
@@ -54,7 +55,7 @@ class ModalWindowPhotoPage extends React.Component<
                   <div className="row">
                     <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
                       <p className="text-center">
-                        {this.props.data!.photos[id].photographer}
+                        <FaRegUserCircle/> {this.props.data!.photos[id].photographer}
                       </p>
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
