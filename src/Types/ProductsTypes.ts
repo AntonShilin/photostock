@@ -76,7 +76,6 @@ export enum DownloadImageTypes {
   DOWNLOADIMAGE = "DOWNLOADIMAGE",
 }
 
-
 export enum GetIdPhotoTypes {
   GETIDPHOTO = "GETIDPHOTO",
 }
@@ -97,6 +96,10 @@ export enum ImageForwardTypes {
   IMAGEFORWARD = "IMAGEFORWARD",
 }
 
+export enum ImageBackTypes {
+  IMAGEBACK = "IMAGEBACK",
+}
+
 export enum VideoBackTypes {
   VIDEOBACK = "VIDEOBACK",
 }
@@ -105,9 +108,6 @@ export enum VideoForwardTypes {
   VIDEOFORWARD = "VIDEOFORWARD",
 }
 
-export enum ImageBackTypes {
-  IMAGEBACK = "IMAGEBACK",
-}
 
 export enum ToggleDropMenuPhotoPageTypes {
   TOGGLEDROPMENUPHOTOPAGE = "TOGGLEDROPMENUPHOTOPAGE",
@@ -162,8 +162,63 @@ export enum ClearKeyPressNumberTypes{
   CLEARKEYPRESSNUMBER = "CLEARKEYPRESSNUMBER"
 }
 
+export enum PopularVideoBackTypes {
+  POPULARVIDEOBACK = "POPULARVIDEOBACK",
+}
+
+export enum PopularVideoForwardTypes {
+  POPULARVIDEOFORWARD = "POPULARVIDEOFORWARD",
+}
+
+export enum ClearVideoIDTypes {
+  CLEARVIDEOID="CLEARVIDEOID",
+}
+
+export enum ClearPhotoIdTypes{
+  CLEARPHOTOID="CLEARPHOTOID",
+}
+
+export enum PopularImageForwardTypes {
+  POPULARIMAGEFORWARD = "POPULARIMAGEFORWARD",
+}
+
+export enum PopularImageBackTypes {
+  POPULARIMAGEBACK = "POPULARIMAGEBACK",
+}
+
+
 
 /*  interfaces */
+
+export interface IPopularImageBackAction {
+  type: PopularImageBackTypes.POPULARIMAGEBACK;
+  stepBack: number;
+}
+
+export interface IPopularImageForwardAction {
+  type: PopularImageForwardTypes.POPULARIMAGEFORWARD;
+  stepForward: number;
+}
+
+export interface IClearPhotoIdAction{
+  type: ClearPhotoIdTypes.CLEARPHOTOID;
+  pos: number;
+}
+
+export interface IClearVideoIDAction{
+  type: ClearVideoIDTypes.CLEARVIDEOID;
+  pos: number;
+}
+
+export interface IPopularVideoBackAction {
+  type: PopularVideoBackTypes.POPULARVIDEOBACK;
+  stepBack: number;
+}
+
+export interface IPopularVideoForwardAction {
+  type: PopularVideoForwardTypes.POPULARVIDEOFORWARD;
+  stepForward: number;
+}
 
 export interface IClearKeyPressNumberAction {
   type: ClearKeyPressNumberTypes.CLEARKEYPRESSNUMBER;
@@ -352,6 +407,12 @@ export interface IMoveScrollAction {
 }
 
 export type ProductsActions =
+  |IPopularImageForwardAction
+  |IPopularImageBackAction
+  |IClearPhotoIdAction
+  |IClearVideoIDAction
+  |IPopularVideoForwardAction
+  |IPopularVideoBackAction
 |IClearKeyPressNumberAction
   |IToggleDropMenuVideoPageAction
   |ISelectVideoSizeAction

@@ -15,15 +15,16 @@ import {
   toggleWindowVideoPage,
   toggleBtnMediaPlayer,
   stopMediaPlayer,
-  watchingVideoForward,
-  watchingVideoBack,
   toggleDropMenuVideoPage,
+  watchingPopularVideoForward,
+  watchingPopularVideoBack,
+  clearVideoID,
 } from "../../../Actions/ProductsActions";
 import MediaPlayer from "../../MediaPlayers/MediaPlayer/MediaPlayer";
 import DropMenuVideoPage from "./DropMenuVideoPage/DropMenuVideoPage";
 
 export interface IWindowVideoPageProps {
-  data: IPopularVideos | null;
+  videos: IPopularVideos | null;
   id: number;
   isOpen: boolean;
   isScrollTop: number | null;
@@ -32,20 +33,20 @@ export interface IWindowVideoPageProps {
   toggleDropMenuVideoPage: typeof toggleDropMenuVideoPage;
   toggleBtnMediaPlayer: typeof toggleBtnMediaPlayer;
   stopMediaPlayer: typeof stopMediaPlayer;
-  watchingVideoForward: typeof watchingVideoForward;
-  watchingVideoBack: typeof watchingVideoBack;
+  watchingPopularVideoForward: typeof watchingPopularVideoForward;
+  watchingPopularVideoBack: typeof watchingPopularVideoBack;
+  clearVideoID: typeof clearVideoID;
 }
 
 export interface State {}
 
 class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
- 
   public render() {
-    const { isOpenDropDownMenu, data, id } = this.props;
+    const { isOpenDropDownMenu, videos, id } = this.props;
 
     return (
       <React.Fragment>
-        {data !== null && (
+        {videos !== null && (
           <div
             className={
               this.props.isOpen ? "d-block modal_window_video_basis" : "d-none"
@@ -59,15 +60,16 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                     this.props.toggleWindowVideoPage();
                     this.props.toggleBtnMediaPlayer(false);
                     this.props.stopMediaPlayer();
+                    this.props.clearVideoID();
                   }}
                 />
                 <div className="col-12 description_video order-lg-first order-last">
                   <div className="row">
                     <div className="col-lg-3 col-md-12 col-sm-12 mb-2 order-lg-first order-last">
-                    <small>VIDEOGRAPHER</small>
+                      <small>VIDEOGRAPHER</small>
                       <p>
-                        <span>{data.videos[id].user.name.charAt(0)}</span>
-                        {data.videos[id].user.name}
+                        <span>{videos.videos[id].user.name.charAt(0)}</span>
+                        {videos.videos[id].user.name}
                       </p>
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
@@ -101,7 +103,7 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                     onClick={() => {
                       this.props.toggleBtnMediaPlayer(false);
                       this.props.stopMediaPlayer();
-                      this.props.watchingVideoBack(id);
+                      this.props.watchingPopularVideoBack(id);
                     }}
                   >
                     <IoIosArrowBack />
@@ -111,7 +113,7 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                     onClick={() => {
                       this.props.toggleBtnMediaPlayer(false);
                       this.props.stopMediaPlayer();
-                      this.props.watchingVideoForward(id);
+                      this.props.watchingPopularVideoForward(id);
                     }}
                   >
                     <IoIosArrowForward />
@@ -127,7 +129,7 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
 }
 
 const mapStateToProps = (state: IApplicationState) => ({
-  data: state.products.videos,
+  videos: state.products.videos,
   id: state.products.modalWindowVideoPage.id,
   isOpen: state.products.modalWindowVideoPage.isOpen,
   isScrollTop: state.products.isScrollTop,
@@ -141,8 +143,9 @@ const mapDispatchToProps = (dispatch: any) => {
     toggleBtnMediaPlayer: (value: boolean) =>
       dispatch(toggleBtnMediaPlayer(value)),
     stopMediaPlayer: () => dispatch(stopMediaPlayer()),
-    watchingVideoForward: (id: number) => dispatch(watchingVideoForward(id)),
-    watchingVideoBack: (id: number) => dispatch(watchingVideoBack(id)),
+    watchingPopularVideoForward: (id: number) => dispatch(watchingPopularVideoForward(id)),
+    watchingPopularVideoBack: (id: number) => dispatch(watchingPopularVideoBack(id)),
+    clearVideoID: () => dispatch(clearVideoID()),
   };
 };
 

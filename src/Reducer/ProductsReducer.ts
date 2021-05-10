@@ -1,4 +1,11 @@
 import {
+  ClearPhotoIdTypes,
+  ClearVideoIDTypes,
+  PopularImageBackTypes,
+  PopularImageForwardTypes,
+  PopularVideoBackTypes,
+} from "./../Types/ProductsTypes";
+import {
   ProductsActions,
   IProductsState,
   GetPopularImagesTypes,
@@ -39,6 +46,7 @@ import {
   SelectVideoSizeTypes,
   ToggleDropMenuVideoPageTypes,
   ClearKeyPressNumberTypes,
+  PopularVideoForwardTypes,
 } from "../Types/ProductsTypes";
 import { IData, IVideos } from "../Interfaces/Interfaces";
 
@@ -98,7 +106,7 @@ export const productsReducer = (
 ): IProductsState => {
   switch (action.type) {
     case GetPopularImagesTypes.GETPOPULARIMAGES: {
-      action.popularPhoto.photos.map((elem:IData, i:number) => {
+      action.popularPhoto.photos.map((elem: IData, i: number) => {
         elem.id = i;
       });
       return {
@@ -124,7 +132,7 @@ export const productsReducer = (
     }
 
     case SearchImagesByNameTypes.SEARCHIMAGESBYNAME: {
-      action.findPhoto.photos.map((elem:IData, i:number) => {
+      action.findPhoto.photos.map((elem: IData, i: number) => {
         elem.id = i;
       });
       return {
@@ -135,7 +143,7 @@ export const productsReducer = (
     }
 
     case GetPopularVideoTypes.GETPOPULARVIDEO: {
-      action.popularVideo.videos.map((elem:IVideos, i:number) => {
+      action.popularVideo.videos.map((elem: IVideos, i: number) => {
         elem.id = i;
       });
       return {
@@ -154,7 +162,7 @@ export const productsReducer = (
     }
 
     case GetVideoTypes.GETVIDEO: {
-      action.findVideo.videos.map((elem:IVideos, i:number) => {
+      action.findVideo.videos.map((elem: IVideos, i: number) => {
         elem.id = i;
       });
       return {
@@ -233,7 +241,6 @@ export const productsReducer = (
         ...state,
       };
     }
-      
 
     case GetIdPhotoTypes.GETIDPHOTO: {
       return {
@@ -244,14 +251,14 @@ export const productsReducer = (
         },
       };
     }
-      
+
     case GetIdVideoTypes.GETIDVIDEO: {
       return {
         ...state,
         modalWindowVideoPage: {
           ...state.modalWindowVideoPage,
           id: action.id,
-        }
+        },
       };
     }
 
@@ -264,7 +271,7 @@ export const productsReducer = (
         },
       };
     }
-      
+
     case ToggleWindowVideoPageTypes.TOGGLEWINDOWVIDEOPAGE: {
       return {
         ...state,
@@ -276,7 +283,7 @@ export const productsReducer = (
     }
 
     case ImageForwardTypes.IMAGEFORWARD: {
-      if (action.stepForward >= state.data!.photos.length) {
+      if (action.stepForward >= state.resultSearchImage!.photos.length) {
         action.stepForward = 0;
       }
       return {
@@ -290,7 +297,7 @@ export const productsReducer = (
 
     case ImageBackTypes.IMAGEBACK: {
       if (action.stepBack <= 0) {
-        action.stepBack = state.data!.photos.length - 1;
+        action.stepBack = state.resultSearchImage!.photos.length - 1;
       }
       return {
         ...state,
@@ -310,7 +317,7 @@ export const productsReducer = (
         },
       };
     }
-      
+
     case ToggleDropMenuVideoPageTypes.TOGGLEDROPMENUVIDEOPAGE: {
       return {
         ...state,
@@ -352,25 +359,24 @@ export const productsReducer = (
         ...state,
       };
     }
-      
-      
+
     case ToggleBtnMediaPlayerTypes.TOGGLEBTNMEDIAPLAYER: {
       return {
         ...state,
         modalWindowVideoPage: {
           ...state.modalWindowVideoPage,
-          isPlay:action.isPlay
+          isPlay: action.isPlay,
         },
       };
     }
-      
+
     case StopMediaPlayerTypes.STOPMEDIAPLAYER: {
       clearInterval(state.modalWindowVideoPage.timer);
       return {
         ...state,
         modalWindowVideoPage: {
           ...state.modalWindowVideoPage,
-          currentTime: action.time
+          currentTime: action.time,
         },
       };
     }
@@ -380,33 +386,30 @@ export const productsReducer = (
         ...state,
         modalWindowVideoPage: {
           ...state.modalWindowVideoPage,
-          timer: action.timer
+          timer: action.timer,
         },
       };
     }
-      
-      
+
     case SetCurrentTimeTypes.SETCURRENTTIME: {
       return {
         ...state,
         modalWindowVideoPage: {
           ...state.modalWindowVideoPage,
-          currentTime: action.time
+          currentTime: action.time,
         },
       };
     }
-      
-      
+
     case PauseMediaPlayerTypes.PAUSEMEDIAPLAYER: {
       clearInterval(state.modalWindowVideoPage.timer);
       return {
-        ...state
+        ...state,
       };
     }
 
-
     case VideoForwardTypes.VIDEOFORWARD: {
-      if (action.stepForward >= state.videos!.videos.length) {
+      if (action.stepForward >= state.resultSearchVideo!.videos.length) {
         action.stepForward = 0;
       }
       return {
@@ -420,6 +423,49 @@ export const productsReducer = (
 
     case VideoBackTypes.VIDEOBACK: {
       if (action.stepBack <= 0) {
+        action.stepBack = state.resultSearchVideo!.videos.length - 1;
+      }
+      return {
+        ...state,
+        modalWindowVideoPage: {
+          ...state.modalWindowVideoPage,
+          id: action.stepBack,
+        },
+      };
+    }
+
+    case SelectVideoSizeTypes.SELECTVIDEOSIZE: {
+      return {
+        ...state,
+        modalWindowVideoPage: {
+          ...state.modalWindowVideoPage,
+          sizeVideoURL: action.size,
+        },
+      };
+    }
+
+    case ClearKeyPressNumberTypes.CLEARKEYPRESSNUMBER: {
+      return {
+        ...state,
+        keyboardKey: action.keyPressNumber,
+      };
+    }
+
+    case PopularVideoForwardTypes.POPULARVIDEOFORWARD: {
+      if (action.stepForward >= state.videos!.videos.length) {
+        action.stepForward = 0;
+      }
+      return {
+        ...state,
+        modalWindowVideoPage: {
+          ...state.modalWindowVideoPage,
+          id: action.stepForward,
+        },
+      };
+    }
+
+    case PopularVideoBackTypes.POPULARVIDEOBACK: {
+      if (action.stepBack <= 0) {
         action.stepBack = state.videos!.videos.length - 1;
       }
       return {
@@ -431,25 +477,52 @@ export const productsReducer = (
       };
     }
 
-      
-    case SelectVideoSizeTypes.SELECTVIDEOSIZE: {
+    case ClearVideoIDTypes.CLEARVIDEOID: {
       return {
         ...state,
         modalWindowVideoPage: {
           ...state.modalWindowVideoPage,
-          sizeVideoURL: action.size,
+          id: action.pos,
         },
       };
     }
       
-    case ClearKeyPressNumberTypes.CLEARKEYPRESSNUMBER: {
+    case ClearPhotoIdTypes.CLEARPHOTOID: {
       return {
         ...state,
-        keyboardKey: action.keyPressNumber
+        modalWindowPhotoPage: {
+          ...state.modalWindowPhotoPage,
+          id: action.pos,
+        },
+      };
+    }
+      
+    case PopularImageForwardTypes.POPULARIMAGEFORWARD: {
+      if (action.stepForward >= state.data!.photos.length) {
+        action.stepForward = 0;
+      }
+      return {
+        ...state,
+        modalWindowPhotoPage: {
+          ...state.modalWindowPhotoPage,
+          id: action.stepForward,
+        },
       };
     }
 
-      
+    case PopularImageBackTypes.POPULARIMAGEBACK: {
+      if (action.stepBack <= 0) {
+        action.stepBack = state.data!.photos.length - 1;
+      }
+      return {
+        ...state,
+        modalWindowPhotoPage: {
+          ...state.modalWindowPhotoPage,
+          id: action.stepBack,
+        },
+      };
+    }
+
     default:
       return state;
   }

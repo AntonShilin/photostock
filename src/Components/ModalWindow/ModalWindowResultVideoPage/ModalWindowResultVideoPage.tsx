@@ -18,6 +18,7 @@ import {
   watchingVideoForward,
   watchingVideoBack,
   toggleDropMenuVideoPage,
+  clearVideoID,
 } from "../../../Actions/ProductsActions";
 import ResultVideoMediaPlayer from "../../MediaPlayers/ResultVideoMediaPlayer/ResultVideoMediaPlayer";
 
@@ -33,6 +34,7 @@ export interface IWindowResultVideoPageProps {
   stopMediaPlayer: typeof stopMediaPlayer;
   watchingVideoForward: typeof watchingVideoForward;
   watchingVideoBack: typeof watchingVideoBack;
+  clearVideoID: typeof clearVideoID;
 }
 
 export interface State {}
@@ -62,6 +64,7 @@ class ModalWindowResultVideoPage extends React.Component<
                     this.props.toggleWindowVideoPage();
                     this.props.toggleBtnMediaPlayer(false);
                     this.props.stopMediaPlayer();
+                    this.props.clearVideoID();
                   }}
                 />
                 <div className="col-12 description_video order-lg-first order-last">
@@ -150,6 +153,7 @@ const mapDispatchToProps = (dispatch: any) => {
     stopMediaPlayer: () => dispatch(stopMediaPlayer()),
     watchingVideoForward: (id: number) => dispatch(watchingVideoForward(id)),
     watchingVideoBack: (id: number) => dispatch(watchingVideoBack(id)),
+    clearVideoID: () => dispatch(clearVideoID()),
   };
 };
 

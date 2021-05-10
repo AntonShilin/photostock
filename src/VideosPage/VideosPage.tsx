@@ -46,7 +46,10 @@ export interface IPropsVideosPage extends RouteComponentProps {
 
 class VideosPage extends React.Component<IPropsVideosPage> {
   public componentDidMount() {
-    this.props.getPopularVideo();
+    const { popularVideo } = this.props;
+    if (popularVideo===null) {
+      this.props.getPopularVideo();
+    }
   }
 
   public pressEnterKey = () => {

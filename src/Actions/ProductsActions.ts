@@ -1,3 +1,4 @@
+import { IPopularVideoForwardAction, PopularVideoForwardTypes, IPopularVideoBackAction, PopularVideoBackTypes, ClearVideoIDTypes, ClearPhotoIdTypes, IPopularImageForwardAction, PopularImageForwardTypes, IPopularImageBackAction, PopularImageBackTypes } from './../Types/ProductsTypes';
 import {
   SearchValueTypes,
   GetPopularVideoTypes,
@@ -523,7 +524,7 @@ export const pauseMediaPlayer = (
   };
 };
 
-/*watching video forward in modal window*/
+/*watching result video forward in modal window*/
 export const watchingVideoForward = (id: number): IVideoForwardAction => {
   ++id;
   return {
@@ -532,7 +533,7 @@ export const watchingVideoForward = (id: number): IVideoForwardAction => {
   };
 };
 
-/*watching video back in modal window*/
+/*watching result video back in modal window*/
 export const watchingVideoBack = (id: number): IVideoBackAction => {
   --id;
   return {
@@ -554,5 +555,57 @@ export const clearKeyPressNumber = (): IClearKeyPressNumberAction => {
   return {
     type: ClearKeyPressNumberTypes.CLEARKEYPRESSNUMBER,
     keyPressNumber: null,
+  };
+};
+
+/*watching popular video forward in modal window*/
+export const watchingPopularVideoForward = (id: number): IPopularVideoForwardAction => {
+  ++id;
+  return {
+    type: PopularVideoForwardTypes.POPULARVIDEOFORWARD,
+    stepForward: id,
+  };
+};
+
+/*watching popular video back in modal window*/
+export const watchingPopularVideoBack = (id: number): IPopularVideoBackAction => {
+  --id;
+  return {
+    type: PopularVideoBackTypes.POPULARVIDEOBACK,
+    stepBack: id,
+  };
+};
+
+/* set defaul position id after close modalvideowindow and modalresultvideowindow */
+export const clearVideoID = () => {
+  return {
+    type: ClearVideoIDTypes.CLEARVIDEOID,
+    pos:0
+  }
+}
+
+/* set defaul position id after close modalphotowindow and modalresultphotowindow */
+export const clearPhotoID = () => {
+  return {
+    type: ClearPhotoIdTypes.CLEARPHOTOID,
+    pos:0
+  }
+}
+
+/*watching popular image forward in modal window*/
+export const watchingPopularImageForward = (id: number): IPopularImageForwardAction => {
+  ++id;
+  return {
+    type: PopularImageForwardTypes.POPULARIMAGEFORWARD,
+    stepForward: id,
+  };
+};
+
+/*watching popular image back in modal window*/
+export const watchingPopularImageBack = (id: number): IPopularImageBackAction => {
+  --id;
+  return {
+    type: PopularImageBackTypes.POPULARIMAGEBACK,
+    stepBack: id,
   };
 };

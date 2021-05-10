@@ -13,12 +13,12 @@ import {
 } from "react-icons/io";
 import {
   toggleWindowPhotoPage,
-  watchingImageForward,
-  watchingImageBack,
   toggleDropMenuPhotoPage,
+  watchingPopularImageForward,
+  watchingPopularImageBack,
+  clearPhotoID,
 } from "../../../Actions/ProductsActions";
 import DropMenuPhotoPage from "./DropMenuPhotoPage/DropMenuPhotoPage";
-import { FaRegUserCircle } from "react-icons/fa";
 
 export interface IWindowPhotoPageProps {
   data: ICuratedPhoto | null;
@@ -27,9 +27,10 @@ export interface IWindowPhotoPageProps {
   isScrollTop: number | null;
   isOpenDropDownMenu: boolean;
   toggleWindowPhotoPage: typeof toggleWindowPhotoPage;
-  watchingImageForward: typeof watchingImageForward;
-  watchingImageBack: typeof watchingImageBack;
+  watchingPopularImageForward: typeof watchingPopularImageForward;
+  watchingPopularImageBack: typeof watchingPopularImageBack;
   toggleDropMenuPhotoPage: typeof toggleDropMenuPhotoPage;
+  clearPhotoID: typeof clearPhotoID;
 }
 
 export interface State {}
@@ -54,14 +55,18 @@ class ModalWindowPhotoPage extends React.Component<
               <div className="row modal_window_photo_bg">
                 <MdClose
                   className="close_icon"
-                  onClick={() => this.props.toggleWindowPhotoPage()}
+                  onClick={() => {
+                    this.props.toggleWindowPhotoPage();
+                    this.props.clearPhotoID();
+                  }}
                 />
-                <div className="col-12 description_photo">
+                <div className="col-12 description_photo order-lg-first order-last">
                   <div className="row">
-                    <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <div className="col-lg-3 col-md-12 col-sm-12 mb-2 order-lg-first order-last">
                       <p>
+                        <small>PHOTOGRAPHER</small>
                         <span>
-                        {this.props.data!.photos[id].photographer.charAt(0)}
+                          {this.props.data!.photos[id].photographer.charAt(0)}
                         </span>{" "}
                         {this.props.data!.photos[id].photographer}
                       </p>
@@ -94,13 +99,13 @@ class ModalWindowPhotoPage extends React.Component<
                   <img src={this.props.data!.photos[id].src.medium} alt="img" />
                   <span
                     className="arrow_left"
-                    onClick={() => this.props.watchingImageBack(id)}
+                    onClick={() => this.props.watchingPopularImageBack(id)}
                   >
                     <IoIosArrowBack />
                   </span>
                   <span
                     className="arrow_right"
-                    onClick={() => this.props.watchingImageForward(id)}
+                    onClick={() => this.props.watchingPopularImageForward(id)}
                   >
                     <IoIosArrowForward />
                   </span>
@@ -125,9 +130,10 @@ const mapStateToProps = (state: IApplicationState) => ({
 const mapDispatchToProps = (dispatch: any) => {
   return {
     toggleWindowPhotoPage: () => dispatch(toggleWindowPhotoPage()),
-    watchingImageForward: (id: number) => dispatch(watchingImageForward(id)),
-    watchingImageBack: (id: number) => dispatch(watchingImageBack(id)),
+    watchingPopularImageForward: (id: number) => dispatch(watchingPopularImageForward(id)),
+    watchingPopularImageBack: (id: number) => dispatch(watchingPopularImageBack(id)),
     toggleDropMenuPhotoPage: () => dispatch(toggleDropMenuPhotoPage()),
+    clearPhotoID: () => dispatch(clearPhotoID()),
   };
 };
 

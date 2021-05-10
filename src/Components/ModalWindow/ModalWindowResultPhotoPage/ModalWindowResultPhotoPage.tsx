@@ -16,6 +16,7 @@ import {
   watchingImageForward,
   watchingImageBack,
   toggleDropMenuPhotoPage,
+  clearPhotoID,
 } from "../../../Actions/ProductsActions";
 import DropMenuResultPhotoPage from "./DropMenuResultPhotoPage/DropMenuResultPhotoPage";
 
@@ -29,6 +30,7 @@ export interface IWindowResultPhotoPageProps {
   watchingImageForward: typeof watchingImageForward;
   watchingImageBack: typeof watchingImageBack;
   toggleDropMenuPhotoPage: typeof toggleDropMenuPhotoPage;
+  clearPhotoID: typeof clearPhotoID;
 }
 
 export interface State {}
@@ -53,12 +55,16 @@ class ModalWindowResultPhotoPage extends React.Component<
               <div className="row modal_window_photo_bg">
                 <MdClose
                   className="close_icon"
-                  onClick={() => this.props.toggleWindowPhotoPage()}
+                  onClick={() => {
+                    this.props.toggleWindowPhotoPage();
+                    this.props.clearPhotoID();
+                  }}
                 />
-                <div className="col-12 description_photo">
+                <div className="col-12 description_photo order-lg-first order-last">
                   <div className="row">
-                    <div className="col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <div className="col-lg-3 col-md-12 col-sm-12 mb-2 order-lg-first order-last">
                       <p>
+                      <small>PHOTOGRAPHER</small>
                         <span>
                           {this.props.resultSearchImage?.photos[
                             id
@@ -132,6 +138,7 @@ const mapDispatchToProps = (dispatch: any) => {
     watchingImageForward: (id: number) => dispatch(watchingImageForward(id)),
     watchingImageBack: (id: number) => dispatch(watchingImageBack(id)),
     toggleDropMenuPhotoPage: () => dispatch(toggleDropMenuPhotoPage()),
+    clearPhotoID: () => dispatch(clearPhotoID()),
   };
 };
 
