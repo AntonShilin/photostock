@@ -11,6 +11,7 @@ import NotFoundPage from "../Components/NotFoundPage/NotFoundPage";
 import LoginPage from "../Components/LoginPage/LoginPage";
 import ResultPhotoPage from "../ResultPhotoPage/ResultPhotoPage";
 import ResultVideoPage from "../ResultVideoPage/ResultVideoPage";
+import SignUpPage from "../Components/SignUpPage/SignUpPage";
 
 
 
@@ -19,6 +20,7 @@ const Routes: React.SFC<RouteComponentProps> = props => {
     <React.Fragment>
       <Switch>
         <Route path="/login" component={LoginPage} />
+        <Route path="/sign-up" component={SignUpPage} />
         <Redirect exact={true} path="/" to="/photos" />
         <Route path="/photos" exact={true} component={PhotosPage} />
         <Route path="/videos" exact={true} component={VideosPage} />

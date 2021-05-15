@@ -10,6 +10,7 @@
     margin-right: 0.25rem;
     margin-bottom: 0.25rem;
   }
+
   div.login_window_bg {
     padding: 0.5rem;
     background-color: rgba(0, 0, 0, 0.5);
@@ -27,6 +28,27 @@
       font-family: "Fredoka One", cursive;
       background-color: #05a081 !important;
       color: whitesmoke !important;
+    }
+    a.sign_up {
+      font-size: 1rem;
+      color: white;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      text-decoration: none;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.95;
+      }
+      span {
+        margin-left: 1rem;
+        font-weight: 700;
+        padding: 6px 12px;
+        background: #fff;
+        border: 1px;
+        border-radius: 3px;
+        color: #1a1a1a;
+      }
     }
     div.login_box {
       margin: 15vh auto 0%;
@@ -116,6 +138,24 @@
             display: block;
             padding-bottom: 1rem;
           }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .login_main {
+    div.login_window_bg {
+      a.btn {
+        display: none !important;
+      }
+      a.sign_up {
+        width: 98%;
+        text-align: center;
+        span {
+          width: 98%;
+          display: block;
         }
       }
     }

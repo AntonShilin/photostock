@@ -31,6 +31,9 @@ class LoginPage extends React.Component<ILoginPageProps, State> {
           <NavLink to="/photos" className="text-decoration-none btn">
             F
           </NavLink>
+          <NavLink to="/sign-up" className="sign_up">
+            New to Photos & Video stock? <span>Sign Up</span>
+          </NavLink>
           <div className="login_box">
             <h3 className="text-center">
               Welcome Back To Photos & Video stock
@@ -40,7 +43,7 @@ class LoginPage extends React.Component<ILoginPageProps, State> {
               <input type="email" placeholder="Enter email" />
               <input type="password" placeholder="Enter password" />
               <button type="submit" disabled={true}>
-                Login
+                Sign In
               </button>
             </form>
           </div>
