@@ -1,0 +1,20 @@
+.admin_page_main {
+  margin-top: 7rem;
+  height: 75vh;
+  max-width: 1500px;
+  div {
+    div {
+      span {
+        display: block;
+        text-align: center;
+        svg {
+          font-size: 4rem;
+          color: lightgray;
+        }
+      }
+      h1 {
+        text-align: center;
+      }
+    }
+  }
+}

@@ -9,10 +9,12 @@ header.main_item_result_video_page {
     a {
       color: #fff;
     }
-    .row {
+    div {
       min-height: 4.125rem;
-      div {
-        text-align: left;
+      div:nth-of-type(1) {
+        display: flex;
+        align-items: center;
+        justify-content: start;
         a.btn {
           width: 2.7rem;
           height: 2.7rem;
@@ -23,29 +25,41 @@ header.main_item_result_video_page {
           background-color: rgb(5, 160, 129);
         }
       }
-    }
-    button {
-      position: absolute;
-      right: 0.5rem;
-      background-color: transparent;
-      border: 0;
-      outline: none;
-      svg{
-        font-size: 2rem; 
-        color: white;
-        stroke-width:20;  
+      div:nth-of-type(3) {
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 4.125rem;
+          svg {
+            color: white;
+            font-size: 1.7rem;
+          }
+          span{
+            width: .5rem;
+            height: .5rem;
+            border-radius: 50%;
+            background-color: white;
+            margin-left: 3px;
+          }
+        }
       }
-    }
-    form > div.input-group {
-      div {
-        span {
-          background-color: #fff;
+      button {
+        position: absolute;
+        top: 1rem;
+        right: 0.5rem;
+        background-color: transparent;
+        border: 0;
+        outline: none;
+        svg {
+          font-size: 2rem;
+          color: white;
+          stroke-width: 20;
         }
       }
     }
   }
 }
-
 
 div.streak {
   opacity: 0.3;
@@ -56,4 +70,3 @@ div.streak {
   position: absolute;
   background-color: #343a40;
 }
-

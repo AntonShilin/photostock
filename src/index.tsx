@@ -7,10 +7,24 @@ import { Store } from "redux";
 import configureStore from "./Store/Store";
 import { IApplicationState } from "./Store/Store";
 import App from "./App";
+import firebase from "firebase/app";
 
 interface IProps {
   store: Store<IApplicationState>;
 }
+
+ // Your web app's Firebase configuration
+ const firebaseConfig = {
+  apiKey: "AIzaSyCILtvGYorUxEkxPWoMX_xe-UYlkd5FZI8",
+  authDomain: "photoandvideo-b979e.firebaseapp.com",
+  databaseURL: "https://photoandvideo-b979e.firebaseio.com",
+  projectId: "photoandvideo-b979e",
+  storageBucket: "photoandvideo-b979e.appspot.com",
+  messagingSenderId: "494143183397",
+  appId: "1:494143183397:web:4fa62ab79051900babbdcc"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 export const Root: React.SFC<IProps> = props => {
   return (

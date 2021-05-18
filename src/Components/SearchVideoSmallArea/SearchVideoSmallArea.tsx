@@ -34,14 +34,13 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
 
   public render() {
     return (
-      <div className="video_search-small-area ml-2 input-group input-group-md align-content-center">
-        <form className="form-inline w-100">
-          <div className="input-group w-100">
+      <div className="video_search-small-area">
+        <form>
+          <div>
             <input
               required={true}
               type="text"
-              className="form-control"
-              placeholder="Find a photo"
+              placeholder="Find a video"
               value={this.props.searchNameVideo!}
               onChange={(e) => this.props.changeNameVideo(e)}
               autoFocus={false}
@@ -52,18 +51,15 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
                 }
               }}
             />
-            <div className="input-group-append">
               <NavLink
                 to={`/videos/${this.props.searchNameVideo}`}
-                className="input-group-text"
                 onClick={() => {
                   this.props.getSearchVideos(this.props.searchNameVideo!);
                   this.props.getSearchImages(this.props.searchNamePhoto!);
                 }}
               >
-                <FiSearch style={{ color: "black" }} />
+                <FiSearch/>
               </NavLink>
-            </div>
           </div>
         </form>
       </div>

@@ -32,12 +32,11 @@ class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
 
   public render() {
     return (
-      <div className="photo_search-small-area ml-2 input-group input-group-md align-content-center">
-        <form className="form-inline w-100">
-          <div className="input-group w-100">
+      <div className="photo_search-small-area ">
+        <form>
+          <div>
             <input
               type="text"
-              className="form-control w-100"
               placeholder="Find a photo"
               value={this.props.searchNamePhoto!}
               onChange={(e) => this.props.watchInputChange(e)}
@@ -50,10 +49,8 @@ class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
                 }
               }}
             />
-            <div className="input-group-append">
               <NavLink
                 to={`/photos/${this.props.searchNamePhoto}`}
-                className="input-group-text"
                 onClick={() => {
                   this.props.getSearchImages(this.props.searchNamePhoto!);
                   this.props.getSearchVideos(this.props.searchNameVideo!);
@@ -61,7 +58,6 @@ class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
               >
                 <FiSearch style={{ color: "black" }} />
               </NavLink>
-            </div>
           </div>
         </form>
       </div>

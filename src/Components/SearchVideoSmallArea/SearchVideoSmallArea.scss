@@ -1,18 +1,35 @@
 .video_search-small-area {
   form {
-    div.input-group {
-      input.form-control {
+    width: 100%;
+    div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      input {
         border: none;
+        width: 90%;
+        height: 2.7rem;
+        border: none;
+        font-size: 1.1rem;
+        padding-left: 1rem;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
         &:focus {
-          outline: 0;
-          outline-offset: 0;
-          box-shadow: none;
+          outline: none;
         }
       }
-      div.input-group-append {
-        a.input-group-text {
-          border: none;
-          background-color: #fff;
+      a {
+        width: 10%;
+        height: 2.7rem;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        svg {
+          color: black;
+          font-size: 1.5rem;
         }
       }
     }

@@ -9,6 +9,9 @@ import { handleToggleMenu, handleScroll } from "../../Actions/ProductsActions";
 import { IApplicationState } from "../../Store/Store";
 import SearchFotoSmallArea from "../../Components/SearchFotoSmallArea/SearchFotoSmallArea";
 import Submenu from "../../Components/Submenu/Submenu";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { toggleAccountModalWindow } from "../../Actions/AccountActions";
+import AccountModalWindow from "../../Components/Account/AccountModalWindow/AccountModalWindow";
 
 export interface IHeaderPhotoPageProps {
   handleToggleMenu: typeof handleToggleMenu;
@@ -16,6 +19,9 @@ export interface IHeaderPhotoPageProps {
   handleScroll: typeof handleScroll;
   isScrolling: boolean;
   isScrollTop: number | null;
+  isAccountSignIn: boolean;
+  isAccountModalWindowOpen: boolean;
+  toggleAccountModalWindow: typeof toggleAccountModalWindow;
 }
 
 class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps> {
@@ -24,6 +30,8 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps> {
   }
 
   public render() {
+    const { isAccountSignIn, isAccountModalWindowOpen } = this.props;
+
     return (
       <>
         <header className="main_item_foto_page">
@@ -53,9 +61,25 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps> {
                 {this.props.isScrollTop! > 390 && <SearchFotoSmallArea />}
               </div>
               <div className="col-2 text-center  d-lg-block d-none ">
-                <NavLink to="/login" className="p-2 text-decoration-none">
-                  <FaRegUserCircle style={{ fontSize: "1.5rem" }} />
-                </NavLink>
+                {isAccountSignIn ? (
+                  <NavLink
+                    to="#"
+                    onClick={() =>
+                      this.props.toggleAccountModalWindow(
+                        !isAccountModalWindowOpen
+                      )
+                    }
+                  >
+                    <FaRegUserCircle />
+                    <MdKeyboardArrowDown />
+                  </NavLink>
+                ) : (
+                  <NavLink to="/login">
+                    <span />
+                    <span />
+                    <span />
+                  </NavLink>
+                )}
               </div>
 
               <button
@@ -68,6 +92,7 @@ class HeaderPhotoPage extends React.Component<IHeaderPhotoPageProps> {
           </div>
         </header>
         <Submenu />
+        <AccountModalWindow />
       </>
     );
   }
@@ -77,12 +102,16 @@ const mapStateToProps = (state: IApplicationState) => ({
   isToggleMenu: state.products.isToggleMenu,
   isScrolling: state.products.isScrolling,
   isScrollTop: state.products.isScrollTop,
+  isAccountSignIn: state.account.isAccountSignIn,
+  isAccountModalWindowOpen: state.account.isAccountModalWindowOpen,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     handleToggleMenu: () => dispatch(handleToggleMenu()),
     handleScroll: (event: any) => dispatch(handleScroll(event)),
+    toggleAccountModalWindow: (value: boolean) =>
+      dispatch(toggleAccountModalWindow(value)),
   };
 };
 

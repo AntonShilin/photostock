@@ -108,7 +108,6 @@ export enum VideoForwardTypes {
   VIDEOFORWARD = "VIDEOFORWARD",
 }
 
-
 export enum ToggleDropMenuPhotoPageTypes {
   TOGGLEDROPMENUPHOTOPAGE = "TOGGLEDROPMENUPHOTOPAGE",
 }
@@ -124,7 +123,6 @@ export enum SelectImageSizeTypes {
 export enum SelectVideoSizeTypes {
   SELECTVIDEOSIZE = "SELECTVIDEOSIZE",
 }
-
 
 export enum DownloadImageSizeTypes {
   DOWNLOADIMAGESIZE = "DOWNLOADIMAGESIZE",
@@ -158,8 +156,8 @@ export enum PauseMediaPlayerTypes {
   PAUSEMEDIAPLAYER = "PAUSEMEDIAPLAYER",
 }
 
-export enum ClearKeyPressNumberTypes{
-  CLEARKEYPRESSNUMBER = "CLEARKEYPRESSNUMBER"
+export enum ClearKeyPressNumberTypes {
+  CLEARKEYPRESSNUMBER = "CLEARKEYPRESSNUMBER",
 }
 
 export enum PopularVideoBackTypes {
@@ -171,11 +169,11 @@ export enum PopularVideoForwardTypes {
 }
 
 export enum ClearVideoIDTypes {
-  CLEARVIDEOID="CLEARVIDEOID",
+  CLEARVIDEOID = "CLEARVIDEOID",
 }
 
-export enum ClearPhotoIdTypes{
-  CLEARPHOTOID="CLEARPHOTOID",
+export enum ClearPhotoIdTypes {
+  CLEARPHOTOID = "CLEARPHOTOID",
 }
 
 export enum PopularImageForwardTypes {
@@ -185,8 +183,6 @@ export enum PopularImageForwardTypes {
 export enum PopularImageBackTypes {
   POPULARIMAGEBACK = "POPULARIMAGEBACK",
 }
-
-
 
 /*  interfaces */
 
@@ -200,12 +196,12 @@ export interface IPopularImageForwardAction {
   stepForward: number;
 }
 
-export interface IClearPhotoIdAction{
+export interface IClearPhotoIdAction {
   type: ClearPhotoIdTypes.CLEARPHOTOID;
   pos: number;
 }
 
-export interface IClearVideoIDAction{
+export interface IClearVideoIDAction {
   type: ClearVideoIDTypes.CLEARVIDEOID;
   pos: number;
 }
@@ -262,7 +258,6 @@ export interface IDownloadImageSizeAction {
   type: DownloadImageSizeTypes.DOWNLOADIMAGESIZE;
 }
 
-
 export interface ISelectImageSizeAction {
   type: SelectImageSizeTypes.SELECTIMAGESIZE;
   size: string;
@@ -278,7 +273,7 @@ export interface IToggleDropMenuPhotoPageAction {
 }
 
 export interface IToggleDropMenuVideoPageAction {
-  type: ToggleDropMenuVideoPageTypes.TOGGLEDROPMENUVIDEOPAGE
+  type: ToggleDropMenuVideoPageTypes.TOGGLEDROPMENUVIDEOPAGE;
 }
 
 export interface IImageBackAction {
@@ -322,7 +317,6 @@ export interface IShowDetailsVideoAction {
 export interface IDownloadImageAction {
   type: DownloadImageTypes.DOWNLOADIMAGE;
 }
-
 
 export interface ISearchBySuggestedWordAction {
   type: SearchBySuggestedWordTypes.SEARCHBYSUGGESTEDWORD;
@@ -406,16 +400,17 @@ export interface IMoveScrollAction {
   clientHeight: number | null;
 }
 
+/* actions */
 export type ProductsActions =
-  |IPopularImageForwardAction
-  |IPopularImageBackAction
-  |IClearPhotoIdAction
-  |IClearVideoIDAction
-  |IPopularVideoForwardAction
-  |IPopularVideoBackAction
-|IClearKeyPressNumberAction
-  |IToggleDropMenuVideoPageAction
-  |ISelectVideoSizeAction
+  | IPopularImageForwardAction
+  | IPopularImageBackAction
+  | IClearPhotoIdAction
+  | IClearVideoIDAction
+  | IPopularVideoForwardAction
+  | IPopularVideoBackAction
+  | IClearKeyPressNumberAction
+  | IToggleDropMenuVideoPageAction
+  | ISelectVideoSizeAction
   | IVideoBackAction
   | IVideoForwardAction
   | IPauseMediaPlayerAction
@@ -453,6 +448,7 @@ export type ProductsActions =
   | IClearRadioBoxesAction
   | IToggleMenuAction;
 
+/* state */
 export interface IProductsState {
   readonly keyboardKey: number | null;
   readonly data: ICuratedPhoto | null;

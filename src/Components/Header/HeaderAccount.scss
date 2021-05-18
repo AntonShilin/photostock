@@ -1,14 +1,12 @@
-header.main_item_video_page {
+.header_main {
   position: fixed;
   top: 0px;
   z-index: 5;
   width: 100%;
-  div.navigation_video_page {
-    max-width: 1500px;
+  .header_bg {
+    background-color: #343a40;
     position: relative;
-    a {
-      color: #fff;
-    }
+    max-width: 1500px !important;
     div {
       min-height: 4.125rem;
       div:nth-of-type(1) {
@@ -23,6 +21,42 @@ header.main_item_video_page {
           line-height: 1.9rem;
           font-family: "Fredoka One", cursive;
           background-color: rgb(5, 160, 129);
+          color: white !important;
+        }
+      }
+      div:nth-of-type(2) {
+        form {
+          div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            input {
+              width: 90%;
+              height: 2.7rem;
+              border: none;
+              font-size: 1.1rem;
+              padding-left: 1rem;
+              border-top-left-radius: 3px;
+              border-bottom-left-radius: 3px;
+              &:focus {
+                outline: none;
+              }
+            }
+            a.search_btn {
+              width: 10%;
+              height: 2.7rem;
+              background-color: #fff;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-top-right-radius: 3px;
+              border-bottom-right-radius: 3px;
+              svg {
+                color: black;
+                font-size: 1.5rem;
+              }
+            }
+          }
         }
       }
       div:nth-of-type(3) {
@@ -36,8 +70,8 @@ header.main_item_video_page {
             font-size: 1.7rem;
           }
           span {
-            width: 0.5rem;
-            height: 0.5rem;
+            width: .5rem;
+            height: .5rem;
             border-radius: 50%;
             background-color: white;
             margin-left: 3px;
@@ -58,15 +92,5 @@ header.main_item_video_page {
         }
       }
     }
-  }
-
-  div.streak {
-    opacity: 0.3;
-    z-index: 3;
-    top: 4rem;
-    width: 97vw;
-    height: 100vh;
-    position: absolute;
-    background-color: #343a40;
   }
 }
