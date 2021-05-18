@@ -13,6 +13,7 @@ import ResultPhotoPage from "../ResultPhotoPage/ResultPhotoPage";
 import ResultVideoPage from "../ResultVideoPage/ResultVideoPage";
 import SignUpPage from "../Components/Account/SignUpPage/SignUpPage";
 import AdminPage from "../Components/Account/AdminPage/AdminPage";
+import ResetPassword from "../Components/Account/ResetPassword/ResetPassword";
 
 
 
@@ -24,6 +25,7 @@ const Routes: React.SFC<RouteComponentProps> = props => {
         <Route path="/login" component={LoginPage} />
         <Route path="/sign-up" component={SignUpPage} />
         <Route path="/my-account" component={AdminPage} />
+        <Route path="/password" component={ResetPassword} />
         <Route path="/photos" exact={true} component={PhotosPage} />
         <Route path="/videos" exact={true} component={VideosPage} />
         <Route path="/videos/:searchvideo" component={ResultVideoPage} />

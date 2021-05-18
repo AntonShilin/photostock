@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import * as React from "react";
+import { IoMdEyeOff } from "react-icons/io";
 import { connect } from "react-redux";
 import {
   NavLink,
@@ -24,46 +25,52 @@ export interface ILoginPageProps extends RouteComponentProps {
 export interface ILoginPageState {
   password: string | null;
   email: string | null;
-  error: boolean;
   errorMessage: string | null;
 }
 
 class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
+  public inputPassword: React.RefObject<HTMLInputElement>;
   constructor(props: ILoginPageProps) {
     super(props);
     this.state = {
       password: null,
       email: null,
-      error: false,
       errorMessage: null,
     };
+    this.inputPassword = React.createRef();
   }
 
   public componentDidMount() {
     if (this.props.data === null) {
       this.props.getPopularImages();
     }
-
-    firebase.auth().onAuthStateChanged((profile: any) => {
-      if (profile) {
-        this.props.setUserName(profile.displayName);
-        this.props.accountSignIn(true);
-      }
-    });
   }
 
   public handleChangeEmail = (e: React.FormEvent<HTMLInputElement>) => {
     const newEmail = e.currentTarget.value;
-    this.setState({
-      email: newEmail,
-    });
+    if (e.currentTarget.willValidate) {
+      this.setState({
+        email: newEmail,
+        errorMessage: e.currentTarget.validationMessage,
+      });
+    } else {
+      this.setState({
+        errorMessage: e.currentTarget.validationMessage,
+      });
+    }
   };
 
   public handleChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
     const newPassword = e.currentTarget.value;
-    this.setState({
-      password: newPassword,
-    });
+    if (e.currentTarget.willValidate) {
+      this.setState({
+        password: newPassword,
+      });
+    } else {
+      this.setState({
+        errorMessage: e.currentTarget.validationMessage,
+      });
+    }
   };
 
   public handleSignIn = () => {
@@ -71,22 +78,29 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
     firebase
       .auth()
       .signInWithEmailAndPassword(email!, password!)
-      .then((userCredential) => {
+      .then(() => {
         this.props.history.push("/my-account");
       })
       .catch((err) => {
-        const errorCode = err.code;
-        const errorMessage = err.message;
-        this.setState({ errorMessage });
+        this.setState({ errorMessage: err.message });
       });
   };
 
+  public toggleVisiblePassword = () => {
+    const elem = this.inputPassword.current!;
+    if (elem.type === "password") {
+      elem.type = "text";
+    } else {
+      elem.type = "password";
+    }
+  };
+
   public render() {
-    const { data , isAccountSignIn} = this.props;
+    const { data, isAccountSignIn } = this.props;
     const { email, password, errorMessage } = this.state;
 
     if (isAccountSignIn) {
-      return <Redirect to="/my-account"/>
+      return <Redirect to="/my-account" />;
     }
 
     return (
@@ -94,7 +108,7 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
         {data !== null &&
           data.photos.map((elem, i) => <img src={elem.src.medium} key={i} />)}
         <div className="login_window_bg">
-          <NavLink to="/photos" className="text-decoration-none btn">
+          <NavLink to="/photos" className="btn">
             F
           </NavLink>
           <NavLink to="/sign-up" className="sign_up">
@@ -104,25 +118,28 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
             <h3 className="text-center">
               Welcome Back To Photos & Video stock
             </h3>
+            <span>{errorMessage}</span>
             <div>
-              <NavLink to="/photos">&times;</NavLink>
               <input
                 type="email"
                 placeholder="Enter email"
                 onChange={this.handleChangeEmail}
               />
               <input
+                ref={this.inputPassword}
+                className="password"
                 type="password"
                 placeholder="Enter password"
                 onChange={this.handleChangePassword}
               />
+              <IoMdEyeOff onClick={this.toggleVisiblePassword} />
               <button
                 disabled={email !== null && password !== null ? false : true}
                 onClick={this.handleSignIn}
               >
                 Sign In
               </button>
-              {errorMessage !== null && <p>{errorMessage}</p>}
+              <NavLink to="#">Forgot your password?</NavLink>
             </div>
           </div>
         </div>
@@ -139,7 +156,7 @@ const mapStateToProps = (state: IApplicationState) => ({
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getPopularImages: () => dispatch(getPopularImages()),
-    setUserName: (name: string|null) => dispatch(setUserName(name)),
+    setUserName: (name: string | null) => dispatch(setUserName(name)),
     accountSignIn: (value: boolean) => dispatch(accountSignIn(value)),
   };
 };

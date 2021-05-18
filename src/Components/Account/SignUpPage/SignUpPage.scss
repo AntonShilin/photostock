@@ -35,7 +35,7 @@
         }
         span {
           margin-left: 1rem;
-          font-weight: 700;
+          font-weight: 400;
           padding: 6px 12px;
           background: #e8e8e8;
           border: 1px;
@@ -55,8 +55,15 @@
           font-size: 44px;
           font-weight: 700;
           letter-spacing: -1.5px;
-          margin-bottom: 13px;
+          margin-bottom: 2rem;
           text-align: center;
+        }
+        span {
+          display: block;
+          color: red;
+          text-align: start;
+          margin: 0 auto 1rem auto;
+          font-size: .9rem;
         }
         div {
           position: relative;
@@ -92,40 +99,50 @@
             width: 100%;
             margin-bottom: 1rem;
             display: block;
-            font-size: 16px;
+            font-size: 1rem;
             line-height: 25px;
-            font-weight: 300;
+            font-weight: 400;
             border-radius: 2px;
             padding: 0.6rem 1.15rem;
             padding-right: 0;
+            background-color: #f1f1f1;
             &:focus {
-              outline: none !important;
+              outline-color: #05a081 !important;
+              background-color: #fff !important;
             }
           }
-          button {
+          svg {
+            position: absolute;
+            top: 8.9rem;
+            right: 1rem;
+            cursor: pointer;
+          }
+          button.sign_up_btn {
             background: #05a081;
             color: #fff;
-            border-color: #05a081;
+            border: 1px solid #05a081;
             line-height: 1;
             position: relative;
             display: block;
             align-items: center;
             justify-content: center;
-            border-width: 1px;
-            border-style: solid;
             border-radius: 3px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 400;
             text-align: center;
-            text-decoration: none;
             white-space: nowrap;
-            padding: 11px 24px;
+            padding: 0.6rem 1.15rem;
             width: 100%;
             overflow: hidden;
             &:hover {
               background: #12bb99 !important;
               border-color: #12bb99 !important;
+            }
+            &:focus {
+              background: #12bb99 !important;
+              border-color: #12bb99 !important;
+              outline: #12bb99;
             }
           }
         }
@@ -177,7 +194,7 @@
       div:nth-of-type(2) {
         a.sign_in {
           span {
-            font-size: .7rem !important;
+            font-size: 0.7rem !important;
           }
         }
       }
