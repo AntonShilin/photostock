@@ -73,7 +73,11 @@ class ModalWindowPhotoPage extends React.Component<
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
                       <button className="btn btn-light mr-2 mb-2 heart">
-                        <Heart /> Likes
+                        <Heart
+                          id={this.props.data!.photos[id].id}
+                          src={this.props.data!.photos[id].src.small}
+                        />{" "}
+                        Likes
                       </button>
                       <button className="btn btn-light mr-2 mb-2   control_point">
                         <MdControlPoint /> Collect
@@ -130,8 +134,10 @@ const mapStateToProps = (state: IApplicationState) => ({
 const mapDispatchToProps = (dispatch: any) => {
   return {
     toggleWindowPhotoPage: () => dispatch(toggleWindowPhotoPage()),
-    watchingPopularImageForward: (id: number) => dispatch(watchingPopularImageForward(id)),
-    watchingPopularImageBack: (id: number) => dispatch(watchingPopularImageBack(id)),
+    watchingPopularImageForward: (id: number) =>
+      dispatch(watchingPopularImageForward(id)),
+    watchingPopularImageBack: (id: number) =>
+      dispatch(watchingPopularImageBack(id)),
     toggleDropMenuPhotoPage: () => dispatch(toggleDropMenuPhotoPage()),
     clearPhotoID: () => dispatch(clearPhotoID()),
   };

@@ -118,7 +118,10 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                                   />
                                 </span>
                                 <span>
-                                  <Heart />
+                                <Heart
+                                  id={image.id}
+                                  src={image.url}
+                                />
                                 </span>
                               </div>
                             </div>
@@ -165,7 +168,10 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                                   />
                                 </span>
                                 <span>
-                                  <Heart />
+                                <Heart
+                                 id={image.id}
+                                 src={image.url}
+                                />
                                 </span>
                               </div>
                             </div>

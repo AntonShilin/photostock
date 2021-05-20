@@ -43,7 +43,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
         {this.props.isLoadingVideos ? (
           <LoadingPage />
         ) : (
-            <>
+          <>
             <div className="container-xl video_result_bg">
               <div className="video-result-bages row align-items-center justify-content-md-center mt-3 mb-5">
                 <div className="col-auto">
@@ -131,7 +131,10 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                                 <MdControlPoint />
                               </span>
                               <span>
-                                <Heart />
+                                <Heart
+                                  id={value.id}
+                                  src={value.video_files[0].link}
+                                />
                               </span>
                             </div>
                           </div>
@@ -190,7 +193,10 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                                   <MdControlPoint />
                                 </span>
                                 <span>
-                                  <Heart />
+                                  <Heart
+                                   id={value.id}
+                                   src={value.video_files[0].link}
+                                  />
                                 </span>
                               </div>
                             </div>
@@ -200,8 +206,8 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                 </div>
               </div>
             </div>
-        <Footer />
-            </>
+            <Footer />
+          </>
         )}
       </React.Fragment>
     );

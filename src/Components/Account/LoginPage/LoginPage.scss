@@ -87,6 +87,9 @@
           padding: 0.6rem 1.15rem;
           padding-right: 0;
           background-color: #f1f1f1;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
           &:focus {
             outline-color: #05a081 !important;
             background-color: #fff !important;
@@ -156,6 +159,9 @@
     div.login_window_bg {
       div.login_box {
         max-width: 100% !important;
+        span {
+          width: 100% !important;
+        }
         div {
           width: 100% !important;
           a {

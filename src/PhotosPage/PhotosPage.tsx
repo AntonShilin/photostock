@@ -172,7 +172,10 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                                   />
                                 </span>
                                 <span>
-                                  <Heart />
+                                  <Heart
+                                    id={image.id}
+                                    src={image.src.small}
+                                  />
                                 </span>
                               </div>
                             </div>
@@ -219,7 +222,10 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                                   />
                                 </span>
                                 <span>
-                                  <Heart />
+                                  <Heart
+                                    id={image.id}
+                                    src={image.src.small}
+                                  />
                                 </span>
                               </div>
                             </div>

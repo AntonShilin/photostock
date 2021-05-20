@@ -34,31 +34,29 @@ class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
     return (
       <div className="photo_search-small-area ">
         <form>
-          <div>
-            <input
-              type="text"
-              placeholder="Find a photo"
-              value={this.props.searchNamePhoto!}
-              onChange={(e) => this.props.watchInputChange(e)}
-              autoFocus={false}
-              required={true}
-              onKeyDown={(e) => {
-                if (e.keyCode === 13) {
-                  this.pressEnterKey();
-                  e.preventDefault();
-                }
-              }}
-            />
-              <NavLink
-                to={`/photos/${this.props.searchNamePhoto}`}
-                onClick={() => {
-                  this.props.getSearchImages(this.props.searchNamePhoto!);
-                  this.props.getSearchVideos(this.props.searchNameVideo!);
-                }}
-              >
-                <FiSearch style={{ color: "black" }} />
-              </NavLink>
-          </div>
+          <input
+            type="text"
+            placeholder="Find a photo"
+            value={this.props.searchNamePhoto!}
+            onChange={(e) => this.props.watchInputChange(e)}
+            autoFocus={false}
+            required={true}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) {
+                this.pressEnterKey();
+                e.preventDefault();
+              }
+            }}
+          />
+          <NavLink
+            to={`/photos/${this.props.searchNamePhoto}`}
+            onClick={() => {
+              this.props.getSearchImages(this.props.searchNamePhoto!);
+              this.props.getSearchVideos(this.props.searchNameVideo!);
+            }}
+          >
+            <FiSearch style={{ color: "black" }} />
+          </NavLink>
         </form>
       </div>
     );

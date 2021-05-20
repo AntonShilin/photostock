@@ -60,7 +60,6 @@ class HeaderAccount extends React.Component<IHeaderProps, IHeaderState> {
               </div>
               <div className="col-8">
                 <form>
-                  <div>
                     <input
                       type="text"
                       placeholder="Find a photo"
@@ -85,7 +84,6 @@ class HeaderAccount extends React.Component<IHeaderProps, IHeaderState> {
                     >
                       <FiSearch />
                     </NavLink>
-                  </div>
                 </form>
               </div>
               <div className="col-2 d-lg-block d-none">

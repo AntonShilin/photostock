@@ -64,7 +64,7 @@ class ModalWindowResultPhotoPage extends React.Component<
                   <div className="row">
                     <div className="col-lg-3 col-md-12 col-sm-12 mb-2 order-lg-first order-last">
                       <p>
-                      <small>PHOTOGRAPHER</small>
+                        <small>PHOTOGRAPHER</small>
                         <span>
                           {this.props.resultSearchImage?.photos[
                             id
@@ -75,7 +75,13 @@ class ModalWindowResultPhotoPage extends React.Component<
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
                       <button className="btn btn-light mr-2 mb-2 heart">
-                        <Heart /> Likes
+                        <Heart
+                          id={this.props.resultSearchImage!.photos[id].id}
+                          src={
+                            this.props.resultSearchImage!.photos[id].src.small
+                          }
+                        />{" "}
+                        Likes
                       </button>
                       <button className="btn btn-light mr-2 mb-2   control_point">
                         <MdControlPoint /> Collect

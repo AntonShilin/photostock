@@ -82,7 +82,11 @@ class ModalWindowResultVideoPage extends React.Component<
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
                       <button className="btn btn-light mr-2 mb-2 heart">
-                        <Heart /> Likes
+                        <Heart
+                          id={resultSearchVideo.videos[id].id}
+                          src={resultSearchVideo.videos[id].video_files[0].link}
+                        />{" "}
+                        Likes
                       </button>
                       <button className="btn btn-light mr-2 mb-2 control_point">
                         <MdControlPoint /> Collect

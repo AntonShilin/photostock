@@ -36,7 +36,6 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
     return (
       <div className="video_search-small-area">
         <form>
-          <div>
             <input
               required={true}
               type="text"
@@ -60,7 +59,6 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
               >
                 <FiSearch/>
               </NavLink>
-          </div>
         </form>
       </div>
     );

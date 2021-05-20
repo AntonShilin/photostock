@@ -10,12 +10,21 @@ export enum AccountSignInTypes {
   ACCOUNTSIGNIN = "ACCOUNTSIGNIN",
 }
 
-export enum ToggleAccountModalWindowTypes{
-  TOGGLEACCOUNTMODALWINDOW="TOGGLEACCOUNTMODALWINDOW"
+export enum ToggleAccountModalWindowTypes {
+  TOGGLEACCOUNTMODALWINDOW = "TOGGLEACCOUNTMODALWINDOW",
+}
+
+export enum AccountIdentificationTypes {
+  ACCOUNTIDENTIFICATION = "ACCOUNTIDENTIFICATION",
 }
 
 /*  interfaces */
-export interface IToggleAccountModalWindowAction{
+export interface IAccountIdentificationAction {
+  type: AccountIdentificationTypes.ACCOUNTIDENTIFICATION;
+  value: string;
+}
+
+export interface IToggleAccountModalWindowAction {
   type: ToggleAccountModalWindowTypes.TOGGLEACCOUNTMODALWINDOW;
   value: boolean;
 }
@@ -27,7 +36,7 @@ export interface IAccountSignInAction {
 
 export interface ISetUserNameAction {
   type: SetUserNameTypes.SETUSERNAME;
-  name: string|null;
+  name: string | null;
 }
 
 export interface IAccountcreatedAction {
@@ -37,7 +46,8 @@ export interface IAccountcreatedAction {
 
 /* actions */
 export type AccountStateActions =
-  |IToggleAccountModalWindowAction
+  | IAccountIdentificationAction
+  | IToggleAccountModalWindowAction
   | IAccountSignInAction
   | ISetUserNameAction
   | IAccountcreatedAction;
@@ -48,4 +58,5 @@ export interface IAccountState {
   userName: string | null;
   isAccountSignIn: boolean;
   isAccountModalWindowOpen: boolean;
+  identification: string | null;
 }

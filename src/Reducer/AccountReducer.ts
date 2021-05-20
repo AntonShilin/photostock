@@ -1,4 +1,5 @@
 import {
+  AccountIdentificationTypes,
   AccountSignInTypes,
   SetUserNameTypes,
   ToggleAccountModalWindowTypes,
@@ -14,6 +15,7 @@ const accountState: IAccountState = {
   userName: null,
   isAccountSignIn: false,
   isAccountModalWindowOpen: false,
+  identification: null,
 };
 
 export const accountReducer = (
@@ -46,6 +48,13 @@ export const accountReducer = (
       return {
         ...state,
         isAccountModalWindowOpen: action.value,
+      };
+    }
+
+    case AccountIdentificationTypes.ACCOUNTIDENTIFICATION: {
+      return {
+        ...state,
+        identification: action.value,
       };
     }
 

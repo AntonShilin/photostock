@@ -1,13 +1,15 @@
 import {
+  AccountCreatedTypes,
+  AccountIdentificationTypes,
   AccountSignInTypes,
   IAccountcreatedAction,
+  IAccountIdentificationAction,
   IAccountSignInAction,
   ISetUserNameAction,
   IToggleAccountModalWindowAction,
   SetUserNameTypes,
   ToggleAccountModalWindowTypes,
 } from "./../Types/AccountTypes";
-import { AccountCreatedTypes } from "../Types/AccountTypes";
 
 export const accountSignUp = (value: boolean): IAccountcreatedAction => {
   return {
@@ -36,6 +38,16 @@ export const toggleAccountModalWindow = (
 ): IToggleAccountModalWindowAction => {
   return {
     type: ToggleAccountModalWindowTypes.TOGGLEACCOUNTMODALWINDOW,
+    value,
+  };
+};
+
+/* set account identification value*/
+export const setAccountIdentification = (
+  value: string
+): IAccountIdentificationAction => {
+  return {
+    type: AccountIdentificationTypes.ACCOUNTIDENTIFICATION,
     value,
   };
 };

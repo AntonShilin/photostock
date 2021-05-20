@@ -180,7 +180,10 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                 <MdControlPoint />
                               </span>
                               <span>
-                                <Heart />
+                                <Heart
+                                 id={value.id}
+                                 src={value.video_files[0].link}
+                                />
                               </span>
                             </div>
                           </div>
@@ -242,7 +245,10 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                   <MdControlPoint />
                                 </span>
                                 <span>
-                                  <Heart />
+                                  <Heart
+                                   id={value.id}
+                                   src={value.video_files[0].link}
+                                  />
                                 </span>
                               </div>
                             </div>

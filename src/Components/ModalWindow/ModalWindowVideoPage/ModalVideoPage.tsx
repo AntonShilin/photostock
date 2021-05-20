@@ -74,7 +74,11 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                     </div>
                     <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
                       <button className="btn btn-light mr-2 mb-2 heart">
-                        <Heart /> Likes
+                        <Heart
+                          id={videos.videos[id].id}
+                          src={videos.videos[id].video_files[0].link}
+                        />{" "}
+                        Likes
                       </button>
                       <button className="btn btn-light mr-2 mb-2 control_point">
                         <MdControlPoint /> Collect
@@ -143,8 +147,10 @@ const mapDispatchToProps = (dispatch: any) => {
     toggleBtnMediaPlayer: (value: boolean) =>
       dispatch(toggleBtnMediaPlayer(value)),
     stopMediaPlayer: () => dispatch(stopMediaPlayer()),
-    watchingPopularVideoForward: (id: number) => dispatch(watchingPopularVideoForward(id)),
-    watchingPopularVideoBack: (id: number) => dispatch(watchingPopularVideoBack(id)),
+    watchingPopularVideoForward: (id: number) =>
+      dispatch(watchingPopularVideoForward(id)),
+    watchingPopularVideoBack: (id: number) =>
+      dispatch(watchingPopularVideoBack(id)),
     clearVideoID: () => dispatch(clearVideoID()),
   };
 };

@@ -90,6 +90,8 @@ class SignUpPage extends React.Component<ISignUpPageProps, ISignUpPageState> {
     });
   };
 
+ 
+
   public createAccount = () => {
     const { email, password } = this.state;
 
@@ -112,13 +114,13 @@ class SignUpPage extends React.Component<ISignUpPageProps, ISignUpPageState> {
     const user = firebase.auth().currentUser;
     if (user !== null && firstName !== null && lastName !== null) {
       user
-        .updateProfile({
-          displayName: firstName + " " + lastName,
-        })
-        .then(() => {
-          this.props.accountSignUp(true);
-          this.setState({ accountCreated: true });
-          this.props.setUserName(firstName + " " + lastName);
+      .updateProfile({
+        displayName: firstName + " " + lastName,
+      })
+      .then(() => {
+        this.props.accountSignUp(true);
+        this.setState({ accountCreated: true });
+        this.props.setUserName(firstName + " " + lastName);
         })
         .catch((err) => {
           this.setState({ error: err.message });
