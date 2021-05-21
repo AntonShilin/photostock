@@ -17,7 +17,7 @@ import ResetPassword from "../Components/Account/ResetPassword/ResetPassword";
 
 
 
-const Routes: React.SFC<RouteComponentProps> = props => {
+const Routes: React.SFC<RouteComponentProps> = () => {
   return (
     <React.Fragment>
       <Switch>

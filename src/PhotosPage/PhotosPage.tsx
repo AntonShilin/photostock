@@ -68,8 +68,10 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
   };
 
   public render() {
+    const { isLoadingImages } = this.props;
+
     return (
-      <React.Fragment>
+      <>
         <HeaderPhotoPage />
         <ModalPhotoPage />
         <div
@@ -118,13 +120,11 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
             Photo by {this.props.data?.photos[0].photographer}
           </p>
         </div>
-        {this.props.isLoadingImages ? (
-          <LoadingPage />
-        ) : (
-          <React.Fragment>
-            <NavigationPages />
+        {!isLoadingImages ? (
+          <>
+          <NavigationPages />
             <div className="container-xl trending_photos">
-              <div className="row mb-2">
+              <div className="row">
                 <div className="col-12">
                   <h6 className="mb-4 mt-4">Trending Free Stock Photos</h6>
                 </div>
@@ -132,10 +132,10 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
               <div className="row ">
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="row">
-                    {this.props.data === null
-                      ? null
-                      : this.props.data.photos.map((image, i) =>
-                          i % 2 ? (
+                    {this.props.data !== null &&
+                      this.props.data.photos.map(
+                        (image, i) =>
+                          i % 2 !== 0 && (
                             <div key={i} className="col-12">
                               <div className="info-for-image">
                                 <img
@@ -164,31 +164,23 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                                   </a>
                                 </span>
                                 <span>
-                                  <MdControlPoint
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1.5rem",
-                                    }}
-                                  />
+                                  <MdControlPoint />
                                 </span>
                                 <span>
-                                  <Heart
-                                    id={image.id}
-                                    src={image.src.large}
-                                  />
+                                  <Heart id={image.id} src={image.src.large} />
                                 </span>
                               </div>
                             </div>
-                          ) : null
-                        )}
+                          )
+                      )}
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="row">
-                    {this.props.data === null
-                      ? null
-                      : this.props.data.photos.map((image, i) =>
-                          i % 2 === 0 ? (
+                    {this.props.data !== null &&
+                      this.props.data.photos.map(
+                        (image, i) =>
+                          i % 2 === 0 && (
                             <div key={i} className="col-12">
                               <div className="info-for-image">
                                 <img
@@ -222,23 +214,22 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                                   />
                                 </span>
                                 <span>
-                                  <Heart
-                                    id={image.id}
-                                    src={image.src.large}
-                                  />
+                                  <Heart id={image.id} src={image.src.large} />
                                 </span>
                               </div>
                             </div>
-                          ) : null
-                        )}
+                          )
+                      )}
                   </div>
                 </div>
               </div>
             </div>
-            <Footer />
-          </React.Fragment>
+          </>
+        ) : (
+          <LoadingPage />
         )}
-      </React.Fragment>
+        <Footer />
+      </>
     );
   }
 }

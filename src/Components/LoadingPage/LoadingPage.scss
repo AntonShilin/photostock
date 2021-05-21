@@ -1,28 +1,28 @@
- div.loading_page_bg {
-   position: fixed;
-   padding: 0;
-   z-index: 5;
-   top:0;
-   left:0;
-   background-color:  #2125297a;
-   width: 100%;
-   height: 100vh;
-   div.loading_page_item {
+div.loading_page_bg {
+  position: fixed;
+  padding: 0;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  background-color: #21252915 !important;
+  width: 100%;
+  height: 100vh;
+  div.loading_page_item {
     height: 100vh;
     position: relative;
-    .loading_page_spinner{
+    .loading_page_spinner {
       animation: moving 1s infinite linear;
       position: absolute;
       top: 40%;
       left: 40%;
-     border-left: .3rem solid  rgb(235, 15, 81);
-     border-top: .3rem solid transparent;
-     border-right: .3rem solid rgb(27, 16, 177);
-     border-bottom: .3rem solid transparent;
-     width: 5rem;
-     height: 5rem;
-     background-color: transparent;
-     border-radius: 50%;
+      border-left: 0.3rem solid rgb(235, 15, 81);
+      border-top: 0.3rem solid transparent;
+      border-right: 0.3rem solid rgb(27, 16, 177);
+      border-bottom: 0.3rem solid transparent;
+      width: 5rem;
+      height: 5rem;
+      background-color: transparent;
+      border-radius: 50%;
     }
   }
 }

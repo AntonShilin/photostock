@@ -36,57 +36,57 @@ export interface IDataResult extends RouteComponentProps {
 
 class ResultPhotoPage extends React.Component<IDataResult> {
   public render() {
+    const {
+      isLoadingImages,
+      resultSearchImage,
+      searchNamePhoto,
+      resultSearchVideo,
+    } = this.props;
+
     return (
-      <React.Fragment>
+      <>
         <HeaderResultPhotoPage />
         <ModalWindowResultPhotoPage />
-        {this.props.isLoadingImages ? (
+        {isLoadingImages ? (
           <LoadingPage />
         ) : (
           <>
             <div className="container-xl photo_result_bg">
-              <div className="photo-result-bages row align-items-center justify-content-md-center mt-3 mb-5">
-                <div className="col-auto">
-                  <ul className="list-group list-group-horizontal">
-                    <li className="list-group-item">
-                      <NavLink
-                        activeClassName="photo-result-bages-active"
-                        to="#"
-                      >
-                        <FaRegImage /> Photos
-                        <span className="ml-1">
-                          {this.props.resultSearchImage === null
-                            ? 0
-                            : this.props.resultSearchImage.photos.length}
-                        </span>
-                      </NavLink>
-                    </li>
-                    <li className="list-group-item">
-                      <NavLink
-                        activeClassName="photo-result-bages-active"
-                        to={`/videos/${this.props.searchNamePhoto}`}
-                      >
-                        <FaVideo /> Videos
-                        <span className="ml-1">
-                          {this.props.resultSearchVideo === null
-                            ? 0
-                            : this.props.resultSearchVideo.videos.length}
-                        </span>
-                      </NavLink>
-                    </li>
-                  </ul>
+              <div className="row photo-result-bages">
+                <div className="col">
+                  <div className="photo-result-navigation">
+                    <NavLink activeClassName="photo-result-bages-active" to="#">
+                      <FaRegImage /> Photos
+                      <span>
+                        {resultSearchImage === null
+                          ? 0
+                          : resultSearchImage.photos.length}
+                      </span>
+                    </NavLink>
+                    <NavLink
+                      activeClassName="photo-result-bages-active"
+                      to={`/videos/${searchNamePhoto}`}
+                    >
+                      <FaVideo /> Videos
+                      <span className="ml-1">
+                        {resultSearchVideo === null
+                          ? 0
+                          : resultSearchVideo.videos.length}
+                      </span>
+                    </NavLink>
+                  </div>
                 </div>
               </div>
               <CouldnotFindPhoto />
-              <div className="row">
+                <div className="row photo-result-search">
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="row">
-                    {this.props.resultSearchImage === null
-                      ? null
-                      : this.props.resultSearchImage.photos.map((image, i) =>
-                          i % 2 ? (
+                    {this.props.resultSearchImage !== null &&
+                      this.props.resultSearchImage.photos.map(
+                        (image, i) =>
+                          i % 2 !== 0 && (
                             <div key={i} className="col-12">
-                              <div className="info-for-image">
+                              <div className="result-info-for-image">
                                 <img
                                   src={image.src.large}
                                   alt={`img_${i}`}
@@ -110,33 +110,25 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                                   </a>
                                 </span>
                                 <span>
-                                  <MdControlPoint
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1.5rem",
-                                    }}
-                                  />
+                                  <MdControlPoint />
                                 </span>
                                 <span>
-                                <Heart
-                                  id={image.id}
-                                  src={image.url}
-                                />
+                                  <Heart id={image.id} src={image.src.large} />
                                 </span>
                               </div>
                             </div>
-                          ) : null
-                        )}
+                          )
+                      )}
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="row">
-                    {this.props.resultSearchImage === null
-                      ? null
-                      : this.props.resultSearchImage.photos.map((image, i) =>
-                          i % 2 === 0 ? (
+                    {this.props.resultSearchImage !== null &&
+                      this.props.resultSearchImage.photos.map(
+                        (image, i) =>
+                          i % 2 === 0 && (
                             <div key={i} className="col-12">
-                              <div className="info-for-image">
+                              <div className="result-info-for-image">
                                 <img
                                   src={image.src.large}
                                   alt={`img_${i}`}
@@ -160,23 +152,15 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                                   </a>
                                 </span>
                                 <span>
-                                  <MdControlPoint
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1.5rem",
-                                    }}
-                                  />
+                                  <MdControlPoint />
                                 </span>
                                 <span>
-                                <Heart
-                                 id={image.id}
-                                 src={image.url}
-                                />
+                                  <Heart id={image.id} src={image.src.large} />
                                 </span>
                               </div>
                             </div>
-                          ) : null
-                        )}
+                          )
+                      )}
                   </div>
                 </div>
               </div>
@@ -184,7 +168,8 @@ class ResultPhotoPage extends React.Component<IDataResult> {
             <Footer />
           </>
         )}
-      </React.Fragment>
+     
+      </>
     );
   }
 }
