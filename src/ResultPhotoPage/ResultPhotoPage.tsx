@@ -78,7 +78,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                 </div>
               </div>
               <CouldnotFindPhoto />
-                <div className="row photo-result-search">
+              <div className="row photo-result-search">
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="row">
                     {this.props.resultSearchImage !== null &&
@@ -168,7 +168,6 @@ class ResultPhotoPage extends React.Component<IDataResult> {
             <Footer />
           </>
         )}
-     
       </>
     );
   }

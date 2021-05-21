@@ -6,41 +6,39 @@ import { connect } from "react-redux";
 import { IDataSearch } from "../../Interfaces/Interfaces";
 
 export interface INotFindPhotoProps {
-  searchNamePhoto?: string;
-  resultSearchImage?: IDataSearch | null;
-
+  searchNamePhoto: string;
+  resultSearchImage: IDataSearch | null;
 }
 
 export interface State {}
 
 class CouldnotFindPhoto extends React.Component<INotFindPhotoProps, State> {
   public render() {
+    const { resultSearchImage, searchNamePhoto } = this.props;
+
     return (
-      <React.Fragment>
-        {
-        this.props.resultSearchImage?.photos?.length===0 ? (
-          <div className="row">
+      <>
+        {resultSearchImage !== null && resultSearchImage.photos.length === 0 ? (
+          <div className="row not-find-photo-msg">
             <div className="col-12">
-              <h2 className="text-center mb-5">
-                We Couldn't Find Anything For "{this.props.searchNamePhoto}"
-              </h2>
+              <h2>We Couldn't Find Anything For "{searchNamePhoto}"</h2>
             </div>
             <div className="col-12">
-              <p className="text-left">Try spelling the word correctly</p>
-              <p className="text-left">
+              <p>Try spelling the word correctly</p>
+              <p>
                 Discover beautiful photos on{" "}
                 <NavLink to="/photos">the main page »</NavLink>
               </p>
             </div>
           </div>
-          ) :
-          <div className="row mb-3">
+        ) : (
+          <div className="row find-photo-msg">
             <div className="col-12">
-              <h2 className="text-center">{this.props.searchNamePhoto} Images</h2>
+              <h2>{searchNamePhoto} Images</h2>
             </div>
-        </div>
-        }
-      </React.Fragment>
+          </div>
+        )}
+      </>
     );
   }
 }
@@ -48,8 +46,12 @@ class CouldnotFindPhoto extends React.Component<INotFindPhotoProps, State> {
 const mapStateToProps = (state: IApplicationState) => {
   return {
     searchNamePhoto: state.products.searchNamePhoto,
-  resultSearchImage: state.products.resultSearchImage
+    resultSearchImage: state.products.resultSearchImage,
   };
 };
 
-export default connect(mapStateToProps, null)(CouldnotFindPhoto);
+const mapDispatchToProps = (dispatch: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CouldnotFindPhoto);

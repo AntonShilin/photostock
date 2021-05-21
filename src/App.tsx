@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
 import {
   accountSignIn,
-  downloadCollectionOfLikes,
   setAccountIdentification,
   setUserName,
 } from "./Actions/AccountActions";
@@ -16,42 +15,21 @@ export interface IAppProps {
   setUserName: typeof setUserName;
   accountSignIn: typeof accountSignIn;
   setAccountIdentification: typeof setAccountIdentification;
-  downloadCollectionOfLikes: typeof downloadCollectionOfLikes;
 }
 
 export interface IAppState {}
 
 class App extends React.Component<IAppProps, IAppState> {
+  
   public componentDidMount() {
     firebase.auth().onAuthStateChanged((profile: any) => {
       if (profile) {
-        console.log(profile);
         this.props.setUserName(profile.displayName);
         this.props.accountSignIn(true);
         this.props.setAccountIdentification(profile.uid);
-        this.getLikesFromCollections(profile.uid);
       }
     });
   }
-
-  public getLikesFromCollections = (identification: string) => {
-    const db = firebase.firestore();
-    const docRef = db.collection("all").doc(identification).collection("likes");
-
-    docRef
-      .get()
-      .then((snapshot) => {
-        const data = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        this.props.downloadCollectionOfLikes(data);
-        // console.log("All data in 'books' collection", data);
-      })
-      .catch((error) => {
-        console.log("Error getting document:", error);
-      });
-  };
 
   public render() {
     return (
@@ -70,8 +48,6 @@ const mapDispatchToProps = (dispatch: any) => {
     accountSignIn: (value: boolean) => dispatch(accountSignIn(value)),
     setAccountIdentification: (value: string) =>
       dispatch(setAccountIdentification(value)),
-    downloadCollectionOfLikes: (arr: any) =>
-      dispatch(downloadCollectionOfLikes(arr)),
   };
 };
 
