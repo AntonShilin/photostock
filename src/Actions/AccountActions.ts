@@ -2,9 +2,11 @@ import {
   AccountCreatedTypes,
   AccountIdentificationTypes,
   AccountSignInTypes,
+  DowloadCollectionOfLikesTypes,
   IAccountcreatedAction,
   IAccountIdentificationAction,
   IAccountSignInAction,
+  IDowloadCollectionOfLikesAction,
   ISetUserNameAction,
   IToggleAccountModalWindowAction,
   SetUserNameTypes,
@@ -49,5 +51,15 @@ export const setAccountIdentification = (
   return {
     type: AccountIdentificationTypes.ACCOUNTIDENTIFICATION,
     value,
+  };
+};
+
+/* download collection from db */
+export const downloadCollectionOfLikes = (
+  arr: any
+): IDowloadCollectionOfLikesAction => {
+  return {
+    type: DowloadCollectionOfLikesTypes.DOWNLOADCOLLECTIONOFLIKES,
+    collection:arr,
   };
 };

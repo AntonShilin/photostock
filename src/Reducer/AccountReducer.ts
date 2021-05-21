@@ -1,6 +1,7 @@
 import {
   AccountIdentificationTypes,
   AccountSignInTypes,
+  DowloadCollectionOfLikesTypes,
   SetUserNameTypes,
   ToggleAccountModalWindowTypes,
 } from "./../Types/AccountTypes";
@@ -16,6 +17,7 @@ const accountState: IAccountState = {
   isAccountSignIn: false,
   isAccountModalWindowOpen: false,
   identification: null,
+  collection:null,
 };
 
 export const accountReducer = (
@@ -55,6 +57,13 @@ export const accountReducer = (
       return {
         ...state,
         identification: action.value,
+      };
+    }
+      
+    case DowloadCollectionOfLikesTypes.DOWNLOADCOLLECTIONOFLIKES: {
+      return {
+        ...state,
+        collection: action.collection,
       };
     }
 

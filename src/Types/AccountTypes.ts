@@ -18,7 +18,16 @@ export enum AccountIdentificationTypes {
   ACCOUNTIDENTIFICATION = "ACCOUNTIDENTIFICATION",
 }
 
+export enum DowloadCollectionOfLikesTypes {
+  DOWNLOADCOLLECTIONOFLIKES = "DOWNLOADCOLLECTIONOFLIKES",
+}
+
 /*  interfaces */
+export interface IDowloadCollectionOfLikesAction {
+  type: DowloadCollectionOfLikesTypes.DOWNLOADCOLLECTIONOFLIKES;
+  collection: any;
+}
+
 export interface IAccountIdentificationAction {
   type: AccountIdentificationTypes.ACCOUNTIDENTIFICATION;
   value: string;
@@ -46,6 +55,7 @@ export interface IAccountcreatedAction {
 
 /* actions */
 export type AccountStateActions =
+  | IDowloadCollectionOfLikesAction
   | IAccountIdentificationAction
   | IToggleAccountModalWindowAction
   | IAccountSignInAction
@@ -59,4 +69,5 @@ export interface IAccountState {
   isAccountSignIn: boolean;
   isAccountModalWindowOpen: boolean;
   identification: string | null;
+  collection: any[] | null;
 }

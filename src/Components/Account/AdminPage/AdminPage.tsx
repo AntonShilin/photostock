@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { IApplicationState } from "../../../Store/Store";
 import Footer from "../../Footer/Footer";
 import HeaderAccount from "../../Header/HeaderAccount";
+import Collections from "../Collections/Collections";
 import "./AdminPage.scss";
 
 export interface IAdminPageProps {
@@ -36,6 +37,7 @@ class AdminPage extends React.Component<IAdminPageProps, IAdminPageState> {
             </div>
           </div>
         </div>
+        <Collections/>
         <Footer />
       </>
     );
