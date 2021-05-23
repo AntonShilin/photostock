@@ -156,7 +156,7 @@ const mapStateToProps = (state: IApplicationState) => ({
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getPopularImages: () => dispatch(getPopularImages()),
-    setUserName: (name: string | null) => dispatch(setUserName(name)),
+    setUserName: (name: string ) => dispatch(setUserName(name)),
     accountSignIn: (value: boolean) => dispatch(accountSignIn(value)),
   };
 };

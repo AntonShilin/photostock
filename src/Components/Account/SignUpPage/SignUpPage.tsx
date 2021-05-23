@@ -229,7 +229,7 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     getPopularImages: () => dispatch(getPopularImages()),
     accountSignUp: (value: boolean) => dispatch(accountSignUp(value)),
-    setUserName: (name: string | null) => dispatch(setUserName(name)),
+    setUserName: (name: string) => dispatch(setUserName(name)),
   };
 };
 

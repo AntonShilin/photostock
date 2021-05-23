@@ -9,6 +9,7 @@ import {
   IDowloadCollectionOfLikesAction,
   ISetUserNameAction,
   IToggleAccountModalWindowAction,
+  SetUserEmailTypes,
   SetUserNameTypes,
   ToggleAccountModalWindowTypes,
 } from "./../Types/AccountTypes";
@@ -20,7 +21,7 @@ export const accountSignUp = (value: boolean): IAccountcreatedAction => {
   };
 };
 
-export const setUserName = (name: string | null): ISetUserNameAction => {
+export const setUserName = (name: string): ISetUserNameAction => {
   return {
     type: SetUserNameTypes.SETUSERNAME,
     name,
@@ -60,6 +61,14 @@ export const downloadCollectionOfLikes = (
 ): IDowloadCollectionOfLikesAction => {
   return {
     type: DowloadCollectionOfLikesTypes.DOWNLOADCOLLECTIONOFLIKES,
-    collection:arr,
+    collection: arr,
+  };
+};
+
+/* set user email */
+export const setUserEmail = (value: string) => {
+  return {
+    type: SetUserEmailTypes.SETUSEREMAIL,
+    value,
   };
 };

@@ -2,6 +2,7 @@ import {
   AccountIdentificationTypes,
   AccountSignInTypes,
   DowloadCollectionOfLikesTypes,
+  SetUserEmailTypes,
   SetUserNameTypes,
   ToggleAccountModalWindowTypes,
 } from "./../Types/AccountTypes";
@@ -13,11 +14,12 @@ import {
 
 const accountState: IAccountState = {
   isAccountCreated: false,
-  userName: null,
+  userName: "",
   isAccountSignIn: false,
   isAccountModalWindowOpen: false,
   identification: null,
-  collection:null,
+  collection: null,
+  userEmail: "",
 };
 
 export const accountReducer = (
@@ -59,11 +61,18 @@ export const accountReducer = (
         identification: action.value,
       };
     }
-      
+
     case DowloadCollectionOfLikesTypes.DOWNLOADCOLLECTIONOFLIKES: {
       return {
         ...state,
         collection: action.collection,
+      };
+    }
+
+    case SetUserEmailTypes.SETUSEREMAIL: {
+      return {
+        ...state,
+        userEmail: action.value,
       };
     }
 

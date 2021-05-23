@@ -4,7 +4,10 @@ import { IApplicationState } from "../../../Store/Store";
 import "./Collections.scss";
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { downloadCollectionOfLikes } from "../../../Actions/AccountActions";
+import {
+  downloadCollectionOfLikes,
+  setUserName,
+} from "../../../Actions/AccountActions";
 import { NavLink, Redirect } from "react-router-dom";
 import LoadingPage from "../../LoadingPage/LoadingPage";
 import { FaRegImages } from "react-icons/fa";
@@ -12,6 +15,7 @@ import { FaRegImages } from "react-icons/fa";
 export interface ICollectionsProps {
   collection: any[] | null;
   downloadCollectionOfLikes: typeof downloadCollectionOfLikes;
+  setUserName: typeof setUserName;
 }
 
 export interface ICollectionsState {
@@ -33,6 +37,7 @@ class Collections extends React.Component<
     firebase.auth().onAuthStateChanged((profile: any) => {
       if (profile) {
         this.getLikesFromCollections(profile.uid);
+        this.props.setUserName(profile.displayName);
       }
     });
   }
@@ -143,6 +148,7 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     downloadCollectionOfLikes: (arr: any) =>
       dispatch(downloadCollectionOfLikes(arr)),
+    setUserName: (value: string) => dispatch(setUserName(value)),
   };
 };
 

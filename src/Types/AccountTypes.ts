@@ -22,7 +22,16 @@ export enum DowloadCollectionOfLikesTypes {
   DOWNLOADCOLLECTIONOFLIKES = "DOWNLOADCOLLECTIONOFLIKES",
 }
 
+export enum SetUserEmailTypes{
+  SETUSEREMAIL="SETUSEREMAIL"
+}
+
 /*  interfaces */
+export interface ISetUserEmailAction{
+  type: SetUserEmailTypes.SETUSEREMAIL;
+  value: string;
+}
+
 export interface IDowloadCollectionOfLikesAction {
   type: DowloadCollectionOfLikesTypes.DOWNLOADCOLLECTIONOFLIKES;
   collection: any;
@@ -45,7 +54,7 @@ export interface IAccountSignInAction {
 
 export interface ISetUserNameAction {
   type: SetUserNameTypes.SETUSERNAME;
-  name: string | null;
+  name: string;
 }
 
 export interface IAccountcreatedAction {
@@ -55,6 +64,7 @@ export interface IAccountcreatedAction {
 
 /* actions */
 export type AccountStateActions =
+  |ISetUserEmailAction
   | IDowloadCollectionOfLikesAction
   | IAccountIdentificationAction
   | IToggleAccountModalWindowAction
@@ -65,9 +75,10 @@ export type AccountStateActions =
 /* state  */
 export interface IAccountState {
   isAccountCreated: boolean;
-  userName: string | null;
+  userName: string;
   isAccountSignIn: boolean;
   isAccountModalWindowOpen: boolean;
   identification: string | null;
   collection: any[] | null;
+  userEmail: string;
 }

@@ -25,7 +25,7 @@ class Submenu extends React.Component<ISubmenuProps, State> {
       .signOut()
       .then(
         () => {
-          this.props.setUserName(null);
+          this.props.setUserName("");
           this.props.accountSignIn(false);
           this.props.handleToggleMenu();
         },
@@ -74,10 +74,10 @@ class Submenu extends React.Component<ISubmenuProps, State> {
               <NavLink to="/my-account" onClick={this.props.handleToggleMenu}>
                 Your profile
               </NavLink>
-              <NavLink to="#" onClick={this.props.handleToggleMenu}>
+              <NavLink to="/edit-profile" onClick={this.props.handleToggleMenu}>
                 Setting
               </NavLink>
-              <NavLink to="#" onClick={this.signOut}>
+              <NavLink to="/photos" onClick={this.signOut}>
                 Logout
               </NavLink>
             </>
@@ -101,7 +101,7 @@ const mapStateToProps = (state: IApplicationState) => ({
 const mapDispatchToProps = (dispatch: any) => {
   return {
     handleToggleMenu: () => dispatch(handleToggleMenu()),
-    setUserName: (name: string | null) => dispatch(setUserName(name)),
+    setUserName: (name: string) => dispatch(setUserName(name)),
     accountSignIn: (value: boolean) => dispatch(accountSignIn(value)),
   };
 };

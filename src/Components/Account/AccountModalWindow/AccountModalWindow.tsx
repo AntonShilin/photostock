@@ -30,7 +30,7 @@ class AccountModalWindow extends React.Component<
       .signOut()
       .then(
         () => {
-          this.props.setUserName(null);
+          this.props.setUserName("");
           this.props.accountSignIn(false);
           this.props.toggleAccountModalWindow(!isAccountModalWindowOpen);
         },
@@ -55,7 +55,7 @@ class AccountModalWindow extends React.Component<
             Your profile
           </NavLink>
           <NavLink to="/edit-profile">Settings</NavLink>
-          <NavLink to="#" onClick={this.signOut}>
+          <NavLink to="photos" onClick={this.signOut}>
             Logout
           </NavLink>
         </div>
@@ -70,7 +70,7 @@ const mapStateToProps = (state: IApplicationState) => ({
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    setUserName: (name: string | null) => dispatch(setUserName(name)),
+    setUserName: (name: string) => dispatch(setUserName(name)),
     accountSignIn: (value: boolean) => dispatch(accountSignIn(value)),
     toggleAccountModalWindow: (value: boolean) =>
       dispatch(toggleAccountModalWindow(value)),
