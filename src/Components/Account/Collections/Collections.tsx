@@ -70,9 +70,9 @@ class Collections extends React.Component<
     if (!isLoading) {
       return (
         <div className="waiting-download-collection">
-         <LoadingPage />
+          <LoadingPage />
         </div>
-       );
+      );
     }
 
     if (collection !== null && collection.length === 0) {
@@ -113,12 +113,18 @@ class Collections extends React.Component<
                 </div>
                 <div className="collection_rest">
                   {collection
-                    .map((img, i) => <img src={img.src} alt="img" key={i} />)
+                    .map(
+                      (img, i) =>
+                        i > 0 && <img src={img.src} alt="img" key={i} />
+                    )
                     .reverse()}
                 </div>
                 <div className="collection_size">
                   <div>Your likes</div>
-                  <div><FaRegImages/>{collection.length}</div>
+                  <div>
+                    <FaRegImages />
+                    {collection.length}
+                  </div>
                 </div>
               </div>
             </div>

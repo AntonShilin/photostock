@@ -1,7 +1,7 @@
 import * as React from "react";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaPencilAlt, FaRegUserCircle } from "react-icons/fa";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { IApplicationState } from "../../../Store/Store";
 import Footer from "../../Footer/Footer";
 import HeaderAccount from "../../Header/HeaderAccount";
@@ -16,12 +16,11 @@ export interface IAdminPageProps {
 export interface IAdminPageState {}
 
 class AdminPage extends React.Component<IAdminPageProps, IAdminPageState> {
-
   public render() {
-    const { userName , isAccountSignIn} = this.props;
-    
+    const { userName, isAccountSignIn } = this.props;
+
     if (!isAccountSignIn) {
-      return <Redirect to="/sign-up"/>
+      return <Redirect to="/sign-up" />;
     }
 
     return (
@@ -30,14 +29,22 @@ class AdminPage extends React.Component<IAdminPageProps, IAdminPageState> {
         <div className="container-xl admin_page_main">
           <div className="row">
             <div className="col">
-              <span>
-                <FaRegUserCircle />
-              </span>
-              <h1>{userName}</h1>
+              <div className="admin_page_content">
+                <div>
+                  <FaRegUserCircle />
+                </div>
+                <div>
+                  <h1>{userName}</h1>
+                  <NavLink to="/edit-profile">
+                    <FaPencilAlt />
+                    Complete Your Profile
+                  </NavLink>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <Collections/>
+        <Collections />
         <Footer />
       </>
     );
