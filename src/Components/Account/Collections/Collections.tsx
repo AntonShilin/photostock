@@ -4,21 +4,48 @@ import { IApplicationState } from "../../../Store/Store";
 import "./Collections.scss";
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import LoadingPage from "../../LoadingPage/LoadingPage";
 import { FaRegImages } from "react-icons/fa";
+import EmptyCollection from "../EmptyCollection/EmptyCollection";
+import { downloadCollectionOfLikes } from "../../../Actions/AccountActions";
 
 export interface ICollectionsProps extends RouteComponentProps {
   collection: any[] | null;
+  downloadCollectionOfLikes: typeof downloadCollectionOfLikes;
 }
 
-export interface ICollectionsState {
-}
+export interface ICollectionsState {}
 
 class Collections extends React.Component<
   ICollectionsProps,
   ICollectionsState
 > {
+  public componentDidMount() {
+    firebase.auth().onAuthStateChanged((profile: firebase.User | null) => {
+      if (profile !== null) {
+        this.getLikesFromCollections(profile.uid);
+      }
+    });
+  }
+
+  public getLikesFromCollections = (identification: string) => {
+    const db = firebase.firestore();
+    const docRef = db.collection("all").doc(identification).collection("likes");
+
+    docRef
+      .get()
+      .then((snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        this.props.downloadCollectionOfLikes(data);
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+  };
 
   public showAllMyLikesPhotos = () => {
     this.props.history.push("/my-likes");
@@ -27,32 +54,17 @@ class Collections extends React.Component<
   public render() {
     const { collection } = this.props;
 
-    if (collection===null) {
-      return (
-          <LoadingPage />
-      );
+    if (collection === null) {
+      return <LoadingPage />;
     }
 
-    if (collection !== null && collection.length === 0) {
-      return (
-        <div className="container-xl empty-collection-bg">
-          <div className="row">
-            <div className="col">
-              <h2>You Haven't Liked Any Photos Yet</h2>
-              <span>
-                Discover amazing pictures and like them, to download them later,
-                share them with your colleagues or use it to make your favourite
-                photographer happy.
-              </span>
-              <NavLink to="/">Discover photos</NavLink>
-            </div>
-          </div>
-        </div>
-      );
+    if (collection.length === 0) {
+      return <EmptyCollection />;
     }
 
     return (
-      collection !== null && (
+      collection !== null &&
+      collection.length > 0 && (
         <div className="container-xl collection_main">
           <div className="row title">
             <div className="col">
@@ -107,7 +119,8 @@ const mapStateToProps = (state: IApplicationState) => ({
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
- 
+    downloadCollectionOfLikes: (arr: any) =>
+      dispatch(downloadCollectionOfLikes(arr)),
   };
 };
 
