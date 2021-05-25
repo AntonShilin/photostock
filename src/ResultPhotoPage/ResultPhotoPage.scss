@@ -58,7 +58,7 @@
               right: 5rem;
               bottom: 1rem;
               z-index: 2;
-              svg{
+              svg {
                 color: white;
                 font-size: 1.5rem;
               }
@@ -92,8 +92,8 @@
       }
     }
     div:nth-of-type(2) {
-      div{
-        div{
+      div {
+        div {
           div.result-info-for-image {
             position: relative;
             margin-bottom: 0.5rem;
@@ -121,7 +121,7 @@
               right: 5rem;
               bottom: 1rem;
               z-index: 2;
-              svg{
+              svg {
                 color: white;
                 font-size: 1.5rem;
               }
@@ -160,6 +160,21 @@
 @media screen and (max-width: 850px) {
   div.result-info-for-image {
     min-height: 15rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  div.photo-result-bages {
+    div {
+      div.photo-result-navigation {
+        padding-left: 10% !important;
+        a {
+          svg {
+            display: none;
+          }
+        }
+      }
+    }
   }
 }
 

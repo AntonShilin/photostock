@@ -78,7 +78,7 @@ export interface IAccountState {
   userName: string;
   isAccountSignIn: boolean;
   isAccountModalWindowOpen: boolean;
-  identification: string | null;
+  identification: string | undefined;
   collection: any[] | null;
   userEmail: string;
 }

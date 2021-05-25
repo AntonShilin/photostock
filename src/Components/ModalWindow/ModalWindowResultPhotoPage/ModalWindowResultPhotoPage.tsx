@@ -80,6 +80,10 @@ class ModalWindowResultPhotoPage extends React.Component<
                           src={
                             this.props.resultSearchImage!.photos[id].src.small
                           }
+                          photographer={
+                            this.props.resultSearchImage!.photos[id]
+                              .photographer
+                          }
                         />{" "}
                         Likes
                       </button>

@@ -17,7 +17,7 @@ const accountState: IAccountState = {
   userName: "",
   isAccountSignIn: false,
   isAccountModalWindowOpen: false,
-  identification: null,
+  identification: undefined,
   collection: null,
   userEmail: "",
 };

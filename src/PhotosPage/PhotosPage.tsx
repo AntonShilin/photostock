@@ -120,9 +120,8 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
             Photo by {this.props.data?.photos[0].photographer}
           </p>
         </div>
+        <NavigationPages />
         {!isLoadingImages ? (
-          <>
-          <NavigationPages />
             <div className="container-xl trending_photos">
               <div className="row">
                 <div className="col-12">
@@ -167,7 +166,11 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                                   <MdControlPoint />
                                 </span>
                                 <span>
-                                  <Heart id={image.id} src={image.src.large} />
+                                  <Heart
+                                    id={image.id}
+                                    src={image.src.large}
+                                    photographer={image.photographer}
+                                  />
                                 </span>
                               </div>
                             </div>
@@ -206,15 +209,14 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                                   </a>
                                 </span>
                                 <span>
-                                  <MdControlPoint
-                                    style={{
-                                      color: "white",
-                                      fontSize: "1.5rem",
-                                    }}
-                                  />
+                                  <MdControlPoint />
                                 </span>
                                 <span>
-                                  <Heart id={image.id} src={image.src.large} />
+                                  <Heart
+                                    id={image.id}
+                                    src={image.src.large}
+                                    photographer={image.photographer}
+                                  />
                                 </span>
                               </div>
                             </div>
@@ -224,7 +226,6 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                 </div>
               </div>
             </div>
-          </>
         ) : (
           <LoadingPage />
         )}

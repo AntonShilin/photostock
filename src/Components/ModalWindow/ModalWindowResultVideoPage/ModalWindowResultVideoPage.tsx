@@ -85,6 +85,7 @@ class ModalWindowResultVideoPage extends React.Component<
                         <Heart
                           id={resultSearchVideo.videos[id].id}
                           src={resultSearchVideo.videos[id].video_files[0].link}
+                          photographer={resultSearchVideo.videos[id].user.name}
                         />{" "}
                         Likes
                       </button>

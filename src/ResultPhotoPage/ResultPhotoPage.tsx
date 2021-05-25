@@ -113,7 +113,11 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                                   <MdControlPoint />
                                 </span>
                                 <span>
-                                  <Heart id={image.id} src={image.src.large} />
+                                  <Heart
+                                    id={image.id}
+                                    src={image.src.large}
+                                    photographer={image.photographer}
+                                  />
                                 </span>
                               </div>
                             </div>
@@ -155,7 +159,11 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                                   <MdControlPoint />
                                 </span>
                                 <span>
-                                  <Heart id={image.id} src={image.src.large} />
+                                  <Heart
+                                    id={image.id}
+                                    src={image.src.large}
+                                    photographer={image.photographer}
+                                  />
                                 </span>
                               </div>
                             </div>

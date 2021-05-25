@@ -182,7 +182,8 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                               <span>
                                 <Heart
                                  id={value.id}
-                                 src={value.video_files[0].link}
+                                  src={value.video_files[0].link}
+                                  photographer={value.user.name}
                                 />
                               </span>
                             </div>
@@ -247,7 +248,8 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                 <span>
                                   <Heart
                                    id={value.id}
-                                   src={value.video_files[0].link}
+                                    src={value.video_files[0].link}
+                                    photographer={value.user.name}
                                   />
                                 </span>
                               </div>

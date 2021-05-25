@@ -1,11 +1,11 @@
 import * as React from "react";
 import { handleLikeHeart } from "../../../Actions/ProductsActions";
 import { connect } from "react-redux";
-import "./Heart.scss";
+import "./Dislike.scss";
 import { IApplicationState } from "../../../Store/Store";
 import firebase from "firebase";
 
-export interface IHeartProps {
+export interface IDislakeProps {
   handleLikeHeart: typeof handleLikeHeart;
   id: number;
   src: string;
@@ -13,37 +13,27 @@ export interface IHeartProps {
   photographer: string | undefined;
 }
 
-export interface IheartState {
+export interface IDislakeState {
   isLiked: boolean;
 }
 
-class Heart extends React.Component<IHeartProps, IheartState> {
-  constructor(props: IHeartProps) {
+class Heart extends React.Component<IDislakeProps, IDislakeState> {
+  constructor(props: IDislakeProps) {
     super(props);
     this.state = {
-      isLiked: false,
+      isLiked: true,
     };
   }
 
-  public addToMyCollectionOfLikes = () => {
-    const { identification, id, src, photographer } = this.props;
-    const db = firebase.firestore();
+  public deleteImageFromMyLikesCollection = (id: number) => {
+    const { identification } = this.props;
     if (identification !== undefined) {
-      db.collection("all")
+      const db = firebase.firestore();
+      const docRef = db
+        .collection("all")
         .doc(identification)
-        .collection("likes")
-        .doc(id.toString())
-        .set({
-          id,
-          src,
-          photographer
-        })
-        .then(() => {
-          console.log("Add to likes collection successfully!");
-        })
-        .catch((error) => {
-          console.error("Error adding to collection:", error);
-        });
+        .collection("likes");
+      docRef.doc(id.toString()).delete();
     }
   };
 
@@ -55,10 +45,11 @@ class Heart extends React.Component<IHeartProps, IheartState> {
 
   public render() {
     const { isLiked } = this.state;
+    const { id } = this.props;
     
     return (
       <svg
-        className={isLiked ? `heart liked`:`heart`}
+        className={isLiked ? `like`:`like dislike`}
         viewBox="0 -2 35 35"
         xmlns="http://www.w3.org/2000/svg"
         strokeWidth="0"
@@ -68,7 +59,7 @@ class Heart extends React.Component<IHeartProps, IheartState> {
         height="1.3em"
         onClick={(e) => {
           // this.props.handleLikeHeart(e);
-          this.addToMyCollectionOfLikes();
+          this.deleteImageFromMyLikesCollection(id);
           this.currentImageIsLiked();
         }}
       >

@@ -7,10 +7,14 @@ import "./MyLikesTitleCollection.scss";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { downloadCollectionOfLikes } from "../../../../Actions/AccountActions";
+import Dislike from "../../../SVGIcons/Dislike/Dislike";
+import DownloadIcon from "../../../SVGIcons/DownloadIcon/DownloadIcon";
+import { MdControlPoint } from "react-icons/md";
 
 export interface IMyLikesTitleCollectionProps {
   collection: any[] | null;
   downloadCollectionOfLikes: typeof downloadCollectionOfLikes;
+  identification: string | undefined;
 }
 
 export interface IMyLikesTitleCollectionState {}
@@ -64,13 +68,57 @@ class MyLikesTitleCollection extends React.Component<
             <div className="col-lg-6 col-md-6 col-12">
               {collection.map(
                 (img, i) =>
-                  i % 2 === 0 && <img src={img.src} alt="img" key={i} />
+                  i % 2 === 0 && (
+                    <div className="info-image" key={i}>
+                      <img src={img.src} alt="img" />
+                      <div className="photographer-data">
+                        <p>{img.photographer}</p>
+                      </div>
+                      <span>
+                        <a>
+                          <DownloadIcon />
+                        </a>
+                      </span>
+                      <span>
+                        <MdControlPoint />
+                      </span>
+                      <span>
+                        <Dislike
+                          id={img.id}
+                          src={img.src}
+                          photographer={img.photographer}
+                        />
+                      </span>
+                    </div>
+                  )
               )}
             </div>
             <div className="col-lg-6 col-md-6 col-12">
               {collection.map(
                 (img, k) =>
-                  k % 2 !== 0 && <img src={img.src} alt="img" key={k} />
+                  k % 2 !== 0 && (
+                    <div className="info-image" key={k}>
+                      <img src={img.src} alt="img" />
+                      <div className="photographer-data">
+                        <p>{img.photographer}</p>
+                      </div>
+                      <span>
+                        <a>
+                          <DownloadIcon />
+                        </a>
+                      </span>
+                      <span>
+                        <MdControlPoint />
+                      </span>
+                      <span>
+                        <Dislike
+                          id={img.id}
+                          src={img.src}
+                          photographer={img.photographer}
+                        />
+                      </span>
+                    </div>
+                  )
               )}
             </div>
           </div>
@@ -82,12 +130,13 @@ class MyLikesTitleCollection extends React.Component<
 
 const mapStateToProps = (state: IApplicationState) => ({
   collection: state.account.collection,
+  identification: state.account.identification,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     downloadCollectionOfLikes: (arr: any) =>
-    dispatch(downloadCollectionOfLikes(arr)),
+      dispatch(downloadCollectionOfLikes(arr)),
   };
 };
 
