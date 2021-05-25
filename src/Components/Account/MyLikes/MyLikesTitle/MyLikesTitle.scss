@@ -1,0 +1,32 @@
+.my-likes-title-bg {
+    margin-top: 7rem;
+    max-width: 1500px;
+    div {
+      div {
+        div.my-likes-title {
+          margin-bottom: 2.5rem;
+          h1 {
+            color: #1a1a1a;
+            text-align: center;
+          }
+          p {
+            text-align: center;
+            font-size: 1rem;
+            color: #5e5e5e;
+            margin-top: 10px;
+            margin-bottom: 0;
+            a {
+              margin-left: 0.5rem;
+              color: #1a1a1a;
+              text-decoration: none;
+              svg {
+                margin-right: 0.25rem;
+                font-size: 1rem;
+                color: lightgray;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
