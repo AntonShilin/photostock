@@ -75,7 +75,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
       <>
         <HeaderPhotoPage />
         <ModalPhotoPage />
-        <AuthModalWindow/>
+        <AuthModalWindow />
         <div
           className="container-xl photospage_bg"
           style={{
@@ -124,114 +124,114 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
         </div>
         <NavigationPages />
         {!isLoadingImages ? (
-            <div className="container-xl trending_photos">
-              <div className="row">
-                <div className="col-12">
-                  <h6 className="mb-4 mt-4">Trending Free Stock Photos</h6>
+          <div className="container-xl trending_photos">
+            <div className="row">
+              <div className="col-12">
+                <h6 className="mb-4 mt-4">Trending Free Stock Photos</h6>
+              </div>
+            </div>
+            <div className="row ">
+              <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="row">
+                  {this.props.data !== null &&
+                    this.props.data.photos.map(
+                      (image, i) =>
+                        i % 2 !== 0 && (
+                          <div key={i} className="col-12">
+                            <div className="info-for-image">
+                              <img
+                                onClick={() => {
+                                  this.props.getIdPhoto(image.id);
+                                  this.props.toggleWindowPhotoPage();
+                                }}
+                                src={image.src.large}
+                                alt={`img_${i}`}
+                                crossOrigin="anonymous"
+                              />
+                              <div className="image-photographer">
+                                <p>
+                                  {image.photographer}
+                                  {image.id}
+                                </p>
+                              </div>
+                              <span>
+                                <a
+                                  download={true}
+                                  onClick={(e) =>
+                                    this.props.downloadImage(e.currentTarget)
+                                  }
+                                >
+                                  <DownloadIcon />
+                                </a>
+                              </span>
+                              <span>
+                                <MdControlPoint />
+                              </span>
+                              <span>
+                                <Heart
+                                  id={image.id}
+                                  src={image.src.large}
+                                  person={image.photographer}
+                                />
+                              </span>
+                            </div>
+                          </div>
+                        )
+                    )}
                 </div>
               </div>
-              <div className="row ">
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="row">
-                    {this.props.data !== null &&
-                      this.props.data.photos.map(
-                        (image, i) =>
-                          i % 2 !== 0 && (
-                            <div key={i} className="col-12">
-                              <div className="info-for-image">
-                                <img
-                                  onClick={() => {
-                                    this.props.getIdPhoto(image.id);
-                                    this.props.toggleWindowPhotoPage();
-                                  }}
-                                  src={image.src.large}
-                                  alt={`img_${i}`}
-                                  crossOrigin="anonymous"
-                                />
-                                <div className="image-photographer">
-                                  <p>
-                                    {image.photographer}
-                                    {image.id}
-                                  </p>
-                                </div>
-                                <span>
-                                  <a
-                                    download={true}
-                                    onClick={(e) =>
-                                      this.props.downloadImage(e.currentTarget)
-                                    }
-                                  >
-                                    <DownloadIcon />
-                                  </a>
-                                </span>
-                                <span>
-                                  <MdControlPoint />
-                                </span>
-                                <span>
-                                  <Heart
-                                    id={image.id}
-                                    src={image.src.large}
-                                    photographer={image.photographer}
-                                  />
-                                </span>
+              <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="row">
+                  {this.props.data !== null &&
+                    this.props.data.photos.map(
+                      (image, i) =>
+                        i % 2 === 0 && (
+                          <div key={i} className="col-12">
+                            <div className="info-for-image">
+                              <img
+                                src={image.src.large}
+                                alt={`img_${i}`}
+                                crossOrigin="anonymous"
+                                onClick={() => {
+                                  this.props.getIdPhoto(image.id);
+                                  this.props.toggleWindowPhotoPage();
+                                }}
+                              />
+                              <div className="image-photographer">
+                                <p>{image.photographer}</p>
                               </div>
-                            </div>
-                          )
-                      )}
-                  </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="row">
-                    {this.props.data !== null &&
-                      this.props.data.photos.map(
-                        (image, i) =>
-                          i % 2 === 0 && (
-                            <div key={i} className="col-12">
-                              <div className="info-for-image">
-                                <img
+                              <span>
+                                <a
+                                  download={true}
+                                  onClick={(e) =>
+                                    this.props.downloadImage(e.currentTarget)
+                                  }
+                                >
+                                  <DownloadIcon />
+                                </a>
+                              </span>
+                              <span>
+                                <MdControlPoint />
+                              </span>
+                              <span>
+                                <Heart
+                                  id={image.id}
                                   src={image.src.large}
-                                  alt={`img_${i}`}
-                                  crossOrigin="anonymous"
-                                  onClick={() => {
-                                    this.props.getIdPhoto(image.id);
-                                    this.props.toggleWindowPhotoPage();
-                                  }}
+                                  person={image.photographer}
                                 />
-                                <div className="image-photographer">
-                                  <p>{image.photographer}</p>
-                                </div>
-                                <span>
-                                  <a
-                                    download={true}
-                                    onClick={(e) =>
-                                      this.props.downloadImage(e.currentTarget)
-                                    }
-                                  >
-                                    <DownloadIcon />
-                                  </a>
-                                </span>
-                                <span>
-                                  <MdControlPoint />
-                                </span>
-                                <span>
-                                  <Heart
-                                    id={image.id}
-                                    src={image.src.large}
-                                    photographer={image.photographer}
-                                  />
-                                </span>
-                              </div>
+                              </span>
                             </div>
-                          )
-                      )}
-                  </div>
+                          </div>
+                        )
+                    )}
                 </div>
               </div>
             </div>
+          </div>
         ) : (
           <LoadingPage />
         )}
-        <Footer />
+        <Footer/>
       </>
     );
   }

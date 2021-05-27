@@ -47,7 +47,7 @@ export interface IPropsVideosPage extends RouteComponentProps {
 class VideosPage extends React.Component<IPropsVideosPage> {
   public componentDidMount() {
     const { popularVideo } = this.props;
-    if (popularVideo===null) {
+    if (popularVideo === null) {
       this.props.getPopularVideo();
     }
   }
@@ -62,11 +62,13 @@ class VideosPage extends React.Component<IPropsVideosPage> {
   };
 
   public render() {
+    const { isLoadingVideos, popularVideo } = this.props;
+
     return (
-      <React.Fragment>
+      <>
         <HeaderVideoPage />
         <ModalVideoPage />
-        <div className="container-xl videos-page-bg">
+        <div className="container-xl videos-page-header">
           <video
             controls={false}
             autoPlay={navigator.appCodeName === "Safari" ? false : true}
@@ -80,10 +82,8 @@ class VideosPage extends React.Component<IPropsVideosPage> {
           </video>
           <div className="container-xl video_search_item_bg">
             <div className="video_search_item">
-              <h1 className="pb-1">
-                The best free stock videos from talented authors.
-              </h1>
-              <div className="input-group mb-3 input-group-lg">
+              <h1>The best free stock videos from talented authors.</h1>
+              <div className="input-group input-group-lg">
                 <input
                   required={true}
                   type="text"
@@ -115,26 +115,26 @@ class VideosPage extends React.Component<IPropsVideosPage> {
             </div>
           </div>
         </div>
-        {this.props.isLoadingVideos ? (
+        <NavigationPages />
+        {isLoadingVideos ? (
           <LoadingPage />
         ) : (
-          <React.Fragment>
-            <NavigationPages />
-            <div className="container-xl trending_video">
-              <div className="row">
-                <div className="col-12">
-                  <h6 className="mt-4 mb-4">Trending Free Stock Videos</h6>
-                </div>
+          <div className="container-xl trending_video_header">
+            <div className="row">
+              <div className="col-12">
+                <h6>Trending Free Stock Videos</h6>
               </div>
-              <div className="row">
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="row">
-                    {this.props.popularVideo! &&
-                      this.props.popularVideo!.videos.map((value, i) =>
-                        i % 2 ? (
+            </div>
+            <div className="row">
+              <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="row">
+                  {popularVideo! &&
+                    popularVideo!.videos.map(
+                      (value, i) =>
+                        i % 2 !== 0 && (
                           <div key={i} className="col-12">
                             <div
-                              className="m-1 popular_video_item"
+                              className="popular_video_item"
                               data-id={value.id}
                             >
                               <video
@@ -181,89 +181,88 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                               </span>
                               <span>
                                 <Heart
-                                 id={value.id}
+                                  id={value.id}
                                   src={value.video_files[0].link}
-                                  photographer={value.user.name}
+                                  person={value.user.name}
                                 />
                               </span>
                             </div>
                           </div>
-                        ) : null
-                      )}
-                  </div>
+                        )
+                    )}
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="row">
-                    {this.props.popularVideo! &&
-                      this.props.popularVideo!.videos.map(
-                        (value, i) =>
-                          i % 2 === 0 && (
-                            <div key={i} className="col-12">
-                              <div
-                                className="m-1 popular_video_item"
-                                data-id={value.id}
+              </div>
+              <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="row">
+                  {popularVideo! &&
+                    popularVideo!.videos.map(
+                      (value, i) =>
+                        i % 2 === 0 && (
+                          <div key={i} className="col-12">
+                            <div
+                              className="popular_video_item"
+                              data-id={value.id}
+                            >
+                              <video
+                                onMouseOver={(e) =>
+                                  this.props.handlePreplayVideo(e)
+                                }
+                                onMouseLeave={(e) =>
+                                  this.props.handlePauseVideo(e)
+                                }
+                                controls={false}
+                                muted={true}
+                                poster={value.image}
                               >
-                                <video
-                                  onMouseOver={(e) =>
-                                    this.props.handlePreplayVideo(e)
-                                  }
-                                  onMouseLeave={(e) =>
-                                    this.props.handlePauseVideo(e)
-                                  }
-                                  controls={false}
-                                  muted={true}
-                                  poster={value.image}
-                                >
-                                  <source
-                                    src={value.video_files[0].link}
-                                    type={value.video_files[0].file_type}
-                                  />
-                                  Your browser doesn't support HTML5 video tag.
-                                </video>
-                                <div
-                                  className="video_item_control"
-                                  onClick={() => {
-                                    this.props.toggleWindowVideoPage();
-                                    this.props.getIdVideo(value.id);
-                                  }}
-                                >
-                                  <AiOutlinePlayCircle />
-                                </div>
-                                <div className="video-person-name">
-                                  <p>{value.user.name}</p>
-                                </div>
-                                <span>
-                                  <a
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                    download={true}
-                                    href={value.video_files[0].link}
-                                  >
-                                    <DownloadIcon />
-                                  </a>
-                                </span>
-                                <span>
-                                  <MdControlPoint />
-                                </span>
-                                <span>
-                                  <Heart
-                                   id={value.id}
-                                    src={value.video_files[0].link}
-                                    photographer={value.user.name}
-                                  />
-                                </span>
+                                <source
+                                  src={value.video_files[0].link}
+                                  type={value.video_files[0].file_type}
+                                />
+                                Your browser doesn't support HTML5 video tag.
+                              </video>
+                              <div
+                                className="video_item_control"
+                                onClick={() => {
+                                  this.props.toggleWindowVideoPage();
+                                  this.props.getIdVideo(value.id);
+                                }}
+                              >
+                                <AiOutlinePlayCircle />
                               </div>
+                              <div className="video-person-name">
+                                <p>{value.user.name}</p>
+                              </div>
+                              <span>
+                                <a
+                                  rel="noopener noreferrer"
+                                  target="_blank"
+                                  download={true}
+                                  href={value.video_files[0].link}
+                                >
+                                  <DownloadIcon />
+                                </a>
+                              </span>
+                              <span>
+                                <MdControlPoint />
+                              </span>
+                              <span>
+                                <Heart
+                                  id={value.id}
+                                  src={value.video_files[0].link}
+                                  person={value.user.name}
+                                />
+                              </span>
                             </div>
-                          )
-                      )}
-                  </div>
+                          </div>
+                        )
+                    )}
                 </div>
               </div>
             </div>
-            <Footer/>
-          </React.Fragment>
-          )}
-      </React.Fragment>
+          </div>
+        )}
+        <Footer/>
+      </>
     );
   }
 }

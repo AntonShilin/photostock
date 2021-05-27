@@ -6,7 +6,12 @@ footer {
   div {
     max-width: 1500px !important;
     div {
-      div {
+      div:first-child {
+          font-size: 0.8rem;
+          font-weight: 300;
+          color: #ffffff;
+          border-bottom: 1px solid rgba(255,255,255,.25);
+          padding-bottom: 1rem;
         a.footer_logo.btn {
           width: 2.7rem;
           height: 2.7rem;
@@ -18,16 +23,31 @@ footer {
           color: #ffffff;
           text-align: left;
           text-decoration: none;
+          margin: 1rem;
         }
       }
       div {
         a {
+          padding-top: 1rem;
           display: block;
           font-size: 1rem;
-          font-weight: 600;
+          font-weight: 400;
           color: #ffffff;
           text-align: center;
           line-height: 2.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  footer {
+    div {
+      div {
+        div {
+          text-align: center;
+      
         }
       }
     }

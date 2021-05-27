@@ -212,7 +212,7 @@ class SignUpPage extends React.Component<ISignUpPageProps, ISignUpPageState> {
             </div>
           </div>
         </div>
-        <Footer />
+        <Footer/>
       </>
     );
   }

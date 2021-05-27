@@ -12,7 +12,7 @@ export interface IHeartProps {
   id: number;
   src: string;
   identification: string | undefined;
-  photographer: string | undefined;
+  person: string | undefined;
   isAccountSignIn: boolean;
   isAuthModalWindowOpen: boolean;
 }
@@ -30,7 +30,7 @@ class Heart extends React.Component<IHeartProps, IheartState> {
   }
 
   public addToMyCollectionOfLikes = () => {
-    const { identification, id, src, photographer } = this.props;
+    const { identification, id, src, person } = this.props;
     const db = firebase.firestore();
     if (identification !== undefined) {
       db.collection("all")
@@ -40,7 +40,7 @@ class Heart extends React.Component<IHeartProps, IheartState> {
         .set({
           id,
           src,
-          photographer,
+          person,
         })
         .then(() => {
           console.log("Add to likes collection successfully!");

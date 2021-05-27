@@ -36,121 +36,120 @@ export interface IPropsResultPage extends RouteComponentProps {
 
 class ResultVideoPage extends React.Component<IPropsResultPage> {
   public render() {
+    const {
+      isLoadingVideos,
+      searchNameVideo,
+      resultSearchImage,
+      resultSearchVideo,
+    } = this.props;
+
     return (
-      <React.Fragment>
+      <>
         <HeaderResultVideoPage />
         <ModalWindowResultVideoPage />
-        {this.props.isLoadingVideos ? (
+        {isLoadingVideos ? (
           <LoadingPage />
         ) : (
           <>
             <div className="container-xl video_result_bg">
-              <div className="video-result-bages row align-items-center justify-content-md-center mt-3 mb-5">
-                <div className="col-auto">
-                  <ul className="list-group list-group-horizontal">
-                    <li className="list-group-item">
-                      {" "}
-                      <NavLink
-                        activeClassName="video-result-bages-active"
-                        to={`/photos/${this.props.searchNameVideo}`}
-                      >
-                        <FaRegImage /> Photos
-                        <span className="ml-1">
-                          {this.props.resultSearchImage === null
-                            ? 0
-                            : this.props.resultSearchImage.photos.length}
-                        </span>
-                      </NavLink>
-                    </li>
-                    <li className="list-group-item">
-                      {" "}
-                      <NavLink
-                        activeClassName="video-result-bages-active"
-                        to="#"
-                      >
-                        <FaVideo /> Videos
-                        <span className="ml-1">
-                          {this.props.resultSearchVideo === null
-                            ? 0
-                            : this.props.resultSearchVideo.videos.length}
-                        </span>
-                      </NavLink>
-                    </li>
-                  </ul>
+              <div className="row video-result-bages">
+                <div className="col">
+                  <div className="video-result-navigation">
+                    <NavLink
+                      activeClassName="video-result-bages-active"
+                      to={`/photos/${searchNameVideo}`}
+                    >
+                      <FaRegImage /> Photos
+                      <span className="ml-1">
+                        {resultSearchImage === null
+                          ? 0
+                          : resultSearchImage.photos.length}
+                      </span>
+                    </NavLink>
+                    <NavLink activeClassName="video-result-bages-active" to="#">
+                      <FaVideo /> Videos
+                      <span className="ml-1">
+                        {resultSearchVideo === null
+                          ? 0
+                          : resultSearchVideo.videos.length}
+                      </span>
+                    </NavLink>
+                  </div>
                 </div>
               </div>
               <CouldnotFindVideo />
-              <div className="row ">
+              <div className="row video-result-search">
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="row">
-                    {this.props.resultSearchVideo !== null &&
-                      this.props.resultSearchVideo.videos.map((value, i) =>
-                        i % 2 ? (
-                          <div key={i} className="col-12">
-                            <div className="m-1 popular_video_item">
-                              <video
-                                onMouseOver={(e) =>
-                                  this.props.handlePreplayVideo(e)
-                                }
-                                onMouseLeave={(e) =>
-                                  this.props.handlePauseVideo(e)
-                                }
-                                controls={false}
-                                muted={true}
-                                poster={value.image}
-                              >
-                                <source
-                                  src={value.video_files[0].link}
-                                  type={value.video_files[0].file_type}
-                                />
-                                Your browser doesn't support HTML5 video tag.
-                              </video>
-                              <div
-                                className="video_item_control"
-                                onClick={() => {
-                                  this.props.toggleWindowVideoPage();
-                                  this.props.getIdVideo(value.id);
-                                }}
-                              >
-                                <AiOutlinePlayCircle />
-                              </div>
-                              <div className="video-person-name">
-                                <p>{value.user.name}</p>
-                              </div>
-                              <span>
-                                <a
-                                  rel="noopener noreferrer"
-                                  target="_blank"
-                                  download={true}
-                                  href={value.video_files[0].link}
+                    {resultSearchVideo! &&
+                      resultSearchVideo!.videos.map(
+                        (value, i) =>
+                          i % 2 !== 0 && (
+                            <div key={i} className="col-12">
+                              <div className="result_video_item">
+                                <video
+                                  onMouseOver={(e) =>
+                                    this.props.handlePreplayVideo(e)
+                                  }
+                                  onMouseLeave={(e) =>
+                                    this.props.handlePauseVideo(e)
+                                  }
+                                  controls={false}
+                                  muted={true}
+                                  poster={value.image}
                                 >
-                                  <DownloadIcon />
-                                </a>
-                              </span>
-                              <span>
-                                <MdControlPoint />
-                              </span>
-                              <span>
-                                <Heart
-                                  id={value.id}
-                                  src={value.video_files[0].link}
-                                  photographer={value.user.name}
-                                />
-                              </span>
+                                  <source
+                                    src={value.video_files[0].link}
+                                    type={value.video_files[0].file_type}
+                                  />
+                                  Your browser doesn't support HTML5 video tag.
+                                </video>
+                                <div
+                                  className="video_item_control"
+                                  onClick={() => {
+                                    this.props.toggleWindowVideoPage();
+                                    this.props.getIdVideo(value.id);
+                                  }}
+                                >
+                                  <AiOutlinePlayCircle />
+                                </div>
+                                <div className="video-person-name">
+                                  <p>{value.user.name}</p>
+                                </div>
+                                <span>
+                                  <a
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                    download={true}
+                                    href={value.video_files[0].link}
+                                  >
+                                    <DownloadIcon />
+                                  </a>
+                                </span>
+                                <span>
+                                  <MdControlPoint />
+                                </span>
+                                <span>
+                                  <Heart
+                                    id={value.id}
+                                    src={value.video_files[0].link}
+                                    person={value.user.name}
+                                  />
+                                </span>
+                              </div>
                             </div>
-                          </div>
-                        ) : null
+                          )
                       )}
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="row">
-                    {this.props.resultSearchVideo !== null &&
-                      this.props.resultSearchVideo.videos.map(
+                    {resultSearchVideo !== null &&
+                      resultSearchVideo.videos.map(
                         (value, i) =>
                           i % 2 === 0 && (
                             <div key={i} className="col-12">
-                              <div className="m-1 popular_video_item">
+                              <div className="result_video_item">
                                 <video
                                   onMouseOver={(e) =>
                                     this.props.handlePreplayVideo(e)
@@ -195,9 +194,9 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                                 </span>
                                 <span>
                                   <Heart
-                                   id={value.id}
+                                    id={value.id}
                                     src={value.video_files[0].link}
-                                    photographer={value.user.name}
+                                    person={value.user.name}
                                   />
                                 </span>
                               </div>
@@ -208,10 +207,10 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                 </div>
               </div>
             </div>
-            <Footer />
           </>
         )}
-      </React.Fragment>
+        <Footer/>
+      </>
     );
   }
 }

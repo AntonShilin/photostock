@@ -80,7 +80,7 @@ class ModalWindowResultPhotoPage extends React.Component<
                           src={
                             this.props.resultSearchImage!.photos[id].src.small
                           }
-                          photographer={
+                          person={
                             this.props.resultSearchImage!.photos[id]
                               .photographer
                           }

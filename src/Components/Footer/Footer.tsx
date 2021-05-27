@@ -4,41 +4,32 @@ import { NavLink } from "react-router-dom";
 import { IApplicationState } from "../../Store/Store";
 import "./Footer.scss";
 
-export interface IFooterProps {
-  collection: any[] | null;
-}
+export interface IFooterProps {}
 
 export interface IFooterState {}
 
 class Footer extends React.Component<IFooterProps, IFooterState> {
   public render() {
-    const { collection } = this.props;
     return (
-      <footer
-        className="container-xl"
-        style={
-        collection === null
-            ? { minHeight: "70vh" }
-            : {}
-        }
-      >
+      <footer className="container-xl">
         <div className="container-xl">
           <div className="row">
-            <div className="col-lg-4 col-md-4 col-sm-12">
+            <div className="col-12">
               <NavLink to="/" className="footer_logo btn">
                 F
               </NavLink>
+               — Beautiful free photos contributed by our talented community.
             </div>
-            <div className="col-lg-2 col-md-2 col-sm-3">
+            <div className="col-12">
               <NavLink to="#">Terms of Use</NavLink>
             </div>
-            <div className="col-lg-2 col-md-2 col-sm-3">
+            <div className="col-12">
               <NavLink to="#">Privacy Policy</NavLink>
             </div>
-            <div className="col-lg-2 col-md-2 col-sm-3">
+            <div className="col-12">
               <NavLink to="#">License</NavLink>
             </div>
-            <div className="col-lg-2 col-md-2 col-sm-3">
+            <div className="col-12">
               <NavLink to="#">Imprint</NavLink>
             </div>
           </div>
@@ -48,9 +39,7 @@ class Footer extends React.Component<IFooterProps, IFooterState> {
   }
 }
 
-const mapStateToProps = (state: IApplicationState) => ({
-  collection: state.account.collection,
-});
+const mapStateToProps = (state: IApplicationState) => ({});
 
 const mapDispatchToProps = (dispatch: any) => {
   return {};

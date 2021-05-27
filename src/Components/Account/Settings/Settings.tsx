@@ -160,7 +160,7 @@ class Settings extends React.Component<ISettingsProps, ISettingsState> {
             </div>
           </div>
         </div>
-        <Footer />
+        <Footer/>
       </>
     );
   }
