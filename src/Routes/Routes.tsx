@@ -16,6 +16,7 @@ import AdminPage from "../Components/Account/AdminPage/AdminPage";
 import ResetPassword from "../Components/Account/ResetPassword/ResetPassword";
 import Settings from "../Components/Account/Settings/Settings";
 import MyLikes from "../Components/Account/MyLikes/MyLikes";
+import AuthModalWindow from "../Components/Account/AuthModalWindow/AuthModalWindow";
 
 
 
@@ -24,6 +25,7 @@ const Routes: React.SFC<RouteComponentProps> = () => {
     <React.Fragment>
       <Switch>
         <Redirect exact={true} path="/" to="/photos" />
+        <Route path="/auth" component={AuthModalWindow} />
         <Route path="/login" component={LoginPage} />
         <Route path="/sign-up" component={SignUpPage} />
         <Route path="/my-account" component={AdminPage} />

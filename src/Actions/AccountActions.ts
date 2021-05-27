@@ -9,9 +9,11 @@ import {
   IDowloadCollectionOfLikesAction,
   ISetUserNameAction,
   IToggleAccountModalWindowAction,
+  IToggleAuthModalWindowOpenAction,
   SetUserEmailTypes,
   SetUserNameTypes,
   ToggleAccountModalWindowTypes,
+  ToggleAuthModalWindowOpenTypes,
 } from "./../Types/AccountTypes";
 
 export const accountSignUp = (value: boolean): IAccountcreatedAction => {
@@ -69,6 +71,16 @@ export const downloadCollectionOfLikes = (
 export const setUserEmail = (value: string) => {
   return {
     type: SetUserEmailTypes.SETUSEREMAIL,
+    value,
+  };
+};
+
+/* toggle auth modal window */
+export const toggleAuthModalWindow = (
+  value: boolean
+): IToggleAuthModalWindowOpenAction => {
+  return {
+    type: ToggleAuthModalWindowOpenTypes.TOGGLEAUTHMODALWINDOWOPEN,
     value,
   };
 };

@@ -4,13 +4,17 @@ import { connect } from "react-redux";
 import "./Heart.scss";
 import { IApplicationState } from "../../../Store/Store";
 import firebase from "firebase";
+import { toggleAuthModalWindow } from "../../../Actions/AccountActions";
 
 export interface IHeartProps {
   handleLikeHeart: typeof handleLikeHeart;
+  toggleAuthModalWindow: typeof toggleAuthModalWindow;
   id: number;
   src: string;
   identification: string | undefined;
   photographer: string | undefined;
+  isAccountSignIn: boolean;
+  isAuthModalWindowOpen: boolean;
 }
 
 export interface IheartState {
@@ -36,7 +40,7 @@ class Heart extends React.Component<IHeartProps, IheartState> {
         .set({
           id,
           src,
-          photographer
+          photographer,
         })
         .then(() => {
           console.log("Add to likes collection successfully!");
@@ -44,6 +48,18 @@ class Heart extends React.Component<IHeartProps, IheartState> {
         .catch((error) => {
           console.error("Error adding to collection:", error);
         });
+    }
+  };
+
+  public deleteFromMyCollectionOfLikes = (id: number) => {
+    const { identification } = this.props;
+    if (identification !== undefined) {
+      const db = firebase.firestore();
+      const docRef = db
+        .collection("all")
+        .doc(identification)
+        .collection("likes");
+      docRef.doc(id.toString()).delete();
     }
   };
 
@@ -55,10 +71,11 @@ class Heart extends React.Component<IHeartProps, IheartState> {
 
   public render() {
     const { isLiked } = this.state;
-    
+    const { id , isAccountSignIn, isAuthModalWindowOpen} = this.props;
+
     return (
       <svg
-        className={isLiked ? `heart liked`:`heart`}
+        className={isLiked ? `heart liked` : `heart`}
         viewBox="0 -2 35 35"
         xmlns="http://www.w3.org/2000/svg"
         strokeWidth="0"
@@ -68,8 +85,16 @@ class Heart extends React.Component<IHeartProps, IheartState> {
         height="1.3em"
         onClick={(e) => {
           // this.props.handleLikeHeart(e);
-          this.addToMyCollectionOfLikes();
-          this.currentImageIsLiked();
+          if (isAccountSignIn) {
+            this.currentImageIsLiked();
+            if (isLiked) {
+              this.deleteFromMyCollectionOfLikes(id);
+            } else if (!isLiked) {
+              this.addToMyCollectionOfLikes();
+            }
+          } else if (!isAccountSignIn) {
+            this.props.toggleAuthModalWindow(true);
+          }
         }}
       >
         <path
@@ -83,12 +108,15 @@ c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
 
 const mapStateToProps = (state: IApplicationState) => ({
   identification: state.account.identification,
+  isAccountSignIn: state.account.isAccountSignIn,
+  isAuthModalWindowOpen: state.account.isAuthModalWindowOpen
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     handleLikeHeart: (e: React.MouseEvent<SVGSVGElement>) =>
       dispatch(handleLikeHeart(e)),
+      toggleAuthModalWindow:(value:boolean)=>dispatch(toggleAuthModalWindow(value))
   };
 };
 

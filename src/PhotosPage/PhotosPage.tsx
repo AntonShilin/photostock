@@ -24,6 +24,7 @@ import Heart from "../Components/SVGIcons/Heart/Heart";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
 import ModalPhotoPage from "../Components/ModalWindow/ModalPhotoPage/ModalPhotoPage";
 import Footer from "../Components/Footer/Footer";
+import AuthModalWindow from "../Components/Account/AuthModalWindow/AuthModalWindow";
 
 export interface IPropsPhotosPage extends RouteComponentProps {
   data: ICuratedPhoto | null;
@@ -74,6 +75,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
       <>
         <HeaderPhotoPage />
         <ModalPhotoPage />
+        <AuthModalWindow/>
         <div
           className="container-xl photospage_bg"
           style={{
@@ -89,7 +91,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Find a photo"
+                  placeholder="Search for free photos"
                   value={this.props.searchNamePhoto!}
                   onChange={this.props.handleSearchChange}
                   autoFocus={false}

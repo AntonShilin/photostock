@@ -36,7 +36,7 @@ class SearchFotoSmallArea extends React.Component<ISearchFotoSmallAreaProps> {
         <form>
           <input
             type="text"
-            placeholder="Find a photo"
+            placeholder="Search for free photos"
             value={this.props.searchNamePhoto!}
             onChange={(e) => this.props.watchInputChange(e)}
             autoFocus={false}

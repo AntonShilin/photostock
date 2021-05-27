@@ -8,7 +8,7 @@ import {
   RouteComponentProps,
   withRouter,
 } from "react-router-dom";
-import { accountSignIn, setUserName } from "../../../Actions/AccountActions";
+import { accountSignIn, setUserName, toggleAuthModalWindow } from "../../../Actions/AccountActions";
 import { getPopularImages } from "../../../Actions/ProductsActions";
 import { ICuratedPhoto } from "../../../Interfaces/Interfaces";
 import { IApplicationState } from "../../../Store/Store";
@@ -20,6 +20,7 @@ export interface ILoginPageProps extends RouteComponentProps {
   setUserName: typeof setUserName;
   accountSignIn: typeof accountSignIn;
   isAccountSignIn: boolean;
+  toggleAuthModalWindow: typeof toggleAuthModalWindow;
 }
 
 export interface ILoginPageState {
@@ -79,7 +80,8 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
       .auth()
       .signInWithEmailAndPassword(email!, password!)
       .then(() => {
-        this.props.history.push("/my-account");
+        this.props.history.push("/");
+        this.props.toggleAuthModalWindow(false);
       })
       .catch((err) => {
         this.setState({ errorMessage: err.message });
@@ -158,6 +160,8 @@ const mapDispatchToProps = (dispatch: any) => {
     getPopularImages: () => dispatch(getPopularImages()),
     setUserName: (name: string ) => dispatch(setUserName(name)),
     accountSignIn: (value: boolean) => dispatch(accountSignIn(value)),
+    toggleAuthModalWindow: (value: boolean) =>
+    dispatch(toggleAuthModalWindow(value)),
   };
 };
 

@@ -1,0 +1,189 @@
+.auth-overloy {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 150;
+  position: fixed;
+  .auth-modal-header {
+    position: absolute;
+    top: 0.25rem;
+    left: 0;
+    width: 100%;
+    a.auth-header-btn {
+      margin-left: .5rem;
+      line-height: 3.3rem;
+      display: block;
+      width: 3.3rem;
+      height: 3.3rem;
+      font-size: 2.5rem;
+      font-weight: 900;
+      padding-left: 1rem;
+      font-family: "Fredoka One", cursive;
+      background-color: #05a081 !important;
+      color: whitesmoke !important;
+      border-radius: 3px;
+    }
+    a.auth-signin {
+      display: block;
+      font-size: 1rem;
+      color: white !important;
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      text-decoration: none;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.95;
+      }
+      span {
+        padding: 1rem 1.5rem;
+        font-weight: 700;
+        margin-left: 1rem;
+        background-color: white;
+        border: 1px;
+        border-radius: 3px;
+        color: #1a1a1a;
+      }
+    }
+  }
+  .auth-signup-bg {
+    margin-top: 1rem;
+    position: relative;
+    max-width: 485px;
+    padding: 2.5rem;
+    background-color: #fff;
+    border-radius: 6px;
+    .auth-signup-btn {
+      width: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
+      height: 45px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      button {
+        height: 2rem;
+        font-size: 2rem;
+        line-height: 0rem;
+        font-weight: 300;
+        background-color: transparent;
+        border: none;
+      }
+    }
+    .auth-signup-form {
+      h3 {
+        font-size: 2rem;
+        line-height: 48px;
+        font-weight: 600;
+        margin: 0;
+        text-align: center;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+      }
+      p {
+        font-size: 1.1rem;
+        font-weight: 300;
+        margin-top: 0;
+        margin-bottom: 0;
+        text-align: center;
+      }
+      span.auth-error-msg {
+        display: block;
+        color: red;
+        text-align: start;
+        margin: 0 auto 1rem auto;
+        font-size: 0.9rem;
+      }
+      div.auth-signup-form-area {
+        position: relative;
+        background: #fff;
+        border-radius: 6px;
+        padding: 1rem 1rem 2rem 1rem;
+        display: block;
+        width: 100%;
+        margin: 0 auto !important;
+        a {
+          position: absolute;
+          top: -2rem;
+          right: -2rem;
+          color: whitesmoke !important;
+          font-size: 1.5rem;
+          text-decoration: none;
+          font-weight: 700;
+          &:hover {
+            color: rgb(255, 0, 55) !important;
+          }
+        }
+        input:nth-of-type(1) {
+          width: 45%;
+          display: initial;
+          margin-right: 10%;
+        }
+        input:nth-of-type(2) {
+          width: 45%;
+          display: initial;
+        }
+        input {
+          border: 1px solid #e8e8e8;
+          width: 100%;
+          margin-bottom: 1rem;
+          display: block;
+          font-size: 1rem;
+          line-height: 25px;
+          font-weight: 400;
+          border-radius: 2px;
+          padding: 0.6rem 1.15rem;
+          padding-right: 0;
+          background-color: #f1f1f1;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          &:focus {
+            outline-color: #05a081 !important;
+            background-color: #fff !important;
+          }
+        }
+        svg {
+          position: absolute;
+          top: 9.9rem;
+          right: 2rem;
+          cursor: pointer;
+        }
+        button.sign_up_btn {
+          background: #05a081;
+          color: #fff;
+          border: 1px solid #05a081;
+          line-height: 1;
+          position: relative;
+          display: block;
+          align-items: center;
+          justify-content: center;
+          border-radius: 3px;
+          cursor: pointer;
+          font-size: 1rem;
+          font-weight: 400;
+          text-align: center;
+          white-space: nowrap;
+          padding: 0.6rem 1.15rem;
+          width: 100%;
+          overflow: hidden;
+          &:hover {
+            background: #12bb99 !important;
+            border-color: #12bb99 !important;
+          }
+          &:focus {
+            background: #12bb99 !important;
+            border-color: #12bb99 !important;
+            outline: #12bb99;
+          }
+        }
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ import {
   SetUserEmailTypes,
   SetUserNameTypes,
   ToggleAccountModalWindowTypes,
+  ToggleAuthModalWindowOpenTypes,
 } from "./../Types/AccountTypes";
 import {
   AccountCreatedTypes,
@@ -20,6 +21,7 @@ const accountState: IAccountState = {
   identification: undefined,
   collection: null,
   userEmail: "",
+  isAuthModalWindowOpen: false,
 };
 
 export const accountReducer = (
@@ -73,6 +75,13 @@ export const accountReducer = (
       return {
         ...state,
         userEmail: action.value,
+      };
+    }
+
+    case ToggleAuthModalWindowOpenTypes.TOGGLEAUTHMODALWINDOWOPEN: {
+      return {
+        ...state,
+        isAuthModalWindowOpen: action.value,
       };
     }
 

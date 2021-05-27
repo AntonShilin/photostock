@@ -54,7 +54,11 @@ class AccountModalWindow extends React.Component<
           >
             Your profile
           </NavLink>
-          <NavLink to="/edit-profile">Settings</NavLink>
+          <NavLink to="/edit-profile"
+           onClick={() =>
+            this.props.toggleAccountModalWindow(!isAccountModalWindowOpen)
+          }
+          >Settings</NavLink>
           <NavLink to="photos" onClick={this.signOut}>
             Logout
           </NavLink>

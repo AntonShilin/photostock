@@ -22,12 +22,22 @@ export enum DowloadCollectionOfLikesTypes {
   DOWNLOADCOLLECTIONOFLIKES = "DOWNLOADCOLLECTIONOFLIKES",
 }
 
-export enum SetUserEmailTypes{
-  SETUSEREMAIL="SETUSEREMAIL"
+export enum SetUserEmailTypes {
+  SETUSEREMAIL = "SETUSEREMAIL",
+}
+
+export enum ToggleAuthModalWindowOpenTypes {
+  TOGGLEAUTHMODALWINDOWOPEN = "TOGGLEAUTHMODALWINDOWOPEN",
 }
 
 /*  interfaces */
-export interface ISetUserEmailAction{
+
+export interface IToggleAuthModalWindowOpenAction {
+  type: ToggleAuthModalWindowOpenTypes.TOGGLEAUTHMODALWINDOWOPEN;
+  value: boolean;
+}
+
+export interface ISetUserEmailAction {
   type: SetUserEmailTypes.SETUSEREMAIL;
   value: string;
 }
@@ -64,7 +74,8 @@ export interface IAccountcreatedAction {
 
 /* actions */
 export type AccountStateActions =
-  |ISetUserEmailAction
+  |IToggleAuthModalWindowOpenAction
+  | ISetUserEmailAction
   | IDowloadCollectionOfLikesAction
   | IAccountIdentificationAction
   | IToggleAccountModalWindowAction
@@ -81,4 +92,5 @@ export interface IAccountState {
   identification: string | undefined;
   collection: any[] | null;
   userEmail: string;
+  isAuthModalWindowOpen: boolean;
 }
