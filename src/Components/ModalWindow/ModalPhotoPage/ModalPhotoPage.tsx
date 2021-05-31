@@ -76,7 +76,8 @@ class ModalWindowPhotoPage extends React.Component<
                         <Heart
                           id={this.props.data!.photos[id].id}
                           src={this.props.data!.photos[id].src.small}
-                          person={this.props.data!.photos[id].photographer}
+                          photographer={this.props.data!.photos[id].photographer}
+                          videographer={null}
                         />{" "}
                         Likes
                       </button>

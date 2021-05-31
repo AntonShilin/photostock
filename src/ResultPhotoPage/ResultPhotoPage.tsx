@@ -116,7 +116,8 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                                   <Heart
                                     id={image.id}
                                     src={image.src.large}
-                                    person={image.photographer}
+                                    photographer={image.photographer}
+                                    videographer={null}
                                   />
                                 </span>
                               </div>
@@ -162,7 +163,8 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                                   <Heart
                                     id={image.id}
                                     src={image.src.large}
-                                    person={image.photographer}
+                                    photographer={image.photographer}
+                                    videographer={null}
                                   />
                                 </span>
                               </div>

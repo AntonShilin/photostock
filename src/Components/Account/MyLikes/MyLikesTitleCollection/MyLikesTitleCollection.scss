@@ -2,12 +2,12 @@
   max-width: 1500px;
   div {
     div:nth-of-type(1) {
-      .info-image {
+      .info-elem {
         margin: 0 auto 0.5rem auto;
         cursor: pointer;
         position: relative;
         &:hover {
-          div.photographer-data {
+          div.elem-data {
             visibility: visible;
           }
         }
@@ -16,7 +16,23 @@
           height: auto;
           width: 100%;
         }
-        .photographer-data {
+        div.video-item {
+          position: relative;
+          video {
+            width: 100%;
+            background-color: lightgray;
+          }
+          .video_btn_control {
+            position: absolute;
+            top: 35%;
+            left: 45%;
+            svg {
+              font-size: 3.5rem;
+              color: white;
+            }
+          }
+        }
+        .elem-data {
           visibility: hidden;
           background-image: linear-gradient(
             0deg,
@@ -59,12 +75,12 @@
       }
     }
     div:nth-of-type(2) {
-      .info-image {
+      .info-elem {
         margin: 0 auto 0.5rem auto;
         cursor: pointer;
         position: relative;
         &:hover {
-          div.photographer-data {
+          div.elem-data {
             visibility: visible;
           }
         }
@@ -73,7 +89,23 @@
           height: auto;
           width: 100%;
         }
-        .photographer-data {
+        div.video-item {
+          position: relative;
+          video {
+            width: 100%;
+            background-color: lightgray;
+          }
+          .video_btn_control {
+            position: absolute;
+            top: 35%;
+            left: 45%;
+            svg {
+              font-size: 3.5rem;
+              color: white;
+            }
+          }
+        }
+        .elem-data {
           visibility: hidden;
           background-image: linear-gradient(
             0deg,

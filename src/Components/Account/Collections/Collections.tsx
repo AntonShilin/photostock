@@ -9,6 +9,7 @@ import LoadingPage from "../../LoadingPage/LoadingPage";
 import { FaRegImages } from "react-icons/fa";
 import EmptyCollection from "../EmptyCollection/EmptyCollection";
 import { downloadCollectionOfLikes } from "../../../Actions/AccountActions";
+import { AiOutlinePlayCircle } from "react-icons/ai";
 
 export interface ICollectionsProps extends RouteComponentProps {
   collection: any[] | null;
@@ -73,27 +74,35 @@ class Collections extends React.Component<
           </div>
           <div className="row">
             <div className="col">
-              <div className="collection_likes">
+              <div className="collection_likes"
+               onClick={this.showAllMyLikesPhotos}
+              >
                 <div className="collection_title">
                   <img
                     className="collection_title_img"
                     src={collection.length > 0 ? collection![0].src : ""}
                     alt="img"
-                    onClick={this.showAllMyLikesPhotos}
+                   
                   />
                 </div>
                 <div className="collection_rest">
                   {collection
                     .map(
-                      (img, i) =>
-                        i > 0 && (
+                      (elem, i) =>
+                        (elem.photographer! ? (
                           <img
-                            src={img.src}
+                            src={elem.src}
                             alt="img"
                             key={i}
                             onClick={this.showAllMyLikesPhotos}
                           />
-                        )
+                        ) : (
+                          <>
+                            <video controls={false}>
+                              <source src={elem.src} type="video/mp4" />
+                            </video>
+                          </>
+                        ))
                     )
                     .reverse()}
                 </div>

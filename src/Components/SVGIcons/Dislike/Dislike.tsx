@@ -10,7 +10,6 @@ export interface IDislakeProps {
   id: number;
   src: string;
   identification: string | undefined;
-  photographer: string | undefined;
 }
 
 export interface IDislakeState {

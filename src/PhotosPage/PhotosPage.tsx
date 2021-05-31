@@ -84,10 +84,10 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
         >
           <div className="container-xl">
             <div className="photo_search_input">
-              <h1 className="pb-1 text-white">
+              <h1>
                 The best free stock photos from talented authors.
               </h1>
-              <div className="input-group mb-3 input-group-lg">
+              <div className="input-group input-group-lg">
                 <input
                   type="text"
                   className="form-control"
@@ -171,7 +171,8 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                                 <Heart
                                   id={image.id}
                                   src={image.src.large}
-                                  person={image.photographer}
+                                  photographer={image.photographer}
+                                  videographer={null}
                                 />
                               </span>
                             </div>
@@ -217,7 +218,8 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                                 <Heart
                                   id={image.id}
                                   src={image.src.large}
-                                  person={image.photographer}
+                                  photographer={image.photographer}
+                                  videographer={null}
                                 />
                               </span>
                             </div>
