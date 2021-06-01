@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { IApplicationState } from "../../../Store/Store";
 import Footer from "../../Footer/Footer";
 import HeaderAccount from "../../Header/HeaderAccount";
+import ModalWindow from "../../ModalWindow/ModalWindow/ModalWindow";
 import MyLikesTitle from "./MyLikesTitle/MyLikesTitle";
 import MyLikesTitleCollection from "./MyLikesTitleCollection/MyLikesTitleCollection";
 
@@ -17,6 +18,7 @@ class MyLikes extends React.Component<IMyLikesProps, IMyLikesState> {
     return (
       <>
         <HeaderAccount />
+        <ModalWindow/>
         <MyLikesTitle />
         <MyLikesTitleCollection />
         <Footer />

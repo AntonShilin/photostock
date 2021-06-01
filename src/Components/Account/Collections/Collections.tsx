@@ -98,7 +98,7 @@ class Collections extends React.Component<
                           />
                         ) : (
                           <>
-                            <video controls={false}>
+                            <video controls={false}  key={i}>
                               <source src={elem.src} type="video/mp4" />
                             </video>
                           </>

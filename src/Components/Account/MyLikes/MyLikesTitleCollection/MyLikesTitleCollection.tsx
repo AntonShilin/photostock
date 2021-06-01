@@ -15,6 +15,7 @@ import {
   handlePauseVideo,
   handlePreplayVideo,
 } from "../../../../Actions/ProductsActions";
+import { toggleModalWindow } from "../../../../Actions/ModalWindowActions";
 
 export interface IMyLikesTitleCollectionProps {
   collection: any[] | null;
@@ -22,6 +23,7 @@ export interface IMyLikesTitleCollectionProps {
   identification: string | undefined;
   handlePauseVideo: typeof handlePauseVideo;
   handlePreplayVideo: typeof handlePreplayVideo;
+  toggleModalWindow: typeof toggleModalWindow;
 }
 
 export interface IMyLikesTitleCollectionState {}
@@ -78,7 +80,13 @@ class MyLikesTitleCollection extends React.Component<
                   i % 2 === 0 && (
                     <div className="info-elem" key={i}>
                       {elem.photographer !== null ? (
-                        <img src={elem.src} alt="img" />
+                        <img
+                          src={elem.src}
+                          alt="img"
+                          onClick={() =>
+                            this.props.toggleModalWindow(true, elem)
+                          }
+                        />
                       ) : (
                         <div className="video-item">
                           <video
@@ -87,6 +95,9 @@ class MyLikesTitleCollection extends React.Component<
                               this.props.handlePreplayVideo(e)
                             }
                             onMouseLeave={(e) => this.props.handlePauseVideo(e)}
+                            onClick={() =>
+                              this.props.toggleModalWindow(true, elem)
+                            }
                           >
                             <source src={elem.src} type="video/mp4" />
                           </video>
@@ -97,7 +108,7 @@ class MyLikesTitleCollection extends React.Component<
                       )}
                       <div className="elem-data">
                         <p>
-                          {elem.photographer!==null
+                          {elem.photographer !== null
                             ? elem.photographer
                             : elem.videographer}
                         </p>
@@ -125,6 +136,9 @@ class MyLikesTitleCollection extends React.Component<
                       {elem.photographer === null ? (
                         <div className="video-item">
                           <video
+                            onClick={() =>
+                              this.props.toggleModalWindow(true, elem)
+                            }
                             controls={false}
                             onMouseOver={(e) =>
                               this.props.handlePreplayVideo(e)
@@ -138,11 +152,17 @@ class MyLikesTitleCollection extends React.Component<
                           </div>
                         </div>
                       ) : (
-                        <img src={elem.src} alt="img" />
+                        <img
+                          src={elem.src}
+                          alt="img"
+                          onClick={() =>
+                            this.props.toggleModalWindow(true, elem)
+                          }
+                        />
                       )}
                       <div className="elem-data">
                         <p>
-                          {elem.photographer===null
+                          {elem.photographer === null
                             ? elem.videographer
                             : elem.photographer}
                         </p>
@@ -182,6 +202,8 @@ const mapDispatchToProps = (dispatch: any) => {
       dispatch(handlePreplayVideo(e)),
     handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
       dispatch(handlePauseVideo(e)),
+    toggleModalWindow: (value: boolean, elem: any | null) =>
+      dispatch(toggleModalWindow(value, elem)),
   };
 };
 
