@@ -74,35 +74,32 @@ class Collections extends React.Component<
           </div>
           <div className="row">
             <div className="col">
-              <div className="collection_likes"
-               onClick={this.showAllMyLikesPhotos}
+              <div
+                className="collection_likes"
+                onClick={this.showAllMyLikesPhotos}
               >
                 <div className="collection_title">
                   <img
                     className="collection_title_img"
                     src={collection.length > 0 ? collection![0].src : ""}
                     alt="img"
-                   
                   />
                 </div>
                 <div className="collection_rest">
                   {collection
-                    .map(
-                      (elem, i) =>
-                        (elem.photographer! ? (
-                          <img
-                            src={elem.src}
-                            alt="img"
-                            key={i}
-                            onClick={this.showAllMyLikesPhotos}
-                          />
-                        ) : (
-                          <>
-                            <video controls={false}  key={i}>
-                              <source src={elem.src} type="video/mp4" />
-                            </video>
-                          </>
-                        ))
+                    .map((elem, i) =>
+                      elem.photographer !== null ? (
+                        <img
+                          src={elem.src}
+                          alt="img"
+                          key={i}
+                          onClick={this.showAllMyLikesPhotos}
+                        />
+                      ) : (
+                        <video controls={false} key={i}>
+                          <source src={elem.src} type="video/mp4" />
+                        </video>
+                      )
                     )
                     .reverse()}
                 </div>

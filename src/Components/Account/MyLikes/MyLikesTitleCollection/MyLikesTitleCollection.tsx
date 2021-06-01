@@ -74,114 +74,55 @@ class MyLikesTitleCollection extends React.Component<
       collection.length > 0 && (
         <div className="container-xl mylikes-collection-bg">
           <div className="row">
-            <div className="col-lg-6 col-md-6 col-12">
-              {collection.map(
-                (elem, i) =>
-                  i % 2 === 0 && (
-                    <div className="info-elem" key={i}>
-                      {elem.photographer !== null ? (
-                        <img
-                          src={elem.src}
-                          alt="img"
-                          onClick={() =>
-                            this.props.toggleModalWindow(true, elem)
-                          }
-                        />
-                      ) : (
-                        <div className="video-item">
-                          <video
-                            controls={false}
-                            onMouseOver={(e) =>
-                              this.props.handlePreplayVideo(e)
-                            }
-                            onMouseLeave={(e) => this.props.handlePauseVideo(e)}
-                            onClick={() =>
-                              this.props.toggleModalWindow(true, elem)
-                            }
-                          >
-                            <source src={elem.src} type="video/mp4" />
-                          </video>
-                          <div className="video_btn_control">
-                            <AiOutlinePlayCircle />
-                          </div>
-                        </div>
-                      )}
-                      <div className="elem-data">
-                        <p>
-                          {elem.photographer !== null
-                            ? elem.photographer
-                            : elem.videographer}
-                        </p>
+            {collection.map((elem, i) => (
+              <div className="col-lg-6 col-md-6 col-12" key={i}>
+                <div className="info-elem">
+                  {elem.photographer !== null ? (
+                    <img
+                      src={elem.src}
+                      alt="img"
+                      onClick={() =>
+                        this.props.toggleModalWindow(true, i, collection)
+                      }
+                    />
+                  ) : (
+                    <div className="video-item">
+                      <video
+                        controls={false}
+                        onMouseOver={(e) => this.props.handlePreplayVideo(e)}
+                        onMouseLeave={(e) => this.props.handlePauseVideo(e)}
+                        onClick={() =>
+                          this.props.toggleModalWindow(true, i, collection)
+                        }
+                      >
+                        <source src={elem.src} type="video/mp4" />
+                      </video>
+                      <div className="video_btn_control">
+                        <AiOutlinePlayCircle />
                       </div>
-                      <span>
-                        <a>
-                          <DownloadIcon />
-                        </a>
-                      </span>
-                      <span>
-                        <MdControlPoint />
-                      </span>
-                      <span>
-                        <Dislike id={elem.id} src={elem.src} />
-                      </span>
                     </div>
-                  )
-              )}
-            </div>
-            <div className="col-lg-6 col-md-6 col-12">
-              {collection.map(
-                (elem, k) =>
-                  k % 2 !== 0 && (
-                    <div className="info-elem" key={k}>
-                      {elem.photographer === null ? (
-                        <div className="video-item">
-                          <video
-                            onClick={() =>
-                              this.props.toggleModalWindow(true, elem)
-                            }
-                            controls={false}
-                            onMouseOver={(e) =>
-                              this.props.handlePreplayVideo(e)
-                            }
-                            onMouseLeave={(e) => this.props.handlePauseVideo(e)}
-                          >
-                            <source src={elem.src} type="video/mp4" />
-                          </video>
-                          <div className="video_btn_control">
-                            <AiOutlinePlayCircle />
-                          </div>
-                        </div>
-                      ) : (
-                        <img
-                          src={elem.src}
-                          alt="img"
-                          onClick={() =>
-                            this.props.toggleModalWindow(true, elem)
-                          }
-                        />
-                      )}
-                      <div className="elem-data">
-                        <p>
-                          {elem.photographer === null
-                            ? elem.videographer
-                            : elem.photographer}
-                        </p>
-                      </div>
-                      <span>
-                        <a>
-                          <DownloadIcon />
-                        </a>
-                      </span>
-                      <span>
-                        <MdControlPoint />
-                      </span>
-                      <span>
-                        <Dislike id={elem.id} src={elem.src} />
-                      </span>
-                    </div>
-                  )
-              )}
-            </div>
+                  )}
+                  <div className="elem-data">
+                    <p>
+                      {elem.photographer !== null
+                        ? elem.photographer
+                        : elem.videographer}
+                    </p>
+                  </div>
+                  <span>
+                    <a>
+                      <DownloadIcon />
+                    </a>
+                  </span>
+                  <span>
+                    <MdControlPoint />
+                  </span>
+                  <span>
+                    <Dislike id={elem.id} src={elem.src} />
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )
@@ -202,8 +143,8 @@ const mapDispatchToProps = (dispatch: any) => {
       dispatch(handlePreplayVideo(e)),
     handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
       dispatch(handlePauseVideo(e)),
-    toggleModalWindow: (value: boolean, elem: any | null) =>
-      dispatch(toggleModalWindow(value, elem)),
+    toggleModalWindow: (value: boolean, id: number, collection: any[] | null) =>
+      dispatch(toggleModalWindow(value, id, collection)),
   };
 };
 

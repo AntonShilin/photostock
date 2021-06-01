@@ -2,14 +2,21 @@ import * as React from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { MdControlPoint } from "react-icons/md";
 import { connect } from "react-redux";
-import { toggleModalWindow } from "../../../Actions/ModalWindowActions";
+import {
+  toggleModalWindow,
+  viewNext,
+  viewPreviously,
+} from "../../../Actions/ModalWindowActions";
 import { IApplicationState } from "../../../Store/Store";
 import "./ModalWindow.scss";
 
 export interface IModalWindowProps {
   toggleModalWindow: typeof toggleModalWindow;
   isModalWindowOpen: boolean;
-  data: null | any;
+  collection: any[] | null;
+  viewedId: number;
+  viewNext: typeof viewNext;
+  viewPreviously: typeof viewPreviously;
 }
 
 export interface IModalWindowState {}
@@ -19,15 +26,15 @@ class ModalWindow extends React.Component<
   IModalWindowState
 > {
   public render() {
-    const { isModalWindowOpen, data } = this.props;
+    const { isModalWindowOpen, collection, viewedId } = this.props;
 
     return (
       isModalWindowOpen &&
-      data! && (
+      collection !== null && (
         <div className="modal-overlay">
           <button
             className="modal-close-btn"
-            onClick={() => this.props.toggleModalWindow(false, null)}
+            onClick={() => this.props.toggleModalWindow(false, 0, null)}
           >
             &#10799;
           </button>
@@ -35,17 +42,21 @@ class ModalWindow extends React.Component<
             <div className="modal-window-title">
               <div className="modal-window-title-header">
                 <small>
-                  {data.photographer! ? "photographer" : "videographer"}
+                  {collection[viewedId].photographer !== null
+                    ? "photographer"
+                    : "videographer"}
                 </small>
               </div>
               <div className="modal-window-title-left">
                 <span>
-                  {data.photographer!
-                    ? data.photographer.charAt(0)
-                    : data.videographer.charAt(0)}
+                  {collection[viewedId].photographer !== null
+                    ? collection[viewedId].photographer.charAt(0)
+                    : collection[viewedId].videographer.charAt(0)}
                 </span>
                 <h5>
-                  {data.photographer! ? data.photographer : data.videographer}
+                  {collection[viewedId].photographer !== null
+                    ? collection[viewedId].photographer
+                    : collection[viewedId].videographer}
                 </h5>
               </div>
               <div className="modal-window-title-right">
@@ -59,17 +70,22 @@ class ModalWindow extends React.Component<
               </div>
             </div>
             <div className="modal-window-content">
-              {data.photographer! && <img src={data.src} alt="img" />}
-              {data.photographer === null && (
+              {collection[viewedId].photographer !== null && (
+                <img src={collection[viewedId].src} alt="img" />
+              )}
+              {collection[viewedId].photographer === null && (
                 <video>
-                  <source src={data.src} type="video/mp4" />
+                  <source src={collection[viewedId].src} type="video/mp4" />
                 </video>
               )}
-              <span className="modal-window-arrow-left">
+              <span
+                className="modal-window-arrow-left"
+                onClick={this.props.viewPreviously}
+              >
                 <IoIosArrowBack />
               </span>
               <span className="modal-window-arrow-right">
-                <IoIosArrowForward />
+                <IoIosArrowForward onClick={this.props.viewNext} />
               </span>
             </div>
           </div>
@@ -81,13 +97,16 @@ class ModalWindow extends React.Component<
 
 const mapStateToProps = (state: IApplicationState) => ({
   isModalWindowOpen: state.modalWindow.isModalWindowOpen,
-  data: state.modalWindow.data,
+  collection: state.modalWindow.collection,
+  viewedId: state.modalWindow.viewedId,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    toggleModalWindow: (value: boolean, elem: any | null) =>
-      dispatch(toggleModalWindow(value, elem)),
+    toggleModalWindow: (value: boolean, id: number, collection: any[] | null) =>
+      dispatch(toggleModalWindow(value, id, collection)),
+    viewNext: () => dispatch(viewNext()),
+    viewPreviously: () => dispatch(viewPreviously()),
   };
 };
 
