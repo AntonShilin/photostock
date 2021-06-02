@@ -21,6 +21,7 @@ import Heart from "../Components/SVGIcons/Heart/Heart";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
 import ModalWindowResultPhotoPage from "../Components/ModalWindow/ModalWindowResultPhotoPage/ModalWindowResultPhotoPage";
 import Footer from "../Components/Footer/Footer";
+import { toggleModalWindow } from "../Actions/ModalWindowActions";
 
 export interface IDataResult extends RouteComponentProps {
   getSearchImages: typeof getSearchImages;
@@ -32,6 +33,7 @@ export interface IDataResult extends RouteComponentProps {
   isLoadingImages: boolean;
   getIdPhoto: typeof getIdPhoto;
   toggleWindowPhotoPage: typeof toggleWindowPhotoPage;
+  toggleModalWindow: typeof toggleModalWindow;
 }
 
 class ResultPhotoPage extends React.Component<IDataResult> {
@@ -50,7 +52,6 @@ class ResultPhotoPage extends React.Component<IDataResult> {
         {isLoadingImages ? (
           <LoadingPage />
         ) : (
-          <>
             <div className="container-xl photo_result_bg">
               <div className="row photo-result-bages">
                 <div className="col">
@@ -81,8 +82,8 @@ class ResultPhotoPage extends React.Component<IDataResult> {
               <div className="row photo-result-search">
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="row">
-                    {this.props.resultSearchImage !== null &&
-                      this.props.resultSearchImage.photos.map(
+                    {resultSearchImage !== null &&
+                      resultSearchImage.photos.map(
                         (image, i) =>
                           i % 2 !== 0 && (
                             <div key={i} className="col-12">
@@ -128,8 +129,8 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="row">
-                    {this.props.resultSearchImage !== null &&
-                      this.props.resultSearchImage.photos.map(
+                    {resultSearchImage !== null &&
+                      resultSearchImage.photos.map(
                         (image, i) =>
                           i % 2 === 0 && (
                             <div key={i} className="col-12">
@@ -175,9 +176,8 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                 </div>
               </div>
             </div>
-            <Footer/>
-          </>
         )}
+        <Footer />
       </>
     );
   }

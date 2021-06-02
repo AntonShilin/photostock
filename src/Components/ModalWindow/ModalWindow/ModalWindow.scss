@@ -91,6 +91,14 @@
         align-items: center;
         .modal-window-title-buttons-group {
           width: 100%;
+          button:last-child{
+            background-color: #04876d;
+            color: #fff;
+            font-weight: 300;
+            &:hover{
+              background-color:  #05A081;
+            }
+          }
           button {
             line-height: 1;
             position: relative;
@@ -128,12 +136,6 @@
         margin: 0 auto;
         background-color: lightgray;
         max-width: 100%;
-      }
-      video {
-        max-width: 100%;
-        background-color: lightgray;
-        display: block;
-        margin: 0 auto;
       }
       .modal-window-arrow-right {
         position: absolute;

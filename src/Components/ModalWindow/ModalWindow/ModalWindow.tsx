@@ -8,6 +8,7 @@ import {
   viewPreviously,
 } from "../../../Actions/ModalWindowActions";
 import { IApplicationState } from "../../../Store/Store";
+import Player from "../../MediaPlayers/Player/Player";
 import "./ModalWindow.scss";
 
 export interface IModalWindowProps {
@@ -74,9 +75,7 @@ class ModalWindow extends React.Component<
                 <img src={collection[viewedId].src} alt="img" />
               )}
               {collection[viewedId].photographer === null && (
-                <video>
-                  <source src={collection[viewedId].src} type="video/mp4" />
-                </video>
+                <Player src={collection[viewedId].src}/>
               )}
               <span
                 className="modal-window-arrow-left"

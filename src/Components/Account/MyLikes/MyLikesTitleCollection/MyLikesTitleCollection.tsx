@@ -11,18 +11,12 @@ import Dislike from "../../../SVGIcons/Dislike/Dislike";
 import DownloadIcon from "../../../SVGIcons/DownloadIcon/DownloadIcon";
 import { MdControlPoint } from "react-icons/md";
 import { AiOutlinePlayCircle } from "react-icons/ai";
-import {
-  handlePauseVideo,
-  handlePreplayVideo,
-} from "../../../../Actions/ProductsActions";
 import { toggleModalWindow } from "../../../../Actions/ModalWindowActions";
 
 export interface IMyLikesTitleCollectionProps {
   collection: any[] | null;
   downloadCollectionOfLikes: typeof downloadCollectionOfLikes;
   identification: string | undefined;
-  handlePauseVideo: typeof handlePauseVideo;
-  handlePreplayVideo: typeof handlePreplayVideo;
   toggleModalWindow: typeof toggleModalWindow;
 }
 
@@ -89,8 +83,7 @@ class MyLikesTitleCollection extends React.Component<
                     <div className="video-item">
                       <video
                         controls={false}
-                        onMouseOver={(e) => this.props.handlePreplayVideo(e)}
-                        onMouseLeave={(e) => this.props.handlePauseVideo(e)}
+                       
                         onClick={() =>
                           this.props.toggleModalWindow(true, i, collection)
                         }
@@ -139,10 +132,6 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     downloadCollectionOfLikes: (arr: any) =>
       dispatch(downloadCollectionOfLikes(arr)),
-    handlePreplayVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
-      dispatch(handlePreplayVideo(e)),
-    handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
-      dispatch(handlePauseVideo(e)),
     toggleModalWindow: (value: boolean, id: number, collection: any[] | null) =>
       dispatch(toggleModalWindow(value, id, collection)),
   };
