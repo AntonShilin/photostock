@@ -1,6 +1,5 @@
 import * as React from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { MdControlPoint } from "react-icons/md";
 import { connect } from "react-redux";
 import {
   toggleModalWindow,
@@ -8,6 +7,9 @@ import {
   viewPreviously,
 } from "../../../Actions/ModalWindowActions";
 import { IApplicationState } from "../../../Store/Store";
+import ButtonLike from "../../ControlKeys/ButtonLike/ButtonLike";
+import Collect from "../../ControlKeys/Collect/Collect";
+import FreeDownload from "../../ControlKeys/FreeDownload/FreeDownload";
 import Player from "../../MediaPlayers/Player/Player";
 import "./ModalWindow.scss";
 
@@ -62,11 +64,21 @@ class ModalWindow extends React.Component<
               </div>
               <div className="modal-window-title-right">
                 <div className="modal-window-title-buttons-group">
-                  <button>Heart</button>
-                  <button>
-                    <MdControlPoint /> Collect
-                  </button>
-                  <button>Free download</button>
+                  <ButtonLike
+                    id={collection[viewedId].id}
+                    src={collection[viewedId].src}
+                    photographer={collection[viewedId].photographer}
+                    videographer={collection[viewedId].videographer}
+                    liked={true}
+                  />
+                  <Collect
+                    id={collection[viewedId].id}
+                    src={collection[viewedId].src}
+                    photographer={collection[viewedId].photographer}
+                    videographer={collection[viewedId].videographer}
+                    liked={true}
+                  />
+                  <FreeDownload />
                 </div>
               </div>
             </div>
@@ -75,7 +87,7 @@ class ModalWindow extends React.Component<
                 <img src={collection[viewedId].src} alt="img" />
               )}
               {collection[viewedId].photographer === null && (
-                <Player src={collection[viewedId].src}/>
+                <Player src={collection[viewedId].src} />
               )}
               <span
                 className="modal-window-arrow-left"

@@ -1,18 +1,18 @@
 import * as React from "react";
-import { IApplicationState } from "../../../../Store/Store";
+import { IApplicationState } from "../../../Store/Store";
 import { connect } from "react-redux";
-import { ICuratedPhoto } from "../../../../Interfaces/Interfaces";
+import { ICuratedPhoto } from "../../../Interfaces/Interfaces";
 import {
   getPopularImages,
   handleSelectImageSize,
   downloadSelectImageSize,
   clearEarlierSize,
   clearRadioBoxes,
-} from "../../../../Actions/ProductsActions";
+} from "../../../Actions/ProductsActions";
 import "./DropMenuPhotoPage.scss";
 
 export interface IDropMenuPhotoPageProps {
-  data: ICuratedPhoto | null;
+  data: any[] | null;
   id: number | null;
   sizeURL: string | undefined;
   isOpen: boolean;
@@ -39,7 +39,7 @@ class DropMenuPhotoPage extends React.Component<
 
   public render() {
     const { id, isOpenDropDownMenu, sizeURL } = this.props;
-    const sizes = this.props.data!.photos[id!].src;
+    const sizes = "";
 
     return this.props.data!==undefined ? (
       <form
@@ -89,8 +89,6 @@ class DropMenuPhotoPage extends React.Component<
 }
 
 const mapStateToProps = (state: IApplicationState) => ({
-  data: state.products.data,
-  id: state.products.modalWindowPhotoPage.id,
   sizeURL: state.products.modalWindowPhotoPage.sizeURL,
   isOpen: state.products.modalWindowPhotoPage.isOpen,
   isOpenDropDownMenu: state.products.modalWindowPhotoPage.isOpenDropDownMenu,

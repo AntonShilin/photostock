@@ -87,6 +87,7 @@ class ModalWindowResultVideoPage extends React.Component<
                           src={resultSearchVideo.videos[id].video_files[0].link}
                           videographer={resultSearchVideo.videos[id].user.name}
                           photographer={null}
+                          liked={false}
                         />{" "}
                         Likes
                       </button>

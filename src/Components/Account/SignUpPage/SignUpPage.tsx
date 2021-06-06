@@ -1,6 +1,6 @@
 import firebase from "firebase";
 import * as React from "react";
-import { IoMdEyeOff } from "react-icons/io";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { connect } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import { accountSignUp, setUserName } from "../../../Actions/AccountActions";
@@ -25,6 +25,7 @@ export interface ISignUpPageState {
   firstName: string | null;
   lastName: string | null;
   accountCreated: boolean;
+  isVisiblePassword: boolean;
 }
 
 class SignUpPage extends React.Component<ISignUpPageProps, ISignUpPageState> {
@@ -38,6 +39,7 @@ class SignUpPage extends React.Component<ISignUpPageProps, ISignUpPageState> {
       firstName: null,
       lastName: null,
       accountCreated: false,
+      isVisiblePassword: false,
     };
     this.inputSignUpPassword = React.createRef();
   }
@@ -130,15 +132,24 @@ class SignUpPage extends React.Component<ISignUpPageProps, ISignUpPageState> {
     const elem = this.inputSignUpPassword.current!;
     if (elem.type === "password") {
       elem.type = "text";
+      this.setState({ isVisiblePassword: true });
     } else {
       elem.type = "password";
+      this.setState({ isVisiblePassword: false });
     }
   };
 
   public render() {
     const { data, isAccountSignIn } = this.props;
-    const { email, password, firstName, lastName, accountCreated, error } =
-      this.state;
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      accountCreated,
+      error,
+      isVisiblePassword,
+    } = this.state;
 
     if (accountCreated || isAccountSignIn) {
       return <Redirect to="/my-account" />;
@@ -186,7 +197,11 @@ class SignUpPage extends React.Component<ISignUpPageProps, ISignUpPageState> {
                     placeholder="Enter password"
                     onChange={this.handleCreatePassword}
                   />
-                  <IoMdEyeOff onClick={this.toggleVisibleSignUpPassword} />
+                  {isVisiblePassword ? (
+                    <IoMdEye onClick={this.toggleVisibleSignUpPassword} />
+                  ) : (
+                    <IoMdEyeOff onClick={this.toggleVisibleSignUpPassword} />
+                  )}
                   <button
                     className="sign_up_btn"
                     disabled={
@@ -212,7 +227,7 @@ class SignUpPage extends React.Component<ISignUpPageProps, ISignUpPageState> {
             </div>
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </>
     );
   }

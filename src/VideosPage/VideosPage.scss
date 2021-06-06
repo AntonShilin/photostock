@@ -33,6 +33,9 @@
         margin-bottom: 3rem;
         input.form-control {
           border: none;
+          font-weight: 300;
+          font-size: 1.25rem;
+          color: #1a1a1a;
           &:focus {
             outline: 0;
             outline-offset: 0;

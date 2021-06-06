@@ -39,7 +39,7 @@ class SearchVideosSmallArea extends React.Component<ISearchVideoSmallAreaProps> 
             <input
               required={true}
               type="text"
-              placeholder="Find a video"
+              placeholder="Search for free videos"
               value={this.props.searchNameVideo!}
               onChange={(e) => this.props.changeNameVideo(e)}
               autoFocus={false}

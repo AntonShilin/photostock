@@ -74,6 +74,9 @@ class Submenu extends React.Component<ISubmenuProps, State> {
               <NavLink to="/my-account" onClick={this.props.handleToggleMenu}>
                 Your profile
               </NavLink>
+              <NavLink to="/my-account" onClick={this.props.handleToggleMenu}>
+                Your Collections
+              </NavLink>
               <NavLink to="/edit-profile" onClick={this.props.handleToggleMenu}>
                 Setting
               </NavLink>

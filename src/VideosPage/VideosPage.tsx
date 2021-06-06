@@ -88,7 +88,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                   required={true}
                   type="text"
                   className="form-control"
-                  placeholder="Find video"
+                  placeholder="Search for free videos"
                   value={this.props.searchNameVideo}
                   onChange={this.props.changeNameVideo}
                   autoFocus={false}
@@ -185,6 +185,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                   src={value.video_files[0].link}
                                   videographer={value.user.name}
                                   photographer={null}
+                                  liked={false}
                                 />
                               </span>
                             </div>
@@ -252,6 +253,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                                   src={value.video_files[0].link}
                                   videographer={value.user.name}
                                   photographer={null}
+                                  liked={false}
                                 />
                               </span>
                             </div>

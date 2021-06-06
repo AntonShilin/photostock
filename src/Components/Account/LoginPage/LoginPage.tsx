@@ -1,6 +1,6 @@
 import firebase from "firebase";
 import * as React from "react";
-import { IoMdEyeOff } from "react-icons/io";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { connect } from "react-redux";
 import {
   NavLink,
@@ -8,7 +8,11 @@ import {
   RouteComponentProps,
   withRouter,
 } from "react-router-dom";
-import { accountSignIn, setUserName, toggleAuthModalWindow } from "../../../Actions/AccountActions";
+import {
+  accountSignIn,
+  setUserName,
+  toggleAuthModalWindow,
+} from "../../../Actions/AccountActions";
 import { getPopularImages } from "../../../Actions/ProductsActions";
 import { ICuratedPhoto } from "../../../Interfaces/Interfaces";
 import { IApplicationState } from "../../../Store/Store";
@@ -27,6 +31,7 @@ export interface ILoginPageState {
   password: string | null;
   email: string | null;
   errorMessage: string | null;
+  isVisiblePassword: boolean;
 }
 
 class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
@@ -37,6 +42,7 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
       password: null,
       email: null,
       errorMessage: null,
+      isVisiblePassword: false,
     };
     this.inputPassword = React.createRef();
   }
@@ -92,14 +98,16 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
     const elem = this.inputPassword.current!;
     if (elem.type === "password") {
       elem.type = "text";
+      this.setState({ isVisiblePassword: true });
     } else {
       elem.type = "password";
+      this.setState({ isVisiblePassword: false });
     }
   };
 
   public render() {
     const { data, isAccountSignIn } = this.props;
-    const { email, password, errorMessage } = this.state;
+    const { email, password, errorMessage, isVisiblePassword } = this.state;
 
     if (isAccountSignIn) {
       return <Redirect to="/my-account" />;
@@ -134,7 +142,11 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
                 placeholder="Enter password"
                 onChange={this.handleChangePassword}
               />
-              <IoMdEyeOff onClick={this.toggleVisiblePassword} />
+              {isVisiblePassword ? (
+                <IoMdEye onClick={this.toggleVisiblePassword} />
+              ) : (
+                <IoMdEyeOff onClick={this.toggleVisiblePassword} />
+              )}
               <button
                 disabled={email !== null && password !== null ? false : true}
                 onClick={this.handleSignIn}
@@ -158,10 +170,10 @@ const mapStateToProps = (state: IApplicationState) => ({
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getPopularImages: () => dispatch(getPopularImages()),
-    setUserName: (name: string ) => dispatch(setUserName(name)),
+    setUserName: (name: string) => dispatch(setUserName(name)),
     accountSignIn: (value: boolean) => dispatch(accountSignIn(value)),
     toggleAuthModalWindow: (value: boolean) =>
-    dispatch(toggleAuthModalWindow(value)),
+      dispatch(toggleAuthModalWindow(value)),
   };
 };
 

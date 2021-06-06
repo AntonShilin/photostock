@@ -173,6 +173,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                                   src={image.src.large}
                                   photographer={image.photographer}
                                   videographer={null}
+                                  liked={false}
                                 />
                               </span>
                             </div>
@@ -220,6 +221,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                                   src={image.src.large}
                                   photographer={image.photographer}
                                   videographer={null}
+                                  liked={false}
                                 />
                               </span>
                             </div>

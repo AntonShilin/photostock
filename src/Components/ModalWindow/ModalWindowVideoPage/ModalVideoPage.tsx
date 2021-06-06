@@ -79,6 +79,7 @@ class ModalVideoPage extends React.Component<IWindowVideoPageProps, State> {
                           src={videos.videos[id].video_files[0].link}
                           videographer={videos.videos[id].user.name}
                           photographer={null}
+                          liked={false}
                         />{" "}
                         Likes
                       </button>

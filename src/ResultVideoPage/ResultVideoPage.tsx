@@ -135,6 +135,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                                     src={value.video_files[0].link}
                                     videographer={value.user.name}
                                     photographer={null}
+                                    liked={false}
                                   />
                                 </span>
                               </div>
@@ -199,6 +200,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                                     src={value.video_files[0].link}
                                     videographer={value.user.name}
                                     photographer={null}
+                                    liked={false}
                                   />
                                 </span>
                               </div>

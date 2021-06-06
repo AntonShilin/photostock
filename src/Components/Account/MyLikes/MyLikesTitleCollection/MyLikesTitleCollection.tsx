@@ -7,11 +7,11 @@ import "./MyLikesTitleCollection.scss";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { downloadCollectionOfLikes } from "../../../../Actions/AccountActions";
-import Dislike from "../../../SVGIcons/Dislike/Dislike";
-import DownloadIcon from "../../../SVGIcons/DownloadIcon/DownloadIcon";
 import { MdControlPoint } from "react-icons/md";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { toggleModalWindow } from "../../../../Actions/ModalWindowActions";
+import Heart from "../../../SVGIcons/Heart/Heart";
+import DownloadIcon from "../../../SVGIcons/DownloadIcon/DownloadIcon";
 
 export interface IMyLikesTitleCollectionProps {
   collection: any[] | null;
@@ -83,7 +83,6 @@ class MyLikesTitleCollection extends React.Component<
                     <div className="video-item">
                       <video
                         controls={false}
-                       
                         onClick={() =>
                           this.props.toggleModalWindow(true, i, collection)
                         }
@@ -111,7 +110,13 @@ class MyLikesTitleCollection extends React.Component<
                     <MdControlPoint />
                   </span>
                   <span>
-                    <Dislike id={elem.id} src={elem.src} />
+                    <Heart
+                      liked={true}
+                      id={elem.id}
+                      src={elem.src}
+                      photographer={elem.photographer}
+                      videographer={elem.videographer}
+                    />
                   </span>
                 </div>
               </div>

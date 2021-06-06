@@ -119,6 +119,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                                     src={image.src.large}
                                     photographer={image.photographer}
                                     videographer={null}
+                                    liked={false}
                                   />
                                 </span>
                               </div>
@@ -166,6 +167,7 @@ class ResultPhotoPage extends React.Component<IDataResult> {
                                     src={image.src.large}
                                     photographer={image.photographer}
                                     videographer={null}
+                                    liked={false}
                                   />
                                 </span>
                               </div>

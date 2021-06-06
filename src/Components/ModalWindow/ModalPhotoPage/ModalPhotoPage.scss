@@ -1,174 +1,219 @@
-div.modal_window_photo_basis {
+.modal-photo-page {
   position: fixed;
-  background-color: rgba(44, 40, 40, 0.8);
-  height: 100%;
-  width: 100%;
-  z-index: 6;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(12, 15, 19, 0.9);
+  z-index: 50;
   overflow-y: scroll;
-  &::-webkit-scrollbar {
-    width: 1px;
-    color: white;
+  .modal-close-btn {
+    position: fixed;
+    top: 0.5rem;
+    left: 0.5rem;
+    color: #fff;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    font-size: 2.8rem;
+    line-height: 0rem;
+    background-color: transparent;
+    border: none;
+    &:focus {
+      outline: none;
+    }
   }
-  scrollbar-width: 1px;
-  scrollbar-color: white;
-  padding: 1rem 0 1rem 0;
-  top: 0rem;
-  div {
+  .modal-photo-page-bg {
+    position: absolute;
     max-width: 1200px;
-    div.modal_window_photo_bg {
-      background-color: white;
-      position: relative;
-      padding: 2rem 1rem 2rem 1rem;
-      height: auto;
-      width: 80vw;
-      border-radius: 6px;
-      margin: 0rem auto;
-      svg.close_icon {
-        position: absolute;
-        cursor: pointer;
-        font-size: 2.5rem;
-        left: -7%;
-        top: 0%;
-        color: white;
-      }
-
-      .description_photo {
+    width: 90%;
+    height: auto;
+    background: #fff;
+    border-radius: 6px;
+    padding: 0.9rem;
+    margin: 3.5rem auto 1.15rem auto;
+    display: flex;
+    flex-direction: column;
+    .modal-photo-page-title {
+      margin-bottom: 2.3rem;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .modal-photo-page-title-header {
         small {
           display: none;
-          font-size: 10px;
-          line-height: 19px;
+          font-size: 0.7rem;
           font-weight: 300;
           margin-top: 0;
           letter-spacing: 0.4px;
-          margin-top: 0.5rem;
-          margin-bottom: 0.5rem;
+          margin-bottom: 15px;
           text-decoration: none;
           text-transform: uppercase;
           color: #5e5e5e;
+          text-align: left;
+          text-transform: uppercase;
+          margin-bottom: 0.5rem;
+        }
+      }
+      .modal-photo-page-title-left {
+        display: flex;
+        align-items: center;
+        width: 30%;
+        span {
+          margin-right: 10px;
+          max-width: 52px;
+          max-height: 52px;
+          min-width: 52px;
+          min-height: 52px;
+          border-radius: 50%;
+          border: 1px solid lightgray;
           text-align: center;
+          line-height: 3rem;
         }
-        p {
-          span {
-            display: inline-block;
-            margin-right: 10px;
-            max-width: 52px;
-            max-height: 52px;
-            min-width: 52px;
-            min-height: 52px;
-            border-radius: 50%;
-            border: 1px solid lightgrey;
-            padding-top: 0.7rem;
-            text-transform: capitalize;
-          }
-          margin: 0;
-          font-weight: 500;
-          white-space: nowrap;
-          text-align: center;
-        }
-        button.heart {
+        h5 {
+          display: block;
           font-size: 1rem;
+          line-height: 25px;
+          font-weight: 600;
+          margin-top: 0;
+          margin-bottom: 0;
+          text-align: left;
+          width: 100%;
+        }
+      }
+      .modal-photo-page-title-right {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        .modal-photo-page-title-buttons-group {
+          width: 100%;
+        }
+      }
+    }
+    .modal-photo-page-content {
+      margin-bottom: 1.75rem;
+      position: relative;
+      img {
+        display: block;
+        margin: 0 auto;
+        background-color: lightgray;
+        max-width: 100%;
+      }
+      .modal-photo-page-arrow-right {
+        position: absolute;
+        top: 30%;
+        right: -3rem;
+        cursor: pointer;
+        &:hover {
           svg {
-            stroke: black;
-            font-size: 1rem;
+            color: white !important;
           }
         }
-        button.control_point {
-          font-size: 1rem;
+        svg {
+          color: rgba(255, 255, 255, 0.555);
+          font-size: 2.8rem;
+        }
+      }
+      .modal-photo-page-arrow-left {
+        position: absolute;
+        top: 30%;
+        left: -3rem;
+        cursor: pointer;
+        &:hover {
           svg {
-            stroke: black;
-            font-size: 1.5rem;
+            color: white !important;
           }
         }
-        .download_item_bg {
-          position: relative;
-          button.download {
-            font-size: 1rem;
-            background-color: #05a081;
-            color: white;
-            &:focus {
-              outline: 0;
-              box-shadow: none;
+        svg {
+          color: rgba(255, 255, 255, 0.555);
+          font-size: 2.8rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .modal-photo-page {
+    .modal-close-btn {
+      display: block;
+      top: 0rem !important;
+      left: 0rem !important;
+      background-color: #fff !important;
+      color: #1a1a1a !important;
+      width: 100%;
+      text-align: start;
+      padding-left: 1rem;
+      z-index: 1;
+      height: 4rem;
+    }
+    .modal-photo-page-bg {
+      padding: 0rem 1rem 1rem 1rem !important;
+      flex-direction: column-reverse;
+      width: 100% !important;
+      margin: 4rem auto 1.15rem auto !important;
+      border-radius: 0px !important;
+      .modal-photo-page-title {
+        flex-direction: column-reverse;
+        .modal-photo-page-title-header {
+          order: 2;
+          small {
+            display: block !important;
+          }
+        }
+        .modal-photo-page-title-right {
+          order: 3;
+          margin-bottom: 1rem;
+          width: 100% !important;
+          .modal-photo-page-title-buttons-group {
+            button:nth-of-type(1) {
+              width: 45% !important;
+            }
+            button:nth-of-type(2) {
+              width: 45% !important;
+            }
+            button:nth-of-type(3) {
+              width: 100% !important;
+              margin-top: 1rem;
+            }
+          }
+        }
+        .modal-photo-page-title-left {
+          order: 1;
+          width: 100% !important;
+          padding: 0.25rem;
+        }
+      }
+      .modal-photo-page-content {
+        .modal-photo-page-arrow-right {
+          top: 10% !important;
+          right: -1rem !important;
+          svg {
+            color: #1a1a1a4d !important;
+          }
+          &:hover {
+            svg {
+              color: #1a1a1aef !important;
+            }
+          }
+        }
+        .modal-photo-page-arrow-left {
+          top: 10% !important;
+          left: -1rem !important;
+          svg {
+            color: #1a1a1a4d !important;
+          }
+          &:hover {
+            svg {
+              color: #1a1a1aef !important;
             }
           }
         }
       }
-      .modal_window_photo {
-        margin: 3rem auto;
-        position: relative;
-        padding: 0;
-        img {
-          margin: 0 auto;
-          display: block;
-        }
-        .arrow_left {
-          position: absolute;
-          top: 40%;
-          left: -3%;
-          &:hover {
-            color: #05a081;
-            cursor: pointer;
-          }
-          svg {
-            font-size: 3rem;
-            stroke-width: 1rem;
-          }
-        }
-        .arrow_right {
-          position: absolute;
-          top: 40%;
-          right: -3%;
-          &:hover {
-            color: #05a081;
-            cursor: pointer;
-          }
-          svg {
-            font-size: 3rem;
-            stroke-width: 1rem;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 850px) {
-  div.modal_window_photo_bg {
-    width: 100% !important;
-    svg.close_icon {
-      left: 0% !important;
-      color: black !important;
-    }
-    .description_photo {
-      small {
-        display: block !important;
-      }
-      p {
-        margin-top: 0.5rem;
-      }
-      button.heart {
-        width: 47% !important;
-      }
-      button.control_point {
-        width: 47% !important;
-      }
-    }
-  }
-  .modal_window_photo {
-    margin: 1rem auto !important;
-    .arrow_left {
-      color: #05a081 !important;
-    }
-    .arrow_right {
-      color: #05a081 !important;
-    }
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .modal_window_photo {
-    img {
-      width: 100%;
-      height: auto;
     }
   }
 }

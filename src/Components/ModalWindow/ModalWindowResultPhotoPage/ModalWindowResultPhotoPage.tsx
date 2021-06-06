@@ -3,14 +3,8 @@ import { connect } from "react-redux";
 import { IApplicationState } from "../../../Store/Store";
 import { IDataSearch } from "../../../Interfaces/Interfaces";
 import "./ModalWindowResultPhotoPage.scss";
-import Heart from "../../SVGIcons/Heart/Heart";
-import { MdControlPoint, MdClose } from "react-icons/md";
-import {
-  IoIosArrowForward,
-  IoIosArrowBack,
-  IoIosArrowDown,
-  IoIosArrowUp,
-} from "react-icons/io";
+import { MdControlPoint } from "react-icons/md";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import {
   toggleWindowPhotoPage,
   watchingImageForward,
@@ -19,6 +13,9 @@ import {
   clearPhotoID,
 } from "../../../Actions/ProductsActions";
 import DropMenuResultPhotoPage from "./DropMenuResultPhotoPage/DropMenuResultPhotoPage";
+import ButtonLike from "../../ControlKeys/ButtonLike/ButtonLike";
+import FreeDownload from "../../ControlKeys/FreeDownload/FreeDownload";
+import Collect from "../../ControlKeys/Collect/Collect";
 
 export interface IWindowResultPhotoPageProps {
   resultSearchImage: IDataSearch | null;
@@ -41,96 +38,70 @@ class ModalWindowResultPhotoPage extends React.Component<
 > {
   public render() {
     const id = this.props.id!;
-    const { isOpenDropDownMenu } = this.props;
+    const { isOpenDropDownMenu, resultSearchImage, isOpen } = this.props;
 
     return (
-      <React.Fragment>
-        {this.props.resultSearchImage !== null ? (
-          <div
-            className={
-              this.props.isOpen ? "d-block modal_window_photo_basis" : "d-none"
-            }
-          >
-            <div className="container-xl">
-              <div className="row modal_window_photo_bg">
-                <MdClose
-                  className="close_icon"
-                  onClick={() => {
-                    this.props.toggleWindowPhotoPage();
-                    this.props.clearPhotoID();
-                  }}
-                />
-                <div className="col-12 description_photo order-lg-first order-last">
-                  <div className="row">
-                    <div className="col-lg-3 col-md-12 col-sm-12 mb-2 order-lg-first order-last">
-                      <p>
-                        <small>PHOTOGRAPHER</small>
-                        <span>
-                          {this.props.resultSearchImage?.photos[
-                            id
-                          ]?.photographer.charAt(0)}
-                        </span>
-                        {this.props.resultSearchImage?.photos[id]?.photographer}
-                      </p>
-                    </div>
-                    <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
-                      <button className="btn btn-light mr-2 mb-2 heart">
-                        <Heart
-                          id={this.props.resultSearchImage!.photos[id].id}
-                          src={
-                            this.props.resultSearchImage!.photos[id].src.small
-                          }
-                          photographer={
-                            this.props.resultSearchImage!.photos[id]
-                              .photographer
-                          }
-                          videographer={null}
-                        />{" "}
-                        Likes
-                      </button>
-                      <button className="btn btn-light mr-2 mb-2   control_point">
-                        <MdControlPoint /> Collect
-                      </button>
-                    </div>
-                    <div className="col-lg-4 col-md-12 col-sm-12 mb-2 download_item_bg">
-                      <button
-                        className="btn download w-100"
-                        onClick={this.props.toggleDropMenuPhotoPage}
-                      >
-                        Free download{" "}
-                        {isOpenDropDownMenu ? (
-                          <IoIosArrowUp />
-                        ) : (
-                          <IoIosArrowDown />
-                        )}
-                      </button>
-                      <DropMenuResultPhotoPage />
-                    </div>
+      <>
+        {resultSearchImage !== null && isOpen && (
+          <div className="modal-photo-result">
+            <button
+              className="modal-close-btn"
+              onClick={() => {
+                this.props.toggleWindowPhotoPage();
+                this.props.clearPhotoID();
+              }}
+            >
+              &#10799;
+            </button>
+            <div className="modal-photo-result-bg">
+              <div className="modal-photo-result-title">
+                <div className="modal-photo-result-title-header">
+                  <small>photographer</small>
+                </div>
+                <div className="modal-photo-result-title-left">
+                  <span>
+                    {resultSearchImage.photos[id].photographer.charAt(0)}
+                  </span>
+                  <h5>{resultSearchImage.photos[id].photographer}</h5>
+                </div>
+                <div className="modal-photo-result-title-right">
+                  <div className="modal-photo-result-title-buttons-group">
+                    <ButtonLike
+                      id={resultSearchImage.photos[id].id}
+                      src={resultSearchImage.photos[id].src.medium}
+                      photographer={resultSearchImage.photos[id].photographer}
+                      videographer={null}
+                      liked={false}
+                    />
+                    <Collect
+                      id={resultSearchImage.photos[id].id}
+                      src={resultSearchImage.photos[id].src.medium}
+                      photographer={resultSearchImage.photos[id].photographer}
+                      videographer={null}
+                      liked={false}
+                    />
+                    <FreeDownload/>
                   </div>
                 </div>
-                <div className="col-12 align-self-center modal_window_photo">
-                  <img
-                    src={this.props.resultSearchImage?.photos[id]?.src.medium}
-                    alt="img"
-                  />
-                  <span
-                    className="arrow_left"
-                    onClick={() => this.props.watchingImageBack(id)}
-                  >
-                    <IoIosArrowBack />
-                  </span>
-                  <span
-                    className="arrow_right"
+              </div>
+              <div className="modal-photo-result-content">
+                <img src={resultSearchImage.photos[id].src.medium} alt="img" />
+                <span
+                  className="modal-photo-result-arrow-left"
+                  onClick={() => this.props.watchingImageBack(id)}
+                >
+                  <IoIosArrowBack />
+                </span>
+                <span className="modal-photo-result-arrow-right">
+                  <IoIosArrowForward
                     onClick={() => this.props.watchingImageForward(id)}
-                  >
-                    <IoIosArrowForward />
-                  </span>
-                </div>
+                  />
+                </span>
               </div>
             </div>
           </div>
-        ) : null}
-      </React.Fragment>
+        )}
+      </>
     );
   }
 }
