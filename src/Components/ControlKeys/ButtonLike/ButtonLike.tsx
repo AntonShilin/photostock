@@ -1,5 +1,4 @@
 import * as React from "react";
-import { handleLikeHeart } from "../../../Actions/ProductsActions";
 import { connect } from "react-redux";
 import "./ButtonLike.scss";
 import { IApplicationState } from "../../../Store/Store";
@@ -7,7 +6,6 @@ import firebase from "firebase";
 import { toggleAuthModalWindow } from "../../../Actions/AccountActions";
 
 export interface IButtonLikeProps {
-  handleLikeHeart: typeof handleLikeHeart;
   toggleAuthModalWindow: typeof toggleAuthModalWindow;
   id: number;
   src: string;
@@ -84,7 +82,6 @@ class ButtonLike extends React.Component<IButtonLikeProps, IButtonLikeState> {
       <button
         className={isLiked ? `btn-like btn-liked` : `btn-like`}
         onClick={() => {
-          // this.props.handleLikeHeart(e);
           if (isAccountSignIn) {
             this.currentElemIsLiked();
             if (isLiked) {
@@ -125,8 +122,6 @@ const mapStateToProps = (state: IApplicationState) => ({
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    handleLikeHeart: (e: React.MouseEvent<SVGSVGElement>) =>
-      dispatch(handleLikeHeart(e)),
     toggleAuthModalWindow: (value: boolean) =>
       dispatch(toggleAuthModalWindow(value)),
   };

@@ -1,20 +1,16 @@
 import * as React from "react";
-import { connect } from "react-redux";
 import "./DownloadIcon.scss";
 
-export interface IDownloadProps {}
 
-export interface State {}
-
-class Download extends React.Component<IDownloadProps, State> {
+class Download extends React.Component<{}, {}> {
   public render() {
     return (
-        <svg
+      <svg
         xmlns="http://www.w3.org/2000/svg"
         width="2rem"
         height="2rem"
-            fill="white"
-            strokeWidth="2"
+        fill="white"
+        strokeWidth="2"
         version="1.1"
         viewBox="0 -25 100 100"
       >
@@ -26,4 +22,4 @@ class Download extends React.Component<IDownloadProps, State> {
   }
 }
 
-export default connect(null, null)(Download);
+export default Download;

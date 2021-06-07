@@ -4,12 +4,14 @@ import "./Player.scss";
 
 export interface IPlayerProps {
   src: string | undefined;
+  poster?: string | undefined;
 }
 
 export interface IPlayerState {
   isPlay: boolean;
   currentTime: number;
   isLoading: boolean;
+  src: undefined | string;
 }
 
 class Player extends React.Component<IPlayerProps, IPlayerState> {
@@ -21,6 +23,7 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
       isPlay: false,
       currentTime: 0,
       isLoading: false,
+      src: undefined,
     };
     this.timer = 0;
     this.myPlayer = React.createRef();
@@ -39,7 +42,6 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
       const durVideo: number = node.duration;
       const t: number = node.currentTime;
       const x: number = (t * 100) / durVideo;
-      console.log(node.played);
       if (x >= 100) {
         this.endedVideo();
         this.setState({ isPlay: false });
@@ -47,7 +49,6 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
         this.setState({ currentTime: x });
       }
     }, 100);
-    console.log(this.myPlayer);
   };
 
   public endedVideo = () => {
@@ -67,28 +68,41 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
     clearInterval(this.timer);
   }
 
+  public componentWillReceiveProps(nextProps: { src: string | undefined }) {
+    if (nextProps.src !== this.props.src) {
+      this.togglePlayerBtn(false);
+      this.endedVideo();
+      clearInterval(this.timer);
+    }
+  }
+
+
   public render() {
-    const { src } = this.props;
+    const { poster, src } = this.props;
     const { isPlay, currentTime, isLoading } = this.state;
 
     return (
       <div className="player_item">
         {isLoading && (
           <div className="spinner">
-            <div className="spinner-border text-dark" role="status">
+            <div className="spinner-border text-danger" role="status">
               <span className="sr-only">Loading...</span>
             </div>
           </div>
         )}
         <video
+          poster={poster}
           controls={false}
           muted={true}
           ref={this.myPlayer}
           onLoadedData={() => this.setState({ isLoading: false })}
           onLoadStart={() => this.setState({ isLoading: true })}
+          src={src}
         >
-          <source src={src} type="video/mp4" />
           Your browser doesn't support HTML5 video tag.
+          {/* <source src={src} type="audio/ogg" />
+          <source src={src} type="video/mp4" />
+          <source src={src} type="video/webm" /> */}
         </video>
         <div className="player_control_panel">
           {isPlay ? (
@@ -102,6 +116,7 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
             </button>
           ) : (
             <button
+              disabled={isLoading ? true : false}
               onClick={() => {
                 this.startVideo();
                 this.togglePlayerBtn(true);

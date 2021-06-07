@@ -1,5 +1,4 @@
 import * as React from "react";
-import { handleLikeHeart } from "../../../Actions/ProductsActions";
 import { connect } from "react-redux";
 import "./Heart.scss";
 import { IApplicationState } from "../../../Store/Store";
@@ -7,7 +6,6 @@ import firebase from "firebase";
 import { toggleAuthModalWindow } from "../../../Actions/AccountActions";
 
 export interface IHeartProps {
-  handleLikeHeart: typeof handleLikeHeart;
   toggleAuthModalWindow: typeof toggleAuthModalWindow;
   id: number;
   src: string;
@@ -122,8 +120,6 @@ const mapStateToProps = (state: IApplicationState) => ({
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    handleLikeHeart: (e: React.MouseEvent<SVGSVGElement>) =>
-      dispatch(handleLikeHeart(e)),
     toggleAuthModalWindow: (value: boolean) =>
       dispatch(toggleAuthModalWindow(value)),
   };

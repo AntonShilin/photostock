@@ -41,8 +41,8 @@ export interface IPropsPhotosPage extends RouteComponentProps {
   isScrollHeight: number | null;
   isClientHeight: number | null;
   isScrolling: boolean;
-  isLoadingImages: boolean;
   keyboardKey: number | null;
+  isLoadingPopularImages: boolean;
 }
 
 class PhotosPage extends React.Component<IPropsPhotosPage> {
@@ -69,7 +69,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
   };
 
   public render() {
-    const { isLoadingImages } = this.props;
+    const { isLoadingPopularImages } = this.props;
 
     return (
       <>
@@ -84,9 +84,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
         >
           <div className="container-xl">
             <div className="photo_search_input">
-              <h1>
-                The best free stock photos from talented authors.
-              </h1>
+              <h1>The best free stock photos from talented authors.</h1>
               <div className="input-group input-group-lg">
                 <input
                   type="text"
@@ -123,14 +121,14 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
           </p>
         </div>
         <NavigationPages />
-        {!isLoadingImages ? (
+        {!isLoadingPopularImages ? (
           <div className="container-xl trending_photos">
             <div className="row">
               <div className="col-12">
-                <h6 className="mb-4 mt-4">Trending Free Stock Photos</h6>
+                <h6>Trending Free Stock Photos</h6>
               </div>
             </div>
-            <div className="row ">
+            <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className="row">
                   {this.props.data !== null &&
@@ -248,8 +246,8 @@ const mapStateToProps = (state: IApplicationState) => ({
   isClientHeight: state.products.isClientHeight,
   isScrolling: state.products.isScrolling,
   searchNamePhoto: state.products.searchNamePhoto,
-  isLoadingImages: state.products.isLoadingImages,
   keyboardKey: state.products.keyboardKey,
+  isLoadingPopularImages: state.products.isLoadingPopularImages
 });
 
 const mapDispatchToProps = (dispatch: any) => {

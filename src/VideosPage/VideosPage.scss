@@ -1,4 +1,5 @@
 .videos-page-header {
+  max-width: 1500px !important;
   position: relative;
   max-height: 40rem;
   min-height: 35rem;
@@ -12,13 +13,17 @@
   padding-left: 0;
   overflow: hidden;
   z-index: 0;
-  max-width: 1500px !important;
+  video {
+    position: absolute;
+    z-index: -1;
+    min-width: 100%;
+    height: auto;
+  }
   .video_search_item_bg {
     padding-top: 13rem;
     padding-bottom: 5rem;
     max-height: 40rem;
     min-height: 35rem;
-
     .video_search_item {
       width: 75%;
       margin: 0 auto;
@@ -51,13 +56,6 @@
       }
     }
   }
-
-  video {
-    position: absolute;
-    z-index: -1;
-    min-width: 100%;
-    height: auto;
-  }
 }
 
 div.trending_video_header {
@@ -67,8 +65,8 @@ div.trending_video_header {
       h6 {
         font-weight: 700;
         font-size: 1.2rem;
-        margin-top: 4rem;
-        margin-bottom: 4rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
       }
     }
   }
@@ -230,78 +228,6 @@ div.trending_video_header {
   }
 }
 
-div.popular_video_item {
-  position: relative;
-  margin: 1rem;
-  video {
-    width: 100%;
-    height: auto;
-  }
-  &:hover {
-    cursor: pointer;
-    div.video-person-name {
-      visibility: visible;
-    }
-  }
-  .video_item_control {
-    position: absolute;
-    top: 35%;
-    left: 40%;
-    padding: 0.5rem;
-    svg {
-      font-size: 3.5rem;
-      color: white;
-    }
-  }
-  span:nth-of-type(3) {
-    visibility: visible;
-    position: absolute;
-    right: 2rem;
-    bottom: 1rem;
-    z-index: 2;
-  }
-  span:nth-of-type(2) {
-    visibility: visible;
-    position: absolute;
-    right: 5rem;
-    bottom: 1rem;
-    z-index: 2;
-    svg {
-      color: white;
-      font-size: 1.5rem;
-    }
-  }
-  span:nth-of-type(1) {
-    visibility: visible;
-    position: absolute;
-    right: 7.8rem;
-    bottom: 1rem;
-    z-index: 2;
-    svg {
-      color: white;
-      font-size: 1.5rem;
-    }
-  }
-  div.video-person-name {
-    visibility: hidden;
-    background-image: linear-gradient(
-      0deg,
-      transparent,
-      rgba(0, 0, 0, 0.76),
-      transparent
-    );
-    position: absolute;
-    min-height: 4rem;
-    width: 100%;
-    bottom: 0rem;
-    z-index: 1;
-    p {
-      margin: 1.5rem 1rem 0 1rem;
-      color: white;
-      font-size: 1rem;
-    }
-  }
-}
 
 @media screen and (min-width: 1500px) {
   div.popular_video_item {

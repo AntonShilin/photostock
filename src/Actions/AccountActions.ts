@@ -50,7 +50,7 @@ export const toggleAccountModalWindow = (
 /* set account identification value*/
 export const setAccountIdentification = (
   value: string
-): IAccountIdentificationAction => {
+):IAccountIdentificationAction => {
   return {
     type: AccountIdentificationTypes.ACCOUNTIDENTIFICATION,
     value,

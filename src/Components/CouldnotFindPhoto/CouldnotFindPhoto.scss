@@ -1,11 +1,11 @@
 .not-find-photo-msg {
+  margin-top: 2rem;
   div:nth-of-type(1) {
     h2 {
       font-size: 1.625rem;
       font-weight: 800;
       text-transform: capitalize;
       text-align: center;
-      margin-bottom: 5rem;
     }
   }
   div:nth-of-type(2) {
@@ -30,6 +30,7 @@
 }
 
 .find-photo-msg {
+  margin-top: 2rem;
   div {
     h2 {
       text-align: center;

@@ -71,7 +71,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
         <div className="container-xl videos-page-header">
           <video
             controls={false}
-            autoPlay={navigator.appCodeName === "Safari" ? false : true}
+            // autoPlay={navigator.appCodeName === "Safari" ? false : true}
             loop={true}
           >
             <source

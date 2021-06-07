@@ -87,7 +87,7 @@ class ModalWindow extends React.Component<
                 <img src={collection[viewedId].src} alt="img" />
               )}
               {collection[viewedId].photographer === null && (
-                <Player src={collection[viewedId].src} />
+                <Player src={collection[viewedId].src}/>
               )}
               <span
                 className="modal-window-arrow-left"

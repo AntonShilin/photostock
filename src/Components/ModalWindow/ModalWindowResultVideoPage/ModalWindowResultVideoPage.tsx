@@ -3,24 +3,20 @@ import { connect } from "react-redux";
 import { IApplicationState } from "../../../Store/Store";
 import { IPopularVideos } from "../../../Interfaces/Interfaces";
 import "./ModalWindowResultVideoPage.scss";
-import Heart from "../../SVGIcons/Heart/Heart";
-import { MdControlPoint, MdClose } from "react-icons/md";
 import {
   IoIosArrowForward,
   IoIosArrowBack,
-  IoIosArrowDown,
-  IoIosArrowUp,
 } from "react-icons/io";
 import {
   toggleWindowVideoPage,
-  toggleBtnMediaPlayer,
-  stopMediaPlayer,
   watchingVideoForward,
   watchingVideoBack,
   toggleDropMenuVideoPage,
-  clearVideoID,
 } from "../../../Actions/ProductsActions";
-import ResultVideoMediaPlayer from "../../MediaPlayers/ResultVideoMediaPlayer/ResultVideoMediaPlayer";
+import ButtonLike from "../../ControlKeys/ButtonLike/ButtonLike";
+import Collect from "../../ControlKeys/Collect/Collect";
+import FreeDownload from "../../ControlKeys/FreeDownload/FreeDownload";
+import Player from "../../MediaPlayers/Player/Player";
 
 export interface IWindowResultVideoPageProps {
   resultSearchVideo: IPopularVideos | null;
@@ -30,11 +26,8 @@ export interface IWindowResultVideoPageProps {
   isOpenDropDownMenu: boolean;
   toggleWindowVideoPage: typeof toggleWindowVideoPage;
   toggleDropMenuVideoPage: typeof toggleDropMenuVideoPage;
-  toggleBtnMediaPlayer: typeof toggleBtnMediaPlayer;
-  stopMediaPlayer: typeof stopMediaPlayer;
   watchingVideoForward: typeof watchingVideoForward;
   watchingVideoBack: typeof watchingVideoBack;
-  clearVideoID: typeof clearVideoID;
 }
 
 export interface State {}
@@ -44,101 +37,69 @@ class ModalWindowResultVideoPage extends React.Component<
   State
 > {
   public render() {
-    const { isOpenDropDownMenu, resultSearchVideo, id } = this.props;
+    const { isOpenDropDownMenu, resultSearchVideo, id, isOpen } = this.props;
 
     return (
-      <React.Fragment>
-        {resultSearchVideo !== null && (
-          <div
-            className={
-              this.props.isOpen
-                ? "d-block modal_result_window_video_basis"
-                : "d-none"
-            }
+      <>
+        {resultSearchVideo !== null && isOpen && (
+          <div className="modal-video-result-page">
+          <button
+            className="modal-close-btn"
+            onClick={() => {
+              this.props.toggleWindowVideoPage();
+            }}
           >
-            <div className="container-xl modal_result_window_video_main">
-              <div className="row modal_result_window_video_bg">
-                <MdClose
-                  className="close_icon"
-                  onClick={() => {
-                    this.props.toggleWindowVideoPage();
-                    this.props.toggleBtnMediaPlayer(false);
-                    this.props.stopMediaPlayer();
-                    this.props.clearVideoID();
-                  }}
-                />
-                <div className="col-12 description_video order-lg-first order-last">
-                  <div className="row">
-                    <div className="col-lg-3 col-md-12 col-sm-12 mb-2 order-lg-first order-last">
-                      <small>VIDEOGRAPHER</small>
-                      <p>
-                        <span>
-                          {resultSearchVideo.videos.length > 0 &&
-                            resultSearchVideo.videos[id].user.name.charAt(0)}
-                        </span>
-                        {resultSearchVideo.videos.length > 0 &&
-                          resultSearchVideo.videos[id].user.name}
-                      </p>
-                    </div>
-                    <div className="col-lg-5 col-md-12 col-sm-12 mb-2 text-center">
-                      <button className="btn btn-light mr-2 mb-2 heart">
-                        <Heart
-                          id={resultSearchVideo.videos[id].id}
-                          src={resultSearchVideo.videos[id].video_files[0].link}
-                          videographer={resultSearchVideo.videos[id].user.name}
-                          photographer={null}
-                          liked={false}
-                        />{" "}
-                        Likes
-                      </button>
-                      <button className="btn btn-light mr-2 mb-2 control_point">
-                        <MdControlPoint /> Collect
-                      </button>
-                    </div>
-                    <div className="col-lg-4 col-md-12 col-sm-12 mb-2 download_item_bg">
-                      <button
-                        className="btn download w-100"
-                        onClick={this.props.toggleDropMenuVideoPage}
-                      >
-                        Free download{" "}
-                        {isOpenDropDownMenu ? (
-                          <IoIosArrowUp />
-                        ) : (
-                          <IoIosArrowDown />
-                        )}
-                      </button>
-                      {/* <DropMenuVideoPage /> */}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-12 align-self-center modal_window_video">
-                  <ResultVideoMediaPlayer />
-                  <span
-                    className="arrow_left"
-                    onClick={() => {
-                      this.props.toggleBtnMediaPlayer(false);
-                      this.props.stopMediaPlayer();
-                      this.props.watchingVideoBack(id);
-                    }}
-                  >
-                    <IoIosArrowBack />
-                  </span>
-                  <span
-                    className="arrow_right"
-                    onClick={() => {
-                      this.props.toggleBtnMediaPlayer(false);
-                      this.props.stopMediaPlayer();
-                      this.props.watchingVideoForward(id);
-                    }}
-                  >
-                    <IoIosArrowForward />
-                  </span>
+            &#10799;
+          </button>
+          <div className="modal-video-result-page-bg">
+            <div className="modal-video-result-page-title">
+              <div className="modal-video-result-page-title-header">
+                <small>videographer</small>
+              </div>
+              <div className="modal-video-result-page-title-left">
+                <span>{resultSearchVideo.videos[id].user.name.charAt(0)}</span>
+                <h5>{resultSearchVideo.videos[id].user.name}</h5>
+              </div>
+              <div className="modal-video-result-page-title-right">
+                <div className="modal-video-result-page-title-buttons-group">
+                  <ButtonLike
+                    id={resultSearchVideo.videos[id].id}
+                    src={resultSearchVideo.videos[id].video_files[0].link}
+                    photographer={null}
+                    videographer={resultSearchVideo.videos[id].user.name}
+                    liked={false}
+                  />
+                  <Collect
+                    id={resultSearchVideo.videos[id].id}
+                    src={resultSearchVideo.videos[id].video_files[0].link}
+                    photographer={null}
+                    videographer={resultSearchVideo.videos[id].user.name}
+                    liked={false}
+                  />
+                  <FreeDownload />
                 </div>
               </div>
             </div>
+            <div className="modal-video-result-page-content">
+              <Player
+                src={resultSearchVideo.videos[id].video_files[0].link}
+              />
+              <span
+                className="modal-video-result-page-arrow-left"
+                onClick={() => this.props.watchingVideoBack(id)}
+              >
+                <IoIosArrowBack />
+              </span>
+              <span className="modal-video-result-page-arrow-right">
+                <IoIosArrowForward
+                  onClick={() => this.props.watchingVideoForward(id)}
+                />
+              </span>
+            </div>
           </div>
+        </div>
         )}
-      </React.Fragment>
+      </>
     );
   }
 }
@@ -155,12 +116,8 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     toggleWindowVideoPage: () => dispatch(toggleWindowVideoPage()),
     toggleDropMenuVideoPage: () => dispatch(toggleDropMenuVideoPage()),
-    toggleBtnMediaPlayer: (value: boolean) =>
-      dispatch(toggleBtnMediaPlayer(value)),
-    stopMediaPlayer: () => dispatch(stopMediaPlayer()),
     watchingVideoForward: (id: number) => dispatch(watchingVideoForward(id)),
     watchingVideoBack: (id: number) => dispatch(watchingVideoBack(id)),
-    clearVideoID: () => dispatch(clearVideoID()),
   };
 };
 

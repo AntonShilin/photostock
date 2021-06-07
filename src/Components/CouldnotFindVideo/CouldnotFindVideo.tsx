@@ -10,36 +10,64 @@ export interface ICouldnotFindVideoProps {
   resultSearchVideo?: IPopularVideos | null;
 }
 
-export interface State {}
-
-class CouldnotFindVideo extends React.Component<ICouldnotFindVideoProps, State> {
+class CouldnotFindVideo extends React.Component<ICouldnotFindVideoProps, {}> {
   public render() {
-    return (
-      <React.Fragment>
-        {
-        this.props.resultSearchVideo?.videos.length === 0 ? (
-          <div className="row">
-            <div className="col-12">
-              <h2 className="text-center mb-5">
-                We Couldn't Find Anything For "{this.props.searchNameVideo}"
-              </h2>
-            </div>
-            <div className="col-12">
-              <p className="text-left">Try spelling the word correctly</p>
-              <p className="text-left">
-                Discover beautiful videos on{" "}
-                <NavLink to="/videos">the main page »</NavLink>
-              </p>
-            </div>
+    const { resultSearchVideo, searchNameVideo } = this.props;
+
+    if (
+      resultSearchVideo !== undefined &&
+      resultSearchVideo !== null &&
+      resultSearchVideo.videos.length > 0
+    ) {
+      return (
+        <div className="row find-video-name">
+          <div className="col-12">
+            <h2>{searchNameVideo} Videos</h2>
           </div>
-          ) :
-          <div className="row mb-3">
-            <div className="col-12">
-              <h2 className="text-center">{this.props.searchNameVideo} Videos</h2>
-            </div>
         </div>
-        }
-      </React.Fragment>
+      );
+    }
+
+    if (resultSearchVideo !== undefined && resultSearchVideo === null) {
+      return (
+        <div className="row not-find-video-name">
+          <div className="col-12">
+            <h2 className="text-center mb-5">
+              We Couldn't Find Anything For "{this.props.searchNameVideo}"
+            </h2>
+          </div>
+          <div className="col-12">
+            <p>Try spelling the word correctly</p>
+            <p>
+              Discover beautiful videos on{" "}
+              <NavLink to="/videos">the main page »</NavLink>
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <>
+        {resultSearchVideo !== undefined &&
+          resultSearchVideo !== null &&
+          resultSearchVideo.videos.length === 0 && (
+            <div className="row not-find-video-name">
+              <div className="col-12">
+                <h2>
+                  We Couldn't Find Anything For "{this.props.searchNameVideo}"
+                </h2>
+              </div>
+              <div className="col-12">
+                <p>Try spelling the word correctly</p>
+                <p>
+                  Discover beautiful videos on{" "}
+                  <NavLink to="/videos">the main page »</NavLink>
+                </p>
+              </div>
+            </div>
+          )}
+      </>
     );
   }
 }
@@ -47,8 +75,8 @@ class CouldnotFindVideo extends React.Component<ICouldnotFindVideoProps, State> 
 const mapStateToProps = (state: IApplicationState) => {
   return {
     searchNameVideo: state.products.searchNameVideo,
-  resultSearchVideo: state.products.resultSearchVideo
+    resultSearchVideo: state.products.resultSearchVideo,
   };
 };
 
-export default connect(mapStateToProps,null)(CouldnotFindVideo);
+export default connect(mapStateToProps, {})(CouldnotFindVideo);

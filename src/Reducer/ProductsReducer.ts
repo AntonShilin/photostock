@@ -1,6 +1,7 @@
 import {
   ClearPhotoIdTypes,
   ClearVideoIDTypes,
+  isLoadingSearchImagesByNameTypes,
   PopularImageBackTypes,
   PopularImageForwardTypes,
   PopularVideoBackTypes,
@@ -17,11 +18,8 @@ import {
   ToggleMenuTypes,
   MoveScroll,
   DeletePrevData,
-  likeHeart,
   preplayVideoTypes,
   pauseVideoTypes,
-  isLoadingImagesTypes,
-  isLoadingVideosTypes,
   SearchImagesByNameTypes,
   SearchBySuggestedWordTypes,
   DownloadImageTypes,
@@ -64,8 +62,9 @@ const initialProductState: IProductsState = {
   isScrollTop: null,
   isScrollHeight: null,
   isClientHeight: null,
-  isLoadingImages: false,
-  isLoadingVideos: false,
+  isLoadingPopularImages: true,
+  isLoadingVideos: true,
+  isSearchingImagesByName: true,
   suggestedWords: [
     "mountain",
     "sport",
@@ -112,7 +111,7 @@ export const productsReducer = (
       return {
         ...state,
         data: action.popularPhoto,
-        isLoadingImages: action.isLoading,
+        isLoadingPopularImages: action.isLoading,
       };
     }
 
@@ -131,6 +130,13 @@ export const productsReducer = (
       };
     }
 
+    case isLoadingSearchImagesByNameTypes.ISLOADINGSEARCHIMAGESBYNAME: {
+      return {
+        ...state,
+        isSearchingImagesByName: action.isLoading,
+      };
+    }
+
     case SearchImagesByNameTypes.SEARCHIMAGESBYNAME: {
       action.findPhoto.photos.map((elem: IData, i: number) => {
         elem.id = i;
@@ -138,7 +144,7 @@ export const productsReducer = (
       return {
         ...state,
         resultSearchImage: action.findPhoto,
-        isLoadingImages: action.isLoading,
+        isSearchingImagesByName: action.isLoading,
       };
     }
 
@@ -149,7 +155,6 @@ export const productsReducer = (
       return {
         ...state,
         videos: action.popularVideo,
-        isLoadingVideos: action.isLoading,
       };
     }
 
@@ -168,7 +173,6 @@ export const productsReducer = (
       return {
         ...state,
         resultSearchVideo: action.findVideo,
-        isLoadingVideos: action.isLoading,
       };
     }
 
@@ -196,12 +200,6 @@ export const productsReducer = (
       };
     }
 
-    case likeHeart.LIKEHEART: {
-      return {
-        ...state,
-      };
-    }
-
     case preplayVideoTypes.PREPLAYVIDEO: {
       return {
         ...state,
@@ -211,20 +209,6 @@ export const productsReducer = (
     case pauseVideoTypes.PAUSEVIDEO: {
       return {
         ...state,
-      };
-    }
-
-    case isLoadingImagesTypes.LOADINGIMAGES: {
-      return {
-        ...state,
-        isLoadingImages: action.isLoading,
-      };
-    }
-
-    case isLoadingVideosTypes.LOADINGVIDEOS: {
-      return {
-        ...state,
-        isLoadingVideos: action.isLoading,
       };
     }
 
@@ -486,7 +470,7 @@ export const productsReducer = (
         },
       };
     }
-      
+
     case ClearPhotoIdTypes.CLEARPHOTOID: {
       return {
         ...state,
@@ -496,7 +480,7 @@ export const productsReducer = (
         },
       };
     }
-      
+
     case PopularImageForwardTypes.POPULARIMAGEFORWARD: {
       if (action.stepForward >= state.data!.photos.length) {
         action.stepForward = 0;

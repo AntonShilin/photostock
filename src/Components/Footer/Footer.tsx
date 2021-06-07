@@ -1,15 +1,11 @@
 import * as React from "react";
-import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { IApplicationState } from "../../Store/Store";
 import "./Footer.scss";
 
-export interface IFooterProps {}
 
-export interface IFooterState {}
-
-class Footer extends React.Component<IFooterProps, IFooterState> {
+class Footer extends React.Component<{}, {}> {
   public render() {
+
     return (
       <footer className="container-xl">
         <div className="container-xl">
@@ -18,7 +14,7 @@ class Footer extends React.Component<IFooterProps, IFooterState> {
               <NavLink to="/" className="footer_logo btn">
                 F
               </NavLink>
-               — Beautiful free photos contributed by our talented community.
+              — Beautiful free photos contributed by our talented community.
             </div>
             <div className="col-12">
               <NavLink to="#">Terms of Use</NavLink>
@@ -39,10 +35,4 @@ class Footer extends React.Component<IFooterProps, IFooterState> {
   }
 }
 
-const mapStateToProps = (state: IApplicationState) => ({});
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+export default Footer;

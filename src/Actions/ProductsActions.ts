@@ -1,4 +1,17 @@
-import { IPopularVideoForwardAction, PopularVideoForwardTypes, IPopularVideoBackAction, PopularVideoBackTypes, ClearVideoIDTypes, ClearPhotoIdTypes, IPopularImageForwardAction, PopularImageForwardTypes, IPopularImageBackAction, PopularImageBackTypes } from './../Types/ProductsTypes';
+import {
+  IPopularVideoForwardAction,
+  PopularVideoForwardTypes,
+  IPopularVideoBackAction,
+  PopularVideoBackTypes,
+  ClearVideoIDTypes,
+  ClearPhotoIdTypes,
+  IPopularImageForwardAction,
+  PopularImageForwardTypes,
+  IPopularImageBackAction,
+  PopularImageBackTypes,
+  ILoadingSearchImagesByNameAction,
+  isLoadingSearchImagesByNameTypes,
+} from "./../Types/ProductsTypes";
 import {
   SearchValueTypes,
   GetPopularVideoTypes,
@@ -14,17 +27,11 @@ import {
   MoveScroll,
   DeletePrevData,
   IDeletePrevDataAction,
-  ILikeHeartAction,
-  likeHeart,
   preplayVideoTypes,
   IPreplayVideoAction,
   IPauseVideoAction,
   pauseVideoTypes,
-  isLoadingImagesTypes,
-  isLoadingVideosTypes,
   GetPopularImagesTypes,
-  ILoadingImagesAction,
-  ILoadingVideosAction,
   SearchImagesByNameTypes,
   SearchBySuggestedWordTypes,
   DownloadImageTypes,
@@ -96,16 +103,13 @@ export const handleToggleMenu = (): IToggleMenuAction => ({
 
 /*  get  fotos for photo page */
 export const getPopularImages = () => {
-  return (
-    dispatch: (arg0: ILoadingImagesAction | IGetPopularPhotoAction) => void
-  ) => {
-    dispatch(isLoadingImages());
+  return (dispatch: (arg0: IGetPopularPhotoAction) => void) => {
     fetch(`https://api.pexels.com/v1/curated?page=1&per_page=40`, {
       headers: { Authorization: keyApi },
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response.statusText)
+          console.log(response.statusText);
           throw new Error(response.statusText);
         }
         return response;
@@ -141,10 +145,7 @@ export const handleSearchChange = (
 
 /*  get popular videos */
 export const getPopularVideo = () => {
-  return (
-    dispatch: (arg0: ILoadingVideosAction | IPopularVideoAction) => void
-  ) => {
-    dispatch(isLoadingVideos());
+  return (dispatch: (arg0: IPopularVideoAction) => void) => {
     fetch(`https://api.pexels.com/videos/popular?per_page=10&page=1`, {
       headers: { Authorization: keyApi },
     })
@@ -159,7 +160,6 @@ export const getPopularVideo = () => {
         dispatch({
           type: GetPopularVideoTypes.GETPOPULARVIDEO,
           popularVideo: data,
-          isLoading: false,
         })
       );
   };
@@ -173,15 +173,21 @@ export const changeNameVideo = (
   value: e.target.value,
 });
 
+export const isLoadingSearchImagesByName = (
+  value: boolean
+): ILoadingSearchImagesByNameAction => {
+  return {
+    type: isLoadingSearchImagesByNameTypes.ISLOADINGSEARCHIMAGESBYNAME,
+    isLoading: value,
+  };
+};
+
 /* get videos search by name*/
 export const getSearchVideos = (name: string) => {
   return (
-    dispatch: (
-      arg0: IDeletePrevDataAction | ILoadingVideosAction | IGetVideoAction
-    ) => void
+    dispatch: (arg0: IDeletePrevDataAction | IGetVideoAction) => void
   ) => {
     dispatch(deletePrevData());
-    dispatch(isLoadingVideos());
     fetch(
       `https://api.pexels.com/videos/search?query=${name}+query&per_page=40&page=1`,
       {
@@ -199,7 +205,6 @@ export const getSearchVideos = (name: string) => {
         dispatch({
           type: GetVideoTypes.GETVIDEO,
           findVideo: data,
-          isLoading: false,
         })
       );
   };
@@ -211,15 +216,18 @@ export const getSearchImages = (name: string) => {
     dispatch: (
       arg0:
         | IDeletePrevDataAction
-        | ILoadingImagesAction
         | ISearchImagesByNameAction
+        | ILoadingSearchImagesByNameAction
     ) => void
   ) => {
     dispatch(deletePrevData());
-    dispatch(isLoadingImages());
-    fetch(`https://api.pexels.com/v1/search?query=${name}+query&per_page=50&page=1`, {
-      headers: { Authorization: keyApi },
-    })
+    dispatch(isLoadingSearchImagesByName(true));
+    fetch(
+      `https://api.pexels.com/v1/search?query=${name}+query&per_page=50&page=1`,
+      {
+        headers: { Authorization: keyApi },
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -247,16 +255,6 @@ export const handleScroll = (event: any): IMoveScrollAction => {
   };
 };
 
-/*click heart interesting video and foto*/
-export const handleLikeHeart = (
-  e: React.MouseEvent<SVGSVGElement>
-): ILikeHeartAction => {
-  e.currentTarget.classList.toggle("liked");
-  return {
-    type: likeHeart.LIKEHEART,
-  };
-};
-
 /* preplay video */
 export const handlePreplayVideo = (
   e: React.MouseEvent<HTMLVideoElement>
@@ -274,22 +272,6 @@ export const handlePauseVideo = (
   e.currentTarget.pause();
   return {
     type: pauseVideoTypes.PAUSEVIDEO,
-  };
-};
-
-/* loading page for photos page */
-export const isLoadingImages = (): ILoadingImagesAction => {
-  return {
-    type: isLoadingImagesTypes.LOADINGIMAGES,
-    isLoading: true,
-  };
-};
-
-/* loading page for videos page */
-export const isLoadingVideos = (): ILoadingVideosAction => {
-  return {
-    type: isLoadingVideosTypes.LOADINGVIDEOS,
-    isLoading: true,
   };
 };
 
@@ -559,7 +541,9 @@ export const clearKeyPressNumber = (): IClearKeyPressNumberAction => {
 };
 
 /*watching popular video forward in modal window*/
-export const watchingPopularVideoForward = (id: number): IPopularVideoForwardAction => {
+export const watchingPopularVideoForward = (
+  id: number
+): IPopularVideoForwardAction => {
   ++id;
   return {
     type: PopularVideoForwardTypes.POPULARVIDEOFORWARD,
@@ -568,7 +552,9 @@ export const watchingPopularVideoForward = (id: number): IPopularVideoForwardAct
 };
 
 /*watching popular video back in modal window*/
-export const watchingPopularVideoBack = (id: number): IPopularVideoBackAction => {
+export const watchingPopularVideoBack = (
+  id: number
+): IPopularVideoBackAction => {
   --id;
   return {
     type: PopularVideoBackTypes.POPULARVIDEOBACK,
@@ -580,20 +566,22 @@ export const watchingPopularVideoBack = (id: number): IPopularVideoBackAction =>
 export const clearVideoID = () => {
   return {
     type: ClearVideoIDTypes.CLEARVIDEOID,
-    pos:0
-  }
-}
+    pos: 0,
+  };
+};
 
 /* set defaul position id after close modalphotowindow and modalresultphotowindow */
 export const clearPhotoID = () => {
   return {
     type: ClearPhotoIdTypes.CLEARPHOTOID,
-    pos:0
-  }
-}
+    pos: 0,
+  };
+};
 
 /*watching popular image forward in modal window*/
-export const watchingPopularImageForward = (id: number): IPopularImageForwardAction => {
+export const watchingPopularImageForward = (
+  id: number
+): IPopularImageForwardAction => {
   ++id;
   return {
     type: PopularImageForwardTypes.POPULARIMAGEFORWARD,
@@ -602,7 +590,9 @@ export const watchingPopularImageForward = (id: number): IPopularImageForwardAct
 };
 
 /*watching popular image back in modal window*/
-export const watchingPopularImageBack = (id: number): IPopularImageBackAction => {
+export const watchingPopularImageBack = (
+  id: number
+): IPopularImageBackAction => {
   --id;
   return {
     type: PopularImageBackTypes.POPULARIMAGEBACK,

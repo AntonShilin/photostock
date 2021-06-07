@@ -13,9 +13,8 @@ export interface IAdminPageProps {
   isAccountSignIn: boolean;
 }
 
-export interface IAdminPageState {}
 
-class AdminPage extends React.Component<IAdminPageProps, IAdminPageState> {
+class AdminPage extends React.Component<IAdminPageProps, {}> {
   public render() {
     const { userName, isAccountSignIn } = this.props;
 
@@ -45,7 +44,7 @@ class AdminPage extends React.Component<IAdminPageProps, IAdminPageState> {
           </div>
         </div>
         <Collections />
-        <Footer />
+        <Footer/>
       </>
     );
   }

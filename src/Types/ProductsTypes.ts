@@ -48,24 +48,12 @@ export enum DeletePrevData {
   DELETEPREVDATA = "DELETEPREVDATA",
 }
 
-export enum likeHeart {
-  LIKEHEART = "LIKEHEART",
-}
-
 export enum preplayVideoTypes {
   PREPLAYVIDEO = "PREPLAYVIDEO",
 }
 
 export enum pauseVideoTypes {
   PAUSEVIDEO = "PAUSEVIDEO",
-}
-
-export enum isLoadingImagesTypes {
-  LOADINGIMAGES = "LOADINGIMAGES",
-}
-
-export enum isLoadingVideosTypes {
-  LOADINGVIDEOS = "LOADINGVIDEOS",
 }
 
 export enum SearchBySuggestedWordTypes {
@@ -184,7 +172,18 @@ export enum PopularImageBackTypes {
   POPULARIMAGEBACK = "POPULARIMAGEBACK",
 }
 
+export enum isLoadingSearchImagesByNameTypes {
+  ISLOADINGSEARCHIMAGESBYNAME = "ISLOADINGSEARCHIMAGESBYNAME",
+}
+
+
+
 /*  interfaces */
+
+export interface ILoadingSearchImagesByNameAction {
+  type: isLoadingSearchImagesByNameTypes.ISLOADINGSEARCHIMAGESBYNAME,
+  isLoading: boolean;
+}
 
 export interface IPopularImageBackAction {
   type: PopularImageBackTypes.POPULARIMAGEBACK;
@@ -323,26 +322,12 @@ export interface ISearchBySuggestedWordAction {
   name: string;
 }
 
-export interface ILoadingImagesAction {
-  type: isLoadingImagesTypes.LOADINGIMAGES;
-  isLoading: boolean;
-}
-
-export interface ILoadingVideosAction {
-  type: isLoadingVideosTypes.LOADINGVIDEOS;
-  isLoading: boolean;
-}
-
 export interface IPauseVideoAction {
   type: pauseVideoTypes.PAUSEVIDEO;
 }
 
 export interface IPreplayVideoAction {
   type: preplayVideoTypes.PREPLAYVIDEO;
-}
-
-export interface ILikeHeartAction {
-  type: likeHeart.LIKEHEART;
 }
 
 export interface IDeletePrevDataAction {
@@ -379,7 +364,6 @@ export interface ISearchImagesByNameAction {
 export interface IPopularVideoAction {
   type: GetPopularVideoTypes.GETPOPULARVIDEO;
   popularVideo: IPopularVideos;
-  isLoading: boolean;
 }
 
 export interface IChangeNameVideoAction {
@@ -390,7 +374,6 @@ export interface IChangeNameVideoAction {
 export interface IGetVideoAction {
   type: GetVideoTypes.GETVIDEO;
   findVideo: IPopularVideos;
-  isLoading: boolean;
 }
 
 export interface IMoveScrollAction {
@@ -402,6 +385,7 @@ export interface IMoveScrollAction {
 
 /* actions */
 export type ProductsActions =
+  |ILoadingSearchImagesByNameAction
   | IPopularImageForwardAction
   | IPopularImageBackAction
   | IClearPhotoIdAction
@@ -427,12 +411,8 @@ export type ProductsActions =
   | IGetVideoAction
   | IMoveScrollAction
   | IDeletePrevDataAction
-  | ILikeHeartAction
   | IPreplayVideoAction
   | IPauseVideoAction
-  | ILoadingImagesAction
-  | ILoadingVideosAction
-  | ILoadingImagesAction
   | ISearchBySuggestedWordAction
   | IDownloadImageAction
   | IShowDetailsPhotoAction
@@ -463,9 +443,10 @@ export interface IProductsState {
   readonly isScrollTop: number | null;
   readonly isScrollHeight: number | null;
   readonly isClientHeight: number | null;
-  readonly isLoadingImages: boolean;
+  readonly isLoadingPopularImages: boolean;
   readonly isLoadingVideos: boolean;
   readonly suggestedWords: string[];
+  readonly isSearchingImagesByName: boolean;
   readonly modalWindowPhotoPage: {
     id: number | null;
     isOpen: boolean;
