@@ -37,6 +37,9 @@
             -o-object-fit: cover;
             object-fit: cover;
           }
+          video{
+            background-color: lightgray;
+          }
         }
         div.collection_rest {
           height: 17vh;

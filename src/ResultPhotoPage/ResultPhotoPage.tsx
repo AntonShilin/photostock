@@ -30,24 +30,18 @@ export interface ISearchImageResultProps extends RouteComponentProps {
   resultSearchVideo: IPopularVideos | null;
   getSearchVideos: typeof getSearchVideos;
   downloadImage: typeof downloadImage;
-  isSearchingImagesByName: boolean;
+  isLoadingSearchImagesByName: boolean;
   getIdPhoto: typeof getIdPhoto;
   toggleWindowPhotoPage: typeof toggleWindowPhotoPage;
   toggleModalWindow: typeof toggleModalWindow;
-  isLoadingSearchImagesByName: typeof isLoadingSearchImagesByName;
 }
 
 class ResultPhotoPage extends React.Component<ISearchImageResultProps, {}> {
-  public componentDidMount() {
-    const { resultSearchImage } = this.props;
-    if (resultSearchImage === null) {
-      this.props.isLoadingSearchImagesByName(false);
-    }
-  }
+
 
   public render() {
     const {
-      isSearchingImagesByName,
+      isLoadingSearchImagesByName,
       resultSearchImage,
       searchNamePhoto,
       resultSearchVideo,
@@ -57,7 +51,7 @@ class ResultPhotoPage extends React.Component<ISearchImageResultProps, {}> {
       <>
         <HeaderResultPhotoPage />
         <ModalWindowResultPhotoPage />
-        {isSearchingImagesByName ? (
+        {isLoadingSearchImagesByName ? (
           <LoadingPage />
         ) : (
           <div className="container-xl photo_result_bg">
@@ -198,14 +192,12 @@ const mapStateToProps = (state: IApplicationState) => {
     resultSearchImage: state.products.resultSearchImage,
     searchNamePhoto: state.products.searchNamePhoto,
     resultSearchVideo: state.products.resultSearchVideo,
-    isSearchingImagesByName: state.products.isSearchingImagesByName,
+    isLoadingSearchImagesByName: state.products.isLoadingSearchImagesByName,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    isLoadingSearchImagesByName: (value: boolean) =>
-      dispatch(isLoadingSearchImagesByName(value)),
     downloadImage: (elem: any) => dispatch(downloadImage(elem)),
     getIdPhoto: (id: number) => dispatch(getIdPhoto(id)),
     toggleWindowPhotoPage: () => dispatch(toggleWindowPhotoPage()),

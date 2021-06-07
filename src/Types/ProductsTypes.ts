@@ -48,14 +48,6 @@ export enum DeletePrevData {
   DELETEPREVDATA = "DELETEPREVDATA",
 }
 
-export enum preplayVideoTypes {
-  PREPLAYVIDEO = "PREPLAYVIDEO",
-}
-
-export enum pauseVideoTypes {
-  PAUSEVIDEO = "PAUSEVIDEO",
-}
-
 export enum SearchBySuggestedWordTypes {
   SEARCHBYSUGGESTEDWORD = "SEARCHBYSUGGESTEDWORD",
 }
@@ -124,26 +116,6 @@ export enum ClearRadioBoxesTypes {
   CLEARRADIOBOXES = "CLEARRADIOBOXES",
 }
 
-export enum ToggleBtnMediaPlayerTypes {
-  TOGGLEBTNMEDIAPLAYER = "TOGGLEBTNMEDIAPLAYER",
-}
-
-export enum StopMediaPlayerTypes {
-  STOPMEDIAPLAYER = "STOPMEDIAPLAYER",
-}
-
-export enum StartMediaPlayerTypes {
-  STARTMEDIAPLAYER = "STARTMEDIAPLAYER",
-}
-
-export enum SetCurrentTimeTypes {
-  SETCURRENTTIME = "SETCURRENTTIME",
-}
-
-export enum PauseMediaPlayerTypes {
-  PAUSEMEDIAPLAYER = "PAUSEMEDIAPLAYER",
-}
-
 export enum ClearKeyPressNumberTypes {
   CLEARKEYPRESSNUMBER = "CLEARKEYPRESSNUMBER",
 }
@@ -176,12 +148,37 @@ export enum isLoadingSearchImagesByNameTypes {
   ISLOADINGSEARCHIMAGESBYNAME = "ISLOADINGSEARCHIMAGESBYNAME",
 }
 
+export enum isLoadingPopularImagesTypes {
+  ISLOADINGPOPULARIMAGES = "ISLOADINGPOPULARIMAGES",
+}
 
+export enum isLoadingSearchVideosByNameTypes {
+  ISLOADINGSEARCHVIDEOSBYNAME = "ISLOADINGSEARCHVIDEOSBYNAME",
+}
+
+export enum isLoadingPopularVideosTypes {
+  ISLOADINGPOPULARVIDEOS = "ISLOADINGPOPULARVIDEOS",
+}
 
 /*  interfaces */
 
+export interface ILoadingPopularVideosAction {
+  type: isLoadingPopularVideosTypes.ISLOADINGPOPULARVIDEOS
+  isLoading: boolean;
+}
+
+export interface ILoadingSearchVideosByNameAction {
+  type: isLoadingSearchVideosByNameTypes.ISLOADINGSEARCHVIDEOSBYNAME;
+  isLoading: boolean;
+}
+
+export interface ILoadingPopularImagesAction {
+  type: isLoadingPopularImagesTypes.ISLOADINGPOPULARIMAGES;
+  isLoading: boolean;
+}
+
 export interface ILoadingSearchImagesByNameAction {
-  type: isLoadingSearchImagesByNameTypes.ISLOADINGSEARCHIMAGESBYNAME,
+  type: isLoadingSearchImagesByNameTypes.ISLOADINGSEARCHIMAGESBYNAME;
   isLoading: boolean;
 }
 
@@ -218,30 +215,6 @@ export interface IPopularVideoForwardAction {
 export interface IClearKeyPressNumberAction {
   type: ClearKeyPressNumberTypes.CLEARKEYPRESSNUMBER;
   keyPressNumber: null;
-}
-
-export interface IPauseMediaPlayerAction {
-  type: PauseMediaPlayerTypes.PAUSEMEDIAPLAYER;
-}
-
-export interface ISetCurrentTimeAction {
-  type: SetCurrentTimeTypes.SETCURRENTTIME;
-  time: number;
-}
-
-export interface IStartMediaPlayerAction {
-  type: StartMediaPlayerTypes.STARTMEDIAPLAYER;
-  timer: any;
-}
-
-export interface IStopMediaPlayerAction {
-  type: StopMediaPlayerTypes.STOPMEDIAPLAYER;
-  time: number;
-}
-
-export interface IToggleBtnMediaPlayerAction {
-  type: ToggleBtnMediaPlayerTypes.TOGGLEBTNMEDIAPLAYER;
-  isPlay: boolean;
 }
 
 export interface IClearRadioBoxesAction {
@@ -322,14 +295,6 @@ export interface ISearchBySuggestedWordAction {
   name: string;
 }
 
-export interface IPauseVideoAction {
-  type: pauseVideoTypes.PAUSEVIDEO;
-}
-
-export interface IPreplayVideoAction {
-  type: preplayVideoTypes.PREPLAYVIDEO;
-}
-
 export interface IDeletePrevDataAction {
   type: DeletePrevData.DELETEPREVDATA;
   data: null;
@@ -364,6 +329,7 @@ export interface ISearchImagesByNameAction {
 export interface IPopularVideoAction {
   type: GetPopularVideoTypes.GETPOPULARVIDEO;
   popularVideo: IPopularVideos;
+  isLoading: boolean;
 }
 
 export interface IChangeNameVideoAction {
@@ -374,6 +340,7 @@ export interface IChangeNameVideoAction {
 export interface IGetVideoAction {
   type: GetVideoTypes.GETVIDEO;
   findVideo: IPopularVideos;
+  isLoading: boolean;
 }
 
 export interface IMoveScrollAction {
@@ -385,7 +352,10 @@ export interface IMoveScrollAction {
 
 /* actions */
 export type ProductsActions =
-  |ILoadingSearchImagesByNameAction
+  |ILoadingPopularVideosAction
+  | ILoadingPopularImagesAction
+  | ILoadingSearchVideosByNameAction
+  | ILoadingSearchImagesByNameAction
   | IPopularImageForwardAction
   | IPopularImageBackAction
   | IClearPhotoIdAction
@@ -397,11 +367,6 @@ export type ProductsActions =
   | ISelectVideoSizeAction
   | IVideoBackAction
   | IVideoForwardAction
-  | IPauseMediaPlayerAction
-  | ISetCurrentTimeAction
-  | IStartMediaPlayerAction
-  | IStopMediaPlayerAction
-  | IToggleBtnMediaPlayerAction
   | IGetPopularPhotoAction
   | IGetSearchValueAction
   | ISearchImagesByNameAction
@@ -411,8 +376,6 @@ export type ProductsActions =
   | IGetVideoAction
   | IMoveScrollAction
   | IDeletePrevDataAction
-  | IPreplayVideoAction
-  | IPauseVideoAction
   | ISearchBySuggestedWordAction
   | IDownloadImageAction
   | IShowDetailsPhotoAction
@@ -444,9 +407,10 @@ export interface IProductsState {
   readonly isScrollHeight: number | null;
   readonly isClientHeight: number | null;
   readonly isLoadingPopularImages: boolean;
-  readonly isLoadingVideos: boolean;
+  readonly isLoadingPopularVideos: boolean;
   readonly suggestedWords: string[];
-  readonly isSearchingImagesByName: boolean;
+  readonly isLoadingSearchImagesByName: boolean;
+  readonly isLoadingSearchVideosByName: boolean;
   readonly modalWindowPhotoPage: {
     id: number | null;
     isOpen: boolean;
@@ -458,9 +422,6 @@ export interface IProductsState {
     isOpen: boolean;
     isOpenDropDownMenu: boolean;
     sizeURL: string | undefined;
-    isPlay: boolean;
-    timer: number;
-    currentTime: number;
     sizeVideoURL: string | undefined;
   };
 }

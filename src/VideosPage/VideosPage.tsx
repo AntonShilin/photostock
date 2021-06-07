@@ -5,8 +5,6 @@ import {
   getPopularVideo,
   getSearchVideos,
   changeNameVideo,
-  handlePreplayVideo,
-  handlePauseVideo,
   getSearchImages,
   toggleWindowVideoPage,
   getIdVideo,
@@ -29,15 +27,13 @@ import Footer from "../Components/Footer/Footer";
 
 export interface IPropsVideosPage extends RouteComponentProps {
   getPopularVideo: typeof getPopularVideo;
-  popularVideo: IPopularVideos | null;
+  videos: IPopularVideos | null;
   searchNameVideo: string;
   searchNamePhoto: string;
   getSearchVideos: typeof getSearchVideos;
   changeNameVideo: typeof changeNameVideo;
-  handlePreplayVideo: typeof handlePreplayVideo;
-  handlePauseVideo: typeof handlePauseVideo;
   getSearchImages: typeof getSearchImages;
-  isLoadingVideos: boolean;
+  isLoadingPopularVideos: boolean;
   toggleWindowVideoPage: typeof toggleWindowVideoPage;
   getIdVideo: typeof getIdVideo;
   keyboardKey: number | null;
@@ -46,8 +42,8 @@ export interface IPropsVideosPage extends RouteComponentProps {
 
 class VideosPage extends React.Component<IPropsVideosPage> {
   public componentDidMount() {
-    const { popularVideo } = this.props;
-    if (popularVideo === null) {
+    const { videos } = this.props;
+    if (videos === null) {
       this.props.getPopularVideo();
     }
   }
@@ -62,7 +58,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
   };
 
   public render() {
-    const { isLoadingVideos, popularVideo } = this.props;
+    const { isLoadingPopularVideos, videos } = this.props;
 
     return (
       <>
@@ -116,7 +112,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
           </div>
         </div>
         <NavigationPages />
-        {isLoadingVideos ? (
+        {isLoadingPopularVideos ? (
           <LoadingPage />
         ) : (
           <div className="container-xl trending_video_header">
@@ -128,8 +124,8 @@ class VideosPage extends React.Component<IPropsVideosPage> {
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className="row">
-                  {popularVideo! &&
-                    popularVideo!.videos.map(
+                  {videos !== null &&
+                    videos.videos.map(
                       (value, i) =>
                         i % 2 !== 0 && (
                           <div key={i} className="col-12">
@@ -138,12 +134,6 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                               data-id={value.id}
                             >
                               <video
-                                onMouseOver={(e) =>
-                                  this.props.handlePreplayVideo(e)
-                                }
-                                onMouseLeave={(e) =>
-                                  this.props.handlePauseVideo(e)
-                                }
                                 controls={false}
                                 muted={true}
                                 poster={value.image}
@@ -196,8 +186,8 @@ class VideosPage extends React.Component<IPropsVideosPage> {
               </div>
               <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className="row">
-                  {popularVideo! &&
-                    popularVideo!.videos.map(
+                  {videos !== null &&
+                    videos.videos.map(
                       (value, i) =>
                         i % 2 === 0 && (
                           <div key={i} className="col-12">
@@ -206,12 +196,6 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                               data-id={value.id}
                             >
                               <video
-                                onMouseOver={(e) =>
-                                  this.props.handlePreplayVideo(e)
-                                }
-                                onMouseLeave={(e) =>
-                                  this.props.handlePauseVideo(e)
-                                }
                                 controls={false}
                                 muted={true}
                                 poster={value.image}
@@ -265,7 +249,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
             </div>
           </div>
         )}
-        <Footer/>
+        <Footer />
       </>
     );
   }
@@ -273,10 +257,10 @@ class VideosPage extends React.Component<IPropsVideosPage> {
 
 const mapStateToProps = (state: IApplicationState) => {
   return {
-    popularVideo: state.products.videos,
+    videos: state.products.videos,
     searchNameVideo: state.products.searchNameVideo,
     searchNamePhoto: state.products.searchNamePhoto,
-    isLoadingVideos: state.products.isLoadingVideos,
+    isLoadingPopularVideos: state.products.isLoadingPopularVideos,
     keyboardKey: state.products.keyboardKey,
   };
 };
@@ -287,10 +271,6 @@ const mapDispatchToProps = (dispatch: any) => {
     changeNameVideo: (e: React.ChangeEvent<HTMLInputElement>) =>
       dispatch(changeNameVideo(e)),
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
-    handlePreplayVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
-      dispatch(handlePreplayVideo(e)),
-    handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
-      dispatch(handlePauseVideo(e)),
     getSearchImages: (name: string) => dispatch(getSearchImages(name)),
     toggleWindowVideoPage: () => dispatch(toggleWindowVideoPage()),
     getIdVideo: (id: number) => dispatch(getIdVideo(id)),

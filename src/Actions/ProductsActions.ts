@@ -11,6 +11,12 @@ import {
   PopularImageBackTypes,
   ILoadingSearchImagesByNameAction,
   isLoadingSearchImagesByNameTypes,
+  ILoadingSearchVideosByNameAction,
+  isLoadingSearchVideosByNameTypes,
+  ILoadingPopularImagesAction,
+  isLoadingPopularImagesTypes,
+  ILoadingPopularVideosAction,
+  isLoadingPopularVideosTypes,
 } from "./../Types/ProductsTypes";
 import {
   SearchValueTypes,
@@ -27,10 +33,6 @@ import {
   MoveScroll,
   DeletePrevData,
   IDeletePrevDataAction,
-  preplayVideoTypes,
-  IPreplayVideoAction,
-  IPauseVideoAction,
-  pauseVideoTypes,
   GetPopularImagesTypes,
   SearchImagesByNameTypes,
   SearchBySuggestedWordTypes,
@@ -63,16 +65,6 @@ import {
   ToggleWindowVideoPageTypes,
   IShowDetailsVideoAction,
   GetIdVideoTypes,
-  ToggleBtnMediaPlayerTypes,
-  IToggleBtnMediaPlayerAction,
-  IStopMediaPlayerAction,
-  StopMediaPlayerTypes,
-  IStartMediaPlayerAction,
-  StartMediaPlayerTypes,
-  ISetCurrentTimeAction,
-  SetCurrentTimeTypes,
-  IPauseMediaPlayerAction,
-  PauseMediaPlayerTypes,
   IVideoForwardAction,
   VideoForwardTypes,
   IVideoBackAction,
@@ -101,9 +93,23 @@ export const handleToggleMenu = (): IToggleMenuAction => ({
   type: ToggleMenuTypes.TOGGLEMENU,
 });
 
+export const isLoadingPopularImages = (
+  value: boolean
+): ILoadingPopularImagesAction => {
+  return {
+    type: isLoadingPopularImagesTypes.ISLOADINGPOPULARIMAGES,
+    isLoading: value,
+  };
+};
+
 /*  get  fotos for photo page */
 export const getPopularImages = () => {
-  return (dispatch: (arg0: IGetPopularPhotoAction) => void) => {
+  return (
+    dispatch: (
+      arg0: IGetPopularPhotoAction | ILoadingPopularImagesAction
+    ) => void
+  ) => {
+    dispatch(isLoadingPopularImages(true));
     fetch(`https://api.pexels.com/v1/curated?page=1&per_page=40`, {
       headers: { Authorization: keyApi },
     })
@@ -143,9 +149,21 @@ export const handleSearchChange = (
   };
 };
 
+export const isLoadingPopularVideos = (
+  value: boolean
+): ILoadingPopularVideosAction => {
+  return {
+    type: isLoadingPopularVideosTypes.ISLOADINGPOPULARVIDEOS,
+    isLoading: value,
+  };
+};
+
 /*  get popular videos */
 export const getPopularVideo = () => {
-  return (dispatch: (arg0: IPopularVideoAction) => void) => {
+  return (
+    dispatch: (arg0: IPopularVideoAction | ILoadingPopularVideosAction) => void
+  ) => {
+    dispatch(isLoadingPopularVideos(true));
     fetch(`https://api.pexels.com/videos/popular?per_page=10&page=1`, {
       headers: { Authorization: keyApi },
     })
@@ -160,6 +178,7 @@ export const getPopularVideo = () => {
         dispatch({
           type: GetPopularVideoTypes.GETPOPULARVIDEO,
           popularVideo: data,
+          isLoading: false,
         })
       );
   };
@@ -173,11 +192,11 @@ export const changeNameVideo = (
   value: e.target.value,
 });
 
-export const isLoadingSearchImagesByName = (
+export const isLoadingSearchVideosByName = (
   value: boolean
-): ILoadingSearchImagesByNameAction => {
+): ILoadingSearchVideosByNameAction => {
   return {
-    type: isLoadingSearchImagesByNameTypes.ISLOADINGSEARCHIMAGESBYNAME,
+    type: isLoadingSearchVideosByNameTypes.ISLOADINGSEARCHVIDEOSBYNAME,
     isLoading: value,
   };
 };
@@ -185,9 +204,15 @@ export const isLoadingSearchImagesByName = (
 /* get videos search by name*/
 export const getSearchVideos = (name: string) => {
   return (
-    dispatch: (arg0: IDeletePrevDataAction | IGetVideoAction) => void
+    dispatch: (
+      arg0:
+        | IDeletePrevDataAction
+        | IGetVideoAction
+        | ILoadingSearchVideosByNameAction
+    ) => void
   ) => {
     dispatch(deletePrevData());
+    dispatch(isLoadingSearchVideosByName(true));
     fetch(
       `https://api.pexels.com/videos/search?query=${name}+query&per_page=40&page=1`,
       {
@@ -205,12 +230,22 @@ export const getSearchVideos = (name: string) => {
         dispatch({
           type: GetVideoTypes.GETVIDEO,
           findVideo: data,
+          isLoading: false,
         })
       );
   };
 };
 
-/* get images search by name  */
+export const isLoadingSearchImagesByName = (
+  value: boolean
+): ILoadingSearchImagesByNameAction => {
+  return {
+    type: isLoadingSearchImagesByNameTypes.ISLOADINGSEARCHIMAGESBYNAME,
+    isLoading: value,
+  };
+};
+
+//  get images search by name
 export const getSearchImages = (name: string) => {
   return (
     dispatch: (
@@ -252,26 +287,6 @@ export const handleScroll = (event: any): IMoveScrollAction => {
     scrollTop: event.srcElement.scrollingElement.scrollTop,
     scrollHeight: event.srcElement.scrollingElement.scrollHeight,
     clientHeight: event.srcElement.scrollingElement.clientHeight,
-  };
-};
-
-/* preplay video */
-export const handlePreplayVideo = (
-  e: React.MouseEvent<HTMLVideoElement>
-): IPreplayVideoAction => {
-  e.currentTarget.play();
-  return {
-    type: preplayVideoTypes.PREPLAYVIDEO,
-  };
-};
-
-/* stop video */
-export const handlePauseVideo = (
-  e: React.MouseEvent<HTMLVideoElement>
-): IPauseVideoAction => {
-  e.currentTarget.pause();
-  return {
-    type: pauseVideoTypes.PAUSEVIDEO,
   };
 };
 
@@ -441,68 +456,6 @@ export const clearRadioBoxes = (inputs: any): IClearRadioBoxesAction => {
   inputs.map((elem: any) => (elem.checked = false));
   return {
     type: ClearRadioBoxesTypes.CLEARRADIOBOXES,
-  };
-};
-
-/* toggle media player button */
-export const toggleBtnMediaPlayer = (
-  value: boolean
-): IToggleBtnMediaPlayerAction => {
-  return {
-    type: ToggleBtnMediaPlayerTypes.TOGGLEBTNMEDIAPLAYER,
-    isPlay: value,
-  };
-};
-
-/* stop media player button */
-export const stopMediaPlayer = () => {
-  return (
-    dispatch: (
-      arg0: IStopMediaPlayerAction | IToggleBtnMediaPlayerAction
-    ) => void
-  ) => {
-    dispatch(toggleBtnMediaPlayer(false));
-    dispatch({
-      type: StopMediaPlayerTypes.STOPMEDIAPLAYER,
-      time: 0,
-    });
-  };
-};
-
-/* start media player button */
-export const startMediaPlayer = (elem: HTMLVideoElement) => {
-  return (
-    dispatch: (arg0: ISetCurrentTimeAction | IStartMediaPlayerAction) => void
-  ) => {
-    const timer = setInterval(() => {
-      const durVideo: number = elem.duration;
-      const t: number = elem.currentTime;
-      const x: number = (t * 100) / durVideo;
-      dispatch(setCurrentTime(x));
-    }, 100);
-    elem.play();
-    dispatch({
-      type: StartMediaPlayerTypes.STARTMEDIAPLAYER,
-      timer,
-    });
-  };
-};
-
-/* set current time */
-export const setCurrentTime = (x: number): ISetCurrentTimeAction => {
-  return {
-    type: SetCurrentTimeTypes.SETCURRENTTIME,
-    time: x,
-  };
-};
-
-/* pause media player button */
-export const pauseMediaPlayer = (
-  elem: HTMLVideoElement
-): IPauseMediaPlayerAction => {
-  elem.pause();
-  return {
-    type: PauseMediaPlayerTypes.PAUSEMEDIAPLAYER,
   };
 };
 

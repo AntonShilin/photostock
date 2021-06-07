@@ -79,11 +79,18 @@ class Collections extends React.Component<
                 onClick={this.showAllMyLikesPhotos}
               >
                 <div className="collection_title">
-                  <img
-                    className="collection_title_img"
-                    src={collection.length > 0 ? collection![0].src : ""}
-                    alt="img"
-                  />
+                  {collection[0].photographer !== null && (
+                    <img
+                      className="collection_title_img"
+                      src={collection![0].src}
+                      alt="img"
+                    />
+                  )}
+                  {collection[0].photographer === null && (
+                    <video controls={false}>
+                      <source src={collection[0].src} type="video/mp4" />
+                    </video>
+                  )}
                 </div>
                 <div className="collection_rest">
                   {collection

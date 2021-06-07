@@ -26,7 +26,7 @@ import ModalPhotoPage from "../Components/ModalWindow/ModalPhotoPage/ModalPhotoP
 import Footer from "../Components/Footer/Footer";
 import AuthModalWindow from "../Components/Account/AuthModalWindow/AuthModalWindow";
 
-export interface IPropsPhotosPage extends RouteComponentProps {
+export interface IPhotosPageProps extends RouteComponentProps {
   data: ICuratedPhoto | null;
   getPopularImages: typeof getPopularImages;
   getIdPhoto: typeof getIdPhoto;
@@ -45,31 +45,27 @@ export interface IPropsPhotosPage extends RouteComponentProps {
   isLoadingPopularImages: boolean;
 }
 
-class PhotosPage extends React.Component<IPropsPhotosPage> {
-  private link: React.RefObject<HTMLAnchorElement> | null;
-
-  constructor(props: IPropsPhotosPage) {
-    super(props);
-    this.link = React.createRef();
-  }
+class PhotosPage extends React.Component<IPhotosPageProps, {}> {
 
   public componentDidMount() {
-    if (this.props.data === null) {
+    const { data } = this.props;
+    if (data === null) {
       this.props.getPopularImages();
     }
   }
 
   public pressEnterKey = () => {
-    if (this.props.searchNamePhoto.trim().length > 0) {
-      this.props.getSearchImages(this.props.searchNamePhoto!);
-      this.props.getSearchVideos(this.props.searchNamePhoto!);
-      this.props.history.push(`/photos/${this.props.searchNamePhoto}`);
+    const { searchNamePhoto } = this.props;
+    if (searchNamePhoto.trim().length > 0) {
+      this.props.getSearchImages(searchNamePhoto!);
+      this.props.getSearchVideos(searchNamePhoto!);
+      this.props.history.push(`/photos/${searchNamePhoto}`);
       this.props.clearKeyPressNumber();
     }
   };
 
   public render() {
-    const { isLoadingPopularImages } = this.props;
+    const { isLoadingPopularImages, data,searchNamePhoto } = this.props;
 
     return (
       <>
@@ -79,7 +75,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
         <div
           className="container-xl photospage_bg"
           style={{
-            backgroundImage: `url(${this.props.data?.photos[0].src.original})`,
+            backgroundImage: `url(${data?.photos[0].src.original})`,
           }}
         >
           <div className="container-xl">
@@ -90,7 +86,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                   type="text"
                   className="form-control"
                   placeholder="Search for free photos"
-                  value={this.props.searchNamePhoto!}
+                  value={searchNamePhoto!}
                   onChange={this.props.handleSearchChange}
                   autoFocus={false}
                   required={true}
@@ -102,11 +98,11 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
                 />
                 <div className="input-group-append">
                   <NavLink
-                    to={`/photos/${this.props.searchNamePhoto}`}
+                    to={`/photos/${searchNamePhoto}`}
                     className="input-group-text"
                     onClick={() => {
-                      this.props.getSearchImages(this.props.searchNamePhoto!);
-                      this.props.getSearchVideos(this.props.searchNamePhoto!);
+                      this.props.getSearchImages(searchNamePhoto!);
+                      this.props.getSearchVideos(searchNamePhoto!);
                     }}
                   >
                     <FiSearch />
@@ -117,7 +113,7 @@ class PhotosPage extends React.Component<IPropsPhotosPage> {
             </div>
           </div>
           <p className="photo_by">
-            Photo by {this.props.data?.photos[0].photographer}
+            Photo by {data?.photos[0].photographer}
           </p>
         </div>
         <NavigationPages />

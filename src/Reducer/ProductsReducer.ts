@@ -1,7 +1,10 @@
 import {
   ClearPhotoIdTypes,
   ClearVideoIDTypes,
+  isLoadingPopularImagesTypes,
+  isLoadingPopularVideosTypes,
   isLoadingSearchImagesByNameTypes,
+  isLoadingSearchVideosByNameTypes,
   PopularImageBackTypes,
   PopularImageForwardTypes,
   PopularVideoBackTypes,
@@ -18,8 +21,6 @@ import {
   ToggleMenuTypes,
   MoveScroll,
   DeletePrevData,
-  preplayVideoTypes,
-  pauseVideoTypes,
   SearchImagesByNameTypes,
   SearchBySuggestedWordTypes,
   DownloadImageTypes,
@@ -34,11 +35,6 @@ import {
   ClearRadioBoxesTypes,
   ToggleWindowVideoPageTypes,
   GetIdVideoTypes,
-  ToggleBtnMediaPlayerTypes,
-  StopMediaPlayerTypes,
-  SetCurrentTimeTypes,
-  StartMediaPlayerTypes,
-  PauseMediaPlayerTypes,
   VideoForwardTypes,
   VideoBackTypes,
   SelectVideoSizeTypes,
@@ -62,9 +58,10 @@ const initialProductState: IProductsState = {
   isScrollTop: null,
   isScrollHeight: null,
   isClientHeight: null,
-  isLoadingPopularImages: true,
-  isLoadingVideos: true,
-  isSearchingImagesByName: true,
+  isLoadingPopularImages: false,
+  isLoadingPopularVideos: false,
+  isLoadingSearchImagesByName: false,
+  isLoadingSearchVideosByName: false,
   suggestedWords: [
     "mountain",
     "sport",
@@ -92,9 +89,6 @@ const initialProductState: IProductsState = {
     isOpen: false,
     isOpenDropDownMenu: false,
     sizeURL: undefined,
-    isPlay: false,
-    timer: 0,
-    currentTime: 0,
     sizeVideoURL: undefined,
   },
 };
@@ -111,6 +105,13 @@ export const productsReducer = (
       return {
         ...state,
         data: action.popularPhoto,
+        isLoadingPopularImages: action.isLoading,
+      };
+    }
+
+    case isLoadingPopularImagesTypes.ISLOADINGPOPULARIMAGES: {
+      return {
+        ...state,
         isLoadingPopularImages: action.isLoading,
       };
     }
@@ -133,7 +134,7 @@ export const productsReducer = (
     case isLoadingSearchImagesByNameTypes.ISLOADINGSEARCHIMAGESBYNAME: {
       return {
         ...state,
-        isSearchingImagesByName: action.isLoading,
+        isLoadingSearchImagesByName: action.isLoading,
       };
     }
 
@@ -144,7 +145,14 @@ export const productsReducer = (
       return {
         ...state,
         resultSearchImage: action.findPhoto,
-        isSearchingImagesByName: action.isLoading,
+        isLoadingSearchImagesByName: action.isLoading,
+      };
+    }
+
+    case isLoadingPopularVideosTypes.ISLOADINGPOPULARVIDEOS: {
+      return {
+        ...state,
+        isLoadingPopularVideos: action.isLoading,
       };
     }
 
@@ -155,6 +163,7 @@ export const productsReducer = (
       return {
         ...state,
         videos: action.popularVideo,
+        isLoadingPopularVideos: action.isLoading,
       };
     }
 
@@ -165,6 +174,14 @@ export const productsReducer = (
         searchNamePhoto: action.value,
       };
     }
+      
+    case isLoadingSearchVideosByNameTypes.ISLOADINGSEARCHVIDEOSBYNAME: {
+      return {
+        ...state,
+        isLoadingSearchVideosByName: action.isLoading,
+      };
+    }
+
 
     case GetVideoTypes.GETVIDEO: {
       action.findVideo.videos.map((elem: IVideos, i: number) => {
@@ -173,6 +190,7 @@ export const productsReducer = (
       return {
         ...state,
         resultSearchVideo: action.findVideo,
+        isLoadingSearchVideosByName: action.isLoading,
       };
     }
 
@@ -197,18 +215,6 @@ export const productsReducer = (
         isScrollTop: action.scrollTop,
         isScrollHeight: action.scrollHeight,
         isClientHeight: action.clientHeight,
-      };
-    }
-
-    case preplayVideoTypes.PREPLAYVIDEO: {
-      return {
-        ...state,
-      };
-    }
-
-    case pauseVideoTypes.PAUSEVIDEO: {
-      return {
-        ...state,
       };
     }
 
@@ -339,54 +345,6 @@ export const productsReducer = (
     }
 
     case ClearRadioBoxesTypes.CLEARRADIOBOXES: {
-      return {
-        ...state,
-      };
-    }
-
-    case ToggleBtnMediaPlayerTypes.TOGGLEBTNMEDIAPLAYER: {
-      return {
-        ...state,
-        modalWindowVideoPage: {
-          ...state.modalWindowVideoPage,
-          isPlay: action.isPlay,
-        },
-      };
-    }
-
-    case StopMediaPlayerTypes.STOPMEDIAPLAYER: {
-      clearInterval(state.modalWindowVideoPage.timer);
-      return {
-        ...state,
-        modalWindowVideoPage: {
-          ...state.modalWindowVideoPage,
-          currentTime: action.time,
-        },
-      };
-    }
-
-    case StartMediaPlayerTypes.STARTMEDIAPLAYER: {
-      return {
-        ...state,
-        modalWindowVideoPage: {
-          ...state.modalWindowVideoPage,
-          timer: action.timer,
-        },
-      };
-    }
-
-    case SetCurrentTimeTypes.SETCURRENTTIME: {
-      return {
-        ...state,
-        modalWindowVideoPage: {
-          ...state.modalWindowVideoPage,
-          currentTime: action.time,
-        },
-      };
-    }
-
-    case PauseMediaPlayerTypes.PAUSEMEDIAPLAYER: {
-      clearInterval(state.modalWindowVideoPage.timer);
       return {
         ...state,
       };

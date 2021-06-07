@@ -4,8 +4,6 @@ import { IApplicationState } from "../Store/Store";
 import { IPopularVideos, IDataSearch } from "../Interfaces/Interfaces";
 import {
   getSearchVideos,
-  handlePauseVideo,
-  handlePreplayVideo,
   toggleWindowVideoPage,
   getIdVideo,
 } from "../Actions/ProductsActions";
@@ -27,27 +25,25 @@ export interface IPropsResultPage extends RouteComponentProps {
   getSearchVideos: typeof getSearchVideos;
   resultSearchImage: IDataSearch | null;
   searchNameVideo: string;
-  handlePreplayVideo: typeof handlePreplayVideo;
-  handlePauseVideo: typeof handlePauseVideo;
-  isLoadingVideos: boolean;
   toggleWindowVideoPage: typeof toggleWindowVideoPage;
   getIdVideo: typeof getIdVideo;
+  isLoadingSearchVideosByName: boolean;
 }
 
 class ResultVideoPage extends React.Component<IPropsResultPage> {
   public render() {
     const {
-      isLoadingVideos,
       searchNameVideo,
       resultSearchImage,
       resultSearchVideo,
+      isLoadingSearchVideosByName,
     } = this.props;
 
     return (
       <>
         <HeaderResultVideoPage />
         <ModalWindowResultVideoPage />
-        {isLoadingVideos ? (
+        {isLoadingSearchVideosByName ? (
           <LoadingPage />
         ) : (
           <>
@@ -88,12 +84,6 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                             <div key={i} className="col-12">
                               <div className="result_video_item">
                                 <video
-                                  onMouseOver={(e) =>
-                                    this.props.handlePreplayVideo(e)
-                                  }
-                                  onMouseLeave={(e) =>
-                                    this.props.handlePauseVideo(e)
-                                  }
                                   controls={false}
                                   muted={true}
                                   poster={value.image}
@@ -153,12 +143,6 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                             <div key={i} className="col-12">
                               <div className="result_video_item">
                                 <video
-                                  onMouseOver={(e) =>
-                                    this.props.handlePreplayVideo(e)
-                                  }
-                                  onMouseLeave={(e) =>
-                                    this.props.handlePauseVideo(e)
-                                  }
                                   controls={false}
                                   muted={true}
                                   poster={value.image}
@@ -213,7 +197,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
             </div>
           </>
         )}
-        <Footer/>
+        <Footer />
       </>
     );
   }
@@ -224,17 +208,13 @@ const mapStateToProps = (state: IApplicationState) => {
     resultSearchVideo: state.products.resultSearchVideo,
     searchNameVideo: state.products.searchNameVideo,
     resultSearchImage: state.products.resultSearchImage,
-    isLoadingVideos: state.products.isLoadingVideos,
+    isLoadingSearchVideosByName: state.products.isLoadingSearchVideosByName,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
-    handlePreplayVideo: (e: React.MouseEvent<HTMLVideoElement>) =>
-      dispatch(handlePreplayVideo(e)),
-    handlePauseVideo: (e: React.MouseEvent<HTMLVideoElement>) =>
-      dispatch(handlePauseVideo(e)),
     toggleWindowVideoPage: () => dispatch(toggleWindowVideoPage()),
     getIdVideo: (id: number) => dispatch(getIdVideo(id)),
   };
