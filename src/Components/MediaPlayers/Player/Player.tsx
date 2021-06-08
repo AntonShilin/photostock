@@ -83,6 +83,7 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
     const { poster, src } = this.props;
     const { isPlay, currentTime, isLoading, error } = this.state;
 
+    console.log(navigator.userAgent.indexOf("Apple Safari"))
     return (
       <div className="player_item">
         {isLoading && (
@@ -95,7 +96,7 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
         {error && (
           <span className="err-message">Sorry! Could not load video!</span>
         )}
-        {navigator.userAgent.indexOf("Apple Safari") !== 1 ? (
+        {navigator.userAgent.indexOf("Apple Safari") === -1 ? (
           <video
             src={src}
             controls={false}
@@ -108,7 +109,7 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
             onLoadStart={() => {
               this.setState({ isLoading: true });
             }}
-            onError={(e) => {
+            onError={() => {
               this.setState({ isLoading: false });
               this.setState({ error: true });
             }}

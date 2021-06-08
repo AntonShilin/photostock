@@ -69,8 +69,9 @@ class VideosPage extends React.Component<IPropsVideosPage> {
         <div className="container-xl videos-page-header">
           <video
             controls={false}
-            // autoPlay={navigator.appCodeName === "Safari" ? false : true}
+            autoPlay={true}
             loop={true}
+            playsInline={true}
           >
             <source
               src="https://firebasestorage.googleapis.com/v0/b/photoandvideo-b979e.appspot.com/o/forest.mp4?alt=media&token=d0db507a-dc26-42f7-aeb2-6046f7481bb4"

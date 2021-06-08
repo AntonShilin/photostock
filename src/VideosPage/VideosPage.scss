@@ -35,7 +35,7 @@
         padding-bottom: 1rem;
       }
       div.input-group {
-        margin-bottom: 3rem;
+        margin-bottom: 0.8rem;
         input.form-control {
           border: none;
           font-weight: 300;
@@ -219,7 +219,6 @@ div.trending_video_header {
     }
   }
 }
-
 
 @media screen and (min-width: 1500px) {
   div.popular_video_item {
