@@ -13,7 +13,7 @@
     left: 0;
     width: 100%;
     a.auth-header-btn {
-      margin-left: .5rem;
+      margin-left: 0.5rem;
       line-height: 3.3rem;
       display: block;
       width: 3.3rem;
@@ -50,7 +50,7 @@
     }
   }
   .auth-signup-bg {
-    margin-top: 1rem;
+    margin-top: 2rem;
     position: relative;
     max-width: 485px;
     padding: 2.5rem;
@@ -182,6 +182,19 @@
             border-color: #12bb99 !important;
             outline: #12bb99;
           }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .auth-overloy {
+    .auth-signup-bg {
+      padding: 2.5rem 0.25rem 2.5rem 0.25rem !important;
+      .auth-signup-form{
+        div.auth-signup-form-area{
+          padding: 1rem 0rem 2rem 0rem !important;
         }
       }
     }

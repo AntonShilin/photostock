@@ -71,7 +71,7 @@ class ResultPhotoPage extends React.Component<ISearchImageResultProps, {}> {
                     to={`/videos/${searchNamePhoto}`}
                   >
                     <FaVideo /> Videos
-                    <span className="ml-1">
+                    <span>
                       {resultSearchVideo === null
                         ? 0
                         : resultSearchVideo.videos.length}

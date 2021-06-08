@@ -23,6 +23,7 @@ class VideoView extends React.Component<IVideoViewProps, IVideoViewState> {
       <video
         className="video-view-item"
         poster={poster}
+        playsInline={true}
         controls={false}
         muted={true}
         onMouseOver={this.startPrevPlayVideo}

@@ -48,7 +48,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
           <LoadingPage />
         ) : (
           <>
-            <div className="container-xl video_result_bg">
+            <div className="container-xl video-result-bg">
               <div className="row video-result-bages">
                 <div className="col">
                   <div className="video-result-navigation">
@@ -57,7 +57,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                       to={`/photos/${searchNameVideo}`}
                     >
                       <FaRegImage /> Photos
-                      <span className="ml-1">
+                      <span>
                         {resultSearchImage === null
                           ? 0
                           : resultSearchImage.photos.length}
@@ -65,7 +65,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                     </NavLink>
                     <NavLink activeClassName="video-result-bages-active" to="#">
                       <FaVideo /> Videos
-                      <span className="ml-1">
+                      <span>
                         {resultSearchVideo === null
                           ? 0
                           : resultSearchVideo.videos.length}
@@ -83,13 +83,13 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                         (value, i) =>
                           i % 2 !== 0 && (
                             <div key={i} className="col-12">
-                              <div className="result_video_item">
+                              <div className="result-video-item">
                                 <VideoView
                                   src={value.video_files[0].link}
                                   poster={value.image}
                                 />
                                 <div
-                                  className="video_item_control"
+                                  className="video-item-control"
                                   onClick={() => {
                                     this.props.toggleWindowVideoPage();
                                     this.props.getIdVideo(value.id);
@@ -135,13 +135,13 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                         (value, i) =>
                           i % 2 === 0 && (
                             <div key={i} className="col-12">
-                              <div className="result_video_item">
+                              <div className="result-video-item">
                                 <VideoView
                                   src={value.video_files[0].link}
                                   poster={value.image}
                                 />
                                 <div
-                                  className="video_item_control"
+                                  className="video-item-control"
                                   onClick={() => {
                                     this.props.toggleWindowVideoPage();
                                     this.props.getIdVideo(value.id);
