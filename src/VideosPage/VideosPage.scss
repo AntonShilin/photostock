@@ -76,10 +76,6 @@ div.trending_video_header {
         div {
           div.popular_video_item {
             position: relative;
-            video {
-              width: 100%;
-              height: auto;
-            }
             &:hover {
               cursor: pointer;
               div.video-person-name {
@@ -153,10 +149,6 @@ div.trending_video_header {
         div {
           div.popular_video_item {
             position: relative;
-            video {
-              width: 100%;
-              height: auto;
-            }
             &:hover {
               cursor: pointer;
               div.video-person-name {

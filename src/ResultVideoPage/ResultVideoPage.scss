@@ -34,11 +34,6 @@
           div.result_video_item {
             margin: 1rem;
             position: relative;
-            video {
-              width: 100%;
-              height: auto;
-              background-color: #a8b0b3;
-            }
             &:hover {
               cursor: pointer;
               div.video-person-name {
@@ -112,11 +107,6 @@
           div.result_video_item {
             margin: 1rem;
             position: relative;
-            video {
-              width: 100%;
-              height: auto;
-              background-color: #a8b0b3;
-            }
             &:hover {
               cursor: pointer;
               div.video-person-name {

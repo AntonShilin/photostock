@@ -12,6 +12,7 @@ import { AiOutlinePlayCircle } from "react-icons/ai";
 import { toggleModalWindow } from "../../../../Actions/ModalWindowActions";
 import Heart from "../../../SVGIcons/Heart/Heart";
 import DownloadIcon from "../../../SVGIcons/DownloadIcon/DownloadIcon";
+import VideoView from "../../../VideoView/VideoView";
 
 export interface IMyLikesTitleCollectionProps {
   collection: any[] | null;
@@ -81,15 +82,13 @@ class MyLikesTitleCollection extends React.Component<
                     />
                   ) : (
                     <div className="video-item">
-                      <video
-                        controls={false}
+                      <VideoView src={elem.src} />
+                      <div
+                        className="video_btn_control"
                         onClick={() =>
                           this.props.toggleModalWindow(true, i, collection)
                         }
                       >
-                        <source src={elem.src} type="video/mp4" />
-                      </video>
-                      <div className="video_btn_control">
                         <AiOutlinePlayCircle />
                       </div>
                     </div>

@@ -24,6 +24,7 @@ import Heart from "../Components/SVGIcons/Heart/Heart";
 import ModalVideoPage from "../Components/ModalWindow/ModalWindowVideoPage/ModalVideoPage";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
 import Footer from "../Components/Footer/Footer";
+import VideoView from "../Components/VideoView/VideoView";
 
 export interface IPropsVideosPage extends RouteComponentProps {
   getPopularVideo: typeof getPopularVideo;
@@ -41,6 +42,7 @@ export interface IPropsVideosPage extends RouteComponentProps {
 }
 
 class VideosPage extends React.Component<IPropsVideosPage> {
+  
   public componentDidMount() {
     const { videos } = this.props;
     if (videos === null) {
@@ -133,17 +135,10 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                               className="popular_video_item"
                               data-id={value.id}
                             >
-                              <video
-                                controls={false}
-                                muted={true}
+                              <VideoView
+                                src={value.video_files[0].link}
                                 poster={value.image}
-                              >
-                                <source
-                                  src={value.video_files[0].link}
-                                  type={value.video_files[0].file_type}
-                                />
-                                Your browser doesn't support HTML5 video tag.
-                              </video>
+                              />
                               <div
                                 className="video_item_control"
                                 onClick={() => {
@@ -195,17 +190,10 @@ class VideosPage extends React.Component<IPropsVideosPage> {
                               className="popular_video_item"
                               data-id={value.id}
                             >
-                              <video
-                                controls={false}
-                                muted={true}
+                              <VideoView
+                                src={value.video_files[0].link}
                                 poster={value.image}
-                              >
-                                <source
-                                  src={value.video_files[0].link}
-                                  type={value.video_files[0].file_type}
-                                />
-                                Your browser doesn't support HTML5 video tag.
-                              </video>
+                              />
                               <div
                                 className="video_item_control"
                                 onClick={() => {
