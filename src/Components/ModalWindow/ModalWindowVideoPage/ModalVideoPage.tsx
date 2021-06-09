@@ -85,6 +85,7 @@ class ModalVideoPage extends React.Component<
               <div className="modal-video-page-content">
                 <Player
                   src={videos.videos[id].video_files[0].link}
+                  poster={videos.videos[id].video_pictures[0].picture}
                 />
                 <span
                   className="modal-video-page-arrow-left"

@@ -82,7 +82,8 @@ class ModalWindowResultVideoPage extends React.Component<
             </div>
             <div className="modal-video-result-page-content">
               <Player
-                src={resultSearchVideo.videos[id].video_files[0].link}
+                  src={resultSearchVideo.videos[id].video_files[0].link}
+                  poster={resultSearchVideo.videos[id].video_pictures[0].picture}
               />
               <span
                 className="modal-video-result-page-arrow-left"

@@ -83,7 +83,6 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
     const { poster, src } = this.props;
     const { isPlay, currentTime, isLoading, error } = this.state;
 
-    console.log(navigator.userAgent.indexOf("Apple Safari"))
     return (
       <div className="player_item">
         {isLoading && (
@@ -96,7 +95,21 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
         {error && (
           <span className="err-message">Sorry! Could not load video!</span>
         )}
-        {navigator.userAgent.indexOf("Apple Safari") === -1 ? (
+        {navigator.userAgent.indexOf("Safari") > -1 ? (
+          <video
+            poster={error ? undefined : poster}
+            src={src}
+            controls={false}
+            playsInline={true}
+            muted={true}
+            ref={this.myPlayer}
+            onError={() => {
+              this.setState({ error: true });
+            }}
+          >
+            Your browser doesn't support HTML5 video tag.
+          </video>
+        ) : (
           <video
             src={src}
             controls={false}
@@ -111,19 +124,6 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
             }}
             onError={() => {
               this.setState({ isLoading: false });
-              this.setState({ error: true });
-            }}
-          >
-            Your browser doesn't support HTML5 video tag.
-          </video>
-        ) : (
-          <video
-            src={src}
-            controls={false}
-            playsInline={true}
-            muted={true}
-            ref={this.myPlayer}
-            onError={(e) => {
               this.setState({ error: true });
             }}
           >
