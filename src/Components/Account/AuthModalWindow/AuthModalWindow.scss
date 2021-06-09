@@ -7,6 +7,7 @@
   justify-content: center;
   z-index: 150;
   position: fixed;
+  top: 0%;
   .auth-modal-header {
     position: absolute;
     top: 0.25rem;
@@ -25,6 +26,9 @@
       background-color: #05a081 !important;
       color: whitesmoke !important;
       border-radius: 3px;
+      &:hover{
+        text-decoration: none;
+      }
     }
     a.auth-signin {
       display: block;
@@ -58,8 +62,8 @@
     border-radius: 6px;
     .auth-signup-btn {
       width: 100%;
-      top: 0;
-      left: 0;
+      top: 0rem;
+      left: 0rem;
       position: absolute;
       height: 45px;
       display: flex;
@@ -74,6 +78,7 @@
         font-weight: 300;
         background-color: transparent;
         border: none;
+        outline: none;
       }
     }
     .auth-signup-form {
@@ -192,8 +197,8 @@
   .auth-overloy {
     .auth-signup-bg {
       padding: 2.5rem 0.25rem 2.5rem 0.25rem !important;
-      .auth-signup-form{
-        div.auth-signup-form-area{
+      .auth-signup-form {
+        div.auth-signup-form-area {
           padding: 1rem 0rem 2rem 0rem !important;
         }
       }

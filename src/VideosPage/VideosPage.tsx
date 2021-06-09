@@ -25,6 +25,7 @@ import ModalVideoPage from "../Components/ModalWindow/ModalWindowVideoPage/Modal
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
 import Footer from "../Components/Footer/Footer";
 import VideoView from "../Components/VideoView/VideoView";
+import AuthModalWindow from "../Components/Account/AuthModalWindow/AuthModalWindow";
 
 export interface IPropsVideosPage extends RouteComponentProps {
   getPopularVideo: typeof getPopularVideo;
@@ -66,6 +67,7 @@ class VideosPage extends React.Component<IPropsVideosPage> {
       <>
         <HeaderVideoPage />
         <ModalVideoPage />
+        <AuthModalWindow />
         <div className="container-xl videos-page-header">
           <video
             controls={false}

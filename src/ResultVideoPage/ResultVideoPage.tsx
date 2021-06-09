@@ -20,6 +20,7 @@ import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
 import ModalWindowResultVideoPage from "../Components/ModalWindow/ModalWindowResultVideoPage/ModalWindowResultVideoPage";
 import Footer from "../Components/Footer/Footer";
 import VideoView from "../Components/VideoView/VideoView";
+import AuthModalWindow from "../Components/Account/AuthModalWindow/AuthModalWindow";
 
 export interface IPropsResultPage extends RouteComponentProps {
   resultSearchVideo: IPopularVideos | null;
@@ -44,6 +45,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
       <>
         <HeaderResultVideoPage />
         <ModalWindowResultVideoPage />
+        <AuthModalWindow/>
         {isLoadingSearchVideosByName ? (
           <LoadingPage />
         ) : (

@@ -5,12 +5,10 @@ import { IDataSearch, IPopularVideos } from "../Interfaces/Interfaces";
 import { RouteComponentProps, NavLink, withRouter } from "react-router-dom";
 import LoadingPage from "../Components/LoadingPage/LoadingPage";
 import {
-  getSearchImages,
   getSearchVideos,
   downloadImage,
   toggleWindowPhotoPage,
   getIdPhoto,
-  isLoadingSearchImagesByName,
 } from "../Actions/ProductsActions";
 import HeaderResultPhotoPage from "./HeaderResultPhotoPage/HeaderResultPhotoPage";
 import "./ResultPhotoPage.scss";
@@ -23,6 +21,7 @@ import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
 import ModalWindowResultPhotoPage from "../Components/ModalWindow/ModalWindowResultPhotoPage/ModalWindowResultPhotoPage";
 import Footer from "../Components/Footer/Footer";
 import { toggleModalWindow } from "../Actions/ModalWindowActions";
+import AuthModalWindow from "../Components/Account/AuthModalWindow/AuthModalWindow";
 
 export interface ISearchImageResultProps extends RouteComponentProps {
   resultSearchImage: IDataSearch | null;
@@ -51,6 +50,7 @@ class ResultPhotoPage extends React.Component<ISearchImageResultProps, {}> {
       <>
         <HeaderResultPhotoPage />
         <ModalWindowResultPhotoPage />
+        <AuthModalWindow />
         {isLoadingSearchImagesByName ? (
           <LoadingPage />
         ) : (
