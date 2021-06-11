@@ -1,7 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { IApplicationState } from "../Store/Store";
-import "./PhotosPage.scss";
 import LoadingPage from "../Components/LoadingPage/LoadingPage";
 import NavigationPages from "../Components/NavigationPages/NavigationPages";
 import HeaderPhotoPage from "./HeaderPhotoPage/HeaderPhotoPage";
