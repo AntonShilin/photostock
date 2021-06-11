@@ -53,3 +53,36 @@
       }
     }
   }
+
+  
+  @media screen and (max-width: 768px) {
+    .photospage_bg {
+      padding-top: 13rem !important;
+      padding-bottom: 3rem;
+      .photo_by {
+        display: none;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 440px) {
+    .photo_search_input {
+      width: 100% !important;
+      margin: 0 auto;
+    }
+  }
+  
+  @media screen and (max-width: 414px) {
+    .photospage_bg {
+      padding-top: 7rem !important;
+      padding-bottom: 3rem;
+    }
+  }
+  
+  @media screen and (max-width: 320px) {
+    .photospage_bg {
+      padding-top: 5rem !important;
+      padding-bottom: 3rem;
+    }
+  }
+  
