@@ -1,5 +1,4 @@
 import * as React from "react";
-import { RouteComponentProps, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { IApplicationState } from "../Store/Store";
 import {
@@ -15,28 +14,26 @@ import { getSearchImages } from "../Actions/ProductsActions";
 import { ICuratedPhoto } from "../Interfaces/Interfaces";
 import "./PhotosPage.scss";
 import LoadingPage from "../Components/LoadingPage/LoadingPage";
-import { FiSearch } from "react-icons/fi";
 import NavigationPages from "../Components/NavigationPages/NavigationPages";
 import HeaderPhotoPage from "./HeaderPhotoPage/HeaderPhotoPage";
 import { MdControlPoint } from "react-icons/md";
-import SuggestedPhotoWords from "../Components/SuggestedPhotoWords/SuggestedPhotoWords";
 import Heart from "../Components/SVGIcons/Heart/Heart";
 import DownloadIcon from "../Components/SVGIcons/DownloadIcon/DownloadIcon";
 import ModalPhotoPage from "../Components/ModalWindow/ModalPhotoPage/ModalPhotoPage";
 import Footer from "../Components/Footer/Footer";
 import AuthModalWindow from "../Components/Account/AuthModalWindow/AuthModalWindow";
+import MainPhotoPage from "./MainPhotoPage/MainPhotoPage";
 
-export interface IPhotosPageProps extends RouteComponentProps {
+export interface IPhotosPageProps {
   data: ICuratedPhoto | null;
   getPopularImages: typeof getPopularImages;
   getIdPhoto: typeof getIdPhoto;
   toggleWindowPhotoPage: typeof toggleWindowPhotoPage;
   getSearchVideos: typeof getSearchVideos;
-  searchNamePhoto: string;
-  handleSearchChange: typeof handleSearchChange;
   getSearchImages: typeof getSearchImages;
-  downloadImage: typeof downloadImage;
   clearKeyPressNumber: typeof clearKeyPressNumber;
+  handleSearchChange: typeof handleSearchChange;
+  downloadImage: typeof downloadImage;
   isScrollTop: number | null;
   isScrollHeight: number | null;
   isClientHeight: number | null;
@@ -54,69 +51,16 @@ class PhotosPage extends React.Component<IPhotosPageProps, {}> {
     }
   }
 
-  public pressEnterKey = () => {
-    const { searchNamePhoto } = this.props;
-    if (searchNamePhoto.trim().length > 0) {
-      this.props.getSearchImages(searchNamePhoto!);
-      this.props.getSearchVideos(searchNamePhoto!);
-      this.props.history.push(`/photos/${searchNamePhoto}`);
-      this.props.clearKeyPressNumber();
-    }
-  };
-
   public render() {
-    const { isLoadingPopularImages, data,searchNamePhoto } = this.props;
+    const { isLoadingPopularImages, data } = this.props;
 
     return (
       <>
         <HeaderPhotoPage />
         <ModalPhotoPage />
         <AuthModalWindow />
-        <div
-          className="container-xl photospage_bg"
-          style={{
-            backgroundImage: `url(${data?.photos[0].src.original})`,
-          }}
-        >
-          <div className="container-xl">
-            <div className="photo_search_input">
-              <h1>The best free stock photos from talented authors.</h1>
-              <div className="input-group input-group-lg">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search for free photos"
-                  value={searchNamePhoto!}
-                  onChange={this.props.handleSearchChange}
-                  autoFocus={false}
-                  required={true}
-                  onKeyDown={(e) => {
-                    if (e.keyCode === 13) {
-                      this.pressEnterKey();
-                    }
-                  }}
-                />
-                <div className="input-group-append">
-                  <NavLink
-                    to={`/photos/${searchNamePhoto}`}
-                    className="input-group-text"
-                    onClick={() => {
-                      this.props.getSearchImages(searchNamePhoto!);
-                      this.props.getSearchVideos(searchNamePhoto!);
-                    }}
-                  >
-                    <FiSearch />
-                  </NavLink>
-                </div>
-              </div>
-              <SuggestedPhotoWords />
-            </div>
-          </div>
-          <p className="photo_by">
-            Photo by {data?.photos[0].photographer}
-          </p>
-        </div>
-        <NavigationPages />
+        <MainPhotoPage />
+        <NavigationPages /> 
         {!isLoadingPopularImages ? (
           <div className="container-xl trending_photos">
             <div className="row">
@@ -127,8 +71,8 @@ class PhotosPage extends React.Component<IPhotosPageProps, {}> {
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className="row">
-                  {this.props.data !== null &&
-                    this.props.data.photos.map(
+                  {data !== null &&
+                    data.photos.map(
                       (image, i) =>
                         i % 2 !== 0 && (
                           <div key={i} className="col-12">
@@ -178,8 +122,8 @@ class PhotosPage extends React.Component<IPhotosPageProps, {}> {
               </div>
               <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className="row">
-                  {this.props.data !== null &&
-                    this.props.data.photos.map(
+                  {data !== null &&
+                    data.photos.map(
                       (image, i) =>
                         i % 2 === 0 && (
                           <div key={i} className="col-12">
@@ -241,7 +185,6 @@ const mapStateToProps = (state: IApplicationState) => ({
   isScrollHeight: state.products.isScrollHeight,
   isClientHeight: state.products.isClientHeight,
   isScrolling: state.products.isScrolling,
-  searchNamePhoto: state.products.searchNamePhoto,
   keyboardKey: state.products.keyboardKey,
   isLoadingPopularImages: state.products.isLoadingPopularImages
 });
@@ -250,13 +193,13 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     getSearchVideos: (name: string) => dispatch(getSearchVideos(name)),
     getPopularImages: () => dispatch(getPopularImages()),
+    clearKeyPressNumber: () => dispatch(clearKeyPressNumber()),
     handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) =>
       dispatch(handleSearchChange(e)),
     getSearchImages: (name: string) => dispatch(getSearchImages(name)),
     downloadImage: (elem: any) => dispatch(downloadImage(elem)),
     getIdPhoto: (id: number) => dispatch(getIdPhoto(id)),
     toggleWindowPhotoPage: () => dispatch(toggleWindowPhotoPage()),
-    clearKeyPressNumber: () => dispatch(clearKeyPressNumber()),
   };
 };
 
