@@ -2,16 +2,13 @@ import * as React from "react";
 import { NavLink } from "react-router-dom";
 import "./NavigationPages.scss";
 
-export interface INavigationPagesProps {}
 
-export interface State {}
-
-class NavigationPages extends React.Component<INavigationPagesProps, State> {
+class NavigationPages extends React.Component<{}, {}> {
   public render() {
     return (
       <div className="navigation-pages container-xl">
         <div className="row">
-          <div className="col-6 navigation-pages-block">
+          <div className="col-6">
             <NavLink to="/photos"  activeClassName="active">
               Photos
             </NavLink>

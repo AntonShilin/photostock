@@ -24,9 +24,20 @@ export interface IMainVideoPageProps extends RouteComponentProps {
   clearKeyPressNumber: typeof clearKeyPressNumber;
 }
 
-export interface State {}
 
-class MainVideoPage extends React.Component<IMainVideoPageProps, State> {
+class MainVideoPage extends React.Component<IMainVideoPageProps, {}> {
+  private videoHeader: React.RefObject<HTMLVideoElement>;
+  constructor(props: IMainVideoPageProps) {
+    super(props);
+    this.videoHeader = React.createRef();
+  }
+
+  public componentDidMount() {
+    if (navigator.appCodeName === "Safari") {
+      this.videoHeader!.current?.load();
+    }
+  }
+
   public pressEnterKey = () => {
     if (this.props.searchNameVideo.trim().length > 0) {
       this.props.getSearchImages(this.props.searchNameVideo!);
@@ -37,9 +48,17 @@ class MainVideoPage extends React.Component<IMainVideoPageProps, State> {
   };
 
   public render() {
+    const { searchNameVideo, searchNamePhoto } = this.props;
+
     return (
       <div className="container-xl videos-page-header">
-        <video controls={false} autoPlay={true} loop={true} playsInline={true}>
+        <video
+          controls={false}
+          autoPlay={true}
+          loop={true}
+          playsInline={true}
+          ref={this.videoHeader}
+        >
           <source
             src="https://firebasestorage.googleapis.com/v0/b/photoandvideo-b979e.appspot.com/o/forest.mp4?alt=media&token=d0db507a-dc26-42f7-aeb2-6046f7481bb4"
             type="video/mp4"
@@ -55,7 +74,7 @@ class MainVideoPage extends React.Component<IMainVideoPageProps, State> {
                 type="text"
                 className="form-control"
                 placeholder="Search for free videos"
-                value={this.props.searchNameVideo}
+                value={searchNameVideo}
                 onChange={this.props.changeNameVideo}
                 autoFocus={false}
                 onKeyDown={(e) => {
@@ -66,11 +85,11 @@ class MainVideoPage extends React.Component<IMainVideoPageProps, State> {
               />
               <div className="input-group-append">
                 <NavLink
-                  to={`/videos/${this.props.searchNameVideo}`}
+                  to={`/videos/${searchNameVideo}`}
                   className="input-group-text"
                   onClick={() => {
-                    this.props.getSearchVideos(this.props.searchNameVideo);
-                    this.props.getSearchImages(this.props.searchNamePhoto);
+                    this.props.getSearchVideos(searchNameVideo);
+                    this.props.getSearchImages(searchNamePhoto);
                   }}
                 >
                   <FiSearch />

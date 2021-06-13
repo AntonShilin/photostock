@@ -81,7 +81,6 @@ class HeaderVideoPage extends React.Component<IHeaderVideoPageProps> {
                   </NavLink>
                 )}
               </div>
-
               <button
                 className="d-lg-none"
                 onClick={() => this.props.handleToggleMenu()}

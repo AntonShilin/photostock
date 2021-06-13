@@ -1,21 +1,22 @@
 div.navigation-pages {
-  border-bottom: 0.25rem solid #d3d3d3a3;
+  border-bottom: 0.15rem solid #d3d3d3a3;
   max-width: 1500px;
   div {
-    height: auto;
+    height: 3.5rem;
     div {
-      display: flex;
-      height: 3.5rem;
+      text-align: center;
       .active {
-        border-bottom: 0.25rem solid blue;
+        border-bottom: 0.15rem solid blue;
       }
       a {
-        margin: 0 auto;
-        padding-top: 0.9rem;
+        vertical-align: -1rem;
+        padding: 1rem;
+        text-align: center;
+        height: 3.5rem;
         font-size: 1rem;
         font-weight: 600;
         text-decoration: none;
-        border-bottom: 0.25rem solid transparent;
+        border-bottom: 0.15rem solid transparent;
         text-transform: uppercase;
         letter-spacing: 0.4px;
         color: #5e5e5e;

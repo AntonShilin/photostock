@@ -108,13 +108,8 @@
         top: 30%;
         right: -3rem;
         cursor: pointer;
-        &:hover {
-          svg {
-            color: white !important;
-          }
-        }
         svg {
-          color: rgba(255, 255, 255, 0.555);
+          color: #05a081;
           font-size: 2.8rem;
         }
       }
@@ -123,13 +118,8 @@
         top: 30%;
         left: -3rem;
         cursor: pointer;
-        &:hover {
-          svg {
-            color: white !important;
-          }
-        }
         svg {
-          color: rgba(255, 255, 255, 0.555);
+          color: #05a081;
           font-size: 2.8rem;
         }
       }
@@ -192,26 +182,10 @@
         .modal-photo-page-arrow-right {
           top: 10% !important;
           right: -1rem !important;
-          svg {
-            color: #1a1a1a4d !important;
-          }
-          &:hover {
-            svg {
-              color: #1a1a1aef !important;
-            }
-          }
         }
         .modal-photo-page-arrow-left {
           top: 10% !important;
           left: -1rem !important;
-          svg {
-            color: #1a1a1a4d !important;
-          }
-          &:hover {
-            svg {
-              color: #1a1a1aef !important;
-            }
-          }
         }
       }
     }
