@@ -15,13 +15,14 @@ export interface IHeartProps {
   isAuthModalWindowOpen: boolean;
   identification: string | undefined;
   liked: boolean;
+  poster: string | null;
 }
 
-export interface IheartState {
+export interface IHeartState {
   isLiked: boolean;
 }
 
-class Heart extends React.Component<IHeartProps, IheartState> {
+class Heart extends React.Component<IHeartProps, IHeartState> {
   constructor(props: IHeartProps) {
     super(props);
     this.state = {
@@ -35,7 +36,8 @@ class Heart extends React.Component<IHeartProps, IheartState> {
   }
 
   public addToMyCollectionOfLikes = () => {
-    const { identification, id, src, photographer, videographer } = this.props;
+    const { identification, id, src, photographer, videographer, poster } =
+      this.props;
     const db = firebase.firestore();
     if (identification !== undefined) {
       db.collection("all")
@@ -47,6 +49,7 @@ class Heart extends React.Component<IHeartProps, IheartState> {
           src,
           photographer,
           videographer,
+          poster
         })
         .then(() => {
           console.log("Add to likes collection successfully!");
@@ -90,7 +93,6 @@ class Heart extends React.Component<IHeartProps, IheartState> {
         width="1.6em"
         height="1.3em"
         onClick={(e) => {
-          // this.props.handleLikeHeart(e);
           if (isAccountSignIn) {
             this.currentImageIsLiked();
             if (isLiked) {

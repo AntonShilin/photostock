@@ -122,6 +122,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                                     videographer={value.user.name}
                                     photographer={null}
                                     liked={false}
+                                    poster={value.video_pictures[0].picture}
                                   />
                                 </span>
                               </div>
@@ -174,6 +175,7 @@ class ResultVideoPage extends React.Component<IPropsResultPage> {
                                     videographer={value.user.name}
                                     photographer={null}
                                     liked={false}
+                                    poster={value.video_pictures[0].picture}
                                   />
                                 </span>
                               </div>

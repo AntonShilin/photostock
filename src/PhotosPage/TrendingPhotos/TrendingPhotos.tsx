@@ -81,6 +81,7 @@ class TrendingPhotos extends React.Component<ITrendingPhotosProps, {}> {
                                   photographer={image.photographer}
                                   videographer={null}
                                   liked={false}
+                                  poster={null}
                                 />
                               </span>
                             </div>
@@ -129,6 +130,7 @@ class TrendingPhotos extends React.Component<ITrendingPhotosProps, {}> {
                                   photographer={image.photographer}
                                   videographer={null}
                                   liked={false}
+                                  poster={null}
                                 />
                               </span>
                             </div>

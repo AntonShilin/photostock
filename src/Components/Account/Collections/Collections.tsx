@@ -10,6 +10,7 @@ import { FaRegImages } from "react-icons/fa";
 import EmptyCollection from "../EmptyCollection/EmptyCollection";
 import { downloadCollectionOfLikes } from "../../../Actions/AccountActions";
 import { AiOutlinePlayCircle } from "react-icons/ai";
+import VideoView from "../../VideoView/VideoView";
 
 export interface ICollectionsProps extends RouteComponentProps {
   collection: any[] | null;
@@ -78,7 +79,9 @@ class Collections extends React.Component<
                 className="collection_likes"
                 onClick={this.showAllMyLikesPhotos}
               >
-                <div className="collection_title">
+                <div className="collection_title"
+                 onClick={this.showAllMyLikesPhotos}
+                >
                   {collection[0].photographer !== null && (
                     <img
                       className="collection_title_img"
@@ -87,12 +90,15 @@ class Collections extends React.Component<
                     />
                   )}
                   {collection[0].photographer === null && (
-                    <video controls={false}>
-                      <source src={collection[0].src} type="video/mp4" />
-                    </video>
+                    <VideoView
+                      src={collection[0].src}
+                      poster={collection[0].poster}
+                    />
                   )}
                 </div>
-                <div className="collection_rest">
+                <div className="collection_rest"
+                 onClick={this.showAllMyLikesPhotos}
+                >
                   {collection
                     .map((elem, i) =>
                       elem.photographer !== null ? (
@@ -103,9 +109,7 @@ class Collections extends React.Component<
                           onClick={this.showAllMyLikesPhotos}
                         />
                       ) : (
-                        <video controls={false} key={i}>
-                          <source src={elem.src} type="video/mp4" />
-                        </video>
+                        <VideoView src={elem.src} poster={elem.poster} />
                       )
                     )
                     .reverse()}

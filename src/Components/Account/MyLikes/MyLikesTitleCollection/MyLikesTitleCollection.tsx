@@ -21,11 +21,9 @@ export interface IMyLikesTitleCollectionProps {
   toggleModalWindow: typeof toggleModalWindow;
 }
 
-export interface IMyLikesTitleCollectionState {}
-
 class MyLikesTitleCollection extends React.Component<
   IMyLikesTitleCollectionProps,
-  IMyLikesTitleCollectionState
+  {}
 > {
   public componentDidMount() {
     firebase.auth().onAuthStateChanged((profile: firebase.User | null) => {
@@ -82,7 +80,7 @@ class MyLikesTitleCollection extends React.Component<
                     />
                   ) : (
                     <div className="video-item">
-                      <VideoView src={elem.src} />
+                      <VideoView src={elem.src} poster={elem.poster} />
                       <div
                         className="video_btn_control"
                         onClick={() =>
@@ -115,6 +113,7 @@ class MyLikesTitleCollection extends React.Component<
                       src={elem.src}
                       photographer={elem.photographer}
                       videographer={elem.videographer}
+                      poster={elem.poster}
                     />
                   </span>
                 </div>

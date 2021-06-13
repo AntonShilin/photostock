@@ -37,8 +37,8 @@
             -o-object-fit: cover;
             object-fit: cover;
           }
-          video{
-            background-color: lightgray;
+          video.video-view-item{
+            width: initial !important;
           }
         }
         div.collection_rest {
@@ -54,9 +54,8 @@
             object-fit: cover;
             margin-right: 2px;
           }
-          video{
-            margin-right: 2px;
-            background-color: lightgray;
+          video.video-view-item{
+            width: initial !important;
           }
         }
         div.collection_size {

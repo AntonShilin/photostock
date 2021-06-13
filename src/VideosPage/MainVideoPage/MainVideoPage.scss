@@ -1,0 +1,98 @@
+.videos-page-header {
+    max-width: 1500px !important;
+    position: relative;
+    max-height: 40rem;
+    min-height: 35rem;
+    background-color: #8e8a8a;
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/photoandvideo-b979e.appspot.com/o/forest.jpg?alt=media&token=d2ba92ab-e4c9-4d03-9455-fe5b6e65efed");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0;
+    padding-right: 0;
+    padding-left: 0;
+    overflow: hidden;
+    z-index: 0;
+    video {
+      position: absolute;
+      z-index: -1;
+      min-width: 100%;
+      height: auto;
+    }
+    .video_search_item_bg {
+      padding-top: 13rem;
+      padding-bottom: 5rem;
+      max-height: 40rem;
+      min-height: 35rem;
+      .video_search_item {
+        width: 75%;
+        margin: 0 auto;
+        h1 {
+          font-size: 3rem;
+          font-weight: 800;
+          font-family: "Archivo Black", sans-serif;
+          color: white !important;
+          padding-bottom: 1rem;
+        }
+        div.input-group {
+          margin-bottom: 0.8rem;
+          input.form-control {
+            border: none;
+            font-weight: 300;
+            font-size: 1.25rem;
+            color: #1a1a1a;
+            &:focus {
+              outline: 0;
+              outline-offset: 0;
+              box-shadow: none;
+            }
+          }
+          div.input-group-append {
+            a.input-group-text {
+              border: none;
+              background-color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .videos-page-header {
+      .video_search_item_bg {
+        padding-top: 13rem !important;
+        padding-bottom: 3rem !important;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 440px) {
+    .videos-page-header {
+      .video_search_item_bg {
+        .video_search_item {
+          width: 100% !important;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+  
+  @media screen and (max-width: 414px) {
+    .videos-page-header {
+      .video_search_item_bg {
+        padding-top: 7rem !important;
+        padding-bottom: 3rem !important;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 320px) {
+    .videos-page-header {
+      .video_search_item_bg {
+        padding-top: 5rem !important;
+        padding-bottom: 3rem !important;
+      }
+    }
+  }
+  

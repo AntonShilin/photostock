@@ -5,6 +5,7 @@ import "./Player.scss";
 export interface IPlayerProps {
   src: string | undefined;
   poster?: string | undefined;
+  type?: string | undefined;
 }
 
 export interface IPlayerState {
@@ -70,17 +71,22 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
     clearInterval(this.timer);
   }
 
+  public componentDidMount() {
+    this.myPlayer.current!.load();
+  }
+
   public componentWillReceiveProps(nextProps: { src: string | undefined }) {
     if (nextProps.src !== this.props.src) {
       this.togglePlayerBtn(false);
       this.endedVideo();
       clearInterval(this.timer);
       this.setState({ error: false });
+      this.myPlayer.current!.load();
     }
   }
 
   public render() {
-    const { poster, src } = this.props;
+    const { poster, src, type } = this.props;
     const { isPlay, currentTime, isLoading, error } = this.state;
 
     return (
@@ -95,41 +101,25 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
         {error && (
           <span className="err-message">Sorry! Could not load video!</span>
         )}
-        {navigator.userAgent.indexOf("Safari") > -1 ? (
-          <video
-            poster={error ? undefined : poster}
-            src={src}
-            controls={false}
-            playsInline={true}
-            muted={true}
-            ref={this.myPlayer}
-            onError={() => {
-              this.setState({ error: true });
-            }}
-          >
-            Your browser doesn't support HTML5 video tag.
-          </video>
-        ) : (
-          <video
-            src={src}
-            controls={false}
-            playsInline={true}
-            muted={true}
-            ref={this.myPlayer}
-            onLoadedData={() => {
-              this.setState({ isLoading: false });
-            }}
-            onLoadStart={() => {
-              this.setState({ isLoading: true });
-            }}
-            onError={() => {
-              this.setState({ isLoading: false });
-              this.setState({ error: true });
-            }}
-          >
-            Your browser doesn't support HTML5 video tag.
-          </video>
-        )}
+        <video
+          controls={false}
+          playsInline={true}
+          muted={true}
+          ref={this.myPlayer}
+          onLoadedData={() => {
+            this.setState({ isLoading: false });
+          }}
+          onLoadStart={() => {
+            this.setState({ isLoading: true });
+          }}
+          onError={() => {
+            this.setState({ isLoading: false });
+            this.setState({ error: true });
+          }}
+        >
+          <source src={src} type={type !== undefined ? type : "video/mp4"} />
+          Your browser doesn't support HTML5 video tag.
+        </video>
         <div className="player_control_panel">
           {isPlay ? (
             <button
@@ -142,6 +132,7 @@ class Player extends React.Component<IPlayerProps, IPlayerState> {
             </button>
           ) : (
             <button
+              disabled={!isLoading && !error ? false : true}
               onClick={() => {
                 this.startVideo();
                 this.togglePlayerBtn(true);

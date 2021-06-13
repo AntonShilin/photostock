@@ -99,6 +99,7 @@ class ResultSearchPhotos extends React.Component<IResultSearchPhotosProps, {}> {
                               photographer={image.photographer}
                               videographer={null}
                               liked={false}
+                              poster={null}
                             />
                           </span>
                         </div>
@@ -147,6 +148,7 @@ class ResultSearchPhotos extends React.Component<IResultSearchPhotosProps, {}> {
                               photographer={image.photographer}
                               videographer={null}
                               liked={false}
+                              poster={null}
                             />
                           </span>
                         </div>
